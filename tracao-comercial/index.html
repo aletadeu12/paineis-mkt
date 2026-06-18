@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Tracao Painel Comercial",
+  "schemaVersion": 1,
+  "description": "Painel comercial inteligente da TRAÇÃO MKT. Formulário pré-reunião → IA gera briefing personalizado (dores, speech de abertura, perguntas-bomba, objeções, mapa solução) → condutor de reunião nos modos Ágil ou Completo → proposta com preços para impressão/PDF."
+}
+</script>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRAÇÃO MKT — Inteligência Comercial</title>
+<style>
+:root{color-scheme:light;--bg:#f4f6f8;--surface:#fff;--surface2:#f8f9fa;--green:#16a34a;--green-lt:#dcfce7;--green-mid:#bbf7d0;--blue:#2563eb;--blue-lt:#dbeafe;--amber:#d97706;--amber-lt:#fef3c7;--red:#dc2626;--red-lt:#fee2e2;--text:#111827;--text-mid:#374151;--text-muted:#6b7280;--border:#e5e7eb;--border-dark:#d1d5db;--radius:8px;--radius-lg:12px;--shadow:0 1px 3px rgba(0,0,0,.08);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','Segoe UI',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
+/* HEADER */
+.header{background:#fff;border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+.logo{font-size:17px;font-weight:900;color:var(--green);letter-spacing:-.5px;flex-shrink:0;}
+.logo-tag{font-size:10px;font-weight:400;color:var(--text-muted);letter-spacing:1.5px;display:block;margin-top:-3px;}
+.steps{display:flex;gap:6px;flex:1;align-items:center;}
+.step-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);user-select:none;}
+.step-item.active{color:var(--green);font-weight:600;}
+.step-item.done{color:var(--green);opacity:.7;cursor:pointer;}
+.step-item.done:hover{opacity:1;}
+.step-dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--border-dark);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:#fff;transition:all .2s;}
+.step-item.active .step-dot{border-color:var(--green);background:var(--green);color:#fff;}
+.step-item.done .step-dot{border-color:var(--green);background:var(--green-lt);color:var(--green);}
+.step-sep{color:var(--border-dark);font-size:12px;}
+.btn-reset{background:transparent;border:1px solid var(--border-dark);color:var(--text-muted);padding:6px 14px;border-radius:var(--radius);cursor:pointer;font-size:12px;transition:all .2s;flex-shrink:0;}
+.btn-reset:hover{color:var(--text);border-color:var(--text-muted);}
+/* LAYOUT */
+.content{max-width:900px;margin:0 auto;padding:24px 16px;}
+.phase{display:none;}
+.phase.active{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);}
+.card-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.section-header{margin-bottom:20px;}
+.section-header h2{font-size:20px;font-weight:700;}
+.section-header p{color:var(--text-muted);font-size:13px;margin-top:4px;}
+/* FORM */
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border-dark);border-radius:var(--radius);padding:9px 12px;color:var(--text);font-size:13px;font-family:inherit;transition:border-color .2s;resize:none;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,.1);}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+/* RADIO — selection changes color */
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;}
+.radio-opt{display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--surface2);border:1.5px solid var(--border-dark);border-radius:20px;cursor:pointer;font-size:12px;transition:all .2s;}
+.radio-opt input{display:none;}
+.radio-opt.checked{background:var(--green-lt);border-color:var(--green);color:var(--green);font-weight:600;}
+/* BUTTONS */
+.btn-primary{width:100%;background:var(--green);color:#fff;border:none;border-radius:var(--radius);padding:13px 24px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:4px;}
+.btn-primary:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.3);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+/* LOADING */
+.loading-wrap{text-align:center;padding:80px 24px;}
+.spinner{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{color:var(--text-muted);}
+.loading-steps{margin-top:16px;display:flex;flex-direction:column;gap:6px;align-items:center;}
+.loading-step{font-size:12px;color:var(--text-muted);}
+.loading-step.active{color:var(--text-mid);font-weight:600;}
+.loading-step.done{color:var(--green);}
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge-green{background:var(--green-lt);color:var(--green);}
+.badge-amber{background:var(--amber-lt);color:var(--amber);}
+.badge-red{background:var(--red-lt);color:var(--red);}
+.badge-blue{background:var(--blue-lt);color:var(--blue);}
+/* BRIEFING */
+.briefing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.pain-list{list-style:none;}
+.pain-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:6px;}
+.pain-num{background:var(--green-lt);color:var(--green);font-size:10px;font-weight:800;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pain-text{font-size:13px;}
+.urgency-row{display:flex;align-items:center;gap:10px;margin:8px 0;}
+.urgency-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.urgency-fill{height:100%;border-radius:3px;transition:width 1s ease;}
+.speech-box{background:var(--surface2);border-left:3px solid var(--green);border-radius:var(--radius);padding:12px 14px;font-size:13px;color:var(--text-mid);font-style:italic;cursor:pointer;position:relative;transition:background .2s;}
+.speech-box:hover{background:var(--green-lt);}
+.speech-copy{position:absolute;top:8px;right:10px;font-size:10px;color:var(--green);opacity:0;transition:opacity .2s;font-style:normal;}
+.speech-box:hover .speech-copy{opacity:1;}
+.q-list{list-style:none;}
+.q-item{display:flex;gap:8px;align-items:flex-start;padding:9px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:6px;font-size:12px;cursor:pointer;transition:background .2s;}
+.q-item:hover{background:var(--blue-lt);}
+.q-icon{color:var(--green);flex-shrink:0;}
+.obj-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:6px;}
+.obj-head{padding:9px 12px;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:500;}
+.obj-head:hover{background:var(--amber-lt);}
+.obj-body{padding:10px 12px;background:#fff;font-size:12px;color:var(--text-mid);display:none;border-left:3px solid var(--blue);border-top:1px solid var(--border);}
+.obj-item.open .obj-body{display:block;}
+.obj-item.open .obj-arrow{transform:rotate(180deg);}
+.obj-arrow{transition:transform .2s;font-size:10px;}
+.alert-box{background:var(--red-lt);border:1px solid #fca5a5;border-radius:var(--radius);padding:11px 14px;font-size:12px;color:#b91c1c;display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;}
+.sol-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;}
+.sol-dor{flex:1;font-size:12px;color:var(--text-muted);}
+.sol-arr{color:var(--green);font-size:13px;flex-shrink:0;}
+.sol-entrega{flex:1.5;font-size:12px;color:var(--text-mid);}
+.market-btn{width:100%;border:1.5px dashed var(--blue);background:transparent;color:var(--blue);border-radius:var(--radius);padding:9px;font-size:12px;cursor:pointer;transition:all .2s;margin-top:8px;}
+.market-btn:hover{background:var(--blue-lt);}
+.market-btn:disabled{opacity:.5;cursor:not-allowed;}
+.market-result{background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:var(--radius);padding:12px;font-size:12px;color:var(--text-mid);margin-top:8px;line-height:1.7;display:none;white-space:pre-wrap;}
+/* MEETING */
+.mode-tag{display:inline-flex;align-items:center;gap:8px;background:var(--green-lt);color:var(--green);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:16px;}
+.block-tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
+.block-tab{padding:6px 14px;border-radius:20px;border:1px solid var(--border-dark);background:#fff;color:var(--text-muted);font-size:12px;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.block-tab:hover{border-color:var(--green);color:var(--green);}
+.block-tab.active{background:var(--green);border-color:var(--green);color:#fff;font-weight:600;}
+.block-tab.done{background:var(--green-lt);border-color:var(--green);color:var(--green);}
+.block-panel{display:none;}
+.block-panel.active{display:block;animation:fadeIn .2s ease;}
+.meeting-card-hdr{background:linear-gradient(135deg,var(--green),#15803d);padding:16px 20px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;display:flex;align-items:center;justify-content:space-between;}
+.meeting-card-title{font-size:16px;font-weight:700;color:#fff;}
+.time-badge{background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:3px 10px;border-radius:20px;}
+.meeting-card-body{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:20px;}
+.script-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:8px;}
+.script-txt{background:var(--surface2);border-left:3px solid var(--green);padding:12px 14px;border-radius:var(--radius);font-size:13px;color:var(--text-mid);font-style:italic;margin-bottom:14px;white-space:pre-wrap;}
+.q-meeting-list{list-style:none;margin-bottom:14px;}
+.q-meeting-item{padding:8px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:5px;font-size:12px;display:flex;gap:8px;}
+.notes-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;}
+.notes-area{width:100%;border:1px solid var(--border-dark);border-radius:var(--radius);background:var(--surface2);padding:10px 12px;font-size:12px;color:var(--text);font-family:inherit;resize:vertical;min-height:70px;}
+.notes-area:focus{outline:none;border-color:var(--green);}
+.block-btns{display:flex;gap:10px;margin-top:16px;}
+.btn-next{flex:1;background:var(--green);color:#fff;border:none;border-radius:var(--radius);padding:11px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-next:hover{background:#15803d;}
+.btn-prev{background:#fff;color:var(--text-muted);border:1px solid var(--border-dark);border-radius:var(--radius);padding:11px 18px;font-size:14px;cursor:pointer;transition:all .2s;}
+.btn-prev:hover{color:var(--text);border-color:var(--text-muted);}
+/* PROPOSAL */
+.proposal-hdr{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:36px 32px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;text-align:center;}
+.prop-logo{font-size:28px;font-weight:900;color:#22c55e;letter-spacing:-1px;}
+.prop-tagline{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+.prop-client-name{font-size:22px;font-weight:700;color:#fff;margin-top:20px;}
+.prop-client-biz{font-size:14px;color:rgba(255,255,255,.5);margin-top:4px;}
+.prop-date{font-size:11px;color:rgba(255,255,255,.3);margin-top:8px;}
+.proposal-body{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:28px 32px;}
+.prop-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin:24px 0 10px;}
+.prop-pain-list{list-style:none;}
+.prop-pain-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:var(--radius);margin-bottom:6px;font-size:13px;}
+.prop-pain-check{color:var(--green);font-weight:700;flex-shrink:0;}
+.prop-value-box{background:linear-gradient(135deg,var(--green-lt),#f0fdf4);border:1px solid var(--green-mid);border-radius:var(--radius);padding:16px;font-size:13px;color:var(--text-mid);line-height:1.7;}
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;}
+.plan-card{border:2px solid var(--border-dark);border-radius:var(--radius-lg);padding:20px;cursor:pointer;transition:all .2s;}
+.plan-card:hover{border-color:var(--green);}
+.plan-card.selected{border-color:var(--green);background:var(--green-lt);}
+.plan-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+.plan-setup{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
+.plan-price{font-size:26px;font-weight:800;color:var(--green);line-height:1;}
+.plan-period{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
+.plan-total{font-size:12px;color:var(--text-mid);background:rgba(22,163,74,.1);padding:5px 10px;border-radius:var(--radius);display:inline-block;margin-bottom:12px;font-weight:600;}
+.plan-feats{list-style:none;font-size:12px;color:var(--text-mid);}
+.plan-feats li{padding:3px 0;display:flex;gap:6px;align-items:flex-start;}
+.plan-feats li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
+.plan-not-incl{list-style:none;font-size:11px;color:var(--text-muted);margin-top:8px;}
+.plan-not-incl li{padding:2px 0;display:flex;gap:6px;}
+.plan-not-incl li::before{content:"—";color:var(--text-muted);}
+/* PRICE INPUTS */
+.price-input{border:none;border-bottom:1.5px dashed var(--green);background:transparent;color:inherit;font-size:inherit;font-weight:inherit;font-family:inherit;width:auto;outline:none;text-align:center;padding:0 2px;}
+.price-input:focus{border-bottom-style:solid;background:rgba(22,163,74,.07);border-radius:3px;}
+.price-input.price-main{font-size:26px;font-weight:800;color:var(--green);width:70px;}
+.price-input.price-sm{width:52px;}
+.price-input.price-months{width:28px;}
+/* NEXT STEP BOX */
+.next-step-box{background:#0f172a;color:#fff;border-radius:var(--radius);padding:16px 20px;text-align:center;margin-top:20px;}
+.next-step-box p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:4px;}
+.next-step-box strong{font-size:16px;font-weight:700;color:#22c55e;}
+.deadline-input{background:transparent;border:none;border-bottom:1.5px dashed rgba(34,197,94,.5);color:#22c55e;font-size:16px;font-weight:700;font-family:inherit;outline:none;text-align:center;width:auto;min-width:220px;padding:0 4px;}
+.deadline-input:focus{border-bottom-color:#22c55e;}
+/* CONSULTANT CARD */
+.consultant-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:16px;box-shadow:var(--shadow);}
+.consultant-card .card-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.consultant-print{display:none;}
+/* PROP FOOTER */
+.prop-footer{border-top:1px solid var(--border);margin-top:24px;padding-top:16px;display:flex;gap:12px;flex-wrap:wrap;}
+.btn-print{background:var(--green);color:#fff;border:none;border-radius:var(--radius);padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-print:hover{background:#15803d;}
+.btn-back{background:#fff;border:1px solid var(--border-dark);color:var(--text-muted);border-radius:var(--radius);padding:11px 18px;font-size:14px;cursor:pointer;transition:all .2s;}
+.btn-back:hover{color:var(--text);}
+/* RESPONSIVE */
+@media(max-width:640px){.briefing-grid,.plans-grid,.field-row{grid-template-columns:1fr}.steps{display:none}.proposal-body,.proposal-hdr{padding:20px 16px}}
+/* PRINT / PDF */
+@media print{
+  @page{margin:12mm 14mm;}
+  .header,.prop-footer,.consultant-card,.no-print,#p-intake,#p-loading,#p-briefing,#p-meeting{display:none!important}
+  body{background:#fff;font-size:12px;color:#111;}
+  .content{padding:0;max-width:100%;}
+  #p-proposal{display:block!important;}
+  /* Header */
+  .proposal-hdr{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:0;padding:28px 28px;}
+  .prop-logo{font-size:22px;}
+  .prop-client-name{font-size:18px;}
+  /* Body */
+  .proposal-body{border:none;padding:20px 28px;border-radius:0;}
+  .prop-value-box{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  /* Plans: stack vertically, show only selected */
+  .plans-grid{grid-template-columns:1fr;gap:10px;}
+  .plan-card:not(.selected){display:none;}
+  .plan-card.selected{border-color:#16a34a!important;background:#f0fdf4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-inside:avoid;break-inside:avoid;}
+  /* Next step box */
+  .next-step-box{-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-inside:avoid;}
+  /* Inputs in print mode — show as plain text */
+  .price-input,.deadline-input{border:none!important;background:transparent!important;font-size:inherit!important;font-weight:inherit!important;color:inherit!important;width:auto!important;}
+  /* Pain items */
+  .prop-pain-item{background:#f8f9fa!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid;}
+  /* Consultant footer */
+  .consultant-print{display:block!important;border-top:1px solid #e5e7eb;margin-top:20px;padding-top:16px;}
+  .consultant-print-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:6px;font-size:11px;color:#6b7280;}
+  .consultant-print-row span strong{color:#111;font-weight:600;}
+  .consultant-print-obs{font-size:11px;color:#374151;margin-top:6px;font-style:italic;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">TRAÇÃO<span class="logo-tag">MARKETING QUE GERA RESULTADO</span></div>
+  <div class="steps" id="steps-nav">
+    <div class="step-item" id="step-1" onclick="navStep(1)"><div class="step-dot">1</div><span>Entrada</span></div>
+    <div class="step-sep">›</div>
+    <div class="step-item" id="step-2" onclick="navStep(2)"><div class="step-dot">2</div><span>Briefing</span></div>
+    <div class="step-sep">›</div>
+    <div class="step-item" id="step-3" onclick="navStep(3)"><div class="step-dot">3</div><span>Reunião</span></div>
+    <div class="step-sep">›</div>
+    <div class="step-item" id="step-4" onclick="navStep(4)"><div class="step-dot">4</div><span>Proposta</span></div>
+  </div>
+  <button class="btn-reset" onclick="resetAll()">+ Nova Reunião</button>
+</header>
+
+<!-- PHASE 1: INTAKE -->
+<div id="p-intake" class="phase active">
+  <div class="content">
+    <div class="section-header">
+      <h2>Diagnóstico do Prospect</h2>
+      <p>Preencha com as respostas do formulário pré-reunião — o sistema gera o briefing em segundos.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Quem é o cliente</div>
+      <div class="field-row">
+        <div class="field"><label>Nome completo</label><input type="text" id="f-nome" placeholder="Ex: Mariana Costa"></div>
+        <div class="field"><label>Nome do negócio</label><input type="text" id="f-negocio" placeholder="Ex: Studio Mariana Fit"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Segmento / mercado</label><input type="text" id="f-segmento" placeholder="Ex: Personal Trainer, Advocacia, Imobiliária…"></div>
+        <div class="field"><label>Tempo no mercado</label><input type="text" id="f-tempo" placeholder="Ex: 3 anos"></div>
+      </div>
+      <div class="field">
+        <label>Rede social principal</label>
+        <div class="radio-group" id="rede-group">
+          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="Instagram" checked>Instagram</label>
+          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="LinkedIn">LinkedIn</label>
+          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="YouTube">YouTube</label>
+          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="TikTok">TikTok</label>
+          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="Nenhuma">Sem presença</label>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Situação atual</div>
+      <div class="field"><label>Como ele descreve o posicionamento hoje</label><textarea id="f-posicionamento" rows="2" placeholder="Ex: Ninguém me conhece, Sou visto como mais barato, Tenho clientes mas não sei por quê..."></textarea></div>
+      <div class="field"><label>Conteúdo nas redes gera resultado?</label>
+        <select id="f-conteudo">
+          <option value="Sim, gera leads e vendas com frequência">Sim — gera leads e vendas com frequência</option>
+          <option value="Gera engajamento mas pouco retorno financeiro">Gera engajamento, mas pouco retorno</option>
+          <option value="Posta sem estratégia clara">Posta sem estratégia clara</option>
+          <option value="Não cria conteúdo ou cria muito pouco">Não cria ou cria muito pouco</option>
+        </select>
+      </div>
+      <div class="field"><label>Já investiu em tráfego pago?</label>
+        <select id="f-trafego">
+          <option value="Sim com bom retorno">Sim, com bom retorno</option>
+          <option value="Sim mas sem retorno claro">Sim, mas sem retorno claro</option>
+          <option value="Tentou e parou">Tentou e parou</option>
+          <option value="Nunca investiu">Nunca investiu</option>
+        </select>
+      </div>
+      <div class="field"><label>Já trabalhou com agência ou freelancer antes?</label>
+        <select id="f-agencia">
+          <option value="Não, primeira vez">Não — primeira vez</option>
+          <option value="Sim com boa experiência">Sim — boa experiência</option>
+          <option value="Sim com experiência ruim">Sim — experiência ruim</option>
+        </select>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Objetivos e urgência</div>
+      <div class="field"><label>Objetivo principal com marketing agora</label>
+        <select id="f-objetivo">
+          <option value="Atrair mais clientes novos">Atrair mais clientes novos</option>
+          <option value="Me tornar referência e autoridade">Me tornar referência e autoridade</option>
+          <option value="Vender mais para quem já me conhece">Vender mais para quem já me conhece</option>
+          <option value="Montar presença digital do zero">Montar presença digital do zero</option>
+          <option value="Testar se o marketing digital funciona">Testar se o marketing funciona pra mim</option>
+        </select>
+      </div>
+      <div class="field"><label>Maior obstáculo que impede de crescer com marketing</label><textarea id="f-obstaculo" rows="2" placeholder="Resposta aberta do cliente — quanto mais detalhado, melhor o briefing"></textarea></div>
+      <div class="field"><label>O que espera diferente em 90 dias se o marketing funcionar</label><textarea id="f-expectativa" rows="2" placeholder="Expectativa de resultado — usar para alinhar ou recalibrar durante a reunião"></textarea></div>
+    </div>
+    <button class="btn-primary" onclick="startAnalysis()">Gerar Inteligência Comercial →</button>
+  </div>
+</div>
+
+<!-- PHASE 2: LOADING -->
+<div id="p-loading" class="phase">
+  <div class="content">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <div class="loading-msg">Analisando perfil do prospect…</div>
+      <div class="loading-steps">
+        <div class="loading-step active" id="ls-1">🔍 Mapeando dores e urgência</div>
+        <div class="loading-step" id="ls-2">💬 Gerando perguntas personalizadas</div>
+        <div class="loading-step" id="ls-3">🗺 Construindo mapa dor → solução</div>
+        <div class="loading-step" id="ls-4">✍️ Preparando speech de abertura</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3: BRIEFING -->
+<div id="p-briefing" class="phase">
+  <div class="content">
+    <div class="section-header">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <h2>Briefing — <span id="b-nome"></span></h2>
+        <span id="b-perfil-badge"></span>
+        <span id="b-urgencia-badge"></span>
+      </div>
+      <p id="b-negocio-desc" style="margin-top:4px;"></p>
+    </div>
+    <div id="b-alert" class="alert-box" style="display:none;"><span>⚠️</span><span id="b-alert-text"></span></div>
+    <div class="briefing-grid">
+      <div>
+        <div class="card">
+          <div class="card-title">Dores prioritárias</div>
+          <ul class="pain-list" id="b-dores"></ul>
+          <div style="margin-top:12px;">
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">Urgência percebida</div>
+            <div class="urgency-row">
+              <div class="urgency-bar"><div class="urgency-fill" id="b-urgencia-bar"></div></div>
+              <span id="b-urgencia-num" style="font-size:12px;font-weight:700;color:var(--text-mid);"></span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Mapa Dor → Solução TRAÇÃO</div>
+          <div id="b-solmap"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Inteligência de mercado</div>
+          <div id="b-market-hint" style="font-size:12px;color:var(--text-muted);margin-bottom:8px;"></div>
+          <button class="market-btn" id="btn-market" onclick="fetchMarketIntel()">🔍 Buscar contexto real do mercado</button>
+          <div class="market-result" id="market-result"></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-title">Speech de abertura — personalizado</div>
+          <div class="speech-box" id="b-speech"><span class="speech-copy">Copiar ↗</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Perguntas-bomba para a reunião</div>
+          <ul class="q-list" id="b-questions"></ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Objeções prováveis</div>
+          <div id="b-objections"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="background:linear-gradient(135deg,var(--green-lt),#f0fdf4);border-color:var(--green-mid);">
+      <div class="card-title" style="color:var(--green);">Argumento de valor central</div>
+      <div id="b-argumento" style="font-size:14px;color:var(--text-mid);line-height:1.7;"></div>
+    </div>
+    <button class="btn-primary" onclick="goToMeeting()">Iniciar Condução da Reunião →</button>
+  </div>
+</div>
+
+<!-- PHASE 4: MEETING -->
+<div id="p-meeting" class="phase">
+  <div class="content">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px;">
+      <h2 style="font-size:20px;font-weight:700;">Condutor da Reunião</h2>
+      <div class="mode-tag" id="m-mode-tag"></div>
+    </div>
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:20px;">Clique em cada bloco para acompanhar o roteiro e anotar insights em tempo real.</p>
+    <div class="block-tabs" id="block-tabs"></div>
+    <div id="blocks-container"></div>
+  </div>
+</div>
+
+<!-- PHASE 5: PROPOSAL -->
+<div id="p-proposal" class="phase">
+  <div class="content">
+    <!-- EDITABLE FIELDS (hidden from print) -->
+    <div class="consultant-card no-print">
+      <div class="card-title">Consultor responsável — aparece no PDF</div>
+      <div class="field-row">
+        <div class="field"><label>Nome do consultor</label><input type="text" id="c-nome" placeholder="Seu nome completo"></div>
+        <div class="field"><label>Telefone / WhatsApp</label><input type="text" id="c-tel" placeholder="(11) 99999-9999"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>E-mail</label><input type="text" id="c-email" placeholder="seu@tracao.com.br"></div>
+        <div class="field"><label>Prazo das primeiras entregas</label><input type="text" id="c-prazo" placeholder="Ex: 7 dias úteis após kick-off"></div>
+      </div>
+      <div class="field"><label>Observação para o cliente (opcional)</label><textarea id="c-obs" rows="2" placeholder="Ex: Contrato enviado por e-mail, aprovação pendente de NDA..."></textarea></div>
+    </div>
+
+    <!-- PRINTABLE PROPOSAL -->
+    <div id="proposal-print-area" style="margin-top:16px;">
+      <div class="proposal-hdr">
+        <div class="prop-logo">TRAÇÃO</div>
+        <div class="prop-tagline">Marketing que gera resultado</div>
+        <div class="prop-client-name" id="pr-nome"></div>
+        <div class="prop-client-biz" id="pr-biz"></div>
+        <div class="prop-date" id="pr-data"></div>
+      </div>
+      <div class="proposal-body">
+        <div class="prop-section-title">O que entendemos sobre seu negócio</div>
+        <ul class="prop-pain-list" id="pr-dores"></ul>
+
+        <div class="prop-section-title">Nossa proposta de valor para você</div>
+        <div class="prop-value-box" id="pr-argumento"></div>
+
+        <div class="prop-section-title">Escolha o modelo que faz mais sentido</div>
+        <div class="plans-grid">
+          <div class="plan-card selected" id="plan-base" onclick="selectPlan('base')">
+            <div class="plan-name">Plano Base</div>
+            <div class="plan-setup">+ Setup único: R$ <input type="number" class="price-input price-sm" id="setup-base" value="1500" min="0" oninput="calcTotal('base')"></div>
+            <div class="plan-price">R$ <input type="number" class="price-input price-main" id="week-base" value="248" min="0" oninput="calcTotal('base')"></div>
+            <div class="plan-period">/ semana · mín. <input type="number" class="price-input price-months" id="months-base" value="3" min="1" max="24" oninput="calcTotal('base')"> meses</div>
+            <div class="plan-total" id="total-base">Total 3 meses: R$ 4.476</div>
+            <ul class="plan-feats">
+              <li>Brand Kit completo</li>
+              <li>3 Personas validadas</li>
+              <li>Grade editorial semanal</li>
+              <li>Copywriting semanal</li>
+              <li>Radar de concorrentes (toda quinta)</li>
+              <li>Revisão quinzenal de estratégia</li>
+              <li>Relatório de performance mensal</li>
+            </ul>
+            <ul class="plan-not-incl">
+              <li>Sem peças visuais</li>
+              <li>Sem gestão de tráfego pago</li>
+            </ul>
+          </div>
+          <div class="plan-card" id="plan-acel" onclick="selectPlan('acel')">
+            <div class="plan-name">Plano Aceleração <span class="badge badge-amber" style="font-size:10px;vertical-align:middle;">RECOMENDADO</span></div>
+            <div class="plan-setup">+ Setup único: R$ <input type="number" class="price-input price-sm" id="setup-acel" value="1500" min="0" oninput="calcTotal('acel')"></div>
+            <div class="plan-price">R$ <input type="number" class="price-input price-main" id="week-acel" value="297" min="0" oninput="calcTotal('acel')"></div>
+            <div class="plan-period">/ semana · mín. <input type="number" class="price-input price-months" id="months-acel" value="3" min="1" max="24" oninput="calcTotal('acel')"> meses</div>
+            <div class="plan-total" id="total-acel">Total 3 meses: R$ 5.148</div>
+            <ul class="plan-feats">
+              <li>Tudo do Plano Base</li>
+              <li>Hub Comercial ativo</li>
+              <li>10–15 leads B2B qualificados/semana</li>
+              <li>Scoring de leads inbound (0–11 pts)</li>
+              <li>MQL direto para você fechar</li>
+              <li>Relatório detalhado semanal</li>
+            </ul>
+            <ul class="plan-not-incl">
+              <li>Sem peças visuais</li>
+              <li>Sem gestão de tráfego pago</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="next-step-box">
+          <p>Para começar, precisamos apenas de</p>
+          <strong>Setup + 1ª semana para rodar</strong>
+          <p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.5);">Prazo das primeiras entregas:</p>
+          <input type="text" class="deadline-input" id="c-prazo-print" value="5 dias úteis após o kick-off" placeholder="Ex: 7 dias úteis após kick-off">
+        </div>
+
+        <!-- CONSULTANT FOOTER (print only) -->
+        <div class="consultant-print" id="consultant-print-block">
+          <div class="consultant-print-row">
+            <span><strong>Consultor:</strong> <span id="pr-c-nome">—</span></span>
+            <span><strong>Tel/WhatsApp:</strong> <span id="pr-c-tel">—</span></span>
+            <span><strong>E-mail:</strong> <span id="pr-c-email">—</span></span>
+          </div>
+          <div class="consultant-print-obs" id="pr-c-obs"></div>
+        </div>
+
+        <div class="prop-footer no-print">
+          <button class="btn-print" onclick="syncAndPrint()">🖨️ Imprimir / Salvar PDF</button>
+          <button class="btn-back" onclick="goToPhase('meeting')">← Voltar à reunião</button>
+          <button class="btn-back" onclick="goToPhase('briefing')">← Voltar ao briefing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var state={client:{},analysis:null,selectedPlan:'base',notes:{},currentBlock:0,visited:{}};
+
+/* ---- NAVIGATION ---- */
+function goToPhase(phase){
+  ['intake','loading','briefing','meeting','proposal'].forEach(function(p){document.getElementById('p-'+p).classList.remove('active');});
+  document.getElementById('p-'+phase).classList.add('active');
+  state.visited[phase]=true;
+  updateSteps(phase);
+  window.scrollTo(0,0);
+}
+
+function updateSteps(phase){
+  var order={intake:1,loading:1,briefing:2,meeting:3,proposal:4};
+  var phaseByNum={1:'intake',2:'briefing',3:'meeting',4:'proposal'};
+  var cur=order[phase]||1;
+  for(var i=1;i<=4;i++){
+    var el=document.getElementById('step-'+i);
+    if(!el)continue;
+    el.className='step-item';
+    if(i<cur)el.classList.add('done');
+    else if(i===cur)el.classList.add('active');
+  }
+}
+
+function navStep(n){
+  var phaseByNum={1:'intake',2:'briefing',3:'meeting',4:'proposal'};
+  var target=phaseByNum[n];
+  if(!target)return;
+  // allow navigation to visited phases or current
+  var order={intake:1,briefing:2,meeting:3,proposal:4};
+  var el=document.getElementById('step-'+n);
+  if(!el)return;
+  // only navigate if done or active
+  if(el.classList.contains('done')||el.classList.contains('active')){
+    if(target==='meeting'&&!state.analysis){return;}
+    if(target==='briefing'&&!state.analysis){return;}
+    if(target==='proposal'&&!state.analysis){return;}
+    goToPhase(target);
+  }
+}
+
+function resetAll(){
+  if(!confirm('Iniciar nova reunião? O briefing atual será descartado.'))return;
+  state={client:{},analysis:null,selectedPlan:'base',notes:{},currentBlock:0,visited:{}};
+  document.querySelectorAll('#p-intake input[type=text],#p-intake textarea').forEach(function(el){el.value='';});
+  document.querySelectorAll('#p-intake select').forEach(function(el){el.selectedIndex=0;});
+  document.querySelectorAll('.radio-opt').forEach(function(el){el.classList.remove('checked');});
+  document.querySelector('.radio-opt').classList.add('checked');
+  document.getElementById('market-result').style.display='none';
+  document.getElementById('btn-market').disabled=false;
+  document.getElementById('btn-market').textContent='🔍 Buscar contexto real do mercado';
+  goToPhase('intake');
+}
+
+/* ---- RADIO VISUAL ---- */
+function selectRadio(el,name){
+  document.querySelectorAll('input[name="'+name+'"]').forEach(function(inp){
+    inp.closest('.radio-opt').classList.remove('checked');
+  });
+  el.classList.add('checked');
+}
+// init first radio as checked
+document.addEventListener('DOMContentLoaded',function(){
+  var first=document.querySelector('.radio-opt');
+  if(first)first.classList.add('checked');
+});
+
+/* ---- FORM COLLECT ---- */
+function collectForm(){
+  state.client={
+    nome:document.getElementById('f-nome').value.trim()||'Cliente',
+    negocio:document.getElementById('f-negocio').value.trim()||'Negócio',
+    segmento:document.getElementById('f-segmento').value.trim()||'Não informado',
+    tempo:document.getElementById('f-tempo').value.trim()||'Não informado',
+    rede:document.querySelector('input[name="rede"]:checked')?.value||'Instagram',
+    posicionamento:document.getElementById('f-posicionamento').value.trim()||'Não informado',
+    conteudo:document.getElementById('f-conteudo').value,
+    trafego:document.getElementById('f-trafego').value,
+    agencia:document.getElementById('f-agencia').value,
+    objetivo:document.getElementById('f-objetivo').value,
+    obstaculo:document.getElementById('f-obstaculo').value.trim()||'Não informado',
+    expectativa:document.getElementById('f-expectativa').value.trim()||'Não informado'
+  };
+}
+
+/* ---- AI ANALYSIS ---- */
+async function startAnalysis(){
+  collectForm();
+  goToPhase('loading');
+  animateLoadingSteps();
+  var c=state.client;
+  var prompt='Você é o sistema de inteligência comercial da TRAÇÃO MKT (agência de marketing digital com IA no Brasil).\n\nDADOS DO PROSPECT:\nNome: '+c.nome+'\nNegócio: '+c.negocio+'\nSegmento: '+c.segmento+'\nTempo no mercado: '+c.tempo+'\nRede principal: '+c.rede+'\nComo descreve o posicionamento: '+c.posicionamento+'\nConteúdo nas redes hoje: '+c.conteudo+'\nHistórico com tráfego pago: '+c.trafego+'\nHistórico com agência: '+c.agencia+'\nObjetivo principal: '+c.objetivo+'\nMaior obstáculo: '+c.obstaculo+'\nExpectativa em 90 dias: '+c.expectativa+'\n\nPRODUTOS TRAÇÃO MKT:\n• Plano Base: Setup R$1.500 + R$248/semana (mín 3 meses). Inclui: Brand kit, 3 personas, grade editorial, copy, radar de concorrentes, revisão quinzenal, relatório mensal\n• Plano Aceleração: Setup R$1.500 + R$297/semana. Adiciona: Hub Comercial, 10-15 leads B2B/semana, scoring inbound\n\nRetorne APENAS JSON válido sem markdown:\n{"dorasPrioritarias":["dor 1","dor 2","dor 3"],"perfilReuniao":"agil","urgencia":7,"aberturaPersonalizada":"script personalizado de 2-3 frases usando as palavras do cliente","perguntasBomba":["pergunta 1","pergunta 2","pergunta 3","pergunta 4"],"objecoesProvaveis":[{"objecao":"objeção esperada","resposta":"resposta recomendada"}],"mapaDolorSolucao":[{"dor":"dor específica","solucao":"serviço TRAÇÃO","entregavel":"resultado esperado"}],"planoRecomendado":"base","argumentoValor":"argumento personalizado em 2-3 frases","sinalAtencao":"algo crítico a ter cuidado","contextoMercado":"o que buscar sobre o mercado deste cliente"}';
+  try{
+    var result=await window.cowork.askClaude(prompt,[]);
+    var match=result.match(/\{[\s\S]*\}/);
+    if(match)state.analysis=JSON.parse(match[0]);
+  }catch(e){state.analysis=null;}
+  if(!state.analysis)state.analysis=buildFallback();
+  renderBriefing();
+  goToPhase('briefing');
+}
+
+function buildFallback(){
+  var c=state.client;
+  return{
+    dorasPrioritarias:[c.obstaculo||'Falta de estratégia digital',c.objetivo,'Presença inconsistente nas redes'],
+    perfilReuniao:'agil',urgencia:7,
+    aberturaPersonalizada:c.nome+', li o que você preencheu. Você mencionou que o maior desafio é "'+c.obstaculo+'". Quero entender melhor isso antes de qualquer coisa — pode me contar mais?',
+    perguntasBomba:['Como você consegue seus clientes hoje — quanto é digital e quanto é indicação?','Você já perdeu um negócio por não ter presença digital mais sólida?','Por que isso está urgente pra você agora?','O que você já tentou que não funcionou?'],
+    objecoesProvaveis:[{objecao:'Preciso pensar',resposta:'Tudo bem. O que especificamente você precisa avaliar? Às vezes dá pra resolver aqui mesmo.'},{objecao:'Está acima do meu orçamento',resposta:'Qual é o valor que você tinha em mente? Deixa eu ver o que consigo encaixar.'}],
+    mapaDolorSolucao:[{dor:c.objetivo,solucao:'Grade editorial + Copy semanal',entregavel:'Presença consistente e com estratégia'},{dor:c.obstaculo||'Falta de estratégia',solucao:'Brand kit + Personas + ICP',entregavel:'Fundação estratégica em 5 dias'}],
+    planoRecomendado:'base',
+    argumentoValor:c.nome+', você tem expertise real. O problema não é o que você oferece — é que ninguém está vendo. A TRAÇÃO resolve exatamente isso, semana a semana.',
+    sinalAtencao:'Verificar expectativas de prazo — resultados orgânicos levam 60-90 dias. Alinhar antes de fechar.',
+    contextoMercado:'Buscar exemplos de marketing digital bem-sucedido no segmento de '+c.segmento+' no Brasil'
+  };
+}
+
+function animateLoadingSteps(){
+  ['ls-1','ls-2','ls-3','ls-4'].forEach(function(id,i){
+    setTimeout(function(){
+      if(i>0){var prev=document.getElementById('ls-'+(i));if(prev)prev.classList.add('done');}
+      var el=document.getElementById(id);if(el)el.classList.add('active');
+    },i*700);
+  });
+}
+
+/* ---- RENDER BRIEFING ---- */
+function renderBriefing(){
+  var a=state.analysis,c=state.client;
+  document.getElementById('b-nome').textContent=c.nome;
+  document.getElementById('b-negocio-desc').textContent=c.negocio+' · '+c.segmento+' · '+c.tempo;
+  var perfil=a.perfilReuniao==='agil'?'⚡ Modo Ágil — 30-45 min':'🏢 Modo Completo — 60-75 min';
+  document.getElementById('b-perfil-badge').innerHTML='<span class="badge badge-green">'+perfil+'</span>';
+  var urg=a.urgencia||7;
+  var uc=urg>=8?'badge-red':urg>=6?'badge-amber':'badge-green';
+  var ul=urg>=8?'🔥 Alta urgência':urg>=6?'⚠️ Urgência média':'🟢 Urgência baixa';
+  document.getElementById('b-urgencia-badge').innerHTML='<span class="badge '+uc+'">'+ul+'</span>';
+  if(a.sinalAtencao){document.getElementById('b-alert').style.display='flex';document.getElementById('b-alert-text').textContent=a.sinalAtencao;}
+  var dEl=document.getElementById('b-dores');dEl.innerHTML='';
+  (a.dorasPrioritarias||[]).forEach(function(d,i){dEl.innerHTML+='<li class="pain-item"><div class="pain-num">'+(i+1)+'</div><div class="pain-text">'+d+'</div></li>';});
+  var ub=document.getElementById('b-urgencia-bar');
+  ub.style.width=(urg/10*100)+'%';
+  ub.style.background=urg>=8?'#dc2626':urg>=6?'#d97706':'#16a34a';
+  document.getElementById('b-urgencia-num').textContent=urg+'/10';
+  var sEl=document.getElementById('b-solmap');sEl.innerHTML='';
+  (a.mapaDolorSolucao||[]).forEach(function(s){sEl.innerHTML+='<div class="sol-item"><div class="sol-dor">'+s.dor+'</div><div class="sol-arr">→</div><div class="sol-entrega"><strong>'+s.solucao+'</strong><br><span style="font-size:11px;color:var(--text-muted);">'+s.entregavel+'</span></div></div>';});
+  document.getElementById('b-market-hint').textContent=a.contextoMercado||'';
+  var sp=document.getElementById('b-speech');
+  sp.innerHTML='<span class="speech-copy">Copiar ↗</span><em>"'+a.aberturaPersonalizada+'"</em>';
+  sp.onclick=function(){copyText(a.aberturaPersonalizada||'');};
+  var qEl=document.getElementById('b-questions');qEl.innerHTML='';
+  (a.perguntasBomba||[]).forEach(function(q){qEl.innerHTML+='<li class="q-item"><span class="q-icon">→</span><span>'+q+'</span></li>';});
+  var oEl=document.getElementById('b-objections');oEl.innerHTML='';
+  (a.objecoesProvaveis||[]).forEach(function(o,i){oEl.innerHTML+='<div class="obj-item" id="obj-'+i+'"><div class="obj-head" onclick="toggleObj('+i+')"><span>'+o.objecao+'</span><span class="obj-arrow">▾</span></div><div class="obj-body">'+o.resposta+'</div></div>';});
+  document.getElementById('b-argumento').textContent=a.argumentoValor||'';
+}
+
+function toggleObj(i){document.getElementById('obj-'+i).classList.toggle('open');}
+
+async function fetchMarketIntel(){
+  var btn=document.getElementById('btn-market');
+  btn.disabled=true;btn.textContent='⏳ Buscando…';
+  var c=state.client,a=state.analysis;
+  var prompt='Você é especialista em marketing digital no Brasil em 2025-2026. Forneça inteligência de mercado específica e prática.\n\nSegmento: '+c.segmento+'\nPista: '+(a?.contextoMercado||'')+'\n\nResponda com 5-6 bullet points práticos em português:\n- O que está funcionando em conteúdo para este segmento agora\n- Formatos em alta (Reels, carrossel, etc)\n- 1-2 argumentos de autoridade específicos\n- Lacuna de posicionamento comum que uma agência pode explorar\n- Tipo de cliente ideal e sua maior dor digital\n\nSeja específico e acionável.';
+  try{
+    var r=await window.cowork.askClaude(prompt,[]);
+    var box=document.getElementById('market-result');
+    box.textContent=r;box.style.display='block';
+  }catch(e){
+    document.getElementById('market-result').textContent='Não foi possível buscar dados. Tente novamente.';
+    document.getElementById('market-result').style.display='block';
+  }
+  btn.disabled=false;btn.textContent='↺ Atualizar referências';
+}
+
+/* ---- MEETING ---- */
+function goToMeeting(){renderMeeting();goToPhase('meeting');}
+
+function renderMeeting(){
+  var a=state.analysis,c=state.client;
+  var isAgil=a.perfilReuniao==='agil';
+  document.getElementById('m-mode-tag').textContent=isAgil?'⚡ Modo Ágil — 30-45 min':'🏢 Modo Completo — 60-75 min';
+  var blocks=isAgil?[
+    {id:'A',label:'A — Abertura + Diagnóstico',time:'15 min',note:'abertura',
+     script:'[Abertura personalizada]\n"'+a.aberturaPersonalizada+'"\n\nPerguntas para fazer (escolha 3-4):\n→ '+(a.perguntasBomba||[]).join('\n→ '),
+     questions:[]},
+    {id:'B',label:'B — Espelho + Solução',time:'10 min',note:'espelho',
+     script:'"Deixa eu resumir o que entendi.\n\nVocê está em '+c.segmento+' e o principal problema é: '+(a.dorasPrioritarias||[]).slice(0,2).join(' e ')+'.\n\nTô correto?\n\n[Aguardar validação]\n\nSe a gente conseguir resolver isso em 90 dias, isso representa quanto de impacto pro seu negócio?"',
+     questions:[]},
+    {id:'C',label:'C — Preço + Fechamento',time:'10-15 min',note:'preco',
+     script:'"Antes de falar em números: se a gente conseguir o resultado que você descreveu, esse investimento faz sentido?\n\n[Apresentar proposta na tela]\n\nQual modelo faz mais sentido pra você agora?"',
+     questions:[]}
+  ]:[
+    {id:'1',label:'1 — Abertura',time:'5 min',note:'abertura',
+     script:'"'+a.aberturaPersonalizada+'"',questions:[]},
+    {id:'2',label:'2 — Diagnóstico',time:'20 min',note:'diagnostico',
+     script:'"Me conta mais sobre o negócio."',
+     questions:a.perguntasBomba||[]},
+    {id:'3',label:'3 — Espelho',time:'10 min',note:'espelho',
+     script:'"Deixa eu resumir o que entendi. Você está em '+c.segmento+'. O principal problema é: '+(a.dorasPrioritarias||[]).join(', ')+'. Tô correto?\n\n[Aguardar]\n\nSe a gente resolver isso em 90 dias, o que representa pra você — financeiro, imagem, tranquilidade?"',
+     questions:[]},
+    {id:'4',label:'4 — Apresentação TRAÇÃO',time:'15 min',note:'apresentacao',
+     script:'"A TRAÇÃO não vende presença — vende resultado mensurável.\n\nBaseado no que você me contou, o que faz mais sentido é: '+(a.mapaDolorSolucao||[]).map(function(s){return s.solucao;}).join(' + ')+'.\n\nIsso resolve diretamente: '+(a.dorasPrioritarias||[]).slice(0,2).join(' e ')+'."',
+     questions:[]},
+    {id:'5',label:'5 — Preço',time:'10 min',note:'preco',
+     script:'"Antes de falar em números: se a gente conseguir [resultado que ele citou], esse investimento faz sentido?\n\n[Apresentar proposta na tela]"',
+     questions:[]},
+    {id:'6',label:'6 — Próximo Passo',time:'5 min',note:'proximo',
+     script:'"[Se fechou] Ótimo. Vou te enviar o contrato ainda hoje. Já agendamos o kick-off aqui?\n\n[Se não fechou] Tudo bem. Vou te mandar a proposta até amanhã. Quando você consegue me dar um retorno?"',
+     questions:[]}
+  ];
+  var tabsEl=document.getElementById('block-tabs');
+  var contEl=document.getElementById('blocks-container');
+  tabsEl.innerHTML='';contEl.innerHTML='';
+  blocks.forEach(function(b,i){
+    var tab=document.createElement('button');
+    tab.className='block-tab'+(i===0?' active':'');
+    tab.textContent=b.label;
+    tab.id='tab-'+i;
+    tab.setAttribute('onclick','switchBlock('+i+')');
+    tabsEl.appendChild(tab);
+    var qs=b.questions.length?'<div class="script-lbl" style="margin-top:14px;">Perguntas para este bloco</div><ul class="q-meeting-list">'+b.questions.map(function(q){return'<li class="q-meeting-item"><span style="color:var(--green);flex-shrink:0;">→</span><span>'+q+'</span></li>';}).join('')+'</ul>':'';
+    var prevBtn=i>0?'<button class="btn-prev" onclick="switchBlock('+(i-1)+')">← Anterior</button>':'';
+    var isLast=i===blocks.length-1;
+    var nextLabel=isLast?'Gerar Proposta para o Cliente →':'Próximo bloco →';
+    var nextFn=isLast?'goToProposal()':'switchBlock('+(i+1)+')';
+    var panel=document.createElement('div');
+    panel.className='block-panel'+(i===0?' active':'');
+    panel.id='block-'+i;
+    panel.innerHTML='<div class="meeting-card-hdr"><div class="meeting-card-title">'+b.label+'</div><div class="time-badge">⏱ '+b.time+'</div></div><div class="meeting-card-body"><div class="script-lbl">Script sugerido</div><div class="script-txt">'+b.script+'</div>'+qs+'<div class="notes-lbl" style="margin-top:14px;">Anotações da reunião</div><textarea class="notes-area" id="notes-'+b.note+'" placeholder="O que o cliente disse, insights importantes…" oninput="saveNote(\''+b.note+'\',this.value)"></textarea><div class="block-btns">'+prevBtn+'<button class="btn-next" onclick="'+nextFn+'">'+nextLabel+'</button></div></div>';
+    contEl.appendChild(panel);
+  });
+  state.currentBlock=0;
+}
+
+function switchBlock(idx){
+  var prev=state.currentBlock;
+  if(prev!==idx){
+    var pt=document.getElementById('tab-'+prev);
+    var pp=document.getElementById('block-'+prev);
+    if(pt){pt.classList.remove('active');pt.classList.add('done');}
+    if(pp)pp.classList.remove('active');
+  }
+  state.currentBlock=idx;
+  var nt=document.getElementById('tab-'+idx);
+  var np=document.getElementById('block-'+idx);
+  if(nt){nt.classList.remove('done');nt.classList.add('active');}
+  if(np)np.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function saveNote(key,val){state.notes[key]=val;}
+
+/* ---- PROPOSAL ---- */
+function goToProposal(){renderProposal();goToPhase('proposal');}
+
+function renderProposal(){
+  var a=state.analysis,c=state.client;
+  document.getElementById('pr-nome').textContent=c.nome;
+  document.getElementById('pr-biz').textContent=c.negocio+' · '+c.segmento;
+  document.getElementById('pr-data').textContent=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  var dEl=document.getElementById('pr-dores');dEl.innerHTML='';
+  (a.dorasPrioritarias||[]).forEach(function(d){dEl.innerHTML+='<li class="prop-pain-item"><span class="prop-pain-check">✓</span><span>'+d+'</span></li>';});
+  document.getElementById('pr-argumento').textContent=a.argumentoValor||'';
+  selectPlan(a.planoRecomendado==='acel'?'acel':'base');
+}
+
+function selectPlan(plan){
+  state.selectedPlan=plan;
+  document.getElementById('plan-base').className='plan-card'+(plan==='base'?' selected':'');
+  document.getElementById('plan-acel').className='plan-card'+(plan==='acel'?' selected':'');
+}
+
+function calcTotal(plan){
+  var setup=parseFloat(document.getElementById('setup-'+plan).value)||0;
+  var week=parseFloat(document.getElementById('week-'+plan).value)||0;
+  var months=parseInt(document.getElementById('months-'+plan).value)||3;
+  var total=setup+(week*4.33*months);
+  var el=document.getElementById('total-'+plan);
+  if(el)el.textContent='Total '+months+' mês'+(months>1?'es':'')+': R$ '+total.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+}
+
+function syncAndPrint(){
+  // sync consultant fields to print-only block
+  var nome=document.getElementById('c-nome').value.trim()||'—';
+  var tel=document.getElementById('c-tel').value.trim()||'—';
+  var email=document.getElementById('c-email').value.trim()||'—';
+  var prazo=document.getElementById('c-prazo').value.trim();
+  var obs=document.getElementById('c-obs').value.trim();
+  document.getElementById('pr-c-nome').textContent=nome;
+  document.getElementById('pr-c-tel').textContent=tel;
+  document.getElementById('pr-c-email').textContent=email;
+  if(prazo)document.getElementById('c-prazo-print').value=prazo;
+  var obsEl=document.getElementById('pr-c-obs');
+  obsEl.textContent=obs?'Obs: '+obs:'';
+  // show consultant block only if at least one field filled
+  document.getElementById('consultant-print-block').style.display=(nome!=='—'||tel!=='—'||email!=='—')?'block':'none';
+  window.print();
+}
+
+/* ---- UTILS ---- */
+function copyText(txt){
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){showToast('Copiado!');});}
+  else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Copiado!');}
+}
+
+function showToast(msg){
+  var t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText='position:fixed;bottom:20px;right:20px;background:#16a34a;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;';
+  document.body.appendChild(t);
+  setTimeout(function(){t.remove();},2000);
+}
+</script>
+</body>
+</html>

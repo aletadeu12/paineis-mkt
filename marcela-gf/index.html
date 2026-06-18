@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{"name":"Painel Marcela Pinheiro GF","schemaVersion":1,"description":"Painel interno de gestão — Marcela Pinheiro, Gestora Financeira. Grade editorial, Canva links, arquivos Drive e captions por semana."}
+</script>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — Marcela Pinheiro GF</title>
+<style>
+/* ── CSS Variables (injetadas via JS com as cores do cliente) ── */
+:root {
+  --primary: #1B6A39;
+  --accent:  #83983A;
+  --bglight: #F8F5EE;
+  --dark:    #1A1A2E;
+  --gray:    #6B7280;
+  --border:  #E5E7EB;
+  --light:   #F8F9FA;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color: #1F2937; font-size: 14px; }
+
+/* ── Topbar ── */
+.topbar { background: var(--primary); color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.topbar h1 { font-size: 15px; font-weight: 700; letter-spacing: .5px; }
+.topbar .badge { background: var(--accent); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+
+/* ── Tabs ── */
+.tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 20px; gap: 4px; overflow-x: auto; }
+.tab { padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; color: var(--gray); transition: all .2s; white-space: nowrap; user-select: none; }
+.tab:hover { color: #374151; background: #F9FAFB; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ── Pages ── */
+.page { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* ── Grids ── */
+.grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+
+/* ── Cards ── */
+.card { background: white; border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+.card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gray); }
+.stat { font-size: 26px; font-weight: 800; line-height: 1; margin-bottom: 2px; }
+.stat-label { font-size: 11px; color: var(--gray); }
+
+/* ── Section titles ── */
+.section-title { font-size: 13px; font-weight: 700; color: var(--dark); margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ── Files bar / path rows ── */
+.files-bar { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
+.files-bar-title { font-size: 12px; font-weight: 700; color: var(--dark); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.files-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px; }
+.path-row { display: flex; align-items: center; gap: 8px; background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 7px 10px; }
+.path-icon { font-size: 15px; flex-shrink: 0; }
+.path-info { flex: 1; min-width: 0; }
+.path-name { font-size: 12px; font-weight: 600; color: #1F2937; }
+.path-txt  { font-family: monospace; font-size: 10px; color: #64748B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn-row { display: flex; gap: 5px; flex-shrink: 0; }
+.copy-btn  { padding: 4px 9px; background: #1E3A5F; color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background .2s; }
+.copy-btn:hover { background: #2563EB; }
+.copy-btn.ok { background: #16A085; }
+.drive-btn { padding: 4px 9px; background: var(--primary); color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; transition: background .2s; }
+.drive-btn:hover { background: var(--accent); }
+
+/* ── Content cards (posts) ── */
+.content-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 12px; overflow: hidden; }
+.content-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.content-header .day { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; background: #E8F5E9; color: var(--primary); }
+.content-header .title { font-weight: 700; font-size: 13px; flex: 1; }
+.content-header .format { font-size: 11px; color: var(--gray); background: var(--light); padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+.pilar-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; background: #E8F5E9; color: var(--primary); flex-shrink: 0; }
+.content-body { padding: 12px 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+.content-body .label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gray); margin-top: 10px; margin-bottom: 3px; }
+.gancho  { background: #FFF7ED; border-left: 3px solid #F59E0B; padding: 8px 12px; border-radius: 0 6px 6px 0; font-style: italic; margin: 6px 0; font-size: 13px; }
+.legenda { background: #F0FDF4; border-left: 3px solid #22C55E; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; line-height: 1.6; }
+.cta  { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.edl  { background: #F5F3FF; border-left: 3px solid #8B5CF6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.story-list { background: #FAFAFA; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
+.story-list li { font-size: 12px; margin-left: 14px; margin-bottom: 3px; line-height: 1.5; }
+.extra-block { background: #F8F5EE; border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.hashtags { font-size: 11px; color: #6B7280; font-family: monospace; margin-top: 6px; }
+
+/* ── Grade overview grid ── */
+.grade-wrap { overflow-x: auto; margin-bottom: 20px; }
+.grade-grid { display: grid; min-width: 620px; gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; }
+.grade-cell { background: white; padding: 9px 12px; font-size: 12px; vertical-align: top; }
+.grade-cell.header { background: var(--primary); color: white; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+.grade-cell.dayname { background: var(--light); font-weight: 700; color: var(--dark); font-size: 11px; }
+.grade-cell.empty { background: #F8F9FA; color: #9CA3AF; font-size: 11px; text-align: center; }
+.chip { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 3px; background: #E8F5E9; color: var(--primary); }
+
+/* ── Canva links ── */
+.canva-section { background: white; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+.canva-head { background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%); color: white; padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.canva-head h4 { font-size: 13px; font-weight: 700; margin: 0; }
+.canva-head small { font-size: 11px; opacity: .8; }
+.canva-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.canva-table td { padding: 7px 14px; border-bottom: 1px solid var(--border); }
+.canva-table tr:last-child td { border-bottom: none; }
+.canva-table tr:hover td { background: #F9FAFB; }
+.canva-table .slide-num { font-weight: 700; color: #6D28D9; width: 48px; }
+.canva-link { display: inline-flex; align-items: center; gap: 4px; color: #7C3AED; text-decoration: none; font-weight: 600; font-size: 11px; border: 1px solid #DDD6FE; border-radius: 4px; padding: 3px 8px; transition: all .2s; white-space: nowrap; }
+.canva-link:hover { background: #7C3AED; color: white; border-color: #7C3AED; }
+
+/* ── Dashboard banners ── */
+.delivery-banner { background: linear-gradient(135deg, var(--primary) 0%, #2D8A52 100%); color: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.delivery-banner h3 { font-size: 14px; font-weight: 800; margin: 0; }
+.delivery-banner p { font-size: 12px; opacity: .8; margin: 3px 0 0; }
+.notion-btn { display: inline-flex; align-items: center; gap: 6px; background: white; color: #1A1A1A; border: none; border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all .2s; }
+.notion-btn:hover { background: #F3F4F6; }
+
+/* ── Brand colors strip ── */
+.brand-strip { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.swatch { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 12px; }
+.swatch-box { width: 28px; height: 28px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.1); }
+.swatch-label { font-weight: 700; }
+.swatch-hex { font-family: monospace; color: var(--gray); font-size: 10px; }
+.swatch-uso { font-size: 10px; color: var(--gray); margin-top: 1px; }
+
+/* ── Pilares ── */
+.pilar-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.pilar-card { flex: 1; min-width: 120px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; border-top: 3px solid var(--primary); }
+.pilar-cod { font-size: 18px; font-weight: 800; color: var(--primary); }
+.pilar-nome { font-size: 12px; font-weight: 700; color: #374151; }
+.pilar-pct { font-size: 20px; font-weight: 800; color: var(--accent); margin-top: 4px; }
+
+/* ── Weeks status table ── */
+.weeks-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.weeks-table th { background: var(--primary); color: white; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.weeks-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+.weeks-table tr:last-child td { border-bottom: none; }
+.weeks-table tr:hover td { background: #F9FAFB; }
+.s-done     { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #D1FAE5; color: #065F46; }
+.s-progress { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #FEF3C7; color: #92400E; }
+.s-pending  { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #F3F4F6; color: #6B7280; }
+
+/* ── Metricas table ── */
+.met-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.met-table th { background: var(--accent); color: white; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.met-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); }
+.met-table tr:last-child td { border-bottom: none; }
+.met-table tr:hover td { background: #F9FAFB; }
+.met-meta { font-weight: 700; color: var(--accent); }
+
+/* ── Toast ── */
+#toast { position: fixed; bottom: 16px; right: 16px; background: #16A085; color: white; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 999; }
+#toast.show { opacity: 1; }
+
+/* ── RADAR ── */
+.tab.radar.active { color: #7C3AED; border-bottom-color: #7C3AED; }
+.radar-header { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); color: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.radar-header h2 { font-size: 16px; font-weight: 800; margin: 0; }
+.radar-header .radar-meta { font-size: 12px; opacity: .75; }
+.radar-badge { background: #7C3AED; color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+/* ── RADAR TOGGLE ── */
+.rt-toggle-m{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;padding:10px 0}
+.rt-chip-m{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .2s;user-select:none}
+.rt-chip-corrente-m{background:#EDE9FE;color:#5B21B6;border-color:#C4B5FD}
+.rt-chip-corrente-m.active{background:#7C3AED;color:#fff;border-color:#7C3AED}
+.rt-chip-proxima-m{background:#F3F4F6;color:#9CA3AF;border-color:#E5E7EB}
+.rt-chip-proxima-m.active{background:#4F46E5;color:#fff;border-color:#4F46E5}
+.rt-chip-proxima-m.locked{opacity:.35;cursor:not-allowed;border-style:dashed}
+.rt-ctx-badge-m{margin-left:auto;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
+.rt-ctx-corrente-m{background:#EDE9FE;color:#5B21B6}
+.rt-ctx-proxima-m{background:#DBEAFE;color:#1D4ED8}
+.radar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.radar-card { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+.radar-card-head { padding: 12px 16px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+.radar-card-body { padding: 14px 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+.radar-card-body ul { padding-left: 16px; margin: 6px 0; }
+.radar-card-body li { margin-bottom: 4px; }
+.radar-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin: 2px; }
+.radar-opp { background: #F0FDF4; border-left: 3px solid #22C55E; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; }
+.radar-alert { background: #FFF7ED; border-left: 3px solid #F59E0B; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; }
+.radar-copy { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; font-style: italic; }
+.cross-card { background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+.cross-card h4 { font-size: 13px; font-weight: 700; color: #5B21B6; margin-bottom: 6px; }
+.cross-card p { font-size: 13px; color: #374151; line-height: 1.6; }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+  .delivery-banner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div id="toast">✓ Copiado!</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   ██  CONFIGURAÇÃO DO CLIENTE  ██
+   Editar este bloco para cada cliente.
+   ══════════════════════════════════════════════════════════════════════ */
+const CLIENTE = {
+  nome:      "Marcela Pinheiro",
+  cargo:     "Gestora Financeira",
+  instagram: "@marcelapinheiroGF",
+  segmento:  "Finanças Pessoais & Comportamento Financeiro",
+  inicio:    "09/06/2026",
+  emoji:     "💚",
+  /* Cores do brand kit */
+  primary: "#1B6A39",   /* Verde Floresta */
+  accent:  "#83983A",   /* Verde Oliva    */
+  bgLight: "#F8F5EE",   /* Creme          */
+  /* Caminhos */
+  pastaLocal:  "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\CLIENTE-Marcela-Pinheiro-GF",
+  driveFolder: "https://drive.google.com/drive/folders/16y0CkeKxo_MeXheeDOx2uFpDBCt0-iPb",
+  /* Canais ativos */
+  canais: ["Instagram", "TikTok", "YouTube", "LinkedIn", "WhatsApp"],
+  /* Pilares de conteúdo */
+  pilares: [
+    { cod: "C",    nome: "Comportamental",    pct: "40%" },
+    { cod: "E",    nome: "Educação",           pct: "30%" },
+    { cod: "CM",   nome: "Comunidade",         pct: "20%" },
+    { cod: "A",    nome: "Autoridade/Oferta",  pct: "10%" },
+  ],
+  /* Paleta de cores */
+  cores: [
+    { nome: "Verde Floresta", hex: "#1B6A39", uso: "Fundo primário, headers" },
+    { nome: "Verde Oliva",    hex: "#83983A", uso: "CTA, números, destaques" },
+    { nome: "Creme",          hex: "#F8F5EE", uso: "Fundos secundários, cards" },
+  ],
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   ██  SEMANAS  ██
+   Adicionar uma nova entrada a cada semana entregue.
+   ══════════════════════════════════════════════════════════════════════ */
+const SEMANAS = [
+  {
+    /* ── Metadados ── */
+    id:        "s09-15-06",
+    label:     "09–15/06",
+    labelFull: "Semana 09–15/06/2026",
+    badge:     "SEM. 1",
+    status:    "done",   /* done | progress | pending */
+    objetivo:  "Lançamento — quem é a Marcela e qual problema ela resolve",
+    notionUrl: "https://www.notion.so/Entrega-Semana-09-15-06-Marcela-Pinheiro-GF-379b15c0997381849259dd28bb9bef86",
+
+    /* ── Arquivos ── */
+    arquivos: [
+      {
+        icon: "📄", nome: "Pacote da Semana v1.0.docx",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\CLIENTE-Marcela-Pinheiro-GF\\Semana 09-15-06-2026\\Pacote da Semana 09-15-06 - Marcela Pinheiro GF v1.0.docx",
+        driveId: "1H-4G2M1VlnV8tz7v_Ku-w_Vtmq5Wi9vI"
+      },
+      {
+        icon: "🎨", nome: "Carrosseis PPTX v2 (3 carrosseis)",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\CLIENTE-Marcela-Pinheiro-GF\\Semana 09-15-06-2026\\Carrosseis-Semana-09-15-06-2026-Marcela-v2.pptx",
+        driveId: "1KkxEEOkoaDiF5UZTaUObpZsVIgqTmjhq"
+      },
+      {
+        icon: "🔗", nome: "Links Canva — todos os slides",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\CLIENTE-Marcela-Pinheiro-GF\\Semana 09-15-06-2026\\LINKS-CANVA-Carrosseis.md",
+        driveId: null
+      },
+      {
+        icon: "📁", nome: "Pasta da semana (Google Drive)",
+        path: null,
+        driveId: "1rPI5LsCBcUFJxdWwRrDq6uccf9eJmsYX", folder: true
+      },
+    ],
+
+    /* ── Canva slides ── */
+    canva: [
+      {
+        nome: "Carrossel 1 — Segunda 09/06",
+        desc: "Você ganha bem, mas no fim do mês não sobra nada",
+        slides: 7,
+        links: [
+          { s: "1/7", tema: "CAPA — Você ganha bem. Por que não sobra nada?",    url: "https://www.canva.com/d/ukkM_UDG8qXsW-l" },
+          { s: "2/7", tema: "Não é falta de dinheiro. É falta de direção.",       url: "https://www.canva.com/d/ACZYXDCWsNJhrY6" },
+          { s: "3/7", tema: "Os 3 comportamentos que drenam",                     url: "https://www.canva.com/d/ysJC7dm6joB7c9M" },
+          { s: "4/7", tema: "Gasto Invisível",                                   url: "https://www.canva.com/d/w4HbLEaTXW4Wxyl" },
+          { s: "5/7", tema: "Gasto Emocional",                                   url: "https://www.canva.com/d/iyqG04CNHT0ryri" },
+          { s: "6/7", tema: "Falta de Destino",                                  url: "https://www.canva.com/d/npoVILFG1nCDlcK" },
+          { s: "7/7", tema: "CTA — Salva esse post. Você vai precisar.",          url: "https://www.canva.com/d/ukaLwdGoXnlx8yE" },
+        ]
+      },
+      {
+        nome: "Carrossel 2 — Quarta 11/06",
+        desc: "Os 5 gatilhos que fazem você gastar sem querer",
+        slides: 7,
+        links: [
+          { s: "1/7", tema: "CAPA — Você não é impulsivo. Foi programado pra gastar.", url: "https://www.canva.com/d/JfJSwc9xozfqzwD" },
+          { s: "2/7", tema: "Gatilho 1 — Promoção e Urgência",                        url: "https://www.canva.com/d/WUo_NhW4zrKPoEX" },
+          { s: "3/7", tema: "Gatilho 2 — Comparação Social",                          url: "https://www.canva.com/d/1qWL0wc17RHsBVq" },
+          { s: "4/7", tema: "Gatilho 3 — Recompensa Emocional",                       url: "https://www.canva.com/d/43A-H_u_QoB12Zm" },
+          { s: "5/7", tema: "Gatilho 4 — FOMO",                                       url: "https://www.canva.com/d/tWy756Q9JYxEAnP" },
+          { s: "6/7", tema: "Gatilho 5 — Facilidade do Crédito",                      url: "https://www.canva.com/d/iSynJIyQA-LQy46" },
+          { s: "7/7", tema: "Conclusão — Reconhecer o gatilho é o 1º passo",          url: "https://www.canva.com/d/LdjvzXchiHLgogo" },
+        ]
+      },
+      {
+        nome: "Carrossel 3 — Sexta 13/06",
+        desc: "Quem é a Marcela e por que ela faz isso",
+        slides: 6,
+        links: [
+          { s: "1/6", tema: "CAPA — Prazer, sou a Marcela.",                       url: "https://www.canva.com/d/o5xFh0ZgJUn9htg" },
+          { s: "2/6", tema: "O que ela faz (gestão financeira comportamental)",    url: "https://www.canva.com/d/MDPEBi_htaoqJ-V" },
+          { s: "3/6", tema: "Para quem ela trabalha",                              url: "https://www.canva.com/d/3kWt3xA-noxGvPF" },
+          { s: "4/6", tema: "Diferencial — Não é só planilha",                     url: "https://www.canva.com/d/TbcAMu14x3DqwUt" },
+          { s: "5/6", tema: "Resultado Real — clientes saíram do vermelho em 60d", url: "https://www.canva.com/d/ubbxWrdoXY6S6kl" },
+          { s: "6/6", tema: "CTA — Se você se identifica, me chama no DM",         url: "https://www.canva.com/d/hEj3dCV5R4Z6eXL" },
+        ]
+      },
+    ],
+
+    /* ── Grade (visão rápida por dia × canal) ── */
+    grade: [
+      { dia: "SEG 09/06",  ig: { chip: "Carrossel", txt: "Você ganha bem, mas não sobra nada" },      tk: null,                                    li: null,                              yt: null },
+      { dia: "TER 10/06",  ig: { chip: "Reel",      txt: "Método dos 3 Envelopes" },                  tk: { chip: "Reel",   txt: "3 Envelopes" }, li: { chip: "Post",  txt: "A verdade sobre planej. familiar" }, yt: null },
+      { dia: "QUA 11/06",  ig: { chip: "Carrossel", txt: "Os 5 Gatilhos do consumo" },                tk: null,                                    li: null,                              yt: null },
+      { dia: "QUI 12/06",  ig: null,                                                                   tk: { chip: "Corte",  txt: "Reserva de Emergência" }, li: null,              yt: { chip: "Vídeo", txt: "Reserva de Emergência" } },
+      { dia: "SEX 13/06",  ig: { chip: "Carrossel", txt: "Quem é a Marcela" },                        tk: null,                                    li: null,                              yt: null },
+      { dia: "SÁB 14/06",  ig: { chip: "Stories",   txt: "Bastidores da semana" },                    tk: { chip: "Casual", txt: "Motivacional" }, li: null,                              yt: null },
+    ],
+
+    /* ── Posts detalhados ── */
+    posts: [
+      {
+        dia: "SEG 09/06", pilar: "C",
+        titulo: "Você ganha bem, mas no fim do mês não sobra nada. Por quê?",
+        formato: "Carrossel · 7 slides · IG 9h",
+        gancho: "Você ganha bem. Por que não sobra nada?",
+        slides: "1. Capa provocativa · 2. Não é falta de dinheiro, é falta de direção · 3. Os 3 comportamentos que drenam · 4. Gasto invisível (assinaturas, delivery, impulso) · 5. Gasto emocional (compensar o estresse) · 6. Falta de destino (dinheiro sem objetivo some) · 7. CTA: 'Salva esse post. Você vai precisar.'",
+        legenda: "Você trabalha o mês inteiro. Paga as contas. Parece que tá tudo certo. No fim do mês... some.\n\nIsso não é má sorte. São 3 comportamentos silenciosos que drenam seu dinheiro antes de você perceber.\n\nArrasta pra conhecer os 3 — e me conta qual te pegou nos comentários. 💚",
+        cta: "Salva esse post. Você vai precisar.",
+        hashtags: "#gestaofinanceira #comportamentofinanceiro #financaspessoais",
+        stories: [
+          "Enquete: 'Você sabe exatamente onde seu dinheiro vai todo mês?' → Sim / Não (spoiler: 80% diz não)",
+          "Resultado da enquete + frase de conexão",
+          "CTA: 'Amanhã tem dica pra resolver isso. Ativa o sininho.'",
+        ],
+      },
+      {
+        dia: "TER 10/06", pilar: "E",
+        titulo: "O método dos 3 envelopes — o mais simples que existe",
+        formato: "Reel 45-60s · TikTok + IG",
+        gancho: "Para tudo. Você está errando o básico do orçamento.",
+        slides: null,
+        legenda: "O método dos 3 envelopes é tão simples que parece bom demais pra ser verdade. E funciona exatamente por isso.\n\nSem app, sem planilha complicada. Só você, seu dinheiro e 3 decisões.\n\nSegue pra ver os próximos passos. 💚",
+        cta: "Segue pra aprender o resto.",
+        hashtags: "#educacaofinanceira #orcamento #financaspessoais",
+        stories: null,
+        extras: [
+          { label: "LinkedIn", txt: "A verdade sobre planejamento financeiro para famílias · Texto 800-1200 chars · Ângulo: 'Depois dos 35, o erro mais caro não é gastar demais — é não ter destino pro dinheiro.' · Persona: Família Ribeiro + Sandra" },
+        ],
+      },
+      {
+        dia: "QUA 11/06", pilar: "C",
+        titulo: "Os 5 gatilhos que fazem você gastar sem querer",
+        formato: "Carrossel · 7 slides · IG",
+        gancho: "Você não é impulsivo. Você foi programado pra gastar.",
+        slides: "1. Capa · 2. Gatilho 1 Promoção/urgência · 3. Gatilho 2 Comparação social · 4. Gatilho 3 Recompensa emocional · 5. Gatilho 4 FOMO · 6. Gatilho 5 Facilidade do crédito · 7. 'Reconhecer o gatilho é o 1º passo pra desprogramar.'",
+        legenda: "Não é fraqueza. É neurociência.\n\nGrandes marcas investem bilhões pra criar esses gatilhos. E ninguém te ensinou a identificá-los.\n\nHoje eu mostro os 5 principais. Salva. Compartilha com alguém que precisa. 💚",
+        cta: "Salva. Compartilha com alguém que precisa.",
+        hashtags: "#comportamentofinanceiro #gatilhos #gestaofinanceira",
+        stories: [
+          "Quiz: 'Qual é o seu maior gatilho de consumo?' (enquete / caixa de resposta)",
+          "Me conta nos comentários do post de hoje",
+        ],
+      },
+      {
+        dia: "QUI 12/06", pilar: "E",
+        titulo: "Reserva de emergência: quanto você precisa e como montar do zero",
+        formato: "YouTube 5-10min + Corte TikTok 30s",
+        gancho: "Você sabe quanto precisa ter na sua reserva de emergência? A maioria não sabe.",
+        slides: null,
+        legenda: "Estrutura do vídeo YouTube:\n→ Intro: por que isso importa\n→ Fórmula: 6x os gastos mensais\n→ Como montar em 90 dias\n→ Onde guardar (Tesouro Selic vs CDB)\n→ CTA: comentar o maior obstáculo\n\nMiniatura: Verde Floresta + '6x' em Verde Oliva + rosto da Marcela.",
+        cta: "TikTok: 'Link do vídeo completo na bio'",
+        hashtags: "#reservadeemergencia #educacaofinanceira #financaspessoais",
+        stories: null,
+      },
+      {
+        dia: "SEX 13/06", pilar: "A+CM",
+        titulo: "Quem é a Marcela e por que ela faz isso",
+        formato: "Carrossel · 6 slides · IG",
+        gancho: "Prazer, sou a Marcela.",
+        slides: "1. Foto profissional + 'Prazer, sou a Marcela.' · 2. O que ela faz (gestão financeira comportamental) · 3. Para quem ela trabalha (os 3 perfis) · 4. Diferencial: 'Não é só planilha. É comportamento + plano + sonhos.' · 5. Resultado real (genérico): 'Clientes que saíram do vermelho em 60 dias' · 6. CTA: 'Se você se identifica, me chama no DM.'",
+        legenda: "Eu não sou a gestora que só te manda planilha.\n\nSou a profissional que entende que dinheiro é comportamento — e que por trás de cada decisão financeira tem uma emoção, um sonho e uma história.\n\nSe você quer se organizar financeiramente e ainda aproveitar a vida, esse perfil é pra você. 💚 Me chama no DM.",
+        cta: "Se você se identifica, me chama no DM.",
+        hashtags: "#marcelapinheiro #gestorafinanceira #planejamentofinanceiro",
+        stories: null,
+        extras: [
+          { label: "WhatsApp Status", txt: "Imagem com frase da semana + 'Salva pra lembrar'" },
+        ],
+      },
+      {
+        dia: "SÁB 14/06", pilar: "CM",
+        titulo: "Bastidores + Motivacional casual",
+        formato: "Stories IG + TikTok 30s",
+        gancho: "Com 25 anos eu achava que era cedo. Com 50 achava que era tarde. Não era nenhum dos dois.",
+        slides: null,
+        legenda: null,
+        cta: null,
+        hashtags: null,
+        stories: [
+          "Foto/vídeo casual: 'Preparando o conteúdo da próxima semana'",
+          "Pergunta aberta: 'Qual é sua maior dificuldade financeira agora?'",
+          "Responder interações da semana em vídeo curto",
+        ],
+        extras: [
+          { label: "TikTok", txt: "Texto na tela + voz off, 30s. Persona alvo: Lucas + Sandra." },
+        ],
+      },
+    ],
+
+    /* ── Métricas da semana ── */
+    metricas: [
+      { label: "Seguidores Instagram",    meta: "+30" },
+      { label: "Alcance de posts",        meta: "+500 contas" },
+      { label: "Salvamentos de carrossel",meta: "+50" },
+      { label: "DMs recebidos",           meta: "+10" },
+      { label: "Visualizações TikTok",    meta: "+1.000" },
+      { label: "Inscritos YouTube",       meta: "+20" },
+    ],
+  },
+
+  /* ══ PRÓXIMA SEMANA — copiar o bloco acima e preencher ══
+  {
+    id: "s16-22-06",
+    label: "16–22/06",
+    labelFull: "Semana 16–22/06/2026",
+    badge: "SEM. 2",
+    status: "pending",
+    objetivo: "...",
+    notionUrl: "",
+    arquivos: [],
+    canva: [],
+    grade: [],
+    posts: [],
+    metricas: [],
+  },
+  */
+];
+
+/* ══════════════════════════════════════════════════════════════════════
+   ██  RADAR DE CONCORRENTES  ██
+   Atualizado semanalmente às quintas-feiras.
+   Arquivo radar: CLIENTE-Marcela-Pinheiro-GF/00 - Base Estrategica/_RADAR-SEMANAL/
+   ══════════════════════════════════════════════════════════════════════ */
+const RADAR = {
+  ultimaExecucao: "08/06/2026",
+  proximaExecucao: "quinta 12/06 às 08h00",
+  concorrentes: [
+    {
+      nome: "Nath Finanças",
+      tag: "Edu. Financeira",
+      tagBg: "#1E90FF", tagFg: "#fff",
+      headBg: "#EBF5FB", headFg: "#0A1B33",
+      emAlta: [
+        "Linguagem divertida conquista jovens 18–28 com alto engajamento",
+        "Produto digital como principal renda — monetização escalável",
+        "Reel/short como carro-chefe do crescimento",
+      ],
+      opp: "Não atua com famílias nem com comportamento financeiro adulto. Espaço aberto para a Marcela dominar o público 30–50 com abordagem empática.",
+      angulo: "Organização financeira que funciona pra quem já tem filho, parceiro e conta pra pagar — não só pra quem está começando.",
+    },
+    {
+      nome: "Me Poupe! (Nathalia Arcuri)",
+      tag: "Grande referência",
+      tagBg: "#F59E0B", tagFg: "#fff",
+      headBg: "#FFFBEB", headFg: "#78350F",
+      emAlta: [
+        "Referência nacional com milhões de seguidores",
+        "Foco em produto digital e cursos em escala",
+        "Abordagem macro/educacional — pouca consultoria personalizada",
+      ],
+      opp: "Nathalia Arcuri ensina finanças de forma geral. A Marcela entrega presença, acolhimento e planejamento personalizado — o oposto de um produto em escala.",
+      angulo: "Não é mais um curso. É a profissional que conhece sua realidade e desenha um plano pra você especificamente.",
+    },
+    {
+      nome: "Thaís Godinho (Organize-se)",
+      tag: "Produtividade + $",
+      tagBg: "#8B5CF6", tagFg: "#fff",
+      headBg: "#F5F3FF", headFg: "#4C1D95",
+      emAlta: [
+        "Combina organização pessoal com finanças — nicho muito próximo",
+        "Público feminino 30–45 bem engajado",
+        "Não explora o comportamento emocional do consumo",
+      ],
+      opp: "Thaís não vai fundo no 'por quê' comportamental. Esse é o território exclusivo da Marcela — explicar o que está por trás dos gastos.",
+      angulo: "Por que você já tentou organizar as finanças várias vezes e não deu? A resposta não está na planilha. Está no comportamento.",
+    },
+    {
+      nome: "Micro-influencers locais / regionais",
+      tag: "Concorrência direta",
+      tagBg: "#16A34A", tagFg: "#fff",
+      headBg: "#F0FDF4", headFg: "#14532D",
+      emAlta: [
+        "Sem posicionamento claro — maioria faz conteúdo genérico de dicas",
+        "Identidade visual inconsistente, sem brand kit definido",
+        "Raramente constroem autoridade com cases reais de clientes",
+      ],
+      opp: "Nenhum perfil local combina consultora + família + abordagem empática com consistência visual. Marcela = parceria que acolhe, não planilha fria.",
+      angulo: "5 razões emocionais que te fazem gastar mais do que quer. Carrossel comportamental, sem julgamento.",
+    },
+  ],
+  crossInsights: [
+    {
+      titulo: "Abordagem comportamental é o grande vazio do mercado",
+      corpo: "Me Poupe e Nath Finanças têm alcance, mas ensinam finanças de forma técnica/educacional. A Marcela tem espaço único para dominar o 'por quê comportamental' — o gatilho emocional por trás de cada decisão financeira. É o diferencial mais difícil de copiar.",
+    },
+    {
+      titulo: "Público 30–50 com família está órfão de conteúdo personalizado",
+      corpo: "O mercado está saturado de conteúdo para jovens (20–28). Famílias, casais e pré-aposentados têm muito menos opção de qualidade. A grade editorial deve falar com esse perfil em pelo menos 40% das peças — é aí que a concorrência é menor e o ticket potencial é maior.",
+    },
+    {
+      titulo: "Consistência visual será vantagem competitiva imediata",
+      corpo: "Nenhum concorrente regional tem identidade visual coesa e profissional. A paleta Verde Floresta + Creme já diferencia a Marcela visualmente na timeline. Manter o brand kit sem exceções é estratégia, não estética.",
+    },
+  ],
+  radarFile: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\CLIENTE-Marcela-Pinheiro-GF\\00 - Base Estrategica\\_RADAR-SEMANAL\\RADAR-MARCELA-2026-06-08.md",
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   RENDER ENGINE — não editar abaixo desta linha
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Inject brand colors */
+(function() {
+  const r = document.documentElement.style;
+  r.setProperty('--primary', CLIENTE.primary);
+  r.setProperty('--accent',  CLIENTE.accent);
+  r.setProperty('--bglight', CLIENTE.bgLight);
+})();
+
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function cp(txt, btn) {
+  if (!txt) return;
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.classList.add('ok');
+    btn.textContent = '✓';
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => { t.classList.remove('show'); btn.classList.remove('ok'); btn.textContent = 'Copiar'; }, 1800);
+  });
+}
+
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+/* ── Topbar ── */
+function buildTopbar() {
+  document.body.insertAdjacentHTML('afterbegin', `
+    <div class="topbar">
+      <h1>${CLIENTE.emoji} ${CLIENTE.nome.toUpperCase()} · ${CLIENTE.cargo.toUpperCase()}</h1>
+      <span class="badge">📐 Agência MKT · ${CLIENTE.instagram}</span>
+    </div>`);
+}
+
+/* ── Tabs ── */
+function buildTabs() {
+  let html = `<div class="tabs">
+    <div class="tab active" onclick="showPage('dashboard',this)">📊 Dashboard</div>`;
+  SEMANAS.forEach(s => {
+    const icon = s.status === 'done' ? '✅' : s.status === 'progress' ? '🔄' : '📅';
+    html += `<div class="tab" onclick="showPage('${s.id}',this)">${icon} Sem. ${s.label}</div>`;
+  });
+  html += `<div class="tab radar" onclick="showPage('radar',this)">🔭 Radar</div>`;
+  html += `</div>`;
+  document.getElementById('tabs-container').innerHTML = html;
+}
+
+/* ── Status badge ── */
+function statusBadge(s) {
+  if (s === 'done')     return `<span class="s-done">✅ Entregue</span>`;
+  if (s === 'progress') return `<span class="s-progress">🔄 Em andamento</span>`;
+  return `<span class="s-pending">⏳ Pendente</span>`;
+}
+
+/* ── Dashboard ── */
+function buildDashboard() {
+  const semStatus = SEMANAS.map(s => `
+    <tr>
+      <td><strong>${s.labelFull}</strong><br><small style="color:var(--gray)">${s.objetivo}</small></td>
+      <td>${statusBadge(s.status)}</td>
+      <td>${s.badge}</td>
+      <td>
+        ${s.notionUrl ? `<a href="${esc(s.notionUrl)}" target="_blank" class="notion-btn" style="font-size:11px;padding:4px 10px">📋 Notion</a>` : '—'}
+        ${s.status==='done' ? `<a href="${esc('https://drive.google.com/drive/folders/' + (s.arquivos.find(a=>a.folder)?.driveId||''))}" target="_blank" class="drive-btn" style="margin-left:6px">☁️ Drive</a>` : ''}
+      </td>
+    </tr>`).join('');
+
+  const swatches = CLIENTE.cores.map(c => `
+    <div class="swatch">
+      <div class="swatch-box" style="background:${esc(c.hex)}"></div>
+      <div>
+        <div class="swatch-label">${esc(c.nome)}</div>
+        <div class="swatch-hex">${esc(c.hex)}</div>
+        <div class="swatch-uso">${esc(c.uso)}</div>
+      </div>
+    </div>`).join('');
+
+  const pilaresHtml = CLIENTE.pilares.map(p => `
+    <div class="pilar-card">
+      <div class="pilar-cod">${esc(p.cod)}</div>
+      <div class="pilar-nome">${esc(p.nome)}</div>
+      <div class="pilar-pct">${esc(p.pct)}</div>
+    </div>`).join('');
+
+  const html = `
+    <div id="page-dashboard" class="page active">
+      <!-- Banner Drive -->
+      <div class="delivery-banner">
+        <div>
+          <h3>${CLIENTE.emoji} ${esc(CLIENTE.nome)} — ${esc(CLIENTE.cargo)}</h3>
+          <p>${esc(CLIENTE.segmento)} · Início: ${esc(CLIENTE.inicio)} · ${esc(CLIENTE.instagram)}</p>
+        </div>
+        <a href="${esc(CLIENTE.driveFolder)}" target="_blank" class="notion-btn">☁️ Pasta Google Drive</a>
+      </div>
+
+      <!-- Pasta local -->
+      <div class="files-bar">
+        <div class="files-bar-title">📂 Pasta local</div>
+        <div class="files-grid">
+          <div class="path-row">
+            <span class="path-icon">📁</span>
+            <div class="path-info">
+              <div class="path-name">Pasta raiz do cliente (OneDrive)</div>
+              <div class="path-txt">${esc(CLIENTE.pastaLocal)}</div>
+            </div>
+            <div class="btn-row">
+              <button class="copy-btn" onclick="cp('${CLIENTE.pastaLocal.replace(/'/g,"\\'")}',this)">Copiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand colors -->
+      <div class="section-title">🎨 Paleta de Cores</div>
+      <div class="brand-strip">${swatches}</div>
+
+      <!-- Pilares -->
+      <div class="section-title">📌 Pilares de Conteúdo</div>
+      <div class="pilar-row">${pilaresHtml}</div>
+
+      <!-- Canais -->
+      <div class="section-title">📱 Canais Ativos</div>
+      <div class="card" style="margin-bottom:20px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          ${CLIENTE.canais.map(c => `<span class="chip" style="background:#E8F5E9;color:var(--primary);font-size:12px;padding:5px 12px">${c}</span>`).join('')}
+        </div>
+      </div>
+
+      <!-- Weeks status -->
+      <div class="section-title">📅 Status das Semanas</div>
+      <div class="card" style="padding:0;margin-bottom:20px;overflow:hidden">
+        <table class="weeks-table">
+          <thead><tr><th>Semana</th><th>Status</th><th>Ref.</th><th>Links</th></tr></thead>
+          <tbody>${semStatus}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend', html);
+}
+
+/* ── Week page ── */
+function buildSemana(s) {
+  /* Files bar */
+  const filesHtml = s.arquivos.map(f => {
+    const driveUrl = f.folder
+      ? `https://drive.google.com/drive/folders/${f.driveId}`
+      : (f.driveId ? `https://drive.google.com/file/d/${f.driveId}/view` : null);
+    const pathDisplay = f.path ? f.path.split('\\').slice(-2).join('\\') : (f.nome);
+    return `
+      <div class="path-row">
+        <span class="path-icon">${esc(f.icon)}</span>
+        <div class="path-info">
+          <div class="path-name">${esc(f.nome)}</div>
+          <div class="path-txt">${esc(pathDisplay)}</div>
+        </div>
+        <div class="btn-row">
+          ${f.path ? `<button class="copy-btn" onclick="cp('${f.path.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>` : ''}
+          ${driveUrl ? `<a href="${esc(driveUrl)}" target="_blank" class="drive-btn">☁️ Drive</a>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+
+  /* Grade grid */
+  const cols5 = 'grid-template-columns: 90px repeat(4, 1fr)';
+  let gradeHtml = `<div class="grade-wrap"><div class="grade-grid" style="${cols5}">
+    <div class="grade-cell header">DIA</div>
+    <div class="grade-cell header" style="background:#E1306C;color:white">📸 Instagram</div>
+    <div class="grade-cell header" style="background:#000;color:white">🎵 TikTok</div>
+    <div class="grade-cell header" style="background:#0A66C2;color:white">💼 LinkedIn</div>
+    <div class="grade-cell header" style="background:#FF0000;color:white">▶️ YouTube</div>`;
+
+  s.grade.forEach(g => {
+    gradeHtml += `<div class="grade-cell dayname">${esc(g.dia)}</div>`;
+    [g.ig, g.tk, g.li, g.yt].forEach(cell => {
+      if (!cell) {
+        gradeHtml += `<div class="grade-cell empty">—</div>`;
+      } else {
+        gradeHtml += `<div class="grade-cell"><span class="chip">${esc(cell.chip)}</span><br>${esc(cell.txt)}</div>`;
+      }
+    });
+  });
+  gradeHtml += `</div></div>`;
+
+  /* Canva links */
+  const canvaHtml = s.canva.map(c => `
+    <div class="canva-section">
+      <div class="canva-head">
+        <div>
+          <h4>🎨 ${esc(c.nome)}</h4>
+          <small>${esc(c.desc)} · ${c.slides} slides</small>
+        </div>
+      </div>
+      <table class="canva-table">
+        ${c.links.map(l => `
+          <tr>
+            <td class="slide-num">${esc(l.s)}</td>
+            <td>${esc(l.tema)}</td>
+            <td style="text-align:right;width:100px"><a href="${esc(l.url)}" target="_blank" class="canva-link">✏️ Canva</a></td>
+          </tr>`).join('')}
+      </table>
+    </div>`).join('');
+
+  /* Content cards */
+  const postsHtml = s.posts.map(p => {
+    const storiesHtml = p.stories ? `
+      <div class="label">Stories IG</div>
+      <ul class="story-list">${p.stories.map(st => `<li>${esc(st)}</li>`).join('')}</ul>` : '';
+    const extrasHtml = (p.extras||[]).map(e => `
+      <div class="label">${esc(e.label)}</div>
+      <div class="extra-block">${esc(e.txt)}</div>`).join('');
+    return `
+      <div class="content-card">
+        <div class="content-header">
+          <span class="day">${esc(p.dia)}</span>
+          <span class="title">${esc(p.titulo)}</span>
+          <span class="pilar-badge">${esc(p.pilar)}</span>
+          <span class="format">${esc(p.formato)}</span>
+        </div>
+        <div class="content-body">
+          <div class="label">Gancho</div>
+          <div class="gancho">"${esc(p.gancho)}"</div>
+          ${p.slides ? `<div class="label">Slides</div><div class="edl">${esc(p.slides)}</div>` : ''}
+          ${p.legenda ? `<div class="label">Legenda / Caption</div><div class="legenda">${esc(p.legenda).replace(/\n/g,'<br>')}</div>` : ''}
+          ${p.cta ? `<div class="label">CTA</div><div class="cta">${esc(p.cta)}</div>` : ''}
+          ${p.hashtags ? `<div class="hashtags">${esc(p.hashtags)}</div>` : ''}
+          ${storiesHtml}
+          ${extrasHtml}
+        </div>
+      </div>`;
+  }).join('');
+
+  /* Métricas */
+  const metHtml = s.metricas.map(m => `
+    <tr><td>${esc(m.label)}</td><td class="met-meta">${esc(m.meta)}</td></tr>`).join('');
+
+  const html = `
+    <div id="page-${esc(s.id)}" class="page">
+
+      <!-- Notion delivery banner -->
+      <div class="delivery-banner">
+        <div>
+          <h3>📦 ${esc(s.labelFull)} · ${statusBadge(s.status)}</h3>
+          <p>Objetivo: ${esc(s.objetivo)}</p>
+        </div>
+        ${s.notionUrl ? `<a href="${esc(s.notionUrl)}" target="_blank" class="notion-btn">📋 Ver entrega no Notion</a>` : ''}
+      </div>
+
+      <!-- Files -->
+      <div class="files-bar">
+        <div class="files-bar-title">📂 Arquivos — clique Copiar → Win+R → cole → Enter</div>
+        <div class="files-grid">${filesHtml}</div>
+      </div>
+
+      <!-- Grade -->
+      <div class="section-title">📅 Grade Editorial da Semana</div>
+      ${gradeHtml}
+
+      <!-- Canva links -->
+      <div class="section-title">🎨 Canva — Slides Individuais</div>
+      ${canvaHtml}
+
+      <!-- Posts detalhados -->
+      <div class="section-title">✍️ Posts Detalhados · Copy + Roteiro</div>
+      ${postsHtml}
+
+      <!-- Métricas -->
+      <div class="section-title">📊 Métricas · Metas da Semana 1</div>
+      <div class="card" style="padding:0;overflow:hidden;margin-bottom:20px">
+        <table class="met-table">
+          <thead><tr><th>Métrica</th><th>Meta</th></tr></thead>
+          <tbody>${metHtml}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend', html);
+}
+
+/* ── Radar page ── */
+function buildRadar() {
+  const cardsHtml = RADAR.concorrentes.map(c => `
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:${esc(c.headBg)};color:${esc(c.headFg)}">
+        ${esc(c.nome)}
+        <span class="radar-tag" style="background:${esc(c.tagBg)};color:${esc(c.tagFg)};margin-left:auto">${esc(c.tag)}</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px">Em alta no nicho</div>
+        <ul>${c.emAlta.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+        <div class="radar-opp"><strong>Oportunidade:</strong> ${esc(c.opp)}</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "${esc(c.angulo)}"</div>
+      </div>
+    </div>`).join('');
+
+  const insightsHtml = RADAR.crossInsights.map(i => `
+    <div class="cross-card">
+      <h4>${esc(i.titulo)}</h4>
+      <p>${esc(i.corpo)}</p>
+    </div>`).join('');
+
+  const html = `
+    <div id="page-radar" class="page">
+
+      <div class="radar-header">
+        <div>
+          <div style="font-size:11px;opacity:.6;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">🔭 Inteligência Competitiva</div>
+          <h2>Radar · ${esc(CLIENTE.nome)}</h2>
+          <div class="radar-meta">Última execução: ${esc(RADAR.ultimaExecucao)} · Próxima: ${esc(RADAR.proximaExecucao)}</div>
+        </div>
+        <span class="radar-badge">${RADAR.concorrentes.length} concorrentes monitorados</span>
+      </div>
+
+      <div class="rt-toggle-m" id="radarToggleM">
+        <span class="rt-chip-m rt-chip-corrente-m" id="rtMChipCorrente" onclick="setRadarModeM('corrente')">📊 Semana em curso</span>
+        <span class="rt-chip-m rt-chip-proxima-m" id="rtMChipProxima" onclick="setRadarModeM('proxima')">🔮 Próxima semana</span>
+        <span id="rtMContextBadge" class="rt-ctx-badge-m"></span>
+      </div>
+
+      <div class="radar-grid">${cardsHtml}</div>
+
+      <div class="section-title">🔄 Cross-Insights da Semana</div>
+      ${insightsHtml}
+
+      <div class="section-title">📂 Relatório Radar completo</div>
+      <div class="files-bar">
+        <div class="files-bar-title">🔭 Arquivo do Radar — clique Copiar → Win+R → cole → Enter</div>
+        <div class="files-grid">
+          <div class="path-row">
+            <span class="path-icon">📄</span>
+            <div class="path-info">
+              <div class="path-name">Radar ${esc(CLIENTE.nome)} · ${esc(RADAR.ultimaExecucao)}</div>
+              <div class="path-txt">${esc(RADAR.radarFile.split('\\').slice(-3).join('\\'))}</div>
+            </div>
+            <div class="btn-row">
+              <button class="copy-btn" onclick="cp('${RADAR.radarFile.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend', html);
+}
+
+/* ── Init ── */
+(function init() {
+  document.body.insertAdjacentHTML('beforeend', '<div id="tabs-container"></div><div id="pages-container"></div>');
+  buildTopbar();
+  buildTabs();
+  buildDashboard();
+  SEMANAS.forEach(s => buildSemana(s));
+  buildRadar();
+  initRadarToggleM();
+})();
+
+function _radarAutoModeM(){var d=new Date().getDay();return(d>=4||d===0)?'proxima':'corrente';}
+function setRadarModeM(m){
+  var auto=_radarAutoModeM();
+  if(m==='proxima'&&auto!=='proxima')return;
+  var cc=document.getElementById('rtMChipCorrente');
+  var cp=document.getElementById('rtMChipProxima');
+  var badge=document.getElementById('rtMContextBadge');
+  if(!cc)return;
+  cc.classList.toggle('active',m==='corrente');
+  cp.classList.toggle('active',m==='proxima');
+  if(m==='corrente'){
+    badge.textContent='Semana em andamento';
+    badge.className='rt-ctx-badge-m rt-ctx-corrente-m';
+  }else{
+    badge.textContent='🔮 Input semana seguinte';
+    badge.className='rt-ctx-badge-m rt-ctx-proxima-m';
+  }
+}
+function initRadarToggleM(){
+  var auto=_radarAutoModeM();
+  var cp=document.getElementById('rtMChipProxima');
+  if(!cp)return;
+  if(auto!=='proxima'){cp.classList.add('locked');cp.title='Disponível toda quinta às 08h';}
+  setRadarModeM(auto);
+}
+</script>
+
+</body>
+</html>

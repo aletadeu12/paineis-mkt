@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painéis MKT — Alexandre Tadeu</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Segoe UI',sans-serif;background:#0A1B33;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.logo{font-size:28px;font-weight:800;margin-bottom:4px;letter-spacing:-0.5px}
+.logo span{color:#9FE83A}
+.subtitle{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:40px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;width:100%;max-width:900px}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px 24px;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit;display:block}
+.card:hover{background:rgba(255,255,255,.1);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.card-icon{font-size:28px;margin-bottom:12px}
+.card-name{font-size:16px;font-weight:700;margin-bottom:5px}
+.card-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;margin-bottom:12px}
+.card-tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.tag-blue{background:rgba(30,144,255,.2);color:#6EB9FF}
+.tag-gold{background:rgba(201,167,122,.2);color:#DDB97E}
+.tag-green{background:rgba(57,255,20,.15);color:#39FF14}
+.tag-teal{background:rgba(128,90,213,.2);color:#C4A8F5}
+.card-updated{font-size:10px;color:rgba(255,255,255,.25);margin-top:10px}
+.card-placeholder{opacity:.4;cursor:default}
+.card-placeholder:hover{transform:none;box-shadow:none;background:rgba(255,255,255,.06)}
+.card-placeholder .card-tag{background:rgba(255,255,255,.08);color:rgba(255,255,255,.4)}
+.footer{margin-top:40px;font-size:11px;color:rgba(255,255,255,.2);text-align:center}
+.footer span{color:rgba(159,232,58,.5)}
+</style>
+</head>
+<body>
+
+<div class="logo">TRAÇÃO<span>MKT</span></div>
+<div class="subtitle">Central de Painéis · Alexandre Tadeu de Oliveira</div>
+
+<div class="grid">
+
+  <a class="card" href="./controle-mkt/index.html">
+    <div class="card-icon">🎯</div>
+    <div class="card-name">Painel Controle MKT</div>
+    <div class="card-desc">Visão geral da agência — 5 empresas, status semanal, radar, agentes, gaps e fluxo. Filtro global por empresa.</div>
+    <span class="card-tag tag-blue">ADFly · AleChef · BPMF · Marcela · TRAÇÃO</span>
+    <div class="card-updated">Atualiza toda segunda às 06h</div>
+  </a>
+
+  <a class="card" href="./painel-semanal/index.html">
+    <div class="card-icon">📅</div>
+    <div class="card-name">Painel Semanal</div>
+    <div class="card-desc">Grade editorial da semana — posts, status de produção, roteiros e captions prontos para publicar.</div>
+    <span class="card-tag tag-blue">ADFly · Semanal</span>
+    <div class="card-updated">Atualiza toda segunda às 06h</div>
+  </a>
+
+  <a class="card" href="./tracao-comercial/index.html">
+    <div class="card-icon">🚀</div>
+    <div class="card-name">TRAÇÃO — Painel Comercial</div>
+    <div class="card-desc">Pipeline comercial da agência — leads, propostas, status de negociação e próximos passos.</div>
+    <span class="card-tag tag-teal">TRAÇÃO MKT</span>
+    <div class="card-updated">Atualiza conforme pipeline evolui</div>
+  </a>
+
+  <div class="card card-placeholder">
+    <div class="card-icon">💚</div>
+    <div class="card-name">Painel Marcela GF</div>
+    <div class="card-desc">Painel semanal da Marcela Pinheiro — grade editorial, status de entrega e métricas de conteúdo.</div>
+    <span class="card-tag">Em breve</span>
+    <div class="card-updated">Disponível quando artifact for criado</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Departamento de MKT Virtual · Atualizado automaticamente via GitHub CI/CD<br>
+  <span>⚡ Deploy automático toda segunda 06h · Próximo: seg 22/06/2026</span>
+</div>
+
+</body>
+</html>
