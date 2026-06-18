@@ -1,812 +1,789 @@
 <!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  painel-trao.html                                                    ║
+  ║  TRAÇÃO MKT — Agência de Marketing Virtual com IA                    ║
+  ║  Agência MKT · Alexandre Tadeu · Gerado: 16/06/2026                  ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+-->
 <script type="application/json" id="cowork-artifact-meta">
-{
-  "name": "Tracao Painel Comercial",
-  "schemaVersion": 1,
-  "description": "Painel comercial inteligente da TRAÇÃO MKT. Formulário pré-reunião → IA gera briefing personalizado (dores, speech de abertura, perguntas-bomba, objeções, mapa solução) → condutor de reunião nos modos Ágil ou Completo → proposta com preços para impressão/PDF."
-}
+{"name":"Painel TRAÇÃO MKT","schemaVersion":1,"description":"Painel interno de gestão — TRAÇÃO MKT, Agência de Marketing Virtual com IA. Grade editorial, arquivos e captions por semana."}
 </script>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRAÇÃO MKT — Inteligência Comercial</title>
+<title>Painel — TRAÇÃO MKT</title>
 <style>
-:root{color-scheme:light;--bg:#f4f6f8;--surface:#fff;--surface2:#f8f9fa;--green:#16a34a;--green-lt:#dcfce7;--green-mid:#bbf7d0;--blue:#2563eb;--blue-lt:#dbeafe;--amber:#d97706;--amber-lt:#fef3c7;--red:#dc2626;--red-lt:#fee2e2;--text:#111827;--text-mid:#374151;--text-muted:#6b7280;--border:#e5e7eb;--border-dark:#d1d5db;--radius:8px;--radius-lg:12px;--shadow:0 1px 3px rgba(0,0,0,.08);}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','Segoe UI',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
-/* HEADER */
-.header{background:#fff;border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
-.logo{font-size:17px;font-weight:900;color:var(--green);letter-spacing:-.5px;flex-shrink:0;}
-.logo-tag{font-size:10px;font-weight:400;color:var(--text-muted);letter-spacing:1.5px;display:block;margin-top:-3px;}
-.steps{display:flex;gap:6px;flex:1;align-items:center;}
-.step-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);user-select:none;}
-.step-item.active{color:var(--green);font-weight:600;}
-.step-item.done{color:var(--green);opacity:.7;cursor:pointer;}
-.step-item.done:hover{opacity:1;}
-.step-dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--border-dark);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:#fff;transition:all .2s;}
-.step-item.active .step-dot{border-color:var(--green);background:var(--green);color:#fff;}
-.step-item.done .step-dot{border-color:var(--green);background:var(--green-lt);color:var(--green);}
-.step-sep{color:var(--border-dark);font-size:12px;}
-.btn-reset{background:transparent;border:1px solid var(--border-dark);color:var(--text-muted);padding:6px 14px;border-radius:var(--radius);cursor:pointer;font-size:12px;transition:all .2s;flex-shrink:0;}
-.btn-reset:hover{color:var(--text);border-color:var(--text-muted);}
-/* LAYOUT */
-.content{max-width:900px;margin:0 auto;padding:24px 16px;}
-.phase{display:none;}
-.phase.active{display:block;animation:fadeIn .3s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);}
-.card-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
-.section-header{margin-bottom:20px;}
-.section-header h2{font-size:20px;font-weight:700;}
-.section-header p{color:var(--text-muted);font-size:13px;margin-top:4px;}
-/* FORM */
-.field{margin-bottom:14px;}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:5px;}
-.field input,.field select,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border-dark);border-radius:var(--radius);padding:9px 12px;color:var(--text);font-size:13px;font-family:inherit;transition:border-color .2s;resize:none;}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,.1);}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-/* RADIO — selection changes color */
-.radio-group{display:flex;flex-wrap:wrap;gap:8px;}
-.radio-opt{display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--surface2);border:1.5px solid var(--border-dark);border-radius:20px;cursor:pointer;font-size:12px;transition:all .2s;}
-.radio-opt input{display:none;}
-.radio-opt.checked{background:var(--green-lt);border-color:var(--green);color:var(--green);font-weight:600;}
-/* BUTTONS */
-.btn-primary{width:100%;background:var(--green);color:#fff;border:none;border-radius:var(--radius);padding:13px 24px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:4px;}
-.btn-primary:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.3);}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
-/* LOADING */
-.loading-wrap{text-align:center;padding:80px 24px;}
-.spinner{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px;}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-msg{color:var(--text-muted);}
-.loading-steps{margin-top:16px;display:flex;flex-direction:column;gap:6px;align-items:center;}
-.loading-step{font-size:12px;color:var(--text-muted);}
-.loading-step.active{color:var(--text-mid);font-weight:600;}
-.loading-step.done{color:var(--green);}
-/* BADGES */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
-.badge-green{background:var(--green-lt);color:var(--green);}
-.badge-amber{background:var(--amber-lt);color:var(--amber);}
-.badge-red{background:var(--red-lt);color:var(--red);}
-.badge-blue{background:var(--blue-lt);color:var(--blue);}
-/* BRIEFING */
-.briefing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.pain-list{list-style:none;}
-.pain-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:6px;}
-.pain-num{background:var(--green-lt);color:var(--green);font-size:10px;font-weight:800;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.pain-text{font-size:13px;}
-.urgency-row{display:flex;align-items:center;gap:10px;margin:8px 0;}
-.urgency-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
-.urgency-fill{height:100%;border-radius:3px;transition:width 1s ease;}
-.speech-box{background:var(--surface2);border-left:3px solid var(--green);border-radius:var(--radius);padding:12px 14px;font-size:13px;color:var(--text-mid);font-style:italic;cursor:pointer;position:relative;transition:background .2s;}
-.speech-box:hover{background:var(--green-lt);}
-.speech-copy{position:absolute;top:8px;right:10px;font-size:10px;color:var(--green);opacity:0;transition:opacity .2s;font-style:normal;}
-.speech-box:hover .speech-copy{opacity:1;}
-.q-list{list-style:none;}
-.q-item{display:flex;gap:8px;align-items:flex-start;padding:9px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:6px;font-size:12px;cursor:pointer;transition:background .2s;}
-.q-item:hover{background:var(--blue-lt);}
-.q-icon{color:var(--green);flex-shrink:0;}
-.obj-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:6px;}
-.obj-head{padding:9px 12px;background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:500;}
-.obj-head:hover{background:var(--amber-lt);}
-.obj-body{padding:10px 12px;background:#fff;font-size:12px;color:var(--text-mid);display:none;border-left:3px solid var(--blue);border-top:1px solid var(--border);}
-.obj-item.open .obj-body{display:block;}
-.obj-item.open .obj-arrow{transform:rotate(180deg);}
-.obj-arrow{transition:transform .2s;font-size:10px;}
-.alert-box{background:var(--red-lt);border:1px solid #fca5a5;border-radius:var(--radius);padding:11px 14px;font-size:12px;color:#b91c1c;display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;}
-.sol-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;}
-.sol-dor{flex:1;font-size:12px;color:var(--text-muted);}
-.sol-arr{color:var(--green);font-size:13px;flex-shrink:0;}
-.sol-entrega{flex:1.5;font-size:12px;color:var(--text-mid);}
-.market-btn{width:100%;border:1.5px dashed var(--blue);background:transparent;color:var(--blue);border-radius:var(--radius);padding:9px;font-size:12px;cursor:pointer;transition:all .2s;margin-top:8px;}
-.market-btn:hover{background:var(--blue-lt);}
-.market-btn:disabled{opacity:.5;cursor:not-allowed;}
-.market-result{background:var(--blue-lt);border:1px solid #bfdbfe;border-radius:var(--radius);padding:12px;font-size:12px;color:var(--text-mid);margin-top:8px;line-height:1.7;display:none;white-space:pre-wrap;}
-/* MEETING */
-.mode-tag{display:inline-flex;align-items:center;gap:8px;background:var(--green-lt);color:var(--green);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:16px;}
-.block-tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
-.block-tab{padding:6px 14px;border-radius:20px;border:1px solid var(--border-dark);background:#fff;color:var(--text-muted);font-size:12px;cursor:pointer;white-space:nowrap;transition:all .2s;}
-.block-tab:hover{border-color:var(--green);color:var(--green);}
-.block-tab.active{background:var(--green);border-color:var(--green);color:#fff;font-weight:600;}
-.block-tab.done{background:var(--green-lt);border-color:var(--green);color:var(--green);}
-.block-panel{display:none;}
-.block-panel.active{display:block;animation:fadeIn .2s ease;}
-.meeting-card-hdr{background:linear-gradient(135deg,var(--green),#15803d);padding:16px 20px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;display:flex;align-items:center;justify-content:space-between;}
-.meeting-card-title{font-size:16px;font-weight:700;color:#fff;}
-.time-badge{background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:3px 10px;border-radius:20px;}
-.meeting-card-body{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:20px;}
-.script-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:8px;}
-.script-txt{background:var(--surface2);border-left:3px solid var(--green);padding:12px 14px;border-radius:var(--radius);font-size:13px;color:var(--text-mid);font-style:italic;margin-bottom:14px;white-space:pre-wrap;}
-.q-meeting-list{list-style:none;margin-bottom:14px;}
-.q-meeting-item{padding:8px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:5px;font-size:12px;display:flex;gap:8px;}
-.notes-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;}
-.notes-area{width:100%;border:1px solid var(--border-dark);border-radius:var(--radius);background:var(--surface2);padding:10px 12px;font-size:12px;color:var(--text);font-family:inherit;resize:vertical;min-height:70px;}
-.notes-area:focus{outline:none;border-color:var(--green);}
-.block-btns{display:flex;gap:10px;margin-top:16px;}
-.btn-next{flex:1;background:var(--green);color:#fff;border:none;border-radius:var(--radius);padding:11px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
-.btn-next:hover{background:#15803d;}
-.btn-prev{background:#fff;color:var(--text-muted);border:1px solid var(--border-dark);border-radius:var(--radius);padding:11px 18px;font-size:14px;cursor:pointer;transition:all .2s;}
-.btn-prev:hover{color:var(--text);border-color:var(--text-muted);}
-/* PROPOSAL */
-.proposal-hdr{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:36px 32px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;text-align:center;}
-.prop-logo{font-size:28px;font-weight:900;color:#22c55e;letter-spacing:-1px;}
-.prop-tagline{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
-.prop-client-name{font-size:22px;font-weight:700;color:#fff;margin-top:20px;}
-.prop-client-biz{font-size:14px;color:rgba(255,255,255,.5);margin-top:4px;}
-.prop-date{font-size:11px;color:rgba(255,255,255,.3);margin-top:8px;}
-.proposal-body{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:28px 32px;}
-.prop-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin:24px 0 10px;}
-.prop-pain-list{list-style:none;}
-.prop-pain-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:var(--radius);margin-bottom:6px;font-size:13px;}
-.prop-pain-check{color:var(--green);font-weight:700;flex-shrink:0;}
-.prop-value-box{background:linear-gradient(135deg,var(--green-lt),#f0fdf4);border:1px solid var(--green-mid);border-radius:var(--radius);padding:16px;font-size:13px;color:var(--text-mid);line-height:1.7;}
-.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;}
-.plan-card{border:2px solid var(--border-dark);border-radius:var(--radius-lg);padding:20px;cursor:pointer;transition:all .2s;}
-.plan-card:hover{border-color:var(--green);}
-.plan-card.selected{border-color:var(--green);background:var(--green-lt);}
-.plan-name{font-size:14px;font-weight:700;margin-bottom:4px;}
-.plan-setup{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
-.plan-price{font-size:26px;font-weight:800;color:var(--green);line-height:1;}
-.plan-period{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
-.plan-total{font-size:12px;color:var(--text-mid);background:rgba(22,163,74,.1);padding:5px 10px;border-radius:var(--radius);display:inline-block;margin-bottom:12px;font-weight:600;}
-.plan-feats{list-style:none;font-size:12px;color:var(--text-mid);}
-.plan-feats li{padding:3px 0;display:flex;gap:6px;align-items:flex-start;}
-.plan-feats li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
-.plan-not-incl{list-style:none;font-size:11px;color:var(--text-muted);margin-top:8px;}
-.plan-not-incl li{padding:2px 0;display:flex;gap:6px;}
-.plan-not-incl li::before{content:"—";color:var(--text-muted);}
-/* PRICE INPUTS */
-.price-input{border:none;border-bottom:1.5px dashed var(--green);background:transparent;color:inherit;font-size:inherit;font-weight:inherit;font-family:inherit;width:auto;outline:none;text-align:center;padding:0 2px;}
-.price-input:focus{border-bottom-style:solid;background:rgba(22,163,74,.07);border-radius:3px;}
-.price-input.price-main{font-size:26px;font-weight:800;color:var(--green);width:70px;}
-.price-input.price-sm{width:52px;}
-.price-input.price-months{width:28px;}
-/* NEXT STEP BOX */
-.next-step-box{background:#0f172a;color:#fff;border-radius:var(--radius);padding:16px 20px;text-align:center;margin-top:20px;}
-.next-step-box p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:4px;}
-.next-step-box strong{font-size:16px;font-weight:700;color:#22c55e;}
-.deadline-input{background:transparent;border:none;border-bottom:1.5px dashed rgba(34,197,94,.5);color:#22c55e;font-size:16px;font-weight:700;font-family:inherit;outline:none;text-align:center;width:auto;min-width:220px;padding:0 4px;}
-.deadline-input:focus{border-bottom-color:#22c55e;}
-/* CONSULTANT CARD */
-.consultant-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:16px;box-shadow:var(--shadow);}
-.consultant-card .card-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
-.consultant-print{display:none;}
-/* PROP FOOTER */
-.prop-footer{border-top:1px solid var(--border);margin-top:24px;padding-top:16px;display:flex;gap:12px;flex-wrap:wrap;}
-.btn-print{background:var(--green);color:#fff;border:none;border-radius:var(--radius);padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
-.btn-print:hover{background:#15803d;}
-.btn-back{background:#fff;border:1px solid var(--border-dark);color:var(--text-muted);border-radius:var(--radius);padding:11px 18px;font-size:14px;cursor:pointer;transition:all .2s;}
-.btn-back:hover{color:var(--text);}
-/* RESPONSIVE */
-@media(max-width:640px){.briefing-grid,.plans-grid,.field-row{grid-template-columns:1fr}.steps{display:none}.proposal-body,.proposal-hdr{padding:20px 16px}}
-/* PRINT / PDF */
-@media print{
-  @page{margin:12mm 14mm;}
-  .header,.prop-footer,.consultant-card,.no-print,#p-intake,#p-loading,#p-briefing,#p-meeting{display:none!important}
-  body{background:#fff;font-size:12px;color:#111;}
-  .content{padding:0;max-width:100%;}
-  #p-proposal{display:block!important;}
-  /* Header */
-  .proposal-hdr{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:0;padding:28px 28px;}
-  .prop-logo{font-size:22px;}
-  .prop-client-name{font-size:18px;}
-  /* Body */
-  .proposal-body{border:none;padding:20px 28px;border-radius:0;}
-  .prop-value-box{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  /* Plans: stack vertically, show only selected */
-  .plans-grid{grid-template-columns:1fr;gap:10px;}
-  .plan-card:not(.selected){display:none;}
-  .plan-card.selected{border-color:#16a34a!important;background:#f0fdf4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-inside:avoid;break-inside:avoid;}
-  /* Next step box */
-  .next-step-box{-webkit-print-color-adjust:exact;print-color-adjust:exact;page-break-inside:avoid;}
-  /* Inputs in print mode — show as plain text */
-  .price-input,.deadline-input{border:none!important;background:transparent!important;font-size:inherit!important;font-weight:inherit!important;color:inherit!important;width:auto!important;}
-  /* Pain items */
-  .prop-pain-item{background:#f8f9fa!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid;}
-  /* Consultant footer */
-  .consultant-print{display:block!important;border-top:1px solid #e5e7eb;margin-top:20px;padding-top:16px;}
-  .consultant-print-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:6px;font-size:11px;color:#6b7280;}
-  .consultant-print-row span strong{color:#111;font-weight:600;}
-  .consultant-print-obs{font-size:11px;color:#374151;margin-top:6px;font-style:italic;}
-}
+:root { --primary: #0D0D0D; --accent: #3B82F6; --bglight: #1F2937; --dark: #1A1A2E; --gray: #6B7280; --border: #E5E7EB; --light: #F8F9FA; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color: #1F2937; font-size: 14px; }
+.topbar { background: var(--primary); color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.topbar h1 { font-size: 15px; font-weight: 700; letter-spacing: .5px; }
+.topbar .badge { background: var(--accent); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 20px; gap: 4px; overflow-x: auto; }
+.tab { padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; color: var(--gray); transition: all .2s; white-space: nowrap; user-select: none; }
+.tab:hover { color: #374151; background: #F9FAFB; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+.page { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
+.page.active { display: block; }
+.grid2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 20px; }
+.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+.card { background: white; border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+.card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gray); }
+.section-title { font-size: 13px; font-weight: 700; color: var(--dark); margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.files-bar { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
+.files-bar-title { font-size: 12px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.files-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 8px; }
+.path-row { display: flex; align-items: center; gap: 8px; background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 7px 10px; }
+.path-icon { font-size: 15px; flex-shrink: 0; }
+.path-info { flex: 1; min-width: 0; }
+.path-name { font-size: 12px; font-weight: 600; color: #1F2937; }
+.path-txt { font-family: monospace; font-size: 10px; color: #64748B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn-row { display: flex; gap: 5px; flex-shrink: 0; }
+.copy-btn { padding: 4px 9px; background: #1E3A5F; color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background .2s; }
+.copy-btn:hover { background: #2563EB; }
+.copy-btn.ok { background: #16A085; }
+.drive-btn { padding: 4px 9px; background: var(--primary); color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; transition: background .2s; }
+.drive-btn:hover { background: var(--accent); }
+.content-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 12px; overflow: hidden; }
+.content-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.content-header .day { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; background: #EEF2FF; color: var(--primary); }
+.content-header .title { font-weight: 700; font-size: 13px; flex: 1; }
+.content-header .format { font-size: 11px; color: var(--gray); background: var(--light); padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+.pilar-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; background: #EEF2FF; color: var(--primary); flex-shrink: 0; }
+.content-body { padding: 12px 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+.content-body .label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gray); margin-top: 10px; margin-bottom: 3px; }
+.gancho  { background: #FFF7ED; border-left: 3px solid #F59E0B; padding: 8px 12px; border-radius: 0 6px 6px 0; font-style: italic; margin: 6px 0; font-size: 13px; }
+.legenda { background: #F0FDF4; border-left: 3px solid #22C55E; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; line-height: 1.6; }
+.cta     { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.edl     { background: #F5F3FF; border-left: 3px solid #8B5CF6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.story-list { background: #FAFAFA; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
+.story-list li { font-size: 12px; margin-left: 14px; margin-bottom: 3px; }
+.extra-block { background: #F5F5F5; border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.hashtags { font-size: 11px; color: #6B7280; font-family: monospace; margin-top: 6px; }
+.grade-wrap { overflow-x: auto; margin-bottom: 20px; }
+.grade-grid { display: grid; min-width: 620px; gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; }
+.grade-cell { background: white; padding: 9px 12px; font-size: 12px; }
+.grade-cell.header { background: var(--primary); color: white; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+.grade-cell.dayname { background: var(--light); font-weight: 700; color: var(--dark); font-size: 11px; }
+.grade-cell.empty { background: #F8F9FA; color: #9CA3AF; font-size: 11px; text-align: center; }
+.chip { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 3px; background: #EEF2FF; color: var(--primary); }
+.canva-section { background: white; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+.canva-head { background: linear-gradient(135deg,#7C3AED 0%,#6D28D9 100%); color: white; padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.canva-head h4 { font-size: 13px; font-weight: 700; margin: 0; }
+.canva-head small { font-size: 11px; opacity: .8; }
+.canva-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.canva-table td { padding: 7px 14px; border-bottom: 1px solid var(--border); }
+.canva-table tr:last-child td { border-bottom: none; }
+.canva-table tr:hover td { background: #F9FAFB; }
+.canva-table .slide-num { font-weight: 700; color: #6D28D9; width: 48px; }
+.canva-link { display: inline-flex; align-items: center; gap: 4px; color: #7C3AED; text-decoration: none; font-weight: 600; font-size: 11px; border: 1px solid #DDD6FE; border-radius: 4px; padding: 3px 8px; transition: all .2s; white-space: nowrap; }
+.canva-link:hover { background: #7C3AED; color: white; border-color: #7C3AED; }
+.delivery-banner { background: linear-gradient(135deg, var(--primary) 0%, #1F2937 100%); color: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.delivery-banner h3 { font-size: 14px; font-weight: 800; margin: 0; }
+.delivery-banner p { font-size: 12px; opacity: .8; margin: 3px 0 0; }
+.notion-btn { display: inline-flex; align-items: center; gap: 6px; background: white; color: #1A1A1A; border: none; border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all .2s; }
+.notion-btn:hover { background: #F3F4F6; }
+.brand-strip { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.swatch { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 12px; }
+.swatch-box { width: 28px; height: 28px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.1); }
+.swatch-label { font-weight: 700; }
+.swatch-hex { font-family: monospace; color: var(--gray); font-size: 10px; }
+.swatch-uso { font-size: 10px; color: var(--gray); margin-top: 1px; }
+.pilar-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.pilar-card { flex: 1; min-width: 120px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; border-top: 3px solid var(--primary); }
+.pilar-cod { font-size: 18px; font-weight: 800; color: var(--primary); }
+.pilar-nome { font-size: 12px; font-weight: 700; color: #374151; }
+.pilar-pct { font-size: 20px; font-weight: 800; color: var(--accent); margin-top: 4px; }
+.weeks-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.weeks-table th { background: var(--primary); color: white; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.weeks-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+.weeks-table tr:last-child td { border-bottom: none; }
+.met-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.met-table th { background: var(--accent); color: white; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.met-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); }
+.met-table tr:last-child td { border-bottom: none; }
+.met-meta { font-weight: 700; color: var(--accent); }
+.s-done     { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #D1FAE5; color: #065F46; }
+.s-progress { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #FEF3C7; color: #92400E; }
+.s-pending  { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: #F3F4F6; color: #6B7280; }
+#toast { position: fixed; bottom: 16px; right: 16px; background: #16A085; color: white; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 999; }
+#toast.show { opacity: 1; }
+@media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } .delivery-banner { flex-direction: column; } }
+/* ── RADAR ── */
+.tab.radar.active { color: #7C3AED; border-bottom-color: #7C3AED; }
+.radar-header { background: linear-gradient(135deg, #0D0D0D 0%, #1F2937 100%); color: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border: 1px solid #3B82F6; }
+.radar-header h2 { font-size: 16px; font-weight: 800; margin: 0; }
+.radar-header .radar-meta { font-size: 12px; opacity: .75; }
+.radar-badge { background: #3B82F6; color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+.radar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.radar-card { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+.radar-card-head { padding: 12px 16px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+.radar-card-body { padding: 14px 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+.radar-card-body ul { padding-left: 16px; margin: 6px 0; }
+.radar-card-body li { margin-bottom: 4px; }
+.radar-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin: 2px; }
+.radar-opp { background: #F0FDF4; border-left: 3px solid #22C55E; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; }
+.radar-copy { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; font-style: italic; }
+.cross-card { background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+.cross-card h4 { font-size: 13px; font-weight: 700; color: #5B21B6; margin-bottom: 6px; }
+.cross-card p { font-size: 13px; color: #374151; line-height: 1.6; }
+/* ── TRAÇÃO accent override ── */
+.pilar-card { border-top-color: var(--accent); }
+.pilar-cod { color: var(--accent); }
+/* ── Radar Toggle TRAÇÃO ── */
+.rt-toggle-t { display:flex; align-items:center; gap:8px; margin-bottom:16px; flex-wrap:wrap; padding:10px 0; }
+.rt-chip-t { padding:5px 14px; border-radius:20px; font-size:11px; font-weight:700; cursor:pointer; border:2px solid transparent; transition:all .2s; user-select:none; }
+.rt-chip-corrente-t { background:#1E3A5F; color:#93C5FD; border-color:#3B82F6; }
+.rt-chip-corrente-t.active { background:#3B82F6; color:#fff; border-color:#3B82F6; }
+.rt-chip-proxima-t { background:#1F2937; color:#6B7280; border-color:#374151; }
+.rt-chip-proxima-t.active { background:#064E3B; color:#10B981; border-color:#10B981; }
+.rt-chip-proxima-t.locked { opacity:.35; cursor:not-allowed; border-style:dashed; }
+.rt-ctx-badge-t { margin-left:auto; padding:3px 10px; border-radius:20px; font-size:10px; font-weight:700; }
+.rt-ctx-corrente-t { background:#1E3A5F; color:#93C5FD; }
+.rt-ctx-proxima-t { background:#064E3B; color:#10B981; }
+.opp-card { background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+.opp-card h4 { font-size:13px; font-weight:700; color:#065F46; margin-bottom:6px; }
+.opp-card .opp-meta { font-size:11px; font-weight:700; color:#6B7280; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; display:flex; gap:8px; flex-wrap:wrap; }
+.opp-card .opp-meta span { background:#DCFCE7; color:#15803D; padding:2px 8px; border-radius:20px; }
+.opp-card .opp-tema { background:#fff; border-left:3px solid #22C55E; padding:8px 12px; border-radius:0 6px 6px 0; font-size:13px; font-style:italic; margin:6px 0; }
+.opp-card .opp-why { font-size:12px; color:#374151; line-height:1.6; margin-top:6px; }
 </style>
 </head>
 <body>
+<div id="toast">✓ Copiado!</div>
 
-<header class="header">
-  <div class="logo">TRAÇÃO<span class="logo-tag">MARKETING QUE GERA RESULTADO</span></div>
-  <div class="steps" id="steps-nav">
-    <div class="step-item" id="step-1" onclick="navStep(1)"><div class="step-dot">1</div><span>Entrada</span></div>
-    <div class="step-sep">›</div>
-    <div class="step-item" id="step-2" onclick="navStep(2)"><div class="step-dot">2</div><span>Briefing</span></div>
-    <div class="step-sep">›</div>
-    <div class="step-item" id="step-3" onclick="navStep(3)"><div class="step-dot">3</div><span>Reunião</span></div>
-    <div class="step-sep">›</div>
-    <div class="step-item" id="step-4" onclick="navStep(4)"><div class="step-dot">4</div><span>Proposta</span></div>
-  </div>
-  <button class="btn-reset" onclick="resetAll()">+ Nova Reunião</button>
-</header>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   CONFIGURAÇÃO DO CLIENTE — TRAÇÃO MKT
+   ══════════════════════════════════════════════════════════════════════ */
+const CLIENTE = {
+  nome:       "TRAÇÃO MKT",
+  cargo:      "Agência de Marketing Virtual com IA",
+  instagram:  "@tracao_mkt",
+  segmento:   "Marketing Digital para PME com IA",
+  linkedin:   "linkedin.com/in/alexandretadeuoliveira",
+  site:       "(a criar)",
+  inicio:     "16/06/2026",
+  emoji:      "📈",
+  primary:    "#0D0D0D",
+  accent:     "#3B82F6",
+  bgLight:    "#1F2937",
+  pastaLocal: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC",
+  driveFolder: "",
+  canais: ["Instagram", "TikTok", "YouTube", "LinkedIn", "WhatsApp"],
+  pilares: [
+    { cod: "P1", nome: "MÉTODO",     pct: "40%" },
+    { cod: "P2", nome: "RESULTADO",  pct: "35%" },
+    { cod: "P3", nome: "BASTIDOR",   pct: "25%" },
+    { cod: "P4", nome: "PROVOCAÇÃO", pct: "integrado" },
+  ],
+  cores: [
+    { nome: "Preto Carbono",   hex: "#0D0D0D",  uso: "Fundo principal, headlines" },
+    { nome: "Azul Elétrico",   hex: "#3B82F6",  uso: "Destaque, CTAs, ação" },
+    { nome: "Branco",          hex: "#FFFFFF",  uso: "Texto sobre fundo escuro" },
+    { nome: "Verde Resultado", hex: "#10B981",  uso: "ROI, métricas, conquistas" },
+    { nome: "Cinza Chumbo",    hex: "#1F2937",  uso: "Cards, fundos secundários" },
+  ],
+};
 
-<!-- PHASE 1: INTAKE -->
-<div id="p-intake" class="phase active">
-  <div class="content">
-    <div class="section-header">
-      <h2>Diagnóstico do Prospect</h2>
-      <p>Preencha com as respostas do formulário pré-reunião — o sistema gera o briefing em segundos.</p>
-    </div>
-    <div class="card">
-      <div class="card-title">Quem é o cliente</div>
-      <div class="field-row">
-        <div class="field"><label>Nome completo</label><input type="text" id="f-nome" placeholder="Ex: Mariana Costa"></div>
-        <div class="field"><label>Nome do negócio</label><input type="text" id="f-negocio" placeholder="Ex: Studio Mariana Fit"></div>
+/* ══════════════════════════════════════════════════════════════════════
+   SEMANAS — Adicionar nova entrada a cada semana de conteúdo
+   ══════════════════════════════════════════════════════════════════════ */
+const SEMANAS = [
+  {
+    id:        "s16-22-06",
+    label:     "16–22/06",
+    labelFull: "Semana 16–22/06/2026",
+    objetivo:  "Lançamento da marca TRAÇÃO — apresentar método, Alexandre e os primeiros cases",
+    status:    "progress",
+    badge:     "S01",
+    notionUrl: "",
+    arquivos: [
+      {
+        icon: "📁",
+        nome: "Pasta da semana",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC\\Semana 16-22-06-2026",
+        folder: true,
+        driveId: "",
+      },
+      {
+        icon: "📄",
+        nome: "Brand Kit TRAÇÃO",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC\\00 - Base Estrategica\\BRAND-KIT-TRAO.md",
+        driveId: "",
+      },
+      {
+        icon: "📄",
+        nome: "Grade Editorial S01",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC\\00 - Base Estrategica\\GRADE-EDITORIAL-TRAO.md",
+        driveId: "",
+      },
+      {
+        icon: "👥",
+        nome: "Personas TRAÇÃO",
+        path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC\\00 - Base Estrategica\\PERSONAS-TRAO.md",
+        driveId: "",
+      },
+    ],
+    grade: [
+      {
+        dia: "SEG 16/06",
+        ig: { chip: "Carrossel", txt: "Apresentação da TRAÇÃO — 7 slides" },
+        tk: null,
+        li: { chip: "Post", txt: "Toda segunda. Sem falha." },
+        yt: null,
+      },
+      {
+        dia: "TER 17/06",
+        ig: { chip: "Stories", txt: "Bastidor do dia 1 — 3 stories" },
+        tk: null,
+        li: null,
+        yt: null,
+      },
+      {
+        dia: "QUA 18/06",
+        ig: { chip: "Reel 60s", txt: "Marketing de PME — por que falha" },
+        tk: { chip: "Repost", txt: "Reel reaproveitado" },
+        li: null,
+        yt: null,
+      },
+      {
+        dia: "QUI 19/06",
+        ig: null,
+        tk: null,
+        li: { chip: "Post Longo", txt: "3 pilares do marketing que funciona" },
+        yt: null,
+      },
+      {
+        dia: "SEX 20/06",
+        ig: { chip: "Post Quad.", txt: "Presença vs. Resultado" },
+        tk: null,
+        li: null,
+        yt: null,
+      },
+    ],
+    posts: [
+      {
+        dia: "SEG 16/06",
+        titulo: "Apresentação da TRAÇÃO — Carrossel Lançamento",
+        pilar: "MÉTODO",
+        formato: "Carrossel 7 slides · 1080×1350",
+        gancho: "Você já teve marketing. Mas nunca teve um departamento de marketing. Até agora.",
+        slides: "S1: Capa com gancho (#0D0D0D, headline bold branca, detalhe azul) · S2: O problema — o ciclo que nunca termina · S3: O que a maioria tenta — freela, agência cara, fazer sozinho · S4: O modelo TRAÇÃO — método executivo + IA · S5: 3 pilares — RADAR / GRADE / PACOTE · S6: Prova — 3 empresas já rodando (cliente 1, 2, 3) · S7: CTA — DM 'MÉTODO'",
+        legenda: "Marketing não é o problema. Consistência é.\nA maioria das PMEs tenta. Para. Recomeça. Para de novo.\nNão é falta de vontade. É falta de sistema.\nA TRAÇÃO resolve isso com método executivo + IA.\nToda segunda-feira. Sem falha. Há 3 empresas já rodando.\nDM \"MÉTODO\" para entender como funciona.\n#TrãçãoMKT #MarketingComIA #PME #AgênciaVirtual",
+        cta: "DM 'MÉTODO' e mando o detalhamento completo",
+        extras: [
+          {
+            label: "AI Prompt LinkedIn 1200×1200",
+            txt: "Imagem estilo data dashboard: fundo #0D0D0D, headline central 'Toda segunda. Sem falha.', detalhe em azul elétrico #3B82F6, elementos de grid e linha de dados ao fundo, tipografia Inter Bold. Sem foto. Visual data-driven clean.",
+          },
+          {
+            label: "Arquivos a produzir",
+            txt: "carrossel-segunda/TRAC-carrossel-lancamento-v1.png (7 slides 1080×1350) · linkedin-segunda/TRAC-linkedin-lancamento-v1.png (1200×1200)",
+          },
+        ],
+      },
+      {
+        dia: "TER 17/06",
+        titulo: "Bastidor do Primeiro Dia — Stories",
+        pilar: "BASTIDOR",
+        formato: "Stories · 1080×1920 · 3 arquivos",
+        gancho: "Assim começa toda semana de marketing de um cliente TRAÇÃO",
+        stories: [
+          "Story 1 — Tela do Claude/Cowork com a grade sendo montada: 'Assim começa toda semana de marketing de um cliente TRAÇÃO'",
+          "Story 2 — Print do brand kit: 'Identidade. Paleta. Tom de voz. Sem isso, tudo que vem depois é ruído.'",
+          "Story 3 — CTA: 'Quer entender o método completo? Link na bio.'",
+        ],
+        extras: [
+          {
+            label: "Arquivos a produzir",
+            txt: "stories/TRAC-stories-bastidor-dia1-v1.png (3 arquivos 1080×1920)",
+          },
+        ],
+      },
+      {
+        dia: "QUA 18/06",
+        titulo: "Marketing de PME em 60s — por que falha e como a TRAÇÃO resolve",
+        pilar: "MÉTODO + BASTIDOR",
+        formato: "Reel · 1080×1920 · 55–60 segundos",
+        gancho: "Você já tentou fazer marketing da sua empresa. Funcionou por quanto tempo?",
+        extras: [
+          {
+            label: "Speech Word-for-Word",
+            txt: "[GANCHO — 0–3s, câmera frontal, direto]\n\"Você já tentou fazer marketing da sua empresa. Funcionou por quanto tempo?\"\n\n[STORY — 3–25s]\n\"A maioria das PMEs entra no mesmo ciclo: contrata um freela, passa 2 semanas explicando o negócio, o freela some no mês 3. Ou tenta fazer sozinho, posta por 2 semanas, some no mês 1.\nNão é falta de vontade. É falta de sistema.\nMarketing não funciona sem método, operação e consistência.\"\n\n[ENTREGA — 25–50s]\n\"A TRAÇÃO é um departamento de marketing virtual operado com IA e método executivo.\nToda segunda-feira, o cliente recebe: grade editorial, roteiros prontos, captions e peças visuais.\nSem ele precisar gravar, aprovar ou gerenciar.\nSão 3 empresas hoje rodando assim — e nenhuma parou em 3 meses.\"\n\n[CTA — 50–60s]\n\"Se você quer marketing que funciona sem você no centro, DM 'MÉTODO'.\nEu mando como funciona por dentro.\"",
+          },
+          {
+            label: "Arquivos a produzir",
+            txt: "reel-quarta/TRAC-reel-metodo-v1.mp4 (gravação do Alexandre) · tiktok-quinta/TRAC-tiktok-metodo-v1.mp4 (reaproveitamento)",
+          },
+        ],
+      },
+      {
+        dia: "QUI 19/06",
+        titulo: "Por que o marketing da sua PME falha — e não é o que você pensa",
+        pilar: "MÉTODO",
+        formato: "Post LinkedIn longo + imagem 1200×1200",
+        gancho: "Você não tem problema de ideia. Você tem problema de consistência.",
+        legenda: "Você não tem problema de ideia.\nVocê tem problema de consistência.\n\nVi isso em centenas de operações ao longo de 20 anos: empresas excelentes tecnicamente, invisíveis no digital.\n\nO padrão é sempre o mesmo:\n→ Contrata freela (mês 1: empolgação. Mês 3: sumiu)\n→ Tenta fazer sozinho (semana 1: postou. Semana 3: parou)\n→ Compra pacote de agência (R$ 8k/mês, 4 posts por semana, zero resultado mensurável)\n\nO problema não é execução. É ausência de método.\n\nMarketing consistente precisa de 3 coisas:\n1. Inteligência de mercado (o que o concorrente está fazendo)\n2. Grade editorial estratégica (o que postar e por que)\n3. Produção sem depender do dono (quem executa quando você está atendendo)\n\nA TRAÇÃO resolve os 3.\nDepartamento de marketing virtual com IA — entrega toda segunda, sem falha.\n\nQuer entender como funciona na prática?\nComenta \"MÉTODO\" ou me manda DM.\n\n#MarketingDigital #PME #Empreendedorismo #TrãçãoMKT #MarketingComIA",
+        extras: [
+          {
+            label: "AI Prompt LinkedIn 1200×1200",
+            txt: "Fundo preto #0D0D0D, 3 colunas verticais com ícones minimalistas brancos representando: 'Inteligência', 'Grade', 'Execução'. Título acima: '3 pilares do marketing que funciona.' Tipografia Inter Bold branca, destaque em azul #3B82F6 nos números 1, 2, 3. Sem foto. Visual data-driven clean.",
+          },
+          {
+            label: "Arquivos a produzir",
+            txt: "linkedin-sexta/TRAC-linkedin-3pilares-v1.png (1200×1200)",
+          },
+        ],
+      },
+      {
+        dia: "SEX 20/06",
+        titulo: "Presença vs. Resultado — Provocação",
+        pilar: "PROVOCAÇÃO",
+        formato: "Post quadrado · 1080×1080",
+        gancho: "A maioria das agências vende presença. A TRAÇÃO vende resultado.",
+        legenda: "A maioria das agências vende presença.\nA TRAÇÃO vende resultado.\n\nDiferença:\nPresença → \"Postamos 4x por semana.\"\nResultado → \"Geramos 8 leads qualificados em 30 dias.\"\n\nVocê está pagando por qual dos dois?\n\n#TrãçãoMKT #MarketingDeResultado #AgênciaVirtual #PME",
+        cta: "Você está pagando por qual dos dois?",
+        extras: [
+          {
+            label: "Arquivos a produzir",
+            txt: "carrossel-segunda/TRAC-post-provocacao-sexta-v1.png (1080×1080)",
+          },
+        ],
+      },
+    ],
+    metricas: [
+      { label: "Alcance no lançamento (carrossel)",  meta: "300+ contas alcançadas" },
+      { label: "Compartilhamentos do carrossel",     meta: "10+ salvamentos" },
+      { label: "DMs recebidos com trigger 'MÉTODO'", meta: "3+ respostas qualificadas" },
+      { label: "Seguidores novos na semana",          meta: "20+ seguidores" },
+      { label: "Impressões LinkedIn",                meta: "500+ impressões no post de quinta" },
+    ],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════════════
+   RADAR — Inteligência Competitiva TRAÇÃO MKT
+   ══════════════════════════════════════════════════════════════════════ */
+const RADAR = {
+  ultimaExecucao: "18/06/2026",
+  proximaExecucao: "quinta 25/06 às 08h00",
+  concorrentes: [
+    {
+      nome: "GV8 (@agenciagv8)",
+      tag: "Volume/Tradicional",
+      tagBg: "#EF4444", tagFg: "#fff",
+      headBg: "#FEF2F2", headFg: "#991B1B",
+      emAlta: [
+        "5.100+ clientes, 18 anos de mercado como argumento de venda — volume como credencial",
+        "Google/Meta Partner como sinalização institucional — parceria paga, não resultado",
+        "Sem IA como DNA declarado — posicionamento tradicional inalterado esta semana",
+      ],
+      opp: "GV8 vende volume. TRAÇÃO vende profundidade. O cliente de GV8 é número em uma carteira de 5.000 — sem fundador visível, sem processo transparente, sem radar semanal.",
+      angulo: "Prefiro ter 15 clientes que crescem do que 5.000 que ficam estagnados.",
+    },
+    {
+      nome: "Goma Digital (@goma.digital)",
+      tag: "Metodologia Flywheel",
+      tagBg: "#F59E0B", tagFg: "#fff",
+      headBg: "#FFFBEB", headFg: "#78350F",
+      emAlta: [
+        "Metodologia com nome próprio (Flywheel) — dá credibilidade de framework, não de resultado",
+        "Foco em SEO e artigos por segmento — geração de conteúdo técnico sem IA",
+        "Sem fundador como rosto público — empresa anônima, não relação de confiança",
+      ],
+      opp: "Goma tem metodologia, não tem IA e não tem fundador visível. TRAÇÃO tem os 3. O que o Flywheel entrega no trimestre, a TRAÇÃO entrega toda semana.",
+      angulo: "Método bom é aquele que você consegue acompanhar em tempo real — não só receber relatório no fim do mês.",
+    },
+    {
+      nome: "Kaizen (@kaizen.agencia) ⚠️",
+      tag: "IA Acelerando",
+      tagBg: "#DC2626", tagFg: "#fff",
+      headBg: "#FFF1F2", headFg: "#881337",
+      emAlta: [
+        "⚠️ Publicou 2 guias de IA esta semana: 'Automação de Marketing com IA 2026' e 'IA Generativa com ChatGPT/Gemini'",
+        "Construindo autoridade no mesmo eixo temático da TRAÇÃO — aceleração clara",
+        "Fala SOBRE IA em guias educativos — mas sem fundador visível nem processo ao vivo",
+      ],
+      opp: "Kaizen fala sobre IA. TRAÇÃO aplica IA ao vivo, toda semana, com cliente acompanhando. Esse gap — processo real vs. guia de blog — é intransponível para agência sem fundador visível.",
+      angulo: "Qualquer agência vai falar de IA agora. Eu mostro como aplico no seu negócio, semana a semana, com você acompanhando ao vivo.",
+    },
+    {
+      nome: "Orgânica Digital (@organica.digital)",
+      tag: "Enterprise / Cases ROI",
+      tagBg: "#3B82F6", tagFg: "#fff",
+      headBg: "#EFF6FF", headFg: "#1E3A8A",
+      emAlta: [
+        "Artigo '31 Tendências de Marketing Digital 2026' publicado — conteúdo de autoridade amplo",
+        "Cases com ROI de centenas de % — posicionamento para médias-grandes empresas",
+        "'Creativity & Growth Firm' — posicionamento criativo, não executivo nem de PME",
+      ],
+      opp: "Orgânica joga no enterprise. TRAÇÃO joga em PME com resultado visível em semanas, não em campanhas anuais de alto custo. Nichos complementares — mas a narrativa de PME como escolha estratégica precisa ser explícita.",
+      angulo: "696% de ROI é incrível — mas foi para empresa de milhões. Você quer resultado para PME de R$50k/mês? Esse é o meu nicho.",
+    },
+    {
+      nome: "Envox (@envox.agencia)",
+      tag: "Full-Service Tradicional",
+      tagBg: "#6B7280", tagFg: "#fff",
+      headBg: "#F9FAFB", headFg: "#374151",
+      emAlta: [
+        "Full-service com foco em resultado de vendas — parceria RD Station",
+        "Sem IA como diferencial declarado — ferramenta invisível no processo",
+        "Posicionamento baseado em resultado, mas sem mostrar o processo de entrega",
+      ],
+      opp: "Envox vende resultado mas não mostra o processo. TRAÇÃO vende resultado E mostra o processo — toda semana, ao vivo, documentado.",
+      angulo: "Mostrar o que um cliente TRAÇÃO recebe toda segunda vs. o que receberia em uma agência full-service tradicional — lado a lado.",
+    },
+  ],
+  crossInsights: [
+    {
+      titulo: "🚨 IA virou requisito mínimo — não diferencial",
+      corpo: "82,4% dos profissionais de marketing já usam IA diariamente. Agências que só falam 'usamos IA' vão perder credibilidade em 6-12 meses. TRAÇÃO precisa evoluir o discurso: de 'agência que usa IA' para 'agência que entrega crescimento documentado com IA como ferramenta, não como produto'. Kaizen está acelerando no mesmo eixo — o diferencial tem que ser método + fundador visível, não a tecnologia em si.",
+    },
+    {
+      titulo: "💡 'Unpromptable Ideas' — o diferencial que a IA não replica",
+      corpo: "Conceito emergente: as melhores ideias de marketing são aquelas que só nascem da vivência humana, estratégia real e contexto específico do negócio — não de um prompt. Exatamente o que Alexandre entrega. Usar isso como linha editorial: 'Isso aqui uma IA sozinha não faria — quer saber por quê?'",
+    },
+    {
+      titulo: "🎯 PME é segmento órfão — TRAÇÃO ocupa essa lacuna com vantagem",
+      corpo: "Agências grandes (Orgânica, Goma) focam em enterprise. Freelas não têm método. Ferramentas de self-service exigem tempo que a PME não tem. TRAÇÃO é o único player que ocupa essa lacuna: custo de freela, entrega de agência, método executivo com IA. Tornar isso explícito no conteúdo: 'Finalmente uma solução para quem faturou o suficiente para precisar de marketing sério, mas não quer pagar R$15k/mês'.",
+    },
+  ],
+  oportunidades: [
+    {
+      titulo: "Contra-narrativa: 'IA que funciona vs. IA de marketing'",
+      pilar: "Diferenciação / Autoridade",
+      formato: "Reel 45-60s",
+      tema: "Toda agência vai dizer que usa IA agora. A pergunta certa não é 'você usa IA?' — é 'você usa IA para resolver MEU problema de vendas?'",
+      porqueAgora: "Kaizen publicou 2 guias de IA esta semana. Timing perfeito para TRAÇÃO se posicionar como quem APLICA IA com método, não quem escreve sobre ela.",
+    },
+    {
+      titulo: "Transparência de processo como argumento de venda",
+      pilar: "Bastidor / Prova de método",
+      formato: "Carrossel ou Story semanal",
+      tema: "Esta semana na TRAÇÃO: o que entregamos para nossos clientes e como o processo ficou por dentro — bastidor real da entrega semanal.",
+      porqueAgora: "Nenhum concorrente faz isso. Transparência de processo é o único argumento que não pode ser copiado com um guia no blog.",
+    },
+    {
+      titulo: "PME como escolha estratégica, não limitação",
+      pilar: "Posicionamento / ICP",
+      formato: "Post LinkedIn / Carrossel",
+      tema: "Eu podia trabalhar com empresas grandes. Escolho PMEs — e tenho um motivo muito específico para isso.",
+      porqueAgora: "Orgânica Digital publicou tendências focadas em enterprise. TRAÇÃO tem oportunidade de ocupar o polo oposto com orgulho — especialização em PME como vantagem competitiva.",
+    },
+  ],
+  radarFile: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC\\00 - Base Estrategica\\_RADAR-SEMANAL\\RADAR-TRAC-18-06-2026.md",
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   RENDER ENGINE
+   ══════════════════════════════════════════════════════════════════════ */
+(function() {
+  const r = document.documentElement.style;
+  r.setProperty('--primary', CLIENTE.primary);
+  r.setProperty('--accent',  CLIENTE.accent);
+  r.setProperty('--bglight', CLIENTE.bgLight);
+})();
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function cp(txt, btn) {
+  if (!txt) return;
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.classList.add('ok'); btn.textContent = '✓';
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => { t.classList.remove('show'); btn.classList.remove('ok'); btn.textContent = 'Copiar'; }, 1800);
+  });
+}
+
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function statusBadge(s) {
+  if (s==='done')     return `<span class="s-done">✅ Entregue</span>`;
+  if (s==='progress') return `<span class="s-progress">🔄 Em andamento</span>`;
+  return `<span class="s-pending">⏳ Pendente</span>`;
+}
+
+function buildTopbar() {
+  document.body.insertAdjacentHTML('afterbegin',
+    `<div class="topbar"><h1>${CLIENTE.emoji} ${esc(CLIENTE.nome.toUpperCase())} · ${esc(CLIENTE.cargo.toUpperCase())}</h1><span class="badge">📐 Agência MKT · ${esc(CLIENTE.instagram)}</span></div>`);
+}
+
+function buildTabs() {
+  let h = `<div class="tabs"><div class="tab active" onclick="showPage('dashboard',this)">📊 Dashboard</div>`;
+  SEMANAS.forEach(s => {
+    const ic = s.status==='done'?'✅':s.status==='progress'?'🔄':'📅';
+    h += `<div class="tab" onclick="showPage('${s.id}',this)">${ic} Sem. ${esc(s.label)}</div>`;
+  });
+  h += `<div class="tab radar" onclick="showPage('radar',this)">🔭 Radar</div>`;
+  h += `</div>`;
+  document.getElementById('tabs-container').innerHTML = h;
+}
+
+function buildDashboard() {
+  const semRows = SEMANAS.map(s => {
+    const fid = (s.arquivos||[]).find(a=>a.folder)?.driveId||'';
+    return `<tr>
+      <td><strong>${esc(s.labelFull)}</strong><br><small style="color:var(--gray)">${esc(s.objetivo)}</small></td>
+      <td>${statusBadge(s.status)}</td>
+      <td>${esc(s.badge)}</td>
+      <td>${s.notionUrl?`<a href="${esc(s.notionUrl)}" target="_blank" class="notion-btn" style="font-size:11px;padding:4px 10px">📋 Notion</a>`:'—'}
+          ${s.status==='done'&&fid?`<a href="https://drive.google.com/drive/folders/${esc(fid)}" target="_blank" class="drive-btn" style="margin-left:6px">☁️ Drive</a>`:''}</td>
+    </tr>`;
+  }).join('');
+
+  const swatches = (CLIENTE.cores||[]).map(c =>
+    `<div class="swatch"><div class="swatch-box" style="background:${esc(c.hex)}"></div><div><div class="swatch-label">${esc(c.nome)}</div><div class="swatch-hex">${esc(c.hex)}</div><div class="swatch-uso">${esc(c.uso)}</div></div></div>`
+  ).join('');
+
+  const pilares = (CLIENTE.pilares||[]).map(p =>
+    `<div class="pilar-card"><div class="pilar-cod">${esc(p.cod)}</div><div class="pilar-nome">${esc(p.nome)}</div><div class="pilar-pct">${esc(p.pct)}</div></div>`
+  ).join('');
+
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend', `
+    <div id="page-dashboard" class="page active">
+      <div class="delivery-banner">
+        <div><h3>${CLIENTE.emoji} ${esc(CLIENTE.nome)} — ${esc(CLIENTE.cargo)}</h3><p>${esc(CLIENTE.segmento)} · Início: ${esc(CLIENTE.inicio)} · ${esc(CLIENTE.instagram)}</p></div>
+        ${CLIENTE.driveFolder?`<a href="${esc(CLIENTE.driveFolder)}" target="_blank" class="notion-btn">☁️ Pasta Google Drive</a>`:'<span style="font-size:12px;opacity:.6">Drive a configurar</span>'}
       </div>
-      <div class="field-row">
-        <div class="field"><label>Segmento / mercado</label><input type="text" id="f-segmento" placeholder="Ex: Personal Trainer, Advocacia, Imobiliária…"></div>
-        <div class="field"><label>Tempo no mercado</label><input type="text" id="f-tempo" placeholder="Ex: 3 anos"></div>
+      <div class="files-bar"><div class="files-bar-title">📂 Pasta local</div>
+        <div class="files-grid"><div class="path-row">
+          <span class="path-icon">📁</span>
+          <div class="path-info"><div class="path-name">Pasta raiz do cliente (OneDrive)</div><div class="path-txt">${esc(CLIENTE.pastaLocal)}</div></div>
+          <div class="btn-row"><button class="copy-btn" onclick="cp('${CLIENTE.pastaLocal.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button></div>
+        </div></div>
       </div>
-      <div class="field">
-        <label>Rede social principal</label>
-        <div class="radio-group" id="rede-group">
-          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="Instagram" checked>Instagram</label>
-          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="LinkedIn">LinkedIn</label>
-          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="YouTube">YouTube</label>
-          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="TikTok">TikTok</label>
-          <label class="radio-opt" onclick="selectRadio(this,'rede')"><input type="radio" name="rede" value="Nenhuma">Sem presença</label>
+      <div class="card" style="margin-bottom:20px;background:linear-gradient(135deg,#0D0D0D 0%,#1F2937 100%);color:white;border:1px solid #3B82F6;">
+        <div style="font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📌 SOBRE A TRAÇÃO MKT</div>
+        <p style="font-size:13px;line-height:1.7;opacity:.9">A <strong>TRAÇÃO MKT</strong> é a agência de marketing virtual com IA do Alexandre Tadeu. É simultaneamente um produto e uma vitrine: as outras empresas do Alexandre (ADFly, AleChef, BPMF) e a Marcela Pinheiro são os primeiros cases reais do modelo. Objetivo: posicionar Alexandre como referência em marketing executivo com IA para PME, gerando leads qualificados via Instagram e LinkedIn.</p>
+      </div>
+      <div class="section-title">🎨 Paleta de Cores</div>
+      <div class="brand-strip">${swatches}</div>
+      <div class="section-title">📌 Pilares de Conteúdo</div>
+      <div class="pilar-row">${pilares}</div>
+      <div class="section-title">👥 Personas</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:20px">
+        <div class="card" style="border-top:3px solid #3B82F6"><div style="font-weight:800;font-size:13px;margin-bottom:6px">Ricardo, 42</div><div style="font-size:11px;color:var(--gray);margin-bottom:6px">PME B2B · Tecnologia, Consultoria, Indústria</div><div style="font-size:12px;line-height:1.5">Quer marketing que roda sem ele gerenciar. Decide por <strong>previsibilidade e ROI</strong>. Canal principal: LinkedIn.</div></div>
+        <div class="card" style="border-top:3px solid #10B981"><div style="font-weight:800;font-size:13px;margin-bottom:6px">Renata, 37</div><div style="font-size:11px;color:var(--gray);margin-bottom:6px">Profissional Liberal · Médica, Arquiteta, Consultora</div><div style="font-size:12px;line-height:1.5">Quer autoridade sem parecer vendedora. Decide por <strong>personalização com estratégia</strong>. Canal: Instagram + LinkedIn.</div></div>
+        <div class="card" style="border-top:3px solid #8B5CF6"><div style="font-weight:800;font-size:13px;margin-bottom:6px">Felipe, 33</div><div style="font-size:11px;color:var(--gray);margin-bottom:6px">Serviços · Coach, Mentor, Treinador Corporativo</div><div style="font-size:12px;line-height:1.5">Quer parar de depender de indicação. Decide por <strong>autonomia com consistência</strong>. Canal: Instagram Reel + LinkedIn.</div></div>
+      </div>
+      <div class="section-title">📱 Canais Ativos</div>
+      <div class="card" style="margin-bottom:20px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          ${(CLIENTE.canais||[]).map(c=>`<span class="chip" style="background:#EEF2FF;color:var(--primary);font-size:12px;padding:5px 12px">${esc(c)}</span>`).join('')}
         </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Situação atual</div>
-      <div class="field"><label>Como ele descreve o posicionamento hoje</label><textarea id="f-posicionamento" rows="2" placeholder="Ex: Ninguém me conhece, Sou visto como mais barato, Tenho clientes mas não sei por quê..."></textarea></div>
-      <div class="field"><label>Conteúdo nas redes gera resultado?</label>
-        <select id="f-conteudo">
-          <option value="Sim, gera leads e vendas com frequência">Sim — gera leads e vendas com frequência</option>
-          <option value="Gera engajamento mas pouco retorno financeiro">Gera engajamento, mas pouco retorno</option>
-          <option value="Posta sem estratégia clara">Posta sem estratégia clara</option>
-          <option value="Não cria conteúdo ou cria muito pouco">Não cria ou cria muito pouco</option>
-        </select>
+      <div class="section-title">📅 Status das Semanas</div>
+      <div class="card" style="padding:0;margin-bottom:20px;overflow:hidden">
+        <table class="weeks-table"><thead><tr><th>Semana</th><th>Status</th><th>Ref.</th><th>Links</th></tr></thead>
+        <tbody>${semRows}</tbody></table>
       </div>
-      <div class="field"><label>Já investiu em tráfego pago?</label>
-        <select id="f-trafego">
-          <option value="Sim com bom retorno">Sim, com bom retorno</option>
-          <option value="Sim mas sem retorno claro">Sim, mas sem retorno claro</option>
-          <option value="Tentou e parou">Tentou e parou</option>
-          <option value="Nunca investiu">Nunca investiu</option>
-        </select>
-      </div>
-      <div class="field"><label>Já trabalhou com agência ou freelancer antes?</label>
-        <select id="f-agencia">
-          <option value="Não, primeira vez">Não — primeira vez</option>
-          <option value="Sim com boa experiência">Sim — boa experiência</option>
-          <option value="Sim com experiência ruim">Sim — experiência ruim</option>
-        </select>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Objetivos e urgência</div>
-      <div class="field"><label>Objetivo principal com marketing agora</label>
-        <select id="f-objetivo">
-          <option value="Atrair mais clientes novos">Atrair mais clientes novos</option>
-          <option value="Me tornar referência e autoridade">Me tornar referência e autoridade</option>
-          <option value="Vender mais para quem já me conhece">Vender mais para quem já me conhece</option>
-          <option value="Montar presença digital do zero">Montar presença digital do zero</option>
-          <option value="Testar se o marketing digital funciona">Testar se o marketing funciona pra mim</option>
-        </select>
-      </div>
-      <div class="field"><label>Maior obstáculo que impede de crescer com marketing</label><textarea id="f-obstaculo" rows="2" placeholder="Resposta aberta do cliente — quanto mais detalhado, melhor o briefing"></textarea></div>
-      <div class="field"><label>O que espera diferente em 90 dias se o marketing funcionar</label><textarea id="f-expectativa" rows="2" placeholder="Expectativa de resultado — usar para alinhar ou recalibrar durante a reunião"></textarea></div>
-    </div>
-    <button class="btn-primary" onclick="startAnalysis()">Gerar Inteligência Comercial →</button>
-  </div>
-</div>
+    </div>`);
+}
 
-<!-- PHASE 2: LOADING -->
-<div id="p-loading" class="phase">
-  <div class="content">
-    <div class="loading-wrap">
-      <div class="spinner"></div>
-      <div class="loading-msg">Analisando perfil do prospect…</div>
-      <div class="loading-steps">
-        <div class="loading-step active" id="ls-1">🔍 Mapeando dores e urgência</div>
-        <div class="loading-step" id="ls-2">💬 Gerando perguntas personalizadas</div>
-        <div class="loading-step" id="ls-3">🗺 Construindo mapa dor → solução</div>
-        <div class="loading-step" id="ls-4">✍️ Preparando speech de abertura</div>
-      </div>
-    </div>
-  </div>
-</div>
+function buildSemana(s) {
+  const filesHtml = (s.arquivos||[]).map(f => {
+    const du = f.folder?`https://drive.google.com/drive/folders/${f.driveId}`:(f.driveId?`https://drive.google.com/file/d/${f.driveId}/view`:null);
+    const pd = f.path?(f.path.split('\\').slice(-2).join('\\')):(f.nome);
+    return `<div class="path-row">
+      <span class="path-icon">${esc(f.icon)}</span>
+      <div class="path-info"><div class="path-name">${esc(f.nome)}</div><div class="path-txt">${esc(pd)}</div></div>
+      <div class="btn-row">
+        ${f.path?`<button class="copy-btn" onclick="cp('${f.path.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>`:''}
+        ${du&&f.driveId?`<a href="${esc(du)}" target="_blank" class="drive-btn">☁️ Drive</a>`:''}
+      </div></div>`;
+  }).join('');
 
-<!-- PHASE 3: BRIEFING -->
-<div id="p-briefing" class="phase">
-  <div class="content">
-    <div class="section-header">
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <h2>Briefing — <span id="b-nome"></span></h2>
-        <span id="b-perfil-badge"></span>
-        <span id="b-urgencia-badge"></span>
+  const cols = 'grid-template-columns: 90px repeat(4, 1fr)';
+  let gradeHtml = `<div class="grade-wrap"><div class="grade-grid" style="${cols}">
+    <div class="grade-cell header">DIA</div>
+    <div class="grade-cell header" style="background:#E1306C;color:white">📸 Instagram</div>
+    <div class="grade-cell header" style="background:#000;color:white">🎵 TikTok</div>
+    <div class="grade-cell header" style="background:#0A66C2;color:white">💼 LinkedIn</div>
+    <div class="grade-cell header" style="background:#FF0000;color:white">▶️ YouTube</div>`;
+  (s.grade||[]).forEach(g => {
+    gradeHtml += `<div class="grade-cell dayname">${esc(g.dia)}</div>`;
+    [g.ig,g.tk,g.li,g.yt].forEach(c => {
+      gradeHtml += c?`<div class="grade-cell"><span class="chip">${esc(c.chip)}</span><br>${esc(c.txt)}</div>`:`<div class="grade-cell empty">—</div>`;
+    });
+  });
+  gradeHtml += `</div></div>`;
+
+  const postsHtml = (s.posts||[]).map(p => `
+    <div class="content-card">
+      <div class="content-header">
+        <span class="day">${esc(p.dia)}</span>
+        <span class="title">${esc(p.titulo)}</span>
+        <span class="pilar-badge">${esc(p.pilar)}</span>
+        <span class="format">${esc(p.formato)}</span>
       </div>
-      <p id="b-negocio-desc" style="margin-top:4px;"></p>
-    </div>
-    <div id="b-alert" class="alert-box" style="display:none;"><span>⚠️</span><span id="b-alert-text"></span></div>
-    <div class="briefing-grid">
-      <div>
-        <div class="card">
-          <div class="card-title">Dores prioritárias</div>
-          <ul class="pain-list" id="b-dores"></ul>
-          <div style="margin-top:12px;">
-            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">Urgência percebida</div>
-            <div class="urgency-row">
-              <div class="urgency-bar"><div class="urgency-fill" id="b-urgencia-bar"></div></div>
-              <span id="b-urgencia-num" style="font-size:12px;font-weight:700;color:var(--text-mid);"></span>
+      <div class="content-body">
+        <div class="label">Gancho</div><div class="gancho">"${esc(p.gancho)}"</div>
+        ${p.slides?`<div class="label">Slides</div><div class="edl">${esc(p.slides)}</div>`:''}
+        ${p.legenda?`<div class="label">Legenda / Caption</div><div class="legenda">${esc(p.legenda).replace(/\n/g,'<br>')}</div>`:''}
+        ${p.cta?`<div class="label">CTA</div><div class="cta">${esc(p.cta)}</div>`:''}
+        ${p.hashtags?`<div class="hashtags">${esc(p.hashtags)}</div>`:''}
+        ${p.stories?`<div class="label">Stories IG</div><ul class="story-list">${p.stories.map(st=>`<li>${esc(st)}</li>`).join('')}</ul>`:''}
+        ${(p.extras||[]).map(e=>`<div class="label">${esc(e.label)}</div><div class="extra-block">${esc(e.txt).replace(/\n/g,'<br>')}</div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const metHtml = (s.metricas||[]).map(m=>`<tr><td>${esc(m.label)}</td><td class="met-meta">${esc(m.meta)}</td></tr>`).join('');
+
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend', `
+    <div id="page-${esc(s.id)}" class="page">
+      <div class="delivery-banner">
+        <div><h3>📦 ${esc(s.labelFull)} · ${statusBadge(s.status)}</h3><p>Objetivo: ${esc(s.objetivo)}</p></div>
+        ${s.notionUrl?`<a href="${esc(s.notionUrl)}" target="_blank" class="notion-btn">📋 Ver entrega no Notion</a>`:''}
+      </div>
+      <div class="files-bar"><div class="files-bar-title">📂 Arquivos — clique Copiar → Win+R → cole → Enter</div>
+        <div class="files-grid">${filesHtml}</div>
+      </div>
+      <div class="section-title">📅 Grade Editorial</div>${gradeHtml}
+      <div class="section-title">✍️ Posts Detalhados · Copy + Roteiro</div>${postsHtml}
+      ${s.metricas&&s.metricas.length?`<div class="section-title">📊 Métricas · Metas</div>
+        <div class="card" style="padding:0;overflow:hidden;margin-bottom:20px">
+          <table class="met-table"><thead><tr><th>Métrica</th><th>Meta</th></tr></thead>
+          <tbody>${metHtml}</tbody></table>
+        </div>`:''}
+    </div>`);
+}
+
+function buildRadar() {
+  const cardsHtml = RADAR.concorrentes.map(c => `
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:${esc(c.headBg)};color:${esc(c.headFg)}">
+        ${esc(c.nome)}
+        <span class="radar-tag" style="background:${esc(c.tagBg)};color:${esc(c.tagFg)};margin-left:auto">${esc(c.tag)}</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px">Em alta no nicho</div>
+        <ul>${c.emAlta.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+        <div class="radar-opp"><strong>Oportunidade:</strong> ${esc(c.opp)}</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "${esc(c.angulo)}"</div>
+      </div>
+    </div>`).join('');
+
+  const insightsHtml = RADAR.crossInsights.map(i => `
+    <div class="cross-card">
+      <h4>${esc(i.titulo)}</h4>
+      <p>${esc(i.corpo)}</p>
+    </div>`).join('');
+
+  const oppsHtml = (RADAR.oportunidades||[]).map(o => `
+    <div class="opp-card">
+      <h4>🎯 ${esc(o.titulo)}</h4>
+      <div class="opp-meta"><span>${esc(o.pilar)}</span><span>${esc(o.formato)}</span></div>
+      <div class="opp-tema">"${esc(o.tema)}"</div>
+      <div class="opp-why">⚡ <strong>Por que agora:</strong> ${esc(o.porqueAgora)}</div>
+    </div>`).join('');
+
+  const radarFileName = RADAR.radarFile.split('\\').pop();
+
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend', `
+    <div id="page-radar" class="page">
+      <div class="radar-header">
+        <div>
+          <div style="font-size:11px;opacity:.6;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">🔭 Inteligência Competitiva</div>
+          <h2>Radar · ${esc(CLIENTE.nome)}</h2>
+          <div class="radar-meta">Última execução: ${esc(RADAR.ultimaExecucao)} · Próxima: ${esc(RADAR.proximaExecucao)}</div>
+        </div>
+        <span class="radar-badge">${RADAR.concorrentes.length} concorrentes monitorados</span>
+      </div>
+
+      <div class="rt-toggle-t">
+        <button id="rtTChipCorrente" class="rt-chip-t rt-chip-corrente-t" onclick="setRadarModeT('corrente')">📊 Semana em curso</button>
+        <button id="rtTChipProxima"  class="rt-chip-t rt-chip-proxima-t"  onclick="setRadarModeT('proxima')">🔮 Próxima semana</button>
+        <span id="rtTCtxBadge" class="rt-ctx-badge-t"></span>
+      </div>
+
+      <div id="rtTSecCorrente">
+        <div class="radar-grid">${cardsHtml}</div>
+        <div class="section-title">🔄 Cross-Insights da Semana</div>
+        ${insightsHtml}
+      </div>
+
+      <div id="rtTSecProxima" style="display:none">
+        <div class="section-title">🎯 Oportunidades para a próxima semana</div>
+        ${oppsHtml}
+      </div>
+
+      <div class="section-title">📂 Relatório Radar completo</div>
+      <div class="files-bar">
+        <div class="files-bar-title">Caminho do arquivo radar</div>
+        <div class="files-grid">
+          <div class="path-row">
+            <span class="path-icon">📄</span>
+            <div class="path-info">
+              <div class="path-name">${esc(radarFileName)}</div>
+              <div class="path-txt">${esc(RADAR.radarFile)}</div>
+            </div>
+            <div class="btn-row">
+              <button class="copy-btn" onclick="cp('${RADAR.radarFile.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-title">Mapa Dor → Solução TRAÇÃO</div>
-          <div id="b-solmap"></div>
-        </div>
-        <div class="card">
-          <div class="card-title">Inteligência de mercado</div>
-          <div id="b-market-hint" style="font-size:12px;color:var(--text-muted);margin-bottom:8px;"></div>
-          <button class="market-btn" id="btn-market" onclick="fetchMarketIntel()">🔍 Buscar contexto real do mercado</button>
-          <div class="market-result" id="market-result"></div>
-        </div>
       </div>
-      <div>
-        <div class="card">
-          <div class="card-title">Speech de abertura — personalizado</div>
-          <div class="speech-box" id="b-speech"><span class="speech-copy">Copiar ↗</span></div>
-        </div>
-        <div class="card">
-          <div class="card-title">Perguntas-bomba para a reunião</div>
-          <ul class="q-list" id="b-questions"></ul>
-        </div>
-        <div class="card">
-          <div class="card-title">Objeções prováveis</div>
-          <div id="b-objections"></div>
-        </div>
-      </div>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,var(--green-lt),#f0fdf4);border-color:var(--green-mid);">
-      <div class="card-title" style="color:var(--green);">Argumento de valor central</div>
-      <div id="b-argumento" style="font-size:14px;color:var(--text-mid);line-height:1.7;"></div>
-    </div>
-    <button class="btn-primary" onclick="goToMeeting()">Iniciar Condução da Reunião →</button>
-  </div>
-</div>
-
-<!-- PHASE 4: MEETING -->
-<div id="p-meeting" class="phase">
-  <div class="content">
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px;">
-      <h2 style="font-size:20px;font-weight:700;">Condutor da Reunião</h2>
-      <div class="mode-tag" id="m-mode-tag"></div>
-    </div>
-    <p style="color:var(--text-muted);font-size:13px;margin-bottom:20px;">Clique em cada bloco para acompanhar o roteiro e anotar insights em tempo real.</p>
-    <div class="block-tabs" id="block-tabs"></div>
-    <div id="blocks-container"></div>
-  </div>
-</div>
-
-<!-- PHASE 5: PROPOSAL -->
-<div id="p-proposal" class="phase">
-  <div class="content">
-    <!-- EDITABLE FIELDS (hidden from print) -->
-    <div class="consultant-card no-print">
-      <div class="card-title">Consultor responsável — aparece no PDF</div>
-      <div class="field-row">
-        <div class="field"><label>Nome do consultor</label><input type="text" id="c-nome" placeholder="Seu nome completo"></div>
-        <div class="field"><label>Telefone / WhatsApp</label><input type="text" id="c-tel" placeholder="(11) 99999-9999"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>E-mail</label><input type="text" id="c-email" placeholder="seu@tracao.com.br"></div>
-        <div class="field"><label>Prazo das primeiras entregas</label><input type="text" id="c-prazo" placeholder="Ex: 7 dias úteis após kick-off"></div>
-      </div>
-      <div class="field"><label>Observação para o cliente (opcional)</label><textarea id="c-obs" rows="2" placeholder="Ex: Contrato enviado por e-mail, aprovação pendente de NDA..."></textarea></div>
-    </div>
-
-    <!-- PRINTABLE PROPOSAL -->
-    <div id="proposal-print-area" style="margin-top:16px;">
-      <div class="proposal-hdr">
-        <div class="prop-logo">TRAÇÃO</div>
-        <div class="prop-tagline">Marketing que gera resultado</div>
-        <div class="prop-client-name" id="pr-nome"></div>
-        <div class="prop-client-biz" id="pr-biz"></div>
-        <div class="prop-date" id="pr-data"></div>
-      </div>
-      <div class="proposal-body">
-        <div class="prop-section-title">O que entendemos sobre seu negócio</div>
-        <ul class="prop-pain-list" id="pr-dores"></ul>
-
-        <div class="prop-section-title">Nossa proposta de valor para você</div>
-        <div class="prop-value-box" id="pr-argumento"></div>
-
-        <div class="prop-section-title">Escolha o modelo que faz mais sentido</div>
-        <div class="plans-grid">
-          <div class="plan-card selected" id="plan-base" onclick="selectPlan('base')">
-            <div class="plan-name">Plano Base</div>
-            <div class="plan-setup">+ Setup único: R$ <input type="number" class="price-input price-sm" id="setup-base" value="1500" min="0" oninput="calcTotal('base')"></div>
-            <div class="plan-price">R$ <input type="number" class="price-input price-main" id="week-base" value="248" min="0" oninput="calcTotal('base')"></div>
-            <div class="plan-period">/ semana · mín. <input type="number" class="price-input price-months" id="months-base" value="3" min="1" max="24" oninput="calcTotal('base')"> meses</div>
-            <div class="plan-total" id="total-base">Total 3 meses: R$ 4.476</div>
-            <ul class="plan-feats">
-              <li>Brand Kit completo</li>
-              <li>3 Personas validadas</li>
-              <li>Grade editorial semanal</li>
-              <li>Copywriting semanal</li>
-              <li>Radar de concorrentes (toda quinta)</li>
-              <li>Revisão quinzenal de estratégia</li>
-              <li>Relatório de performance mensal</li>
-            </ul>
-            <ul class="plan-not-incl">
-              <li>Sem peças visuais</li>
-              <li>Sem gestão de tráfego pago</li>
-            </ul>
-          </div>
-          <div class="plan-card" id="plan-acel" onclick="selectPlan('acel')">
-            <div class="plan-name">Plano Aceleração <span class="badge badge-amber" style="font-size:10px;vertical-align:middle;">RECOMENDADO</span></div>
-            <div class="plan-setup">+ Setup único: R$ <input type="number" class="price-input price-sm" id="setup-acel" value="1500" min="0" oninput="calcTotal('acel')"></div>
-            <div class="plan-price">R$ <input type="number" class="price-input price-main" id="week-acel" value="297" min="0" oninput="calcTotal('acel')"></div>
-            <div class="plan-period">/ semana · mín. <input type="number" class="price-input price-months" id="months-acel" value="3" min="1" max="24" oninput="calcTotal('acel')"> meses</div>
-            <div class="plan-total" id="total-acel">Total 3 meses: R$ 5.148</div>
-            <ul class="plan-feats">
-              <li>Tudo do Plano Base</li>
-              <li>Hub Comercial ativo</li>
-              <li>10–15 leads B2B qualificados/semana</li>
-              <li>Scoring de leads inbound (0–11 pts)</li>
-              <li>MQL direto para você fechar</li>
-              <li>Relatório detalhado semanal</li>
-            </ul>
-            <ul class="plan-not-incl">
-              <li>Sem peças visuais</li>
-              <li>Sem gestão de tráfego pago</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="next-step-box">
-          <p>Para começar, precisamos apenas de</p>
-          <strong>Setup + 1ª semana para rodar</strong>
-          <p style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.5);">Prazo das primeiras entregas:</p>
-          <input type="text" class="deadline-input" id="c-prazo-print" value="5 dias úteis após o kick-off" placeholder="Ex: 7 dias úteis após kick-off">
-        </div>
-
-        <!-- CONSULTANT FOOTER (print only) -->
-        <div class="consultant-print" id="consultant-print-block">
-          <div class="consultant-print-row">
-            <span><strong>Consultor:</strong> <span id="pr-c-nome">—</span></span>
-            <span><strong>Tel/WhatsApp:</strong> <span id="pr-c-tel">—</span></span>
-            <span><strong>E-mail:</strong> <span id="pr-c-email">—</span></span>
-          </div>
-          <div class="consultant-print-obs" id="pr-c-obs"></div>
-        </div>
-
-        <div class="prop-footer no-print">
-          <button class="btn-print" onclick="syncAndPrint()">🖨️ Imprimir / Salvar PDF</button>
-          <button class="btn-back" onclick="goToPhase('meeting')">← Voltar à reunião</button>
-          <button class="btn-back" onclick="goToPhase('briefing')">← Voltar ao briefing</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-var state={client:{},analysis:null,selectedPlan:'base',notes:{},currentBlock:0,visited:{}};
-
-/* ---- NAVIGATION ---- */
-function goToPhase(phase){
-  ['intake','loading','briefing','meeting','proposal'].forEach(function(p){document.getElementById('p-'+p).classList.remove('active');});
-  document.getElementById('p-'+phase).classList.add('active');
-  state.visited[phase]=true;
-  updateSteps(phase);
-  window.scrollTo(0,0);
+    </div>`);
 }
 
-function updateSteps(phase){
-  var order={intake:1,loading:1,briefing:2,meeting:3,proposal:4};
-  var phaseByNum={1:'intake',2:'briefing',3:'meeting',4:'proposal'};
-  var cur=order[phase]||1;
-  for(var i=1;i<=4;i++){
-    var el=document.getElementById('step-'+i);
-    if(!el)continue;
-    el.className='step-item';
-    if(i<cur)el.classList.add('done');
-    else if(i===cur)el.classList.add('active');
+/* ── Radar Toggle TRAÇÃO ── */
+function _radarAutoModeT() {
+  var d = new Date().getDay(); // 0=Dom,1=Seg,...,6=Sab
+  return (d >= 4 || d === 0) ? 'proxima' : 'corrente';
+}
+function setRadarModeT(m) {
+  var cc = document.getElementById('rtTSecCorrente');
+  var cp2 = document.getElementById('rtTSecProxima');
+  var bc = document.getElementById('rtTChipCorrente');
+  var bp = document.getElementById('rtTChipProxima');
+  var badge = document.getElementById('rtTCtxBadge');
+  if (!cc || !cp2) return;
+  if (m === 'proxima') {
+    cc.style.display = 'none'; cp2.style.display = 'block';
+    bc.classList.remove('active'); bp.classList.add('active');
+    badge.textContent = '🔮 Planejando próxima semana';
+    badge.className = 'rt-ctx-badge-t rt-ctx-proxima-t';
+  } else {
+    cc.style.display = 'block'; cp2.style.display = 'none';
+    bc.classList.add('active'); bp.classList.remove('active');
+    badge.textContent = '📊 Inteligência da semana atual';
+    badge.className = 'rt-ctx-badge-t rt-ctx-corrente-t';
   }
 }
-
-function navStep(n){
-  var phaseByNum={1:'intake',2:'briefing',3:'meeting',4:'proposal'};
-  var target=phaseByNum[n];
-  if(!target)return;
-  // allow navigation to visited phases or current
-  var order={intake:1,briefing:2,meeting:3,proposal:4};
-  var el=document.getElementById('step-'+n);
-  if(!el)return;
-  // only navigate if done or active
-  if(el.classList.contains('done')||el.classList.contains('active')){
-    if(target==='meeting'&&!state.analysis){return;}
-    if(target==='briefing'&&!state.analysis){return;}
-    if(target==='proposal'&&!state.analysis){return;}
-    goToPhase(target);
+function initRadarToggleT() {
+  var auto = _radarAutoModeT();
+  var bp = document.getElementById('rtTChipProxima');
+  if (!bp) return;
+  if (auto !== 'proxima') {
+    bp.classList.add('locked');
+    bp.title = 'Disponível toda quinta às 08h após execução do radar';
   }
+  setRadarModeT(auto);
 }
 
-function resetAll(){
-  if(!confirm('Iniciar nova reunião? O briefing atual será descartado.'))return;
-  state={client:{},analysis:null,selectedPlan:'base',notes:{},currentBlock:0,visited:{}};
-  document.querySelectorAll('#p-intake input[type=text],#p-intake textarea').forEach(function(el){el.value='';});
-  document.querySelectorAll('#p-intake select').forEach(function(el){el.selectedIndex=0;});
-  document.querySelectorAll('.radio-opt').forEach(function(el){el.classList.remove('checked');});
-  document.querySelector('.radio-opt').classList.add('checked');
-  document.getElementById('market-result').style.display='none';
-  document.getElementById('btn-market').disabled=false;
-  document.getElementById('btn-market').textContent='🔍 Buscar contexto real do mercado';
-  goToPhase('intake');
-}
-
-/* ---- RADIO VISUAL ---- */
-function selectRadio(el,name){
-  document.querySelectorAll('input[name="'+name+'"]').forEach(function(inp){
-    inp.closest('.radio-opt').classList.remove('checked');
-  });
-  el.classList.add('checked');
-}
-// init first radio as checked
-document.addEventListener('DOMContentLoaded',function(){
-  var first=document.querySelector('.radio-opt');
-  if(first)first.classList.add('checked');
-});
-
-/* ---- FORM COLLECT ---- */
-function collectForm(){
-  state.client={
-    nome:document.getElementById('f-nome').value.trim()||'Cliente',
-    negocio:document.getElementById('f-negocio').value.trim()||'Negócio',
-    segmento:document.getElementById('f-segmento').value.trim()||'Não informado',
-    tempo:document.getElementById('f-tempo').value.trim()||'Não informado',
-    rede:document.querySelector('input[name="rede"]:checked')?.value||'Instagram',
-    posicionamento:document.getElementById('f-posicionamento').value.trim()||'Não informado',
-    conteudo:document.getElementById('f-conteudo').value,
-    trafego:document.getElementById('f-trafego').value,
-    agencia:document.getElementById('f-agencia').value,
-    objetivo:document.getElementById('f-objetivo').value,
-    obstaculo:document.getElementById('f-obstaculo').value.trim()||'Não informado',
-    expectativa:document.getElementById('f-expectativa').value.trim()||'Não informado'
-  };
-}
-
-/* ---- AI ANALYSIS ---- */
-async function startAnalysis(){
-  collectForm();
-  goToPhase('loading');
-  animateLoadingSteps();
-  var c=state.client;
-  var prompt='Você é o sistema de inteligência comercial da TRAÇÃO MKT (agência de marketing digital com IA no Brasil).\n\nDADOS DO PROSPECT:\nNome: '+c.nome+'\nNegócio: '+c.negocio+'\nSegmento: '+c.segmento+'\nTempo no mercado: '+c.tempo+'\nRede principal: '+c.rede+'\nComo descreve o posicionamento: '+c.posicionamento+'\nConteúdo nas redes hoje: '+c.conteudo+'\nHistórico com tráfego pago: '+c.trafego+'\nHistórico com agência: '+c.agencia+'\nObjetivo principal: '+c.objetivo+'\nMaior obstáculo: '+c.obstaculo+'\nExpectativa em 90 dias: '+c.expectativa+'\n\nPRODUTOS TRAÇÃO MKT:\n• Plano Base: Setup R$1.500 + R$248/semana (mín 3 meses). Inclui: Brand kit, 3 personas, grade editorial, copy, radar de concorrentes, revisão quinzenal, relatório mensal\n• Plano Aceleração: Setup R$1.500 + R$297/semana. Adiciona: Hub Comercial, 10-15 leads B2B/semana, scoring inbound\n\nRetorne APENAS JSON válido sem markdown:\n{"dorasPrioritarias":["dor 1","dor 2","dor 3"],"perfilReuniao":"agil","urgencia":7,"aberturaPersonalizada":"script personalizado de 2-3 frases usando as palavras do cliente","perguntasBomba":["pergunta 1","pergunta 2","pergunta 3","pergunta 4"],"objecoesProvaveis":[{"objecao":"objeção esperada","resposta":"resposta recomendada"}],"mapaDolorSolucao":[{"dor":"dor específica","solucao":"serviço TRAÇÃO","entregavel":"resultado esperado"}],"planoRecomendado":"base","argumentoValor":"argumento personalizado em 2-3 frases","sinalAtencao":"algo crítico a ter cuidado","contextoMercado":"o que buscar sobre o mercado deste cliente"}';
-  try{
-    var result=await window.cowork.askClaude(prompt,[]);
-    var match=result.match(/\{[\s\S]*\}/);
-    if(match)state.analysis=JSON.parse(match[0]);
-  }catch(e){state.analysis=null;}
-  if(!state.analysis)state.analysis=buildFallback();
-  renderBriefing();
-  goToPhase('briefing');
-}
-
-function buildFallback(){
-  var c=state.client;
-  return{
-    dorasPrioritarias:[c.obstaculo||'Falta de estratégia digital',c.objetivo,'Presença inconsistente nas redes'],
-    perfilReuniao:'agil',urgencia:7,
-    aberturaPersonalizada:c.nome+', li o que você preencheu. Você mencionou que o maior desafio é "'+c.obstaculo+'". Quero entender melhor isso antes de qualquer coisa — pode me contar mais?',
-    perguntasBomba:['Como você consegue seus clientes hoje — quanto é digital e quanto é indicação?','Você já perdeu um negócio por não ter presença digital mais sólida?','Por que isso está urgente pra você agora?','O que você já tentou que não funcionou?'],
-    objecoesProvaveis:[{objecao:'Preciso pensar',resposta:'Tudo bem. O que especificamente você precisa avaliar? Às vezes dá pra resolver aqui mesmo.'},{objecao:'Está acima do meu orçamento',resposta:'Qual é o valor que você tinha em mente? Deixa eu ver o que consigo encaixar.'}],
-    mapaDolorSolucao:[{dor:c.objetivo,solucao:'Grade editorial + Copy semanal',entregavel:'Presença consistente e com estratégia'},{dor:c.obstaculo||'Falta de estratégia',solucao:'Brand kit + Personas + ICP',entregavel:'Fundação estratégica em 5 dias'}],
-    planoRecomendado:'base',
-    argumentoValor:c.nome+', você tem expertise real. O problema não é o que você oferece — é que ninguém está vendo. A TRAÇÃO resolve exatamente isso, semana a semana.',
-    sinalAtencao:'Verificar expectativas de prazo — resultados orgânicos levam 60-90 dias. Alinhar antes de fechar.',
-    contextoMercado:'Buscar exemplos de marketing digital bem-sucedido no segmento de '+c.segmento+' no Brasil'
-  };
-}
-
-function animateLoadingSteps(){
-  ['ls-1','ls-2','ls-3','ls-4'].forEach(function(id,i){
-    setTimeout(function(){
-      if(i>0){var prev=document.getElementById('ls-'+(i));if(prev)prev.classList.add('done');}
-      var el=document.getElementById(id);if(el)el.classList.add('active');
-    },i*700);
-  });
-}
-
-/* ---- RENDER BRIEFING ---- */
-function renderBriefing(){
-  var a=state.analysis,c=state.client;
-  document.getElementById('b-nome').textContent=c.nome;
-  document.getElementById('b-negocio-desc').textContent=c.negocio+' · '+c.segmento+' · '+c.tempo;
-  var perfil=a.perfilReuniao==='agil'?'⚡ Modo Ágil — 30-45 min':'🏢 Modo Completo — 60-75 min';
-  document.getElementById('b-perfil-badge').innerHTML='<span class="badge badge-green">'+perfil+'</span>';
-  var urg=a.urgencia||7;
-  var uc=urg>=8?'badge-red':urg>=6?'badge-amber':'badge-green';
-  var ul=urg>=8?'🔥 Alta urgência':urg>=6?'⚠️ Urgência média':'🟢 Urgência baixa';
-  document.getElementById('b-urgencia-badge').innerHTML='<span class="badge '+uc+'">'+ul+'</span>';
-  if(a.sinalAtencao){document.getElementById('b-alert').style.display='flex';document.getElementById('b-alert-text').textContent=a.sinalAtencao;}
-  var dEl=document.getElementById('b-dores');dEl.innerHTML='';
-  (a.dorasPrioritarias||[]).forEach(function(d,i){dEl.innerHTML+='<li class="pain-item"><div class="pain-num">'+(i+1)+'</div><div class="pain-text">'+d+'</div></li>';});
-  var ub=document.getElementById('b-urgencia-bar');
-  ub.style.width=(urg/10*100)+'%';
-  ub.style.background=urg>=8?'#dc2626':urg>=6?'#d97706':'#16a34a';
-  document.getElementById('b-urgencia-num').textContent=urg+'/10';
-  var sEl=document.getElementById('b-solmap');sEl.innerHTML='';
-  (a.mapaDolorSolucao||[]).forEach(function(s){sEl.innerHTML+='<div class="sol-item"><div class="sol-dor">'+s.dor+'</div><div class="sol-arr">→</div><div class="sol-entrega"><strong>'+s.solucao+'</strong><br><span style="font-size:11px;color:var(--text-muted);">'+s.entregavel+'</span></div></div>';});
-  document.getElementById('b-market-hint').textContent=a.contextoMercado||'';
-  var sp=document.getElementById('b-speech');
-  sp.innerHTML='<span class="speech-copy">Copiar ↗</span><em>"'+a.aberturaPersonalizada+'"</em>';
-  sp.onclick=function(){copyText(a.aberturaPersonalizada||'');};
-  var qEl=document.getElementById('b-questions');qEl.innerHTML='';
-  (a.perguntasBomba||[]).forEach(function(q){qEl.innerHTML+='<li class="q-item"><span class="q-icon">→</span><span>'+q+'</span></li>';});
-  var oEl=document.getElementById('b-objections');oEl.innerHTML='';
-  (a.objecoesProvaveis||[]).forEach(function(o,i){oEl.innerHTML+='<div class="obj-item" id="obj-'+i+'"><div class="obj-head" onclick="toggleObj('+i+')"><span>'+o.objecao+'</span><span class="obj-arrow">▾</span></div><div class="obj-body">'+o.resposta+'</div></div>';});
-  document.getElementById('b-argumento').textContent=a.argumentoValor||'';
-}
-
-function toggleObj(i){document.getElementById('obj-'+i).classList.toggle('open');}
-
-async function fetchMarketIntel(){
-  var btn=document.getElementById('btn-market');
-  btn.disabled=true;btn.textContent='⏳ Buscando…';
-  var c=state.client,a=state.analysis;
-  var prompt='Você é especialista em marketing digital no Brasil em 2025-2026. Forneça inteligência de mercado específica e prática.\n\nSegmento: '+c.segmento+'\nPista: '+(a?.contextoMercado||'')+'\n\nResponda com 5-6 bullet points práticos em português:\n- O que está funcionando em conteúdo para este segmento agora\n- Formatos em alta (Reels, carrossel, etc)\n- 1-2 argumentos de autoridade específicos\n- Lacuna de posicionamento comum que uma agência pode explorar\n- Tipo de cliente ideal e sua maior dor digital\n\nSeja específico e acionável.';
-  try{
-    var r=await window.cowork.askClaude(prompt,[]);
-    var box=document.getElementById('market-result');
-    box.textContent=r;box.style.display='block';
-  }catch(e){
-    document.getElementById('market-result').textContent='Não foi possível buscar dados. Tente novamente.';
-    document.getElementById('market-result').style.display='block';
-  }
-  btn.disabled=false;btn.textContent='↺ Atualizar referências';
-}
-
-/* ---- MEETING ---- */
-function goToMeeting(){renderMeeting();goToPhase('meeting');}
-
-function renderMeeting(){
-  var a=state.analysis,c=state.client;
-  var isAgil=a.perfilReuniao==='agil';
-  document.getElementById('m-mode-tag').textContent=isAgil?'⚡ Modo Ágil — 30-45 min':'🏢 Modo Completo — 60-75 min';
-  var blocks=isAgil?[
-    {id:'A',label:'A — Abertura + Diagnóstico',time:'15 min',note:'abertura',
-     script:'[Abertura personalizada]\n"'+a.aberturaPersonalizada+'"\n\nPerguntas para fazer (escolha 3-4):\n→ '+(a.perguntasBomba||[]).join('\n→ '),
-     questions:[]},
-    {id:'B',label:'B — Espelho + Solução',time:'10 min',note:'espelho',
-     script:'"Deixa eu resumir o que entendi.\n\nVocê está em '+c.segmento+' e o principal problema é: '+(a.dorasPrioritarias||[]).slice(0,2).join(' e ')+'.\n\nTô correto?\n\n[Aguardar validação]\n\nSe a gente conseguir resolver isso em 90 dias, isso representa quanto de impacto pro seu negócio?"',
-     questions:[]},
-    {id:'C',label:'C — Preço + Fechamento',time:'10-15 min',note:'preco',
-     script:'"Antes de falar em números: se a gente conseguir o resultado que você descreveu, esse investimento faz sentido?\n\n[Apresentar proposta na tela]\n\nQual modelo faz mais sentido pra você agora?"',
-     questions:[]}
-  ]:[
-    {id:'1',label:'1 — Abertura',time:'5 min',note:'abertura',
-     script:'"'+a.aberturaPersonalizada+'"',questions:[]},
-    {id:'2',label:'2 — Diagnóstico',time:'20 min',note:'diagnostico',
-     script:'"Me conta mais sobre o negócio."',
-     questions:a.perguntasBomba||[]},
-    {id:'3',label:'3 — Espelho',time:'10 min',note:'espelho',
-     script:'"Deixa eu resumir o que entendi. Você está em '+c.segmento+'. O principal problema é: '+(a.dorasPrioritarias||[]).join(', ')+'. Tô correto?\n\n[Aguardar]\n\nSe a gente resolver isso em 90 dias, o que representa pra você — financeiro, imagem, tranquilidade?"',
-     questions:[]},
-    {id:'4',label:'4 — Apresentação TRAÇÃO',time:'15 min',note:'apresentacao',
-     script:'"A TRAÇÃO não vende presença — vende resultado mensurável.\n\nBaseado no que você me contou, o que faz mais sentido é: '+(a.mapaDolorSolucao||[]).map(function(s){return s.solucao;}).join(' + ')+'.\n\nIsso resolve diretamente: '+(a.dorasPrioritarias||[]).slice(0,2).join(' e ')+'."',
-     questions:[]},
-    {id:'5',label:'5 — Preço',time:'10 min',note:'preco',
-     script:'"Antes de falar em números: se a gente conseguir [resultado que ele citou], esse investimento faz sentido?\n\n[Apresentar proposta na tela]"',
-     questions:[]},
-    {id:'6',label:'6 — Próximo Passo',time:'5 min',note:'proximo',
-     script:'"[Se fechou] Ótimo. Vou te enviar o contrato ainda hoje. Já agendamos o kick-off aqui?\n\n[Se não fechou] Tudo bem. Vou te mandar a proposta até amanhã. Quando você consegue me dar um retorno?"',
-     questions:[]}
-  ];
-  var tabsEl=document.getElementById('block-tabs');
-  var contEl=document.getElementById('blocks-container');
-  tabsEl.innerHTML='';contEl.innerHTML='';
-  blocks.forEach(function(b,i){
-    var tab=document.createElement('button');
-    tab.className='block-tab'+(i===0?' active':'');
-    tab.textContent=b.label;
-    tab.id='tab-'+i;
-    tab.setAttribute('onclick','switchBlock('+i+')');
-    tabsEl.appendChild(tab);
-    var qs=b.questions.length?'<div class="script-lbl" style="margin-top:14px;">Perguntas para este bloco</div><ul class="q-meeting-list">'+b.questions.map(function(q){return'<li class="q-meeting-item"><span style="color:var(--green);flex-shrink:0;">→</span><span>'+q+'</span></li>';}).join('')+'</ul>':'';
-    var prevBtn=i>0?'<button class="btn-prev" onclick="switchBlock('+(i-1)+')">← Anterior</button>':'';
-    var isLast=i===blocks.length-1;
-    var nextLabel=isLast?'Gerar Proposta para o Cliente →':'Próximo bloco →';
-    var nextFn=isLast?'goToProposal()':'switchBlock('+(i+1)+')';
-    var panel=document.createElement('div');
-    panel.className='block-panel'+(i===0?' active':'');
-    panel.id='block-'+i;
-    panel.innerHTML='<div class="meeting-card-hdr"><div class="meeting-card-title">'+b.label+'</div><div class="time-badge">⏱ '+b.time+'</div></div><div class="meeting-card-body"><div class="script-lbl">Script sugerido</div><div class="script-txt">'+b.script+'</div>'+qs+'<div class="notes-lbl" style="margin-top:14px;">Anotações da reunião</div><textarea class="notes-area" id="notes-'+b.note+'" placeholder="O que o cliente disse, insights importantes…" oninput="saveNote(\''+b.note+'\',this.value)"></textarea><div class="block-btns">'+prevBtn+'<button class="btn-next" onclick="'+nextFn+'">'+nextLabel+'</button></div></div>';
-    contEl.appendChild(panel);
-  });
-  state.currentBlock=0;
-}
-
-function switchBlock(idx){
-  var prev=state.currentBlock;
-  if(prev!==idx){
-    var pt=document.getElementById('tab-'+prev);
-    var pp=document.getElementById('block-'+prev);
-    if(pt){pt.classList.remove('active');pt.classList.add('done');}
-    if(pp)pp.classList.remove('active');
-  }
-  state.currentBlock=idx;
-  var nt=document.getElementById('tab-'+idx);
-  var np=document.getElementById('block-'+idx);
-  if(nt){nt.classList.remove('done');nt.classList.add('active');}
-  if(np)np.classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function saveNote(key,val){state.notes[key]=val;}
-
-/* ---- PROPOSAL ---- */
-function goToProposal(){renderProposal();goToPhase('proposal');}
-
-function renderProposal(){
-  var a=state.analysis,c=state.client;
-  document.getElementById('pr-nome').textContent=c.nome;
-  document.getElementById('pr-biz').textContent=c.negocio+' · '+c.segmento;
-  document.getElementById('pr-data').textContent=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
-  var dEl=document.getElementById('pr-dores');dEl.innerHTML='';
-  (a.dorasPrioritarias||[]).forEach(function(d){dEl.innerHTML+='<li class="prop-pain-item"><span class="prop-pain-check">✓</span><span>'+d+'</span></li>';});
-  document.getElementById('pr-argumento').textContent=a.argumentoValor||'';
-  selectPlan(a.planoRecomendado==='acel'?'acel':'base');
-}
-
-function selectPlan(plan){
-  state.selectedPlan=plan;
-  document.getElementById('plan-base').className='plan-card'+(plan==='base'?' selected':'');
-  document.getElementById('plan-acel').className='plan-card'+(plan==='acel'?' selected':'');
-}
-
-function calcTotal(plan){
-  var setup=parseFloat(document.getElementById('setup-'+plan).value)||0;
-  var week=parseFloat(document.getElementById('week-'+plan).value)||0;
-  var months=parseInt(document.getElementById('months-'+plan).value)||3;
-  var total=setup+(week*4.33*months);
-  var el=document.getElementById('total-'+plan);
-  if(el)el.textContent='Total '+months+' mês'+(months>1?'es':'')+': R$ '+total.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
-}
-
-function syncAndPrint(){
-  // sync consultant fields to print-only block
-  var nome=document.getElementById('c-nome').value.trim()||'—';
-  var tel=document.getElementById('c-tel').value.trim()||'—';
-  var email=document.getElementById('c-email').value.trim()||'—';
-  var prazo=document.getElementById('c-prazo').value.trim();
-  var obs=document.getElementById('c-obs').value.trim();
-  document.getElementById('pr-c-nome').textContent=nome;
-  document.getElementById('pr-c-tel').textContent=tel;
-  document.getElementById('pr-c-email').textContent=email;
-  if(prazo)document.getElementById('c-prazo-print').value=prazo;
-  var obsEl=document.getElementById('pr-c-obs');
-  obsEl.textContent=obs?'Obs: '+obs:'';
-  // show consultant block only if at least one field filled
-  document.getElementById('consultant-print-block').style.display=(nome!=='—'||tel!=='—'||email!=='—')?'block':'none';
-  window.print();
-}
-
-/* ---- UTILS ---- */
-function copyText(txt){
-  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){showToast('Copiado!');});}
-  else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Copiado!');}
-}
-
-function showToast(msg){
-  var t=document.createElement('div');
-  t.textContent=msg;
-  t.style.cssText='position:fixed;bottom:20px;right:20px;background:#16a34a;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;';
-  document.body.appendChild(t);
-  setTimeout(function(){t.remove();},2000);
-}
+(function init() {
+  document.body.insertAdjacentHTML('beforeend', '<div id="tabs-container"></div><div id="pages-container"></div>');
+  buildTopbar();
+  buildTabs();
+  buildDashboard();
+  SEMANAS.forEach(s => buildSemana(s));
+  buildRadar();
+  initRadarToggleT();
+})();
 </script>
+
 </body>
 </html>

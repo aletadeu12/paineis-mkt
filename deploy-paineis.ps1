@@ -29,7 +29,7 @@ $copies = @(
     },
     @{
         label = "TRACAO Comercial"
-        src   = "$ARTIFACTS\tracao-painel-comercial\index.html"
+        src   = "$CLIENTES\CLIENTE-TRAO-TRAC\painel-trao.html"
         dst   = "$REPO_DIR\tracao-comercial\index.html"
     },
     @{
