@@ -184,6 +184,52 @@ body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color
 .cross-card h4 { font-size: 13px; font-weight: 700; color: #5B21B6; margin-bottom: 6px; }
 .cross-card p { font-size: 13px; color: #374151; line-height: 1.6; }
 
+/* ── Radar Executivo ── */
+.exec-brief { background:#EEEDFE; border:1px solid #AFA9EC; border-radius:12px; padding:16px 20px; margin-bottom:16px; }
+.exec-brief .exec-label { font-size:11px; font-weight:700; text-transform:uppercase; color:#534AB7; letter-spacing:.5px; margin-bottom:6px; }
+.exec-brief .exec-text { font-size:13px; color:#26215C; line-height:1.75; }
+.pulse-strip { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.pulse-chip { display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:12px; }
+.pulse-chip .pulse-num { font-size:22px; font-weight:800; color:#1F2937; }
+.pulse-chip .pulse-lbl { font-size:11px; color:var(--gray); line-height:1.3; }
+.pulse-chip.alert { background:#FFF1F2; border-color:#FCA5A5; }
+.pulse-chip.alert .pulse-num { color:#DC2626; }
+.alert-banner { background:#FEF3C7; border:1px solid #FCD34D; border-radius:10px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:flex-start; gap:12px; }
+.alert-banner .ab-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.alert-banner .ab-title { font-size:13px; font-weight:700; color:#78350F; margin-bottom:3px; }
+.alert-banner .ab-acao { font-size:12px; color:#92400E; font-style:italic; }
+.comp-fields { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 10px; }
+.comp-field { background:#F8FAFC; border:1px solid #CBD5E1; border-radius:6px; padding:8px 10px; }
+.comp-field .cf-label { font-size:10px; font-weight:700; text-transform:uppercase; color:#64748B; letter-spacing:.4px; margin-bottom:4px; }
+.comp-field .cf-value { font-size:12px; color:#1F2937; line-height:1.5; }
+.ia-badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; }
+.ia-sim { background:#DCFCE7; color:#15803D; }
+.ia-nao { background:#F3F4F6; color:#6B7280; }
+.mud-sim { background:#FEF3C7; color:#92400E; }
+.mud-nao { background:#F3F4F6; color:#6B7280; }
+.trend-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; margin-bottom:20px; }
+.trend-card { background:#fff; border:1px solid var(--border); border-top:3px solid #7C3AED; border-radius:10px; padding:14px 16px; }
+.trend-card h4 { font-size:12px; font-weight:700; color:#1F2937; margin-bottom:6px; line-height:1.4; }
+.trend-card p { font-size:12px; color:#4B5563; line-height:1.65; }
+.threat-card { border-radius:10px; padding:14px 16px; margin-bottom:10px; }
+.threat-alto { background:#FEE2E2; border:1px solid #FECACA; }
+.threat-medio { background:#FFFBEB; border:1px solid #FDE68A; }
+.threat-opp { background:#F0FDF4; border:1px solid #BBF7D0; }
+.threat-card h4 { font-size:13px; font-weight:700; margin-bottom:5px; }
+.threat-alto h4 { color:#7F1D1D; }
+.threat-medio h4 { color:#78350F; }
+.threat-opp h4 { color:#14532D; }
+.threat-card .threat-corpo { font-size:12px; color:#374151; line-height:1.65; }
+.threat-card .threat-acao { font-size:12px; margin-top:8px; padding:7px 11px; background:rgba(0,0,0,.05); border-radius:6px; font-style:italic; }
+.threat-alto .threat-acao { color:#991B1B; }
+.threat-medio .threat-acao { color:#92400E; }
+.threat-opp .threat-acao { color:#166534; }
+.opp-card { background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:16px 20px; margin-bottom:12px; }
+.opp-card h4 { font-size:13px; font-weight:700; color:#4C1D95; margin-bottom:6px; }
+.opp-card .opp-meta { font-size:11px; font-weight:700; color:#6B7280; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; display:flex; gap:8px; flex-wrap:wrap; }
+.opp-card .opp-meta span { background:#EDE9FE; color:#5B21B6; padding:2px 8px; border-radius:20px; }
+.opp-card .opp-tema { background:#fff; border-left:3px solid #7C3AED; padding:8px 12px; border-radius:0 6px 6px 0; font-size:13px; font-style:italic; margin:6px 0; }
+.opp-card .opp-why { font-size:12px; color:#374151; line-height:1.6; margin-top:6px; }
 /* ── Responsive ── */
 @media (max-width: 700px) {
   .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
@@ -544,18 +590,17 @@ const SEMANAS = [
 const RADAR = {
   ultimaExecucao: "18/06/2026",
   proximaExecucao: "quinta 25/06 às 08h00",
+  resumoExecutivo: "Semana de revisão financeira de meio de ano — abertura do 2º semestre é o gatilho de conteúdo mais forte de junho. Férias de julho criam demanda urgente por planejamento de gastos familiares. Concorrentes P-01 a P-04 seguem com frequência alta e temas educacionais, mas nenhum está falando especificamente para família 35-45 com foco em comportamento + resultado rápido. Essa lacuna segue aberta e exclusiva de Marcela.",
   concorrentes: [
     {
       nome: "@mepoupe — Nathalia Arcuri (P-01)",
       tag: "Grande referência",
       tagBg: "#F59E0B", tagFg: "#fff",
       headBg: "#FFFBEB", headFg: "#78350F",
-      emAlta: [
-        "Renda extra + 'como ganhar mais sem depender de emprego fixo' em alta",
-        "Reel 30-45s com gancho provocativo na capa performando bem",
-        "Gancho da semana: 'Você não precisa de aumento — você precisa de uma estratégia'",
-      ],
-      opp: "Nathalia não fala com famílias. Seu conteúdo é macro/educacional. Marcela pode dominar o ângulo 'família 35-45 + comportamento + resultado rápido' que a Arcuri deixa vago.",
+      oQuePublicaram: "Sem dados de post individual disponíveis esta semana — tendência geral de renda extra e 'como ganhar mais sem depender de emprego fixo'.",
+      mencionouIA: false,
+      mudancaDetectada: false,
+      opp: "Nathalia não fala com famílias. Conteúdo macro/educacional. Marcela domina o ângulo 'família 35-45 + comportamento + resultado rápido' que a Arcuri deixa vago.",
       angulo: "Tom de provocação que não intimida. Gancho que fala com quem 'acha que não tem saída'.",
     },
     {
@@ -563,25 +608,21 @@ const RADAR = {
       tag: "Planejamento 2º sem.",
       tagBg: "#2563EB", tagFg: "#fff",
       headBg: "#EFF6FF", headFg: "#1E3A5F",
-      emAlta: [
-        "Revisão de planejamento para o 2º semestre — público maduro 35-55",
-        "Carrossel comparativo: 'se você fez X em janeiro, agora precisa de Y'",
-        "Gancho: '1º dia útil do 2º semestre: 3 perguntas que toda família deveria responder hoje'",
-      ],
-      opp: "Vera está no mesmo timing (virada de semestre) mas com ângulo técnico/patrimonial. Marcela entra com o ângulo familiar/comportamental — mais próximo da Família Ribeiro.",
+      oQuePublicaram: "Revisão de planejamento para o 2º semestre. Carrossel comparativo 'se você fez X em janeiro, agora precisa de Y'. Gancho: 'Primeiro dia útil do 2º semestre: 3 perguntas que toda família deveria responder hoje'.",
+      mencionouIA: false,
+      mudancaDetectada: false,
+      opp: "Vera está no mesmo timing (virada de semestre) mas com ângulo técnico/patrimonial. Marcela entra com ângulo familiar/comportamental — mais próximo da Família Ribeiro.",
       angulo: "Formato 'perguntas que toda família deveria responder' — roteiro pronto para carrossel com ângulo comportamental.",
     },
     {
       nome: "@camilavillelafinancas — Camila Villela (P-03)",
-      tag: "Psicologia do $",
+      tag: "⚠️ Psicologia do $",
       tagBg: "#EC4899", tagFg: "#fff",
       headBg: "#FDF2F8", headFg: "#831843",
-      emAlta: [
-        "Psicologia do dinheiro em julho — gasto emocional com férias como sabotagem",
-        "Reel 30s com gancho emocional nos 3 primeiros segundos",
-        "Alta ressonância com mulheres 30-45 — exatamente a persona da Marcela",
-      ],
-      opp: "Camila fala da dor. Marcela entrega o plano. Se Camila publicar sobre gastos de julho antes, Marcela responde com SOLUÇÃO RÁPIDA — não diagnóstico.",
+      oQuePublicaram: "Psicologia do dinheiro em julho — gasto emocional com férias como sabotagem do planejamento. Reel 30s com gancho emocional nos 3 primeiros segundos.",
+      mencionouIA: false,
+      mudancaDetectada: true,
+      opp: "Camila fala da dor. Marcela entrega o plano. Se Camila publicar sobre gastos de julho primeiro, Marcela responde com SOLUÇÃO RÁPIDA — não diagnóstico. Essa diferença é o posicionamento.",
       angulo: "Todo ano você gasta mais do que planejou nas férias de julho — vem ver por que isso acontece (e como mudar de vez).",
     },
     {
@@ -589,27 +630,78 @@ const RADAR = {
       tag: "Renda Fixa",
       tagBg: "#059669", tagFg: "#fff",
       headBg: "#ECFDF5", headFg: "#064E3B",
-      emAlta: [
-        "Renda fixa como protagonista em 2026 — CDB, Tesouro Selic, IPCA",
-        "CTA em TODA peça educacional — 'me chama no direct' + 'link na bio'",
-        "Frequência 5x/semana + depoimentos em Stories mantêm engajamento alto",
-      ],
-      opp: "Ricardo domina renda fixa com ângulo técnico. Marcela entra com mesmo tema mas ângulo familiar: 'Com juros de hoje, quanto rende R$ 500/mês da família Ribeiro em 12 meses?' — dado real, contexto de família.",
-      angulo: "Marcela ainda pode melhorar consistência de CTA em toda peça educacional — Ricardo prova que funciona.",
+      oQuePublicaram: "Renda fixa como protagonista: CDB, Tesouro Selic, IPCA. CTA em toda peça educacional — 'me chama no direct' + 'link na bio'. Frequência 5x/semana com depoimentos em Stories.",
+      mencionouIA: false,
+      mudancaDetectada: false,
+      opp: "Ricardo domina renda fixa com ângulo técnico. Marcela entra com mesmo tema mas ângulo familiar: 'Com juros de hoje, quanto rende R$500/mês da Família Ribeiro em 12 meses?' — dado real, contexto família.",
+      angulo: "CTA em toda peça educacional — Ricardo prova que funciona. Marcela pode melhorar nessa dimensão imediatamente.",
     },
   ],
-  crossInsights: [
+  tendencias: [
     {
-      titulo: "🔥 Timing máximo: virada de semestre (agora até ~10/07)",
-      corpo: "Abertura do 2º semestre é o gatilho de conteúdo mais forte de junho. Google Trends confirma busca por 'planejamento financeiro segundo semestre'. Concorrentes (Vera, P-02) estão no timing mas com ângulo técnico. Janela de Marcela: ângulo família 35-45 + comportamento. Vale pelo menos 2 peças nessa narrativa.",
+      titulo: "Virada de semestre = timing máximo de revisão de metas",
+      corpo: "1º dia útil de julho está a 9 dias. Google Trends confirma alta de 'planejamento financeiro segundo semestre'. Tema vale pelo menos 2 peças — janela fecha em ~10/07.",
     },
     {
-      titulo: "⏰ Alerta: TikTok 'gastos julho' chega ao IG em ~5 dias",
-      corpo: "Trending no TikTok: 'como não entrar em dívida em julho' / gastos com férias. Chegará no Instagram em ~5 dias. Marcela pode ANTECIPAR com reel ou carrossel de férias de julho AGORA e capturar atenção antes da saturação. Oportunidade: 'todo ano você gasta mais do que planejou nas férias — vem ver por quê.'",
+      titulo: "Férias de julho como gatilho de gasto impulsivo",
+      corpo: "Nicho todo está cobrindo esse tema. Familia com filhos é o perfil mais afetado — exatamente a persona de Marcela. TikTok 'gastos julho' chega ao Instagram em ~5 dias.",
     },
     {
-      titulo: "🎯 Lacuna da Família Ribeiro 35-45 segue aberta",
-      corpo: "Nenhum dos 12 perfis monitorados fala especificamente para casal com filhos, renda dupla, gastos invisíveis e férias de julho. Me Poupe é jovem-first, Vera é patrimônio-first, Camila é individual-first. Esta é a janela exclusiva de Marcela — e ninguém está fechando.",
+      titulo: "Tecnologia doméstica + finanças em casal",
+      corpo: "Apps de compartilhamento de gastos em tempo real virando tema de conteúdo. Ângulo de casal + finanças transparentes ressoa com persona Marcela — diferencial ainda não ocupado por nenhum dos 12 perfis.",
+    },
+    {
+      titulo: "Revisar vs. planejar: linguagem que converte no 2º semestre",
+      corpo: "Conteúdo que usa 'revisão' (não 'planejamento') tem taxa de salvos mais alta nesse timing. Carrossel reflexivo tipo 'onde você está vs. onde planejou estar em janeiro' está entre os formatos mais salvos da semana.",
+    },
+  ],
+  alertas: [
+    {
+      titulo: "⚠️ Camila Villela cobrindo comportamento antes de férias",
+      corpo: "Se publicar sobre gastos emocionais de julho antes de Marcela, o posicionamento fica como 'mais uma sobre o mesmo tema'. Diferencial: Camila fala da dor — Marcela entrega o plano.",
+      nivel: "medio",
+      acao: "Publicar solução antes que Camila ocupe o tema — não só o diagnóstico, mas os 3 passos práticos.",
+    },
+    {
+      titulo: "Ricardo Vieira com CTA em cada peça educacional",
+      corpo: "Consistência de convite comercial em toda peça educacional é padrão que Marcela ainda não replicou. Cada post educacional sem CTA é uma oportunidade de captura perdida.",
+      nivel: "medio",
+      acao: "Adicionar CTA claro em todas as peças desta semana — mesmo nas educacionais. 'Quer um plano personalizado para sua família? Me manda mensagem.'",
+    },
+    {
+      titulo: "Lacuna da Família Ribeiro 35-45 segue aberta",
+      corpo: "Nenhum dos 12 perfis monitorados fala especificamente para casal com filhos, renda dupla, gastos invisíveis e férias de julho. Me Poupe é jovem-first, Vera é patrimônio-first, Camila é individual-first.",
+      nivel: "opp",
+      acao: "Nomear explicitamente a persona no conteúdo — 'se você tem 35-45 anos, filhos e duas rendas, este post é para você'.",
+    },
+  ],
+  oportunidades: [
+    {
+      titulo: "Revisão de meio de ano — 5 perguntas que toda família deveria responder agora",
+      pilar: "Planejamento / Comportamento",
+      formato: "Carrossel reflexivo",
+      trigger: "Vera Gimenez (P-02) + Google Trends",
+      prioridade: "alta",
+      tema: "Você está no caminho do que planejou em janeiro? 5 perguntas que toda família deveria responder agora — antes de fechar o semestre.",
+      porqueAgora: "Abertura do 2º semestre. Google Trends confirmando busca. Concorrentes ainda no tom genérico — Marcela entra com ângulo família específico (Família Ribeiro).",
+    },
+    {
+      titulo: "Férias de julho sem arrependimento — como planejar em 48h",
+      pilar: "Comportamento / Resultado prático",
+      formato: "Reel 30-45s com gancho emocional",
+      trigger: "TikTok trending · Camila Villela (P-03)",
+      prioridade: "alta",
+      tema: "Todo ano você gasta mais do que planejou nas férias de julho. E todo ano você promete que dessa vez vai ser diferente. Vem ver por que isso acontece — e como mudar em 48h.",
+      porqueAgora: "TikTok trending 'gastos julho' chega ao Instagram em ~5 dias. Marcela antecipa e captura atenção antes da saturação.",
+    },
+    {
+      titulo: "Renda fixa com ângulo de família Ribeiro",
+      pilar: "Educação financeira / Resultado",
+      formato: "Carrossel com dado concreto",
+      trigger: "Ricardo Vieira (P-04)",
+      prioridade: "media",
+      tema: "Com os juros de hoje, quanto rende R$500/mês guardados pela família Ribeiro em 12 meses? (dado real, simulação real, resultado real)",
+      porqueAgora: "Ricardo domina renda fixa com ângulo técnico — Marcela entra com mesmo tema mas ângulo familiar. Diferenciação de posicionamento no mesmo tópico.",
     },
   ],
   radarFile: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\Marcela-Pinheiro-GF\\00 - Base Estrategica\\_RADAR-SEMANAL\\RADAR-MARCELA-18-06-2026.md",
@@ -906,37 +998,125 @@ function buildSemana(s) {
 
 /* ── Radar page ── */
 function buildRadar() {
-  const cardsHtml = RADAR.concorrentes.map(c => `
+  /* ── Pulse KPIs ── */
+  const movimentos = RADAR.concorrentes.filter(c => c.mencionouIA || c.mudancaDetectada).length;
+  const alertasAltos = (RADAR.alertas||[]).filter(a => a.nivel === 'alto').length;
+  const pulseHtml = `
+    <div class="pulse-strip">
+      <div class="pulse-chip">
+        <div class="pulse-num">${RADAR.concorrentes.length}</div>
+        <div class="pulse-lbl">concorrentes<br>diretos (Grupo A)</div>
+      </div>
+      <div class="pulse-chip">
+        <div class="pulse-num">${movimentos}</div>
+        <div class="pulse-lbl">movimentos<br>detectados</div>
+      </div>
+      <div class="pulse-chip ${alertasAltos > 0 ? 'alert' : ''}">
+        <div class="pulse-num">${alertasAltos}</div>
+        <div class="pulse-lbl">alerta${alertasAltos!==1?'s':''}<br>${alertasAltos!==1?'altos':'alto'}</div>
+      </div>
+    </div>`;
+
+  /* ── Alert banner (top alerta alto) ── */
+  const topAlerta = (RADAR.alertas||[]).find(a => a.nivel === 'alto');
+  const alertBannerHtml = topAlerta ? `
+    <div class="alert-banner">
+      <div class="ab-icon">⚠️</div>
+      <div>
+        <div class="ab-title">${esc(topAlerta.titulo)}</div>
+        <div class="ab-acao">Ação recomendada: ${esc(topAlerta.acao)}</div>
+      </div>
+    </div>` : '';
+
+  /* ── Competitor cards (enriched) ── */
+  const cardsHtml = RADAR.concorrentes.map(c => {
+    const iaBadge = c.mencionouIA
+      ? `<span class="ia-badge ia-sim">✓ SIM</span>`
+      : `<span class="ia-badge ia-nao">NÃO</span>`;
+    const mudBadge = c.mudancaDetectada
+      ? `<span class="ia-badge mud-sim">⚡ SIM</span>`
+      : `<span class="ia-badge mud-nao">NÃO</span>`;
+    return `
     <div class="radar-card">
       <div class="radar-card-head" style="background:${esc(c.headBg)};color:${esc(c.headFg)}">
         ${esc(c.nome)}
         <span class="radar-tag" style="background:${esc(c.tagBg)};color:${esc(c.tagFg)};margin-left:auto">${esc(c.tag)}</span>
       </div>
       <div class="radar-card-body">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px">Em alta no nicho</div>
-        <ul>${c.emAlta.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
-        <div class="radar-opp"><strong>Oportunidade:</strong> ${esc(c.opp)}</div>
+        <div class="comp-fields">
+          <div class="comp-field" style="grid-column:1/-1">
+            <div class="cf-label">📢 O que publicaram esta semana</div>
+            <div class="cf-value">${esc(c.oQuePublicaram||'—')}</div>
+          </div>
+          <div class="comp-field">
+            <div class="cf-label">🤖 Mencionou IA?</div>
+            <div class="cf-value">${iaBadge}</div>
+          </div>
+          <div class="comp-field">
+            <div class="cf-label">🔄 Mudança detectada?</div>
+            <div class="cf-value">${mudBadge}</div>
+          </div>
+          <div class="comp-field" style="grid-column:1/-1">
+            <div class="cf-label">🎯 O que Marcela usa disso</div>
+            <div class="cf-value">${esc(c.opp)}</div>
+          </div>
+        </div>
         <div class="radar-copy"><strong>Ângulo AG-05:</strong> "${esc(c.angulo)}"</div>
       </div>
+    </div>`;
+  }).join('');
+
+  /* ── Tendências ── */
+  const tendenciasHtml = (RADAR.tendencias||[]).map(t => `
+    <div class="trend-card">
+      <h4>${esc(t.titulo)}</h4>
+      <p>${esc(t.corpo)}</p>
     </div>`).join('');
 
-  const insightsHtml = RADAR.crossInsights.map(i => `
-    <div class="cross-card">
-      <h4>${esc(i.titulo)}</h4>
-      <p>${esc(i.corpo)}</p>
+  /* ── Alertas/ameaças ── */
+  const ameacasHtml = (RADAR.alertas||[]).map(a => {
+    const cls = a.nivel === 'alto' ? 'threat-alto' : a.nivel === 'opp' ? 'threat-opp' : 'threat-medio';
+    return `
+    <div class="threat-card ${cls}">
+      <h4>${esc(a.titulo)}</h4>
+      <div class="threat-corpo">${esc(a.corpo)}</div>
+      <div class="threat-acao">→ ${esc(a.acao)}</div>
+    </div>`;
+  }).join('');
+
+  /* ── Oportunidades (próxima semana) ── */
+  const oppsHtml = (RADAR.oportunidades||[]).map(o => `
+    <div class="opp-card">
+      <h4>🎯 ${esc(o.titulo)}</h4>
+      <div class="opp-meta">
+        <span>${esc(o.pilar)}</span>
+        <span>${esc(o.formato)}</span>
+        ${o.trigger?`<span style="background:#FEF3C7;color:#92400E;">trigger: ${esc(o.trigger)}</span>`:''}
+        ${o.prioridade==='alta'?`<span style="background:#FEE2E2;color:#A32D2D;">prioridade alta</span>`:`<span>prioridade média</span>`}
+      </div>
+      <div class="opp-tema">"${esc(o.tema)}"</div>
+      <div class="opp-why">⚡ <strong>Por que agora:</strong> ${esc(o.porqueAgora)}</div>
     </div>`).join('');
 
   const html = `
     <div id="page-radar" class="page">
-
       <div class="radar-header">
         <div>
           <div style="font-size:11px;opacity:.6;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">🔭 Inteligência Competitiva</div>
           <h2>Radar · ${esc(CLIENTE.nome)}</h2>
           <div class="radar-meta">Última execução: ${esc(RADAR.ultimaExecucao)} · Próxima: ${esc(RADAR.proximaExecucao)}</div>
         </div>
-        <span class="radar-badge">${RADAR.concorrentes.length} concorrentes monitorados</span>
+        <span class="radar-badge">${RADAR.concorrentes.length} perfis Grupo A + 8 referências</span>
       </div>
+
+      ${RADAR.resumoExecutivo ? `
+      <div class="exec-brief">
+        <div class="exec-label">📌 Briefing Executivo · ${esc(RADAR.ultimaExecucao)}</div>
+        <div class="exec-text">${esc(RADAR.resumoExecutivo)}</div>
+      </div>` : ''}
+
+      ${pulseHtml}
+      ${alertBannerHtml}
 
       <div class="rt-toggle-m" id="radarToggleM">
         <span class="rt-chip-m rt-chip-corrente-m" id="rtMChipCorrente" onclick="setRadarModeM('corrente')">📊 Semana em curso</span>
@@ -944,10 +1124,16 @@ function buildRadar() {
         <span id="rtMContextBadge" class="rt-ctx-badge-m"></span>
       </div>
 
-      <div class="radar-grid">${cardsHtml}</div>
+      <div id="rtMSecCorrente">
+        <div class="radar-grid">${cardsHtml}</div>
+        ${tendenciasHtml ? `<div class="section-title">📈 Tendências do nicho (semana)</div><div class="trend-grid">${tendenciasHtml}</div>` : ''}
+        ${ameacasHtml ? `<div class="section-title">🚨 Alertas · Ameaças · Oportunidades</div>${ameacasHtml}` : ''}
+      </div>
 
-      <div class="section-title">🔄 Cross-Insights da Semana</div>
-      ${insightsHtml}
+      <div id="rtMSecProxima" style="display:none">
+        <div class="section-title">🎯 Oportunidades para a próxima semana</div>
+        ${oppsHtml}
+      </div>
 
       <div class="section-title">📂 Relatório Radar completo</div>
       <div class="files-bar">
@@ -988,9 +1174,13 @@ function setRadarModeM(m){
   var cc=document.getElementById('rtMChipCorrente');
   var cp=document.getElementById('rtMChipProxima');
   var badge=document.getElementById('rtMContextBadge');
+  var secC=document.getElementById('rtMSecCorrente');
+  var secP=document.getElementById('rtMSecProxima');
   if(!cc)return;
   cc.classList.toggle('active',m==='corrente');
   cp.classList.toggle('active',m==='proxima');
+  if(secC) secC.style.display = m==='corrente'?'block':'none';
+  if(secP) secP.style.display = m==='proxima'?'block':'none';
   if(m==='corrente'){
     badge.textContent='Semana em andamento';
     badge.className='rt-ctx-badge-m rt-ctx-corrente-m';

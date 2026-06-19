@@ -150,6 +150,43 @@ body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color
 .opp-card .opp-meta span { background:#DCFCE7; color:#15803D; padding:2px 8px; border-radius:20px; }
 .opp-card .opp-tema { background:#fff; border-left:3px solid #22C55E; padding:8px 12px; border-radius:0 6px 6px 0; font-size:13px; font-style:italic; margin:6px 0; }
 .opp-card .opp-why { font-size:12px; color:#374151; line-height:1.6; margin-top:6px; }
+/* ── Radar Executivo ── */
+.exec-brief { background:#EEEDFE; border:1px solid #AFA9EC; border-radius:12px; padding:16px 20px; margin-bottom:16px; }
+.exec-brief .exec-label { font-size:11px; font-weight:700; text-transform:uppercase; color:#534AB7; letter-spacing:.5px; margin-bottom:6px; }
+.exec-brief .exec-text { font-size:13px; color:#26215C; line-height:1.75; }
+.pulse-strip { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.pulse-chip { display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:12px; }
+.pulse-chip .pulse-num { font-size:22px; font-weight:800; color:#1F2937; }
+.pulse-chip .pulse-lbl { font-size:11px; color:var(--gray); line-height:1.3; }
+.pulse-chip.alert { background:#FFF1F2; border-color:#FCA5A5; }
+.pulse-chip.alert .pulse-num { color:#DC2626; }
+.alert-banner { background:#FEF3C7; border:1px solid #FCD34D; border-radius:10px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:flex-start; gap:12px; }
+.alert-banner .ab-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.alert-banner .ab-title { font-size:13px; font-weight:700; color:#78350F; margin-bottom:3px; }
+.alert-banner .ab-acao { font-size:12px; color:#92400E; font-style:italic; }
+.comp-fields { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 10px; }
+.comp-field { background:#F8FAFC; border:1px solid #CBD5E1; border-radius:6px; padding:8px 10px; }
+.comp-field .cf-label { font-size:10px; font-weight:700; text-transform:uppercase; color:#64748B; letter-spacing:.4px; margin-bottom:4px; }
+.comp-field .cf-value { font-size:12px; color:#1F2937; line-height:1.5; }
+.ia-badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; }
+.ia-sim { background:#DCFCE7; color:#15803D; }
+.ia-nao { background:#F3F4F6; color:#6B7280; }
+.mud-sim { background:#FEF3C7; color:#92400E; }
+.mud-nao { background:#F3F4F6; color:#6B7280; }
+.trend-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; margin-bottom:20px; }
+.trend-card { background:#fff; border:1px solid var(--border); border-top:3px solid #3B82F6; border-radius:10px; padding:14px 16px; }
+.trend-card h4 { font-size:12px; font-weight:700; color:#1F2937; margin-bottom:6px; line-height:1.4; }
+.trend-card p { font-size:12px; color:#4B5563; line-height:1.65; }
+.threat-card { border-radius:10px; padding:14px 16px; margin-bottom:10px; }
+.threat-alto { background:#FEE2E2; border:1px solid #FECACA; }
+.threat-medio { background:#FFFBEB; border:1px solid #FDE68A; }
+.threat-card h4 { font-size:13px; font-weight:700; margin-bottom:5px; }
+.threat-alto h4 { color:#7F1D1D; }
+.threat-medio h4 { color:#78350F; }
+.threat-card .threat-corpo { font-size:12px; color:#374151; line-height:1.65; }
+.threat-card .threat-acao { font-size:12px; margin-top:8px; padding:7px 11px; background:rgba(0,0,0,.05); border-radius:6px; font-style:italic; }
+.threat-alto .threat-acao { color:#991B1B; }
+.threat-medio .threat-acao { color:#92400E; }
 </style>
 </head>
 <body>
@@ -371,17 +408,16 @@ const SEMANAS = [
 const RADAR = {
   ultimaExecucao: "18/06/2026",
   proximaExecucao: "quinta 25/06 às 08h00",
+  resumoExecutivo: "IA deixou de ser diferencial — virou requisito mínimo. Isso é ameaça e oportunidade simultâneas para a TRAÇÃO. A ameaça: o discurso de 'usamos IA' vai ser igualado pelos concorrentes em 6–12 meses. A oportunidade: o verdadeiro diferencial que a TRAÇÃO tem — método + fundador visível + entrega semanal transparente — é exatamente o que o mercado está dizendo que vai separar vencedores de perdedores em 2026. A TRAÇÃO está na posição certa. O conteúdo precisa provar isso.",
   concorrentes: [
     {
       nome: "GV8 (@agenciagv8)",
       tag: "Volume/Tradicional",
       tagBg: "#EF4444", tagFg: "#fff",
       headBg: "#FEF2F2", headFg: "#991B1B",
-      emAlta: [
-        "5.100+ clientes, 18 anos de mercado como argumento de venda — volume como credencial",
-        "Google/Meta Partner como sinalização institucional — parceria paga, não resultado",
-        "Sem IA como DNA declarado — posicionamento tradicional inalterado esta semana",
-      ],
+      oQuePublicaram: "Sem dados de post individual — perfil ativo no Instagram, mas conteúdo desta semana não indexado nas buscas desta rodada.",
+      mencionouIA: false,
+      mudancaDetectada: false,
       opp: "GV8 vende volume. TRAÇÃO vende profundidade. O cliente de GV8 é número em uma carteira de 5.000 — sem fundador visível, sem processo transparente, sem radar semanal.",
       angulo: "Prefiro ter 15 clientes que crescem do que 5.000 que ficam estagnados.",
     },
@@ -390,24 +426,20 @@ const RADAR = {
       tag: "Metodologia Flywheel",
       tagBg: "#F59E0B", tagFg: "#fff",
       headBg: "#FFFBEB", headFg: "#78350F",
-      emAlta: [
-        "Metodologia com nome próprio (Flywheel) — dá credibilidade de framework, não de resultado",
-        "Foco em SEO e artigos por segmento — geração de conteúdo técnico sem IA",
-        "Sem fundador como rosto público — empresa anônima, não relação de confiança",
-      ],
+      oQuePublicaram: "Blog com artigos de SEO por segmento — metodologia Flywheel presente no site. Sem post individual desta semana indexado.",
+      mencionouIA: false,
+      mudancaDetectada: false,
       opp: "Goma tem metodologia, não tem IA e não tem fundador visível. TRAÇÃO tem os 3. O que o Flywheel entrega no trimestre, a TRAÇÃO entrega toda semana.",
       angulo: "Método bom é aquele que você consegue acompanhar em tempo real — não só receber relatório no fim do mês.",
     },
     {
-      nome: "Kaizen (@kaizen.agencia) ⚠️",
-      tag: "IA Acelerando",
+      nome: "Kaizen (@kaizen.agencia)",
+      tag: "⚠️ IA Acelerando",
       tagBg: "#DC2626", tagFg: "#fff",
       headBg: "#FFF1F2", headFg: "#881337",
-      emAlta: [
-        "⚠️ Publicou 2 guias de IA esta semana: 'Automação de Marketing com IA 2026' e 'IA Generativa com ChatGPT/Gemini'",
-        "Construindo autoridade no mesmo eixo temático da TRAÇÃO — aceleração clara",
-        "Fala SOBRE IA em guias educativos — mas sem fundador visível nem processo ao vivo",
-      ],
+      oQuePublicaram: "2 guias publicados: 'Automação de Marketing com IA: Guia Completo 2026' e 'IA Generativa no Marketing: Como Usar ChatGPT e Gemini para Escalar Resultados em 2026'.",
+      mencionouIA: true,
+      mudancaDetectada: true,
       opp: "Kaizen fala sobre IA. TRAÇÃO aplica IA ao vivo, toda semana, com cliente acompanhando. Esse gap — processo real vs. guia de blog — é intransponível para agência sem fundador visível.",
       angulo: "Qualquer agência vai falar de IA agora. Eu mostro como aplico no seu negócio, semana a semana, com você acompanhando ao vivo.",
     },
@@ -416,12 +448,10 @@ const RADAR = {
       tag: "Enterprise / Cases ROI",
       tagBg: "#3B82F6", tagFg: "#fff",
       headBg: "#EFF6FF", headFg: "#1E3A8A",
-      emAlta: [
-        "Artigo '31 Tendências de Marketing Digital 2026' publicado — conteúdo de autoridade amplo",
-        "Cases com ROI de centenas de % — posicionamento para médias-grandes empresas",
-        "'Creativity & Growth Firm' — posicionamento criativo, não executivo nem de PME",
-      ],
-      opp: "Orgânica joga no enterprise. TRAÇÃO joga em PME com resultado visível em semanas, não em campanhas anuais de alto custo. Nichos complementares — mas a narrativa de PME como escolha estratégica precisa ser explícita.",
+      oQuePublicaram: "Artigo '31 Maiores Tendências de Marketing Digital para 2026' publicado no blog — conteúdo de autoridade amplo focado em empresas grandes.",
+      mencionouIA: true,
+      mudancaDetectada: false,
+      opp: "Orgânica joga no enterprise. TRAÇÃO joga em PME com resultado visível em semanas. A narrativa de PME como escolha estratégica precisa ser explícita e orgulhosa.",
       angulo: "696% de ROI é incrível — mas foi para empresa de milhões. Você quer resultado para PME de R$50k/mês? Esse é o meu nicho.",
     },
     {
@@ -429,27 +459,49 @@ const RADAR = {
       tag: "Full-Service Tradicional",
       tagBg: "#6B7280", tagFg: "#fff",
       headBg: "#F9FAFB", headFg: "#374151",
-      emAlta: [
-        "Full-service com foco em resultado de vendas — parceria RD Station",
-        "Sem IA como diferencial declarado — ferramenta invisível no processo",
-        "Posicionamento baseado em resultado, mas sem mostrar o processo de entrega",
-      ],
+      oQuePublicaram: "Sem dados de post individual — site com foco em resultado de vendas e parceria RD Station.",
+      mencionouIA: false,
+      mudancaDetectada: false,
       opp: "Envox vende resultado mas não mostra o processo. TRAÇÃO vende resultado E mostra o processo — toda semana, ao vivo, documentado.",
       angulo: "Mostrar o que um cliente TRAÇÃO recebe toda segunda vs. o que receberia em uma agência full-service tradicional — lado a lado.",
     },
   ],
-  crossInsights: [
+  tendencias: [
     {
-      titulo: "🚨 IA virou requisito mínimo — não diferencial",
-      corpo: "82,4% dos profissionais de marketing já usam IA diariamente. Agências que só falam 'usamos IA' vão perder credibilidade em 6-12 meses. TRAÇÃO precisa evoluir o discurso: de 'agência que usa IA' para 'agência que entrega crescimento documentado com IA como ferramenta, não como produto'. Kaizen está acelerando no mesmo eixo — o diferencial tem que ser método + fundador visível, não a tecnologia em si.",
+      titulo: "IA como requisito mínimo — não diferencial",
+      corpo: "82,4% dos profissionais de marketing já usam IA diariamente. Agências que só falam 'usamos IA' perdem credibilidade em 6–12 meses. O mercado quer ver COMO usam — exatamente o que a TRAÇÃO mostra.",
     },
     {
-      titulo: "💡 'Unpromptable Ideas' — o diferencial que a IA não replica",
-      corpo: "Conceito emergente: as melhores ideias de marketing são aquelas que só nascem da vivência humana, estratégia real e contexto específico do negócio — não de um prompt. Exatamente o que Alexandre entrega. Usar isso como linha editorial: 'Isso aqui uma IA sozinha não faria — quer saber por quê?'",
+      titulo: "'Unpromptable ideas' — o diferencial que IA não replica",
+      corpo: "Conceito emergente: as melhores ideias de marketing nascem da vivência humana, estratégia real e contexto específico do negócio — não de um prompt. Linha editorial: 'Isso aqui uma IA sozinha não faria — quer saber por quê?'",
     },
     {
-      titulo: "🎯 PME é segmento órfão — TRAÇÃO ocupa essa lacuna com vantagem",
-      corpo: "Agências grandes (Orgânica, Goma) focam em enterprise. Freelas não têm método. Ferramentas de self-service exigem tempo que a PME não tem. TRAÇÃO é o único player que ocupa essa lacuna: custo de freela, entrega de agência, método executivo com IA. Tornar isso explícito no conteúdo: 'Finalmente uma solução para quem faturou o suficiente para precisar de marketing sério, mas não quer pagar R$15k/mês'.",
+      titulo: "Agentes de IA autônomos em destaque",
+      corpo: "Não só ferramentas de criação — agentes que analisam, decidem e executam. TRAÇÃO pode educar o mercado PME sobre isso antes que vire commodity. Oportunidade de conteúdo técnico-educativo de alto valor.",
+    },
+    {
+      titulo: "ROI no centro — marketing sem dados perde contrato",
+      corpo: "Marketing sem conexão com resultado de vendas perde contrato em 2026. PMEs querem saber o que cada real investido retornou. Prioridade: documentar métricas dos clientes agora para publicar com autorização.",
+    },
+  ],
+  alertas: [
+    {
+      titulo: "⚠️ Kaizen acelerando no eixo IA",
+      corpo: "Publicou 2 guias técnicos esta semana. Está construindo autoridade no mesmo território da TRAÇÃO. Diferencial precisa ir além do tema IA — para método + rosto humano + resultado documentado.",
+      nivel: "alto",
+      acao: "Publicar contra-narrativa antes de sexta: 'Qualquer agência vai falar de IA agora. Eu mostro como aplico ao vivo.'",
+    },
+    {
+      titulo: "Commoditização de 'marketing com IA'",
+      corpo: "Em 12 meses esse discurso vai saturar. TRAÇÃO precisa evoluir de 'agência que usa IA' para 'agência que entrega crescimento documentado com IA como ferramenta, não como produto'.",
+      nivel: "medio",
+      acao: "Começar a introduzir a linguagem de 'crescimento documentado' no conteúdo desta semana.",
+    },
+    {
+      titulo: "Ausência de cases com dados públicos",
+      corpo: "Orgânica tem 696% de ROI público. TRAÇÃO ainda está construindo os primeiros cases. Prioridade: documentar resultados dos clientes atuais para publicação com autorização.",
+      nivel: "medio",
+      acao: "Pedir autorização para Marcela e ADFly para publicar primeiros números — esse é o ativo mais valioso nos próximos 6 meses.",
     },
   ],
   oportunidades: [
@@ -457,6 +509,8 @@ const RADAR = {
       titulo: "Contra-narrativa: 'IA que funciona vs. IA de marketing'",
       pilar: "Diferenciação / Autoridade",
       formato: "Reel 45-60s",
+      trigger: "Kaizen (C-03)",
+      prioridade: "alta",
       tema: "Toda agência vai dizer que usa IA agora. A pergunta certa não é 'você usa IA?' — é 'você usa IA para resolver MEU problema de vendas?'",
       porqueAgora: "Kaizen publicou 2 guias de IA esta semana. Timing perfeito para TRAÇÃO se posicionar como quem APLICA IA com método, não quem escreve sobre ela.",
     },
@@ -464,6 +518,8 @@ const RADAR = {
       titulo: "Transparência de processo como argumento de venda",
       pilar: "Bastidor / Prova de método",
       formato: "Carrossel ou Story semanal",
+      trigger: "Diferencial exclusivo TRAÇÃO",
+      prioridade: "alta",
       tema: "Esta semana na TRAÇÃO: o que entregamos para nossos clientes e como o processo ficou por dentro — bastidor real da entrega semanal.",
       porqueAgora: "Nenhum concorrente faz isso. Transparência de processo é o único argumento que não pode ser copiado com um guia no blog.",
     },
@@ -471,8 +527,10 @@ const RADAR = {
       titulo: "PME como escolha estratégica, não limitação",
       pilar: "Posicionamento / ICP",
       formato: "Post LinkedIn / Carrossel",
+      trigger: "Orgânica Digital (C-04)",
+      prioridade: "media",
       tema: "Eu podia trabalhar com empresas grandes. Escolho PMEs — e tenho um motivo muito específico para isso.",
-      porqueAgora: "Orgânica Digital publicou tendências focadas em enterprise. TRAÇÃO tem oportunidade de ocupar o polo oposto com orgulho — especialização em PME como vantagem competitiva.",
+      porqueAgora: "Orgânica publicou tendências focadas em enterprise. TRAÇÃO ocupa o polo oposto com orgulho — especialização em PME como vantagem competitiva.",
     },
   ],
   radarFile: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\CLIENTE-TRAO-TRAC\\00 - Base Estrategica\\_RADAR-SEMANAL\\RADAR-TRAC-18-06-2026.md",
@@ -662,30 +720,99 @@ function buildSemana(s) {
 }
 
 function buildRadar() {
-  const cardsHtml = RADAR.concorrentes.map(c => `
+  /* ── Pulse KPIs ── */
+  const movimentos = RADAR.concorrentes.filter(c => c.mencionouIA || c.mudancaDetectada).length;
+  const alertasAltos = (RADAR.alertas||[]).filter(a => a.nivel === 'alto').length;
+  const pulseHtml = `
+    <div class="pulse-strip">
+      <div class="pulse-chip">
+        <div class="pulse-num">${RADAR.concorrentes.length}</div>
+        <div class="pulse-lbl">concorrentes<br>monitorados</div>
+      </div>
+      <div class="pulse-chip">
+        <div class="pulse-num">${movimentos}</div>
+        <div class="pulse-lbl">movimentos<br>detectados</div>
+      </div>
+      <div class="pulse-chip ${alertasAltos > 0 ? 'alert' : ''}">
+        <div class="pulse-num">${alertasAltos}</div>
+        <div class="pulse-lbl">alerta${alertasAltos!==1?'s':''}<br>${alertasAltos!==1?'altos':'alto'}</div>
+      </div>
+    </div>`;
+
+  /* ── Alert banner (top alerta alto) ── */
+  const topAlerta = (RADAR.alertas||[]).find(a => a.nivel === 'alto');
+  const alertBannerHtml = topAlerta ? `
+    <div class="alert-banner">
+      <div class="ab-icon">⚠️</div>
+      <div>
+        <div class="ab-title">${esc(topAlerta.titulo)}</div>
+        <div class="ab-acao">Ação recomendada: ${esc(topAlerta.acao)}</div>
+      </div>
+    </div>` : '';
+
+  /* ── Competitor cards (enriched) ── */
+  const cardsHtml = RADAR.concorrentes.map(c => {
+    const iaBadge = c.mencionouIA
+      ? `<span class="ia-badge ia-sim">✓ SIM</span>`
+      : `<span class="ia-badge ia-nao">NÃO</span>`;
+    const mudBadge = c.mudancaDetectada
+      ? `<span class="ia-badge mud-sim">⚡ SIM</span>`
+      : `<span class="ia-badge mud-nao">NÃO</span>`;
+    return `
     <div class="radar-card">
       <div class="radar-card-head" style="background:${esc(c.headBg)};color:${esc(c.headFg)}">
         ${esc(c.nome)}
         <span class="radar-tag" style="background:${esc(c.tagBg)};color:${esc(c.tagFg)};margin-left:auto">${esc(c.tag)}</span>
       </div>
       <div class="radar-card-body">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px">Em alta no nicho</div>
-        <ul>${c.emAlta.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
-        <div class="radar-opp"><strong>Oportunidade:</strong> ${esc(c.opp)}</div>
+        <div class="comp-fields">
+          <div class="comp-field" style="grid-column:1/-1">
+            <div class="cf-label">📢 O que publicaram esta semana</div>
+            <div class="cf-value">${esc(c.oQuePublicaram||'—')}</div>
+          </div>
+          <div class="comp-field">
+            <div class="cf-label">🤖 Mencionou IA?</div>
+            <div class="cf-value">${iaBadge}</div>
+          </div>
+          <div class="comp-field">
+            <div class="cf-label">🔄 Mudança detectada?</div>
+            <div class="cf-value">${mudBadge}</div>
+          </div>
+          <div class="comp-field" style="grid-column:1/-1">
+            <div class="cf-label">🎯 O que TRAÇÃO usa disso</div>
+            <div class="cf-value">${esc(c.opp)}</div>
+          </div>
+        </div>
         <div class="radar-copy"><strong>Ângulo AG-05:</strong> "${esc(c.angulo)}"</div>
       </div>
+    </div>`;
+  }).join('');
+
+  /* ── Tendências ── */
+  const tendenciasHtml = (RADAR.tendencias||[]).map(t => `
+    <div class="trend-card">
+      <h4>${esc(t.titulo)}</h4>
+      <p>${esc(t.corpo)}</p>
     </div>`).join('');
 
-  const insightsHtml = RADAR.crossInsights.map(i => `
-    <div class="cross-card">
-      <h4>${esc(i.titulo)}</h4>
-      <p>${esc(i.corpo)}</p>
+  /* ── Alertas/ameaças ── */
+  const ameacasHtml = (RADAR.alertas||[]).map(a => `
+    <div class="threat-card threat-${esc(a.nivel)}">
+      <h4>${esc(a.titulo)}</h4>
+      <div class="threat-corpo">${esc(a.corpo)}</div>
+      <div class="threat-acao">→ ${esc(a.acao)}</div>
     </div>`).join('');
 
+  /* ── Oportunidades (próxima semana) ── */
   const oppsHtml = (RADAR.oportunidades||[]).map(o => `
     <div class="opp-card">
       <h4>🎯 ${esc(o.titulo)}</h4>
-      <div class="opp-meta"><span>${esc(o.pilar)}</span><span>${esc(o.formato)}</span></div>
+      <div class="opp-meta">
+        <span>${esc(o.pilar)}</span>
+        <span>${esc(o.formato)}</span>
+        ${o.trigger?`<span style="background:#FEF3C7;color:#92400E;">trigger: ${esc(o.trigger)}</span>`:''}
+        ${o.prioridade==='alta'?`<span style="background:#FEE2E2;color:#A32D2D;">prioridade alta</span>`:`<span>prioridade média</span>`}
+      </div>
       <div class="opp-tema">"${esc(o.tema)}"</div>
       <div class="opp-why">⚡ <strong>Por que agora:</strong> ${esc(o.porqueAgora)}</div>
     </div>`).join('');
@@ -703,6 +830,15 @@ function buildRadar() {
         <span class="radar-badge">${RADAR.concorrentes.length} concorrentes monitorados</span>
       </div>
 
+      ${RADAR.resumoExecutivo ? `
+      <div class="exec-brief">
+        <div class="exec-label">📌 Briefing Executivo · ${esc(RADAR.ultimaExecucao)}</div>
+        <div class="exec-text">${esc(RADAR.resumoExecutivo)}</div>
+      </div>` : ''}
+
+      ${pulseHtml}
+      ${alertBannerHtml}
+
       <div class="rt-toggle-t">
         <button id="rtTChipCorrente" class="rt-chip-t rt-chip-corrente-t" onclick="setRadarModeT('corrente')">📊 Semana em curso</button>
         <button id="rtTChipProxima"  class="rt-chip-t rt-chip-proxima-t"  onclick="setRadarModeT('proxima')">🔮 Próxima semana</button>
@@ -711,8 +847,8 @@ function buildRadar() {
 
       <div id="rtTSecCorrente">
         <div class="radar-grid">${cardsHtml}</div>
-        <div class="section-title">🔄 Cross-Insights da Semana</div>
-        ${insightsHtml}
+        ${tendenciasHtml ? `<div class="section-title">📈 Tendências do mercado de agências</div><div class="trend-grid">${tendenciasHtml}</div>` : ''}
+        ${ameacasHtml ? `<div class="section-title">🚨 Alertas · Ameaças</div>${ameacasHtml}` : ''}
       </div>
 
       <div id="rtTSecProxima" style="display:none">

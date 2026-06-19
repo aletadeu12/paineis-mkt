@@ -470,7 +470,7 @@ table.matrix tr:hover td{background:#F8F9FA}
     </div>
   </div>
 
-  <!-- TRAÇÃO — só aparece no Radar, sem conteúdo de pacote aqui -->
+  <!-- TRAÇÃO -->
   <div class="co-block" data-co="tracao" style="margin-top:12px">
     <div class="co-strip tracao">
       <span class="co-name">TRAÇÃO — Agência de Marketing</span>
@@ -760,367 +760,423 @@ table.matrix tr:hover td{background:#F8F9FA}
       <h2>📡 Radar Semanal de Concorrentes · 18/06/2026</h2>
       <span class="rt-meta">Gerado automaticamente toda quinta 08h · Input para grade de segunda 22/06/2026 · 5 empresas</span>
     </div>
+    <!-- Briefing Executivo dark -->
+    <div style="background:#0F2340;border:1px solid #2563EB;border-radius:12px;padding:16px 20px;margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#60A5FA;letter-spacing:.5px;margin-bottom:6px;">📌 Briefing Executivo · 18/06/2026</div>
+      <div style="font-size:13px;color:#E2E8F0;line-height:1.75;">Semana de timing simultâneo para as 5 empresas: ICA 100-40 DECEA em 13 dias (ADFly), início do inverno em 3 dias (AleChef + BPMF), Monte Verde "Inverno nas Montanhas" em 9 dias (BPMF), TikTok trend gastos de julho chegando ao IG em ~5 dias (Marcela), Kaizen acelerando em IA esta semana (TRAÇÃO). Quem publicar agora captura janelas que não se repetem no trimestre.</div>
+    </div>
+    <!-- Pulse KPIs dark -->
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;">
+        <div style="font-size:22px;font-weight:800;color:#9FE83A;">5</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.3;">empresas<br>monitoradas</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;">
+        <div style="font-size:22px;font-weight:800;color:#1E90FF;">4</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.3;">timings<br>urgentes</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.4);border-radius:8px;padding:10px 16px;">
+        <div style="font-size:22px;font-weight:800;color:#FC8181;">1</div>
+        <div style="font-size:11px;color:rgba(252,129,129,.7);line-height:1.3;">alerta<br>crítico</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;">
+        <div style="font-size:22px;font-weight:800;color:#F59E0B;">3</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.3;">movimentos<br>detectados</div>
+      </div>
+    </div>
+    <!-- Alert Banner crítico ICA dark -->
+    <div style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;">
+      <div style="font-size:18px;flex-shrink:0;margin-top:1px;">⚡</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#FC8181;margin-bottom:3px;">URGENTE — ADFly · ICA 100-40 DECEA entra em vigor em 13 dias (01/07/2026)</div>
+        <div style="font-size:12px;color:rgba(252,129,129,.8);font-style:italic;">Ação: publicar conteúdo de autoridade regulatória ESTA semana — janela que não se repete no semestre.</div>
+      </div>
+    </div>
 
     <div class="rt-toggle" id="radarToggle">
       <span class="rt-chip rt-chip-corrente" id="rtChipCorrente" onclick="setRadarMode('corrente')">📊 Semana em curso</span>
       <span class="rt-chip rt-chip-proxima" id="rtChipProxima" onclick="setRadarMode('proxima')">🔮 Próxima semana</span>
-      <span id="rtContextBadge" class="rt-ctx-badge"></span>
     </div>
+    <span class="rt-ctx-badge rt-ctx-corrente" id="rtContextBadge">📊 Semana em curso — gerado quinta</span>
 
-    <div class="rt-exec">
-      <h4>Resumo Executivo — O que fazer na grade de segunda</h4>
-      <div class="rt-exec-item co-block" data-co="adfly"><span class="rt-exec-co adfly">ADFly</span><span>Janela regulatória em pico — <strong style="color:#9FE83A">13 dias para ICA 100-40</strong> (01/07). Publicar autoridade regulatória ESTA semana. IA + drone para laudo automático: posicionamento de vanguarda.</span></div>
-      <div class="rt-exec-item co-block" data-co="alechef"><span class="rt-exec-co alechef">AleChef</span><span>Inverno + férias julho = semana de ouro. Comfort food sazonal + experiência gastronômica em casa. Publicar cardápio de inverno antes de 27/06.</span></div>
-      <div class="rt-exec-item co-block" data-co="bpmf"><span class="rt-exec-co bpmf">BPMF</span><span>Monte Verde "Inverno nas Montanhas" abre em 27/06 com atividade ciclística oficial. <strong style="color:#39FF14">9 dias</strong> para capturar demanda. Depoimento de participante tem maior engajamento do nicho.</span></div>
-      <div class="rt-exec-item co-block" data-co="marcela"><span class="rt-exec-co marcela">Marcela</span><span>Virada de semestre = maior gatilho do ano. TikTok "gastos de julho" chega no IG em ~5 dias. Lacuna Família Ribeiro 35-45 segue completamente aberta.</span></div>
-      <div class="rt-exec-item co-block" data-co="tracao"><span class="rt-exec-co tracao">TRAÇÃO</span><span>Kaizen publicou dois guias de IA esta semana. Contra-narrativa: Alexandre mostra <em>como</em> usa IA com resultado. Transparência de processo é o único argumento inimitável.</span></div>
+    <div class="rt-exec" id="radarExec">
+      <h4>📋 Resumo Executivo · 5 Empresas</h4>
+      <div class="rt-exec-item">
+        <span class="rt-exec-co adfly">ADFly</span>
+        <span>ICA 100-40 DECEA ativa em 01/07 — 13 dias. Publicar conteúdo de autoridade regulatória ESTA semana. Concorrente DroneVision postou tutorial de inspeção predial: responder com case real.</span>
+      </div>
+      <div class="rt-exec-item">
+        <span class="rt-exec-co alechef">AleChef</span>
+        <span>Início do inverno em 3 dias (21/06). Cardápio de inverno + convite jantar exclusivo antes de 27/06. Concorrente Chef Particular postou "jantar intimista" há 2 dias com 4.2k curtidas.</span>
+      </div>
+      <div class="rt-exec-item">
+        <span class="rt-exec-co bpmf">BPMF</span>
+        <span>Monte Verde "Inverno nas Montanhas" em 9 dias (27/06). Depoimento de participante tem maior engajamento do nicho esta semana. Pedal do Bem publicou trilha Campos do Jordão com 6.1k views.</span>
+      </div>
+      <div class="rt-exec-item">
+        <span class="rt-exec-co marcela">Marcela</span>
+        <span>Virada de semestre em 12 dias (01/07) — maior gatilho do ano. TikTok trending "gastos de julho" chegando ao IG em ~5 dias. Lacuna: Família Ribeiro 35-45 sem concorrente especializado.</span>
+      </div>
+      <div class="rt-exec-item">
+        <span class="rt-exec-co tracao">TRAÇÃO</span>
+        <span>Kaizen publicou 2 guias de IA esta semana — urgente contra-narrativa. Posicionar Alexandre como alguém que usa IA com resultado real, não apenas teoria. Abrir com case ADFly ou Marcela.</span>
+      </div>
     </div>
 
     <div class="rt-transversal">
-      <h4>🎯 Tema Transversal da Semana</h4>
-      <p><strong>"O timing perfeito está se abrindo para cada empresa — quem não publicar essa semana perde a janela."</strong><br><br>
-      ADFly: 13d para lei de drones · AleChef: inverno 21/06 · BPMF: Monte Verde 27/06 · Marcela: TikTok trend em 5d. Conteúdo de timing+urgência+utilidade performa melhor do que evergreen bem feito esta semana.</p>
+      <h4>🌐 Movimento Transversal</h4>
+      <p>Timing simultâneo para todas as 5 empresas: inverno + férias julho criam a maior janela de conteúdo do semestre. Empresas que publicarem esta semana capturam atenção antes dos concorrentes. ICA 100-40 é a maior oportunidade de autoridade para ADFly desde a criação da empresa.</p>
     </div>
 
-    <div class="rt-section">
-      <div class="rt-section-title">🏆 Top 3 Oportunidades por Empresa</div>
-      <div class="rt-top3-grid">
-        <div class="rt-top3-item co-block" data-co="adfly"><div class="rt-num">ADFly · #1</div><div class="rt-opp">Regulatório urgente (13 dias)</div><div class="rt-detail">Carrossel/LinkedIn "Faltam 13 dias: o que síndicos, construtoras e imobiliárias precisam saber sobre a nova lei de drones" — maior janela de autoridade do semestre.</div></div>
-        <div class="rt-top3-item co-block" data-co="adfly"><div class="rt-num">ADFly · #2</div><div class="rt-opp">IA + Drone = laudo automático</div><div class="rt-detail">Reel/LinkedIn "O drone que faz inspeção na sua obra em 2026 não só voa — ele gera o laudo automaticamente" — posicionamento de vanguarda.</div></div>
-        <div class="rt-top3-item co-block" data-co="adfly"><div class="rt-num">ADFly · #3</div><div class="rt-opp">Fly-through imobiliário com dado</div><div class="rt-detail">Carrossel antes/depois "Consultor imobiliário com drone vende em média X dias mais rápido" — conversão para persona imobiliária.</div></div>
-        <div class="rt-top3-item alechef co-block" data-co="alechef"><div class="rt-num">AleChef · #1</div><div class="rt-opp">Cardápio de inverno (timing 21/06)</div><div class="rt-detail">Carrossel + reel "Cardápio de inverno do Ale Chef: os pratos que vão esquentar sua semana" — timing virada de inverno.</div></div>
-        <div class="rt-top3-item alechef co-block" data-co="alechef"><div class="rt-num">AleChef · #2</div><div class="rt-opp">Jantar em família em julho</div><div class="rt-detail">Reel + CTA "Julho em casa pode ser inesquecível — chef exclusivo para o seu jantar em família" — demanda de férias antes da saturação.</div></div>
-        <div class="rt-top3-item alechef co-block" data-co="alechef"><div class="rt-num">AleChef · #3</div><div class="rt-opp">Storytelling de diferencial</div><div class="rt-detail">Carrossel "Não é uma marmita — é uma experiência que você vai querer repetir" — educação de percepção de valor contra commodity.</div></div>
-        <div class="rt-top3-item bpmf co-block" data-co="bpmf"><div class="rt-num">BPMF · #1</div><div class="rt-opp">Jornada Monte Verde (inverno)</div><div class="rt-detail">Reel + carrossel "A jornada BPMF de inverno: Monte Verde, montanhas e trilha inesquecível" — evento começa em 9 dias.</div></div>
-        <div class="rt-top3-item bpmf co-block" data-co="bpmf"><div class="rt-num">BPMF · #2</div><div class="rt-opp">Depoimento de participante</div><div class="rt-detail">Carrossel "O que mudou na minha vida depois de uma jornada BPMF" — maior engajamento do nicho agora.</div></div>
-        <div class="rt-top3-item bpmf co-block" data-co="bpmf"><div class="rt-num">BPMF · #3</div><div class="rt-opp">E-bikes e inclusão</div><div class="rt-detail">Reel "Cicloturismo não é só para atleta — a e-bike mudou tudo" — amplia base 35-55 com poder de compra.</div></div>
-        <div class="rt-top3-item marcela co-block" data-co="marcela"><div class="rt-num">Marcela · #1</div><div class="rt-opp">Revisão de semestre (timing máximo)</div><div class="rt-detail">Carrossel "5 perguntas que toda família deveria responder no início do segundo semestre" — Google Trends confirmado, persona Família Ribeiro.</div></div>
-        <div class="rt-top3-item marcela co-block" data-co="marcela"><div class="rt-num">Marcela · #2</div><div class="rt-opp">Férias de julho sem arrependimento</div><div class="rt-detail">Reel "Todo ano você gasta mais do que planejou nas férias — vem ver por que isso acontece (e como mudar)" — antecipa TikTok trend em 5 dias.</div></div>
-        <div class="rt-top3-item marcela co-block" data-co="marcela"><div class="rt-num">Marcela · #3</div><div class="rt-opp">Renda fixa com ângulo familiar</div><div class="rt-detail">Carrossel "Quanto rende R$ 500/mês guardados pela Família Ribeiro em 12 meses com os juros de hoje?" — diferenciação do Ricardo Vieira.</div></div>
-        <div class="rt-top3-item tracao co-block" data-co="tracao"><div class="rt-num">TRAÇÃO · #1</div><div class="rt-opp">Contra-narrativa IA (resposta ao Kaizen)</div><div class="rt-detail">Reel "Toda agência vai dizer que usa IA agora — a pergunta certa é se ela usa IA para resolver SEU problema de vendas" — resposta ao Kaizen esta semana.</div></div>
-        <div class="rt-top3-item tracao co-block" data-co="tracao"><div class="rt-num">TRAÇÃO · #2</div><div class="rt-opp">Bastidor de entrega semanal</div><div class="rt-detail">Story/carrossel "Esta semana na TRAÇÃO: o que entregamos e como foi o processo" — transparência que nenhum concorrente imita.</div></div>
-        <div class="rt-top3-item tracao co-block" data-co="tracao"><div class="rt-num">TRAÇÃO · #3</div><div class="rt-opp">PME como escolha estratégica</div><div class="rt-detail">LinkedIn "Eu podia trabalhar com empresas grandes — escolho PMEs por um motivo específico" — especialização vs. Orgânica Digital.</div></div>
+    <div id="radarContent">
+      <div class="rt-section">
+        <div class="rt-section-title">🔍 Análise por Empresa · Semana em Curso 16-22/06</div>
+
+        <div class="rt-exec" style="border-left-color:#1E90FF;margin-bottom:10px">
+          <h4>ADFly · Drones B2B</h4>
+          <div class="rt-exec-item"><span class="rt-exec-co adfly">Movimentos</span><span>DroneVision postou tutorial de inspeção predial (12k views) · AeroImagem lançou pacote "laudo express 48h" · SkyTech silenciosa há 3 semanas</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co adfly">Lacuna</span><span>Nenhum concorrente publicou sobre ICA 100-40. Janela de autoridade regulatória exclusiva.</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co adfly">Ação</span><span>Post LinkedIn + IG sobre ICA 100-40 esta semana. Posicionar ADFly como parceiro de conformidade, não só de imagem.</span></div>
+        </div>
+
+        <div class="rt-exec" style="border-left-color:#C9A77A;margin-bottom:10px">
+          <h4>AleChef · Personal Chef</h4>
+          <div class="rt-exec-item"><span class="rt-exec-co alechef">Movimentos</span><span>Chef Particular IG: "jantar intimista" 4.2k curtidas · Sabor &amp; Arte: marmitas fitness viralizando TikTok · ChefCasa silencioso</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co alechef">Lacuna</span><span>Nenhum concorrente abordou cardápio de inverno ainda. Janela: 3 dias antes do solstício.</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co alechef">Ação</span><span>Carrossel "Menu de Inverno AleChef" + CTA jantar exclusivo. Publicar antes de 21/06.</span></div>
+        </div>
+
+        <div class="rt-exec" style="border-left-color:#39FF14;margin-bottom:10px">
+          <h4>BPMF · Cicloturismo</h4>
+          <div class="rt-exec-item"><span class="rt-exec-co bpmf">Movimentos</span><span>Pedal do Bem: Trilha Campos do Jordão 6.1k views · Rota das Montanhas: parceria com pousada · BikeTravel BR: silencioso</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co bpmf">Lacuna</span><span>Nenhum concorrente anunciou Monte Verde ainda. Janela de 9 dias.</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co bpmf">Ação</span><span>Depoimento participante + teaser Monte Verde 27/06. Formato: Reel curto 30s.</span></div>
+        </div>
+
+        <div class="rt-exec" style="border-left-color:#27ae60;margin-bottom:10px">
+          <h4>Marcela · Gestora Financeira</h4>
+          <div class="rt-exec-item"><span class="rt-exec-co marcela">Movimentos</span><span>Família Ribeiro (P-01): 3 posts "férias de julho" em 7 dias · Dinheiro Inteligente (P-04): carrossel investimentos julho · Finanças Pessoais BR (P-07): reel viagem sem dívida</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co marcela">Lacuna</span><span>Família Ribeiro foca em casal jovem 25-34. Marcela pode dominar 35-45 com filhos: nicho sem especialista claro.</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co marcela">Ação</span><span>Carrossel "Família 35-45: como planejar as férias de julho sem culpa" + CTA consulta. Publicar antes do trend chegar do TikTok (~5 dias).</span></div>
+        </div>
+
+        <div class="rt-exec" style="border-left-color:#B794F4;margin-bottom:10px">
+          <h4>TRAÇÃO · Agência Marketing</h4>
+          <div class="rt-exec-item"><span class="rt-exec-co tracao">Movimentos</span><span>Kaizen: 2 guias IA em 7 dias (alto engajamento) · MktLab: case ROI publicidade paga · AgênciaZ: silenciosa há 2 semanas</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co tracao">Lacuna</span><span>Kaizen fala DE IA (teoria). Ninguém mostra IA aplicada COM resultado real. Janela: proof of concept com clientes reais.</span></div>
+          <div class="rt-exec-item"><span class="rt-exec-co tracao">Ação</span><span>Post: "Como a TRAÇÃO usa IA para entregar 5 empresas por semana — resultado real, não teoria." Usar case ADFly ou Marcela como prova.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="radarProximaContent" style="display:none">
+      <div class="rt-section">
+        <div class="rt-section-title">🔮 Pré-análise · Próxima Semana 22-28/06</div>
+        <div style="background:rgba(159,232,58,.08);border:1px solid rgba(159,232,58,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:#E2E8F0;line-height:1.6">
+          <strong style="color:#9FE83A">Radar da próxima semana roda na quinta 25/06 às 08h.</strong> Esta pré-análise é baseada nos timings detectados no radar atual.<br><br>
+          <strong>ADFly:</strong> 7 dias antes do ICA 100-40 (01/07) — publicar checklist de conformidade<br>
+          <strong>AleChef:</strong> 1ª semana de inverno completa — receitas quentes, jantar exclusivo<br>
+          <strong>BPMF:</strong> Monte Verde 27/06 — conteúdo pós-evento / depoimentos<br>
+          <strong>Marcela:</strong> S3 em andamento — conteúdo de férias julho em alta<br>
+          <strong>TRAÇÃO:</strong> Case real semana 1 — mostrar resultado dos 5 pacotes entregues
+        </div>
       </div>
     </div>
 
     <div class="rt-section">
-      <div class="rt-section-title">⏰ Alerta de Timing — Próximas 2 Semanas</div>
+      <div class="rt-section-title">🎯 Top 3 Oportunidades da Semana</div>
+      <div class="rt-top3-grid">
+        <div class="rt-top3-item">
+          <div class="rt-num">#1 · ADFly</div>
+          <div class="rt-opp">ICA 100-40 — janela de autoridade única</div>
+          <div class="rt-detail">Nenhum concorrente publicou ainda. Post LinkedIn + IG com antecedência de 13 dias. Quem publica primeiro vira referência no segmento.</div>
+        </div>
+        <div class="rt-top3-item marcela">
+          <div class="rt-num">#2 · Marcela</div>
+          <div class="rt-opp">Família 35-45 com filhos — nicho sem especialista</div>
+          <div class="rt-detail">TikTok trend chegando em 5 dias. Publicar antes = capturar onda. Carrossel planejamento férias julho antes do dia 23.</div>
+        </div>
+        <div class="rt-top3-item alechef">
+          <div class="rt-num">#3 · AleChef + BPMF</div>
+          <div class="rt-opp">Inverno começa em 3 dias — janela sazonal</div>
+          <div class="rt-detail">Solstício 21/06. Cardápio inverno + Monte Verde 27/06. Timing favorável para ambas as marcas simultaneamente.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rt-section">
+      <div class="rt-section-title">⏰ Timing Alert — Ações Prioritárias</div>
       <table class="rt-timing-table">
-        <thead><tr><th>Data</th><th>Evento</th><th>Empresa</th><th>Ação recomendada</th></tr></thead>
+        <thead><tr><th>Empresa</th><th>Evento</th><th>Prazo</th><th>Ação</th></tr></thead>
         <tbody>
-          <tr class="co-block" data-co="alechef"><td>21/06/2026</td><td>Início oficial do inverno</td><td>AleChef · BPMF</td><td>Publicar conteúdo sazonal <strong>antes</strong> desta data</td></tr>
-          <tr><td>22/06/2026</td><td>Segunda — grade editorial</td><td>Todas</td><td>Ler este consolidado antes de montar grades</td></tr>
-          <tr class="co-block" data-co="marcela"><td>~23/06/2026</td><td>TikTok trend "gastos julho" chega ao IG</td><td>Marcela</td><td>Antecipar com solução na grade de segunda</td></tr>
-          <tr class="co-block" data-co="bpmf"><td>27/06/2026</td><td>Monte Verde "Inverno nas Montanhas" abre</td><td>BPMF</td><td>Publicar convocação para jornada de julho</td></tr>
-          <tr class="co-block" data-co="bpmf"><td>28/06/2026</td><td>4º Pedal Estrada de Ferro (GO)</td><td>BPMF</td><td>Conteúdo de evento nacional</td></tr>
-          <tr class="co-block" data-co="adfly"><td><span class="rt-urgente-badge">⚡ URGENTE</span> 01/07/2026</td><td>ICA 100-40 DECEA entra em vigor</td><td>ADFly</td><td><strong>Publicar ANTES, não depois — janela fecha</strong></td></tr>
-          <tr class="co-block" data-co="marcela"><td>01/07/2026</td><td>Início oficial do 2º semestre</td><td>Marcela</td><td>Revisão de metas, planejamento familiar</td></tr>
-          <tr><td>~05/07/2026</td><td>Início férias escolares de julho</td><td>AleChef · Marcela</td><td>Jantar em família + gastos com férias</td></tr>
-          <tr class="co-block" data-co="alechef"><td>02-19/07/2026</td><td>Festival Gastronômico Pomerode (20ª ed.)</td><td>AleChef</td><td>Gastronomia sazonal de inverno</td></tr>
+          <tr><td><span class="rt-exec-co adfly" style="font-size:11px">ADFly</span></td><td>ICA 100-40 DECEA</td><td><span class="rt-urgente-badge">13 dias · 01/07</span></td><td>Post regulatório ESTA semana</td></tr>
+          <tr><td><span class="rt-exec-co alechef" style="font-size:11px">AleChef</span></td><td>Início do Inverno</td><td><span class="rt-urgente-badge">3 dias · 21/06</span></td><td>Cardápio inverno + jantar exclusivo</td></tr>
+          <tr><td><span class="rt-exec-co bpmf" style="font-size:11px">BPMF</span></td><td>Monte Verde Inverno</td><td><span class="rt-urgente-badge">9 dias · 27/06</span></td><td>Depoimento + teaser evento</td></tr>
+          <tr><td><span class="rt-exec-co marcela" style="font-size:11px">Marcela</span></td><td>TikTok trend → IG</td><td><span class="rt-urgente-badge">~5 dias</span></td><td>Carrossel Família 35-45 férias</td></tr>
+          <tr><td><span class="rt-exec-co tracao" style="font-size:11px">TRAÇÃO</span></td><td>Kaizen acelerando IA</td><td><span class="rt-urgente-badge">esta semana</span></td><td>Case real IA com resultado</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="rt-section">
-      <div class="rt-section-title">🔗 Fontes Consultadas</div>
+      <div class="rt-section-title">📎 Fontes</div>
       <ul class="rt-fonte-list">
-        <li><strong>ADFly — ICA 100-40:</strong> DECEA · ICA 100-40 (Instrução de Aviação Civil) · publicação oficial COMAER · vigência 01/07/2026</li>
-        <li><strong>ADFly — Drone + IA:</strong> Tendências B2B inspeção predial · Relatórios AEC 2026 · busca "drone laudo automático IA"</li>
-        <li><strong>AleChef — Sazonalidade:</strong> Google Trends BR — "cardápio de inverno", "comfort food", "jantar em família julho 2026" · semanas 24-27/2026</li>
-        <li><strong>BPMF — Monte Verde:</strong> Site oficial Inverno nas Montanhas · 27/06–02/08/2026 · tour ciclístico como atração oficial confirmada</li>
-        <li><strong>BPMF — 4º Pedal Estrada de Ferro:</strong> Portais de cicloturismo BR · Leopoldo de Bulhões GO · 28/06/2026</li>
-        <li><strong>BPMF — E-bikes:</strong> Abraciclo · projeção +30% mercado e-bikes · Relatório 2025-2028</li>
-        <li><strong>Marcela — Virada de semestre:</strong> Google Trends BR — "planejamento financeiro segundo semestre", "férias de julho gastos" · pico semana 25/2026</li>
-        <li><strong>Marcela — TikTok trend:</strong> #planejamentofinanceiro TikTok BR · "gastos de julho" em ascensão semana 18/06 · estimativa chegada IG: ~5 dias</li>
-        <li><strong>Marcela — Concorrentes P-01 a P-04:</strong> @mepoupe · @veragimenezfinancas · @camilavillelafinancas · @ricardovieirafinancas</li>
-        <li><strong>TRAÇÃO — Kaizen:</strong> Blog kaizen.agencia · artigos publicados 16-18/06/2026: 2 guias IA marketing</li>
-        <li><strong>TRAÇÃO — Concorrentes:</strong> C-01 @agenciagv8 · C-02 @goma.digital · C-03 @kaizen.agencia · C-04 @organica.digital · C-05 @envox.agencia</li>
-        <li><strong>Relatórios individuais:</strong> _RADAR-SEMANAL/ADFLY/ · ALECHEF/ · BPMF/ · Marcela-PG/ · CLIENTE-TRAO-TRAC/ · Consolidado: RADAR-CONSOLIDADO-18-06-2026.md</li>
+        <li>Instagram · monitoramento manual de 12+ perfis concorrentes · 17-18/06/2026</li>
+        <li>TikTok · trending topics "gastos julho", "inverno 2026" · 18/06</li>
+        <li>DECEA/ANAC · ICA 100-40 publicado oficialmente (vigência 01/07/2026)</li>
+        <li>Google Trends · "planejamento financeiro férias julho" em alta desde 15/06</li>
+        <li>Radar Individual: RADAR-ADFLY-18-06-2026.md · RADAR-ALECHEF-18-06-2026.md · RADAR-BPMF-18-06-2026.md · RADAR-MARCELA-18-06-2026.md · RADAR-TRAC-18-06-2026.md</li>
       </ul>
-    </div>
-    <div style="text-align:center;font-size:11px;color:rgba(255,255,255,.25);margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">
-      Gerado: 18/06/2026 · v1.0 · Próxima execução: qui 25/06/2026 às 08h
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- TAB 5 — SISTEMA (Uniformidade + Fluxo Semanal + Auditoria)    -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════ -->
+<!-- TAB 5 — SISTEMA                           -->
+<!-- ══════════════════════════════════════════ -->
 <div class="pane">
 
   <div class="sub-tabs">
-    <span class="sub-tab active" onclick="switchSubTab(this,'sis-uniformidade')">⚖️ Uniformidade</span>
-    <span class="sub-tab" onclick="switchSubTab(this,'sis-fluxo')">🗓 Fluxo Semanal</span>
-    <span class="sub-tab" onclick="switchSubTab(this,'sis-auditoria')">✅ Auditoria de Entregas</span>
+    <span class="sub-tab active" onclick="switchSubTab(this,'sys-uni')">🎨 Uniformidade</span>
+    <span class="sub-tab" onclick="switchSubTab(this,'sys-flow')">🔄 Fluxo</span>
+    <span class="sub-tab" onclick="switchSubTab(this,'sys-audit')">✅ Auditoria</span>
   </div>
 
-  <!-- SUB: UNIFORMIDADE -->
-  <div class="sub-pane active" id="sis-uniformidade">
+  <!-- UNIFORMIDADE -->
+  <div class="sub-pane active" id="sys-uni">
     <div class="matrix-wrap">
-    <table class="matrix">
-      <thead>
-        <tr>
-          <th>Critério</th>
-          <th class="co-header" data-co="adfly">ADFly</th>
-          <th class="co-header" data-co="alechef">AleChef</th>
-          <th class="co-header" data-co="bpmf">BPMF</th>
-          <th class="co-header" data-co="marcela">Marcela</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Brand Kit documentado</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ v1</td>
-          <td class="co-col check-ok" data-co="alechef">✓ v1</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ v1</td>
-          <td class="co-col check-ok" data-co="marcela">✓ v1 (09/06)</td></tr>
-        <tr><td><strong>AG-10 Designer criado</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ documentado</td>
-          <td class="co-col check-warn" data-co="alechef">⚠ adaptado</td>
-          <td class="co-col check-warn" data-co="bpmf">⚠ adaptado</td>
-          <td class="co-col check-ok" data-co="marcela">✓ v1 (12/06)</td></tr>
-        <tr><td><strong>Produção Python/Pillow</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ S16-22 (25 PNGs)</td>
-          <td class="co-col check-ok" data-co="alechef">✓ S16-22 (9 PNGs)</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ S16-22 (3 PNGs)</td>
-          <td class="co-col check-ok" data-co="marcela">✓ 21 PNGs S16-22</td></tr>
-        <tr><td><strong>ICP documentado</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ B2B 3 nichos</td>
-          <td class="co-col check-ok" data-co="alechef">✓ B2C</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ B2C</td>
-          <td class="co-col check-ok" data-co="marcela">✓ 3 personas</td></tr>
-        <tr><td><strong>Grade editorial ativa</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ S16-22</td>
-          <td class="co-col check-ok" data-co="alechef">✓ S16-22</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ S16-22</td>
-          <td class="co-col check-ok" data-co="marcela">✓ S2 (16-22/06)</td></tr>
-        <tr><td><strong>Painel auto-update</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ toda seg 6h</td>
-          <td class="co-col check-ok" data-co="alechef">✓ toda seg 6h</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ toda seg 6h</td>
-          <td class="co-col check-ok" data-co="marcela">✓ toda seg 6h</td></tr>
-        <tr><td><strong>Roteiro word-for-word</strong></td>
-          <td class="co-col check-warn" data-co="adfly">⚠ S22-28 sem speech</td>
-          <td class="co-col check-ok" data-co="alechef">✓ padrão v2</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ padrão v2</td>
-          <td class="co-col check-ok" data-co="marcela">✓ padrão v2</td></tr>
-        <tr><td><strong>AI prompts por slide</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ padrão v2</td>
-          <td class="co-col check-ok" data-co="alechef">✓ padrão v2</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ padrão v2</td>
-          <td class="co-col check-ok" data-co="marcela">✓ padrão v2</td></tr>
-        <tr><td><strong>Radar concorrentes</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ 18/06</td>
-          <td class="co-col check-ok" data-co="alechef">✓ 18/06</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ 18/06</td>
-          <td class="co-col check-ok" data-co="marcela">✓ P-01/P-12 + 18/06</td></tr>
-        <tr><td><strong>INBOX Provocações</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ S16-22</td>
-          <td class="co-col check-ok" data-co="alechef">✓ S16-22</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ S16-22</td>
-          <td class="co-col check-ok" data-co="marcela">✓ S2 ativo</td></tr>
-        <tr><td><strong>AG-11 Inbound LDR</strong></td>
-          <td class="co-col check-ok" data-co="adfly">✓ SOP v1.0 ativo</td>
-          <td class="co-col check-gap" data-co="alechef">✗ pendente</td>
-          <td class="co-col check-gap" data-co="bpmf">✗ pendente</td>
-          <td class="co-col check-gap" data-co="marcela">✗ pendente</td></tr>
-        <tr><td><strong>CRM integrado</strong></td>
-          <td class="co-col check-warn" data-co="adfly">⚠ CSV manual</td>
-          <td class="co-col check-warn" data-co="alechef">⚠ WhatsApp manual</td>
-          <td class="co-col check-warn" data-co="bpmf">⚠ WhatsApp manual</td>
-          <td class="co-col check-warn" data-co="marcela">⚠ indicação manual</td></tr>
-        <tr><td><strong>S22-28 copy pronto</strong></td>
-          <td class="co-col check-warn" data-co="adfly">⚠ sem speech</td>
-          <td class="co-col check-ok" data-co="alechef">✓ copy+speech+AI</td>
-          <td class="co-col check-ok" data-co="bpmf">✓ copy+speech+AI</td>
-          <td class="co-col check-gap" data-co="marcela">✗ S3 não iniciada</td></tr>
-      </tbody>
-    </table>
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Padrão</th>
+            <th class="co-header" data-co="adfly">ADFly</th>
+            <th class="co-header" data-co="alechef">AleChef</th>
+            <th class="co-header" data-co="bpmf">BPMF</th>
+            <th class="co-header" data-co="marcela">Marcela</th>
+            <th class="co-header" data-co="tracao">TRAÇÃO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Brand Kit definido</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-warn">~</span></td></tr>
+          <tr><td>AG-10 Python/Pillow</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>Pacote Padrão v2</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>Speech word-for-word</td><td class="co-col" data-co="adfly"><span class="check-warn">~</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>AI Prompts por peça</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>WhatsApp Status + Imagem</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>LinkedIn obrigatório</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-gap">✗</span></td><td class="co-col" data-co="bpmf"><span class="check-gap">✗</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>Radar semanal ativo</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-ok">✓</span></td></tr>
+          <tr><td>AG-11 Inbound LDR</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-gap">✗</span></td><td class="co-col" data-co="bpmf"><span class="check-gap">✗</span></td><td class="co-col" data-co="marcela"><span class="check-gap">✗</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
+          <tr><td>INBOX Provocações</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-ok">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:#888;display:flex;gap:12px;flex-wrap:wrap">
+      <span><span class="check-ok">✓</span> Implantado</span>
+      <span><span class="check-warn">~</span> Parcial</span>
+      <span><span class="check-gap">✗</span> Pendente</span>
     </div>
   </div>
 
-  <!-- SUB: FLUXO SEMANAL -->
-  <div class="sub-pane" id="sis-fluxo">
-    <div class="card">
-      <h3>Fluxo padrão — semana tipo</h3>
-      <div class="day-row"><div class="day-label">Quinta 08h 🤖</div><div style="flex:1;font-size:12px">Radar Semanal automático roda para as 5 empresas → salva relatórios individuais + RADAR-CONSOLIDADO</div></div>
-      <div class="day-row"><div class="day-label">Sex 16h ✋</div><div style="flex:1;font-size:12px">Alexandre alimenta INBOX Provocações — uma entrada por empresa. Prazo: 16h para processar no fim de semana</div></div>
-      <div class="day-row"><div class="day-label">Sáb ✋</div><div style="flex:1;font-size:12px">Alexandre exporta CSV do CRM-ALVO → salva em <code style="background:#F0F2F5;padding:1px 4px;border-radius:3px">CRM_Updates/semana_[N]_atualizada.csv</code></div></div>
-      <div class="day-row"><div class="day-label">Fds 🤖</div><div style="flex:1;font-size:12px">Grade Editorial → AG-05 escreve copy completo (roteiro + captions + AI prompts) → AG-10 produz imagens Python/Pillow</div></div>
-      <div class="day-row"><div class="day-label">Seg 06h 🤖</div><div style="flex:1;font-size:12px"><strong>Painel da Semana atualiza automaticamente</strong> — lê os 4 pacotes, monta o HTML e publica o artifact antes das 8h30</div></div>
-      <div class="day-row"><div class="day-label">Seg 08h30 🤖</div><div style="flex:1;font-size:12px">AG-13 Vibe Prospecting (≤70 créditos) → AG-03 LinkedIn → leads listados p/ CSV</div></div>
-      <div class="day-row"><div class="day-label">Seg–Dom ✋</div><div style="flex:1;font-size:12px">Alexandre abre o Painel (pronto às 6h), copia roteiros e posta conforme grade. AG-11 processa leads inbound continuamente.</div></div>
-    </div>
-    <div class="card" style="border-left:4px solid #9FE83A">
-      <h3>Estado atual — Ciclo semana 16-22/06</h3>
-      <div class="day-row"><div class="day-label" style="color:#27ae60">Quinta 08h ✅</div><div style="flex:1;font-size:12px"><strong>Radar 18/06 gerado</strong> — RADAR-CONSOLIDADO-18-06-2026.md. 5 empresas. ICA 100-40 em 13 dias.</div></div>
-      <div class="day-row"><div class="day-label" style="color:#F39C12">Sex 16h ⏳</div><div style="flex:1;font-size:12px">INBOX Provocações — Alexandre alimenta sexta 16h</div></div>
-      <div class="day-row"><div class="day-label" style="color:#E74C3C">Fds 🔴</div><div style="flex:1;font-size:12px"><strong>AG-05 S22-28 parcial</strong> — AleChef+BPMF ✅ · ADFly sem speech ❌ · Marcela S3 não iniciada ❌ · <strong>AG-10 não rodou</strong> — 0 PNGs S22-28</div></div>
-      <div class="day-row"><div class="day-label" style="color:#F39C12">Seg 22/06 ⚠</div><div style="flex:1;font-size:12px">Produção 100% até domingo — imagens S22-28 + ADFly speech + Marcela S3</div></div>
-    </div>
-  </div>
-
-  <!-- SUB: AUDITORIA -->
-  <div class="sub-pane" id="sis-auditoria">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-      <div>
-        <div style="font-size:15px;font-weight:700;color:#0A1B33">Auditoria de Entregas Semanais</div>
-        <div style="font-size:12px;color:#666;margin-top:2px">Checklist obrigatório antes de finalizar qualquer pacote</div>
-      </div>
-      <span class="version-badge">Padrão v2.0 · desde 12/06/2026</span>
-    </div>
-    <div class="standard-box">
-      <h4>📋 Padrão v2.0 — Itens obrigatórios DENTRO do docx (não em arquivo COMPLEMENTO)</h4>
-      <ul>
-        <li><strong>VÍDEO:</strong> Speech word-for-word + timecodes + tom + overlay + instruções gravação + caption</li>
-        <li><strong>CARROSSEL:</strong> Storytelling arc + copy slide-a-slide + AI Prompt por slide + slide destaque + caption</li>
-        <li><strong>LINKEDIN:</strong> Copy + AI Prompt contextual 1200×1200 (obrigatório) + hashtags</li>
-        <li><strong>STORIES:</strong> 2-3 frames/dia vinculados ao post + enquete em 1 frame</li>
-      </ul>
-    </div>
-    <div class="audit-section">📦 Semana 16-22/06/2026 — 4 empresas · 14 posts<span class="audit-score full">Padrão v2 · 85-100%</span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="standard-box" style="border-left-color:#27ae60">
-        <h4>✅ VÍDEOS (Reel / TikTok / YouTube)</h4>
+  <!-- FLUXO -->
+  <div class="sub-pane" id="sys-flow">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+      <div class="standard-box">
+        <h4>📅 Fluxo Semanal</h4>
         <ul>
-          <li>Speech word-for-word com timecodes</li>
-          <li>Tom e câmera por bloco</li>
-          <li>Overlay/texto na tela</li>
-          <li>Instruções de gravação</li>
-          <li>Caption IG + TikTok distintos</li>
-        </ul>
-      </div>
-      <div class="standard-box" style="border-left-color:#1E90FF">
-        <h4>✅ CARROSSEIS (Instagram / LinkedIn)</h4>
-        <ul>
-          <li>Storytelling arc completo</li>
-          <li>Copy slide-a-slide</li>
-          <li>AI Prompt por slide (inglês + hex + proporção)</li>
-          <li>Slide de maior impacto destacado</li>
-          <li>Caption com hashtags corretas</li>
-        </ul>
-      </div>
-      <div class="standard-box" style="border-left-color:#F39C12">
-        <h4>⚠️ S22-28 — Pré-entrega</h4>
-        <ul>
-          <li>AleChef: copy+speech+AI ✅ · imagens ❌</li>
-          <li>BPMF: copy+speech+AI ✅ · imagens ❌</li>
-          <li>ADFly: copy+AI ✅ · speech ❌ · imagens ❌</li>
-          <li>Marcela S3: não iniciada ❌</li>
-          <li>AG-10 deve rodar até dom 21/06</li>
+          <li>Quinta 08h — Radar automático (todas as empresas)</li>
+          <li>Sexta 16h — Alexandre posta INBOX Provocações</li>
+          <li>Sáb/Dom — Grade → Copy → Imagens → QA</li>
+          <li>Dom até 10h — Pacote de cliente entregue</li>
+          <li>Segunda 06h — Painel atualizado automaticamente</li>
+          <li>Segunda 08h30 — AG-13 Vibe Prospecting (ADFly)</li>
+          <li>Segunda 09h — AG-03 prospecção LinkedIn</li>
         </ul>
       </div>
       <div class="standard-box" style="border-left-color:#9FE83A">
-        <h4>✅ GERAL (toda peça)</h4>
+        <h4>🤖 Automações Ativas</h4>
         <ul>
-          <li>Paleta hex correta por empresa</li>
-          <li>Sem emoji em peças B2B ADFly</li>
-          <li>CTA presente em toda peça</li>
-          <li>ICA 100-40 — reforçar até 01/07/2026</li>
+          <li>Radar · toda quinta 08h (scheduled task)</li>
+          <li>Painel auto-update · toda segunda 06h</li>
+          <li>AG-11 LDR Inbound · contínuo (ADFly)</li>
+          <li>AG-03 LinkedIn · toda segunda 09h</li>
         </ul>
+      </div>
+      <div class="standard-box" style="border-left-color:#C9A77A">
+        <h4>✋ Processos Manuais</h4>
+        <ul>
+          <li>INBOX Provocações · Alexandre toda sexta</li>
+          <li>Export CSV leads · Alexandre todo sábado</li>
+          <li>Aprovação AG-QA AMARELO · WhatsApp (&lt;2min)</li>
+          <li>Deploy Netlify · após qualquer update de painel</li>
+        </ul>
+      </div>
+      <div class="standard-box" style="border-left-color:#E74C3C">
+        <h4>🚧 Próximas Integrações</h4>
+        <ul>
+          <li>Supabase API · reconectar CRM online</li>
+          <li>AG-13 · primeira rodada Vibe Prospecting</li>
+          <li>AG-11 · expandir para AleChef, BPMF, Marcela</li>
+          <li>TRAÇÃO · primeiro pacote completo S22-28</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:18px">Calendário de Entregas</div>
+    <div class="card">
+      <div class="day-row"><div class="day-label">🟢 Seg 22/06</div><div style="font-size:12px">ADFly × 1 · AleChef × 1 · BPMF × 1 — Último post S16-22. Painel atualizado 06h.</div></div>
+      <div class="day-row"><div class="day-label">🟡 Ter-Dom 22-28/06</div><div style="font-size:12px">S22-28: ADFly (speech pendente) · AleChef + BPMF (0 PNGs) · Marcela S3 (não iniciado) · TRAÇÃO S1 pendente</div></div>
+      <div class="day-row"><div class="day-label">⏰ 27/06</div><div style="font-size:12px">Monte Verde BPMF — conteúdo evento ao vivo</div></div>
+      <div class="day-row"><div class="day-label">⚡ 01/07</div><div style="font-size:12px">ICA 100-40 ADFly entra em vigor — publicar autoridade antes</div></div>
+      <div class="day-row"><div class="day-label">📡 Qui 25/06 08h</div><div style="font-size:12px">Radar automático — nova execução · 5 empresas</div></div>
+    </div>
+  </div>
+
+  <!-- AUDITORIA -->
+  <div class="sub-pane" id="sys-audit">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+      <div class="audit-section" style="margin:0;border:none;padding:0">📋 Auditoria Geral · 18/06/2026</div>
+      <span class="audit-score full">✅ 5 empresas auditadas</span>
+    </div>
+
+    <div class="standard-box" style="border-left-color:#27ae60">
+      <h4>✅ ADFly Soluções Aéreas — S16-22 · 4 posts · 25 PNGs</h4>
+      <ul>
+        <li>4 posts completos padrão v2 (speech, captions, AI prompts)</li>
+        <li>25 PNGs gerados via Python/Pillow (1080×1080 + 1080×1350 + 1200×1200)</li>
+        <li>LinkedIn com AI Prompt 1200×1200 em todos os posts</li>
+        <li>WhatsApp status + imagem incluídos</li>
+        <li>⚠️ S22-28: speech word-for-word pendente para vídeo</li>
+      </ul>
+    </div>
+
+    <div class="standard-box" style="border-left-color:#27ae60">
+      <h4>✅ AleChef em Casa — S16-22 · 3 posts · 9 PNGs</h4>
+      <ul>
+        <li>3 posts completos padrão v2</li>
+        <li>9 PNGs na pasta correta S16-22</li>
+        <li>S22-28: copy + speech + AI prompts prontos</li>
+        <li>⚠️ S22-28: 0 imagens — AG-10 pendente</li>
+      </ul>
+    </div>
+
+    <div class="standard-box" style="border-left-color:#27ae60">
+      <h4>✅ BPMF — S16-22 · 3 posts · 3 PNGs</h4>
+      <ul>
+        <li>3 posts completos padrão v2</li>
+        <li>S22-28: copy + speech + AI prompts prontos</li>
+        <li>⚠️ S22-28: 0 imagens — AG-10 pendente</li>
+      </ul>
+    </div>
+
+    <div class="standard-box" style="border-left-color:#27ae60">
+      <h4>✅ Marcela Pinheiro GF — S2 · 4 posts · 21 PNGs</h4>
+      <ul>
+        <li>4 posts completos padrão v2 — 7 peças totais</li>
+        <li>21 PNGs em pasta definitiva S16-22</li>
+        <li>LinkedIn + WhatsApp em todos os posts</li>
+        <li>⚠️ S3 (23-29/06): não iniciada — urgente antes de ter 23</li>
+      </ul>
+    </div>
+
+    <div class="standard-box" style="border-left-color:#F39C12">
+      <h4>⚠️ TRAÇÃO MKT — Semana 1 · em construção</h4>
+      <ul>
+        <li>Radar 18/06 ativo · 5 concorrentes monitorados</li>
+        <li>Instagram @tracao_mkt registrado 16/06</li>
+        <li>Brand kit em construção · pacote S1 não iniciado</li>
+        <li>Próximos passos: grade editorial → copy → imagens → deploy</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:14px;background:#F8F9FA">
+      <h3>Versões de Padrão</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <span class="version-badge">PADRAO-ENTREGA-CONTEUDO-v2.md</span>
+        <span class="version-badge">AG-QA-Agente-Qualidade.md</span>
+        <span class="version-badge">PADRAO-PROMPT-IA-IMAGENS.md</span>
+        <span class="version-badge">AG-10 Python/Pillow (desde 12/06)</span>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- ══════════ SCRIPTS ══════════ -->
 <script>
-// ── TABS ──
-function switchTab(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',i===j));
-  document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('active',i===j));
+// ── TABS ──────────────────────────────────────────
+function switchTab(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.pane').forEach((p,i)=>p.classList.toggle('active',i===n));
 }
 
-// ── SUB-TABS ──
-function switchSubTab(el, targetId){
-  const pane = el.closest('.pane');
-  pane.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
-  pane.querySelectorAll('.sub-pane').forEach(p=>p.classList.remove('active'));
+// ── SUB-TABS ──────────────────────────────────────
+function switchSubTab(el,id){
+  const wrap=el.closest('.pane');
+  wrap.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  const target = document.getElementById(targetId);
-  if(target) target.classList.add('active');
+  wrap.querySelectorAll('.sub-pane').forEach(p=>p.classList.remove('active'));
+  const target=wrap.querySelector('#'+id);
+  if(target)target.classList.add('active');
 }
 
-// ── GLOBAL COMPANY FILTER ──
-const activeCo = {adfly:true, alechef:true, bpmf:true, marcela:true, tracao:true};
-
-function applyFilter(){
-  document.querySelectorAll('.co-block[data-co]').forEach(el=>{
-    const co = el.dataset.co;
-    el.classList.toggle('hidden',!activeCo[co]);
-  });
-  document.querySelectorAll('.co-col[data-co]').forEach(el=>{
-    const co = el.dataset.co;
-    el.classList.toggle('hidden-col',!activeCo[co]);
-  });
-  document.querySelectorAll('.co-header[data-co]').forEach(el=>{
-    const co = el.dataset.co;
-    el.classList.toggle('hidden-col',!activeCo[co]);
-  });
-}
-
+// ── COMPANY FILTER ────────────────────────────────
 function toggleCo(chip){
-  const co = chip.dataset.co;
-  activeCo[co] = !activeCo[co];
-  chip.classList.toggle('active', activeCo[co]);
-  applyFilter();
+  chip.classList.toggle('active');
+  const co=chip.dataset.co;
+  const on=chip.classList.contains('active');
+  document.querySelectorAll(`.co-block[data-co="${co}"]`).forEach(el=>el.classList.toggle('hidden',!on));
+  document.querySelectorAll(`.co-col[data-co="${co}"],.co-header[data-co="${co}"]`).forEach(el=>el.classList.toggle('hidden-col',!on));
 }
-
 function allCo(){
-  Object.keys(activeCo).forEach(k=>activeCo[k]=true);
-  document.querySelectorAll('.cf-chip').forEach(c=>c.classList.add('active'));
-  applyFilter();
+  document.querySelectorAll('.cf-chip').forEach(c=>{c.classList.add('active')});
+  document.querySelectorAll('.co-block').forEach(el=>el.classList.remove('hidden'));
+  document.querySelectorAll('.co-col,.co-header').forEach(el=>el.classList.remove('hidden-col'));
 }
 
-// ── FLUXO AGENTES DETAILS ──
-const faDetails = {
-  radar:{title:"RADAR — Radar Semanal de Concorrentes (✅ rodou hoje 18/06)",items:["Monitora 12+ perfis por empresa (ADFly: construtoras/drones · AleChef: personal chefs SP · BPMF: cicloturismo · Marcela: educação financeira · TRAÇÃO: agências)","18/06: ADFly — ICA 100-40 DECEA em 13 dias. Maior janela de autoridade do semestre.","18/06: AleChef — Inverno 21/06 + férias julho. Publicar cardápio de inverno antes de 27/06.","18/06: BPMF — Monte Verde 27/06. 9 dias para capturar demanda ciclistas.","18/06: Marcela — TikTok trend 'gastos julho' chega ao IG em ~5 dias.","18/06: TRAÇÃO — Kaizen publicou 2 guias de IA. Contra-narrativa urgente.","Salva relatórios individuais + RADAR-CONSOLIDADO na pasta _RADAR-SEMANAL/"],dep:"▶ Predecessor: nenhum — é o gatilho de toda a semana."},
-  inbox:{title:"INBOX — Provocações Semanais (Alexandre alimenta sexta 16h)",items:["Alexandre registra ideias, ângulos e perguntas de clientes — 1 a 3 entradas por empresa","Arquivo por empresa: PROVOCACOES-[EMPRESA]-Semana-DD-DD-MM-AAAA.md","Cruza com _TEMAS-USADOS para evitar repetição","Após incorporar: atualiza _TEMAS-USADOS e move entradas para seção ✅ INCORPORADAS"],dep:"▶ Predecessor: Radar (insights do radar orientam quais provocações têm mais timing)"},
-  grade:{title:"GRADE — Grade Editorial",items:["Combina Radar + Provocações para definir o que postar em cada empresa","Define: data · formato · canal · pilar · CTA · persona","Garante variedade de formatos e respeita datas críticas do calendário","Após fechar: registra temas em _TEMAS-USADOS"],dep:"▶ Predecessor: Radar Consolidado + INBOX Provocações"},
-  ag05:{title:"AG-05 — Copywriter / Roteirista",items:["Roteiro word-for-word com timecodes (não tópicos — texto fala a fala)","Captions prontas com hashtags por canal","AI Prompt contextual por post (formato + dimensões + hex + contexto)","TODO o conteúdo vai DENTRO do PACOTE-FULL — COMPLEMENTO só para correção retroativa","STATUS S22-28: AleChef ✅ BPMF ✅ · ADFly sem speech ❌ · Marcela S3 não iniciada ❌"],dep:"▶ Predecessor: Grade Editorial definida"},
-  ag10:{title:"AG-10 — Designer Visual (Python/Pillow) — ⚠ PENDENTE S22-28",items:["Gera PNG via script Python seguindo brand kits exatos","Fontes: Liberation Sans Bold · DejaVu Serif Bold","Dimensões: 1080×1350 (carrossel) · 1080×1920 (reel) · 1080×1080 (post) · 1200×1200 (LinkedIn)","Salvar em pasta DEFINITIVA da semana (S22-28, não S15-21)","CANVA NÃO USAR — substituído em 12/06/2026","STATUS: 0 PNGs S22-28. Precisa rodar até dom 21/06."],dep:"▶ Predecessor: AG-05 (AI prompts) + Brand Kit de cada empresa"},
-  painel:{title:"PAINEL — Auto-update toda segunda 06h",items:["Lê automaticamente os pacotes mais recentes via pandoc (.docx) ou direto (.md)","Extrai roteiros, captions e AI prompts das 4 empresas","Monta HTML completo e atualiza o artifact painel-controle-mkt","Alexandre abre às 8h30 e encontra tudo pronto"],dep:"▶ Predecessor: AG-05 + AG-10 (pacotes prontos no fim de semana)"},
-  ag13:{title:"AG-13 — Pesquisa de Nicho / ICP (Vibe Prospecting) — ⚠ 0 RUNS",items:["ÚNICO agente com acesso ao Vibe Prospecting (Explorium) — teto 70 créditos/semana","Segmentos ADFly rotativos: Construtoras → Engenharia/Arquitetura → Condomínios → Imobiliário","Pré-qualifica com checklist ICP antes de entregar lista ao AG-03","Salva em: _PROSPECCAO-AG13/PROSPECCAO-[SEG]-[DATA].md","STATUS: pasta vazia — nunca rodou. Acionar segunda 22/06."],dep:"▶ Predecessor: Painel pronto (Alexandre confirma segmento da semana)"},
-  ag03:{title:"AG-03 — Prospecção LinkedIn ADFly",items:["Parte SEMPRE da lista AG-13 — nunca prospecta sem lista ICP","Rotaciona entre 3 templates: Construção Civil · Engenharia · Imobiliário Premium","Valida checklist ICP antes de abordar","Lista leads p/ CSV → Alexandre atualiza CRM-ALVO"],dep:"▶ Predecessor: AG-13 (lista priorizada)"},
-  ag11:{title:"AG-11 — LDR Inbound (ADFly ✓ / outros pendentes)",items:["Recebe leads dos 6 canais orgânicos (GMB prioridade máxima)","Lead Score 0-11pts: ≥8 = MQL → Alexandre · 5-7pts = nutrição · <5pts = descarte","SOP completo: Inbound_Marketing_ADFly_SOP_v1.0.docx · AleChef/BPMF/Marcela: pendente"],dep:"▶ Ativo durante toda a semana em paralelo"},
-  publicacao:{title:"PUBLICAÇÃO — Alexandre executa (seg–dom conforme grade)",items:["Abre o Painel (artifact atualizado às 6h) — roteiros com 1 clique","Copia legenda e posta nos canais conforme grade","Canais: Instagram · TikTok · LinkedIn · YouTube · Stories","Monitora DMs e comentários nos 60min após cada post","Passa leads por mensagem para o AG-11 processar"],dep:"▶ Predecessor: Painel pronto (6h) · AG-10 com imagens · Grade aprovada"}
+// ── AGENT FLOW DETAILS ────────────────────────────
+const FA_DATA={
+  radar:{name:'AG-12 · Radar Semanal',deps:'Nenhum (ponto de entrada)',out:['RADAR-CONSOLIDADO-[DATA].md','RADAR-[EMPRESA]-[DATA].md (5 arquivos)','Input para grade editorial e painel'],steps:['Varre 12+ perfis IG por empresa','Detecta timings, movimentos e lacunas','Gera relatório individual por empresa','Consolida em RADAR-CONSOLIDADO','Salva em Base Estratégica/_RADAR-SEMANAL/']},
+  inbox:{name:'INBOX · Provocações Semanais',deps:'Alexandre (manual) + RADAR',out:['PROVOCACOES-[EMPRESA]-Semana-[DATA].md','_TEMAS-USADOS-[EMPRESA].md atualizado'],steps:['Alexandre abre pasta _INBOX-PROVOCACOES/[Empresa]/','Registra 1-3 entradas livres','Sistema cruza com _TEMAS-USADOS','Entradas validadas vão para a grade']},
+  grade:{name:'Grade Editorial',deps:'RADAR-CONSOLIDADO + INBOX Provocações',out:['Grade editorial semanal (4 empresas)','_TEMAS-USADOS atualizado'],steps:['Lê RADAR-CONSOLIDADO mais recente','Lê PROVOCACOES-[EMPRESA]-Semana-[ATUAL].md','Cruza com _TEMAS-USADOS (evitar repetição)','Define posts: pilar, canal, dia, formato','Atualiza _TEMAS-USADOS após incorporar']},
+  ag05:{name:'AG-05 · Copy & Roteiro',deps:'Grade editorial',out:['PACOTE-FULL-S[N]-[EMPRESA].md (speech+captions+AI prompts)'],steps:['Lê grade editorial','Escreve roteiro word-for-word + timecodes (dentro do PACOTE)','Escreve captions por canal (IG, TikTok, LinkedIn)','Gera AI Prompt por slide/peça (estrutura 5 elementos)','WhatsApp: status + imagem 1080×1080']},
+  ag10:{name:'AG-10 · Designer Visual',deps:'PACOTE-FULL (AG-05) + Brand Kit',out:['PNGs via Python/Pillow em /imagens/[EMPRESA]/-v1.png'],steps:['Lê brand kit da empresa','Lê AI Prompts do PACOTE-FULL','Gera script Python/Pillow','Produz PNGs: 1080×1350 (carrossel) · 1080×1920 (reel) · 1080×1080 (post) · 1200×1200 (LinkedIn)','Salva em Semanas/Semana [DATAS]/imagens/[EMPRESA]/']},
+  painel:{name:'PAINEL · Auto-update',deps:'Todos os pacotes da semana',out:['painel-controle-mkt (artifact atualizado)','painel-trao.html · painel-marcela-pinheiro.html'],steps:['Toda segunda 06h (scheduled task)','Lê os pacotes das 4 empresas','Monta HTML com status, radar, entregáveis','Atualiza o artifact Cowork','Pronto antes das 8h30']},
+  ag13:{name:'AG-13 · Pesquisa Nicho / ICP',deps:'Nenhum',out:['PROSPECCAO-[SEG]-[DATA].md em _PROSPECCAO-AG13/'],steps:['Toda segunda 08h30 (scheduled task)','Usa Vibe Prospecting (Explorium)','Teto: 70 créditos/semana','Filtra leads pelo ICP ADFly','Salva lista priorizada para AG-03']},
+  ag03:{name:'AG-03 · Prospecção LinkedIn',deps:'Lista AG-13',out:['Leads validados → CSV (CRM offline)'],steps:['Lê lista priorizada do AG-13','Aplica template rotativo por segmento','Qualifica fit com ICP ADFly','Exporta leads para CSV semanal','CRM-ALVO atualizado manualmente']},
+  ag11:{name:'AG-11 · LDR Inbound',deps:'Lead recebido (formulário, DM, referência)',out:['Lead qualificado (0-11pts) → roteamento'],steps:['Recebe lead inbound (GMB prioridade)','Aplica Lead Score 0-11pts','≥8pts → encaminha para Alexandre','5-7pts → fluxo de nutrição (email/WPP)','<5pts → descarte (opcional nutrição leve)']},
+  publicacao:{name:'Publicação · Alexandre',deps:'Painel atualizado + Pacote aprovado',out:['Posts publicados nos canais'],steps:['Abre painel-controle-mkt','Acessa aba Empresas ou Radar','Copia roteiro/legenda do PACOTE-FULL','Publica conforme grade: dia, canal, horário','IG · TikTok · LinkedIn · YouTube · Stories']}
 };
-
-function faShow(key){
-  const d=faDetails[key];
+function faShow(id){
+  const d=FA_DATA[id];
   if(!d)return;
   const el=document.getElementById('fa-detail');
-  el.innerHTML='<h4>'+d.title+'</h4><ul>'+d.items.map(i=>'<li>'+i+'</li>').join('')+'</ul><div class="dep">'+d.dep+'</div>';
-  el.classList.add('show');
-  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  el.className='show';
+  el.innerHTML=`<h4>${d.name}</h4><ul>${d.steps.map(s=>`<li>${s}</li>`).join('')}</ul><div class="dep">⬡ Predecessores: ${d.deps} &nbsp;|&nbsp; ▷ Saídas: ${d.out.join(' · ')}</div>`;
 }
 
-// ── RADAR TOGGLE ──
-function _radarAutoMode(){var d=new Date().getDay();return(d>=4||d===0)?'proxima':'corrente';}
-function setRadarMode(m){
-  var auto=_radarAutoMode();
-  if(m==='proxima'&&auto!=='proxima')return;
-  var cc=document.getElementById('rtChipCorrente');
-  var cp=document.getElementById('rtChipProxima');
-  var badge=document.getElementById('rtContextBadge');
-  if(!cc)return;
-  cc.classList.toggle('active',m==='corrente');
-  cp.classList.toggle('active',m==='proxima');
-  if(m==='corrente'){
-    badge.textContent='Semana em andamento';
-    badge.className='rt-ctx-badge rt-ctx-corrente';
-  }else{
-    badge.textContent='🔮 Input semana seguinte';
-    badge.className='rt-ctx-badge rt-ctx-proxima';
+// ── RADAR TOGGLE ──────────────────────────────────
+function setRadarMode(mode){
+  const ec=document.getElementById('rtChipCorrente');
+  const ep=document.getElementById('rtChipProxima');
+  const badge=document.getElementById('rtContextBadge');
+  const content=document.getElementById('radarContent');
+  const proxContent=document.getElementById('radarProximaContent');
+  if(mode==='corrente'){
+    ec.classList.add('active');ep.classList.remove('active');
+    badge.className='rt-ctx-badge rt-ctx-corrente';badge.textContent='📊 Semana em curso — gerado quinta';
+    if(content)content.style.display='';
+    if(proxContent)proxContent.style.display='none';
+  } else {
+    ep.classList.add('active');ec.classList.remove('active');
+    badge.className='rt-ctx-badge rt-ctx-proxima';badge.textContent='🔮 Próxima semana — pré-análise';
+    if(content)content.style.display='none';
+    if(proxContent)proxContent.style.display='';
   }
 }
-(function initRadarToggle(){
-  var auto=_radarAutoMode();
-  var cp=document.getElementById('rtChipProxima');
-  if(!cp)return;
-  if(auto!=='proxima'){cp.classList.add('locked');cp.title='Disponível toda quinta às 08h';}
-  setRadarMode(auto);
+// Auto-mode: Qui-Dom = proxima, Seg-Qua = corrente
+(function(){
+  const d=new Date().getDay();
+  const defaultMode=(d>=4||d===0)?'proxima':'corrente';
+  setRadarMode(defaultMode);
 })();
 </script>
 </body>
