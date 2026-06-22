@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <script type="application/json" id="cowork-artifact-meta">
 {"name":"Painel Marcela Pinheiro GF","schemaVersion":1,"description":"Painel interno de gestão — Marcela Pinheiro, Gestora Financeira. Grade editorial, Canva links, arquivos Drive e captions por semana."}
-
-function copyAiPrompt(id, btn) {
-  const ta = document.getElementById(id);
-  if (!ta) return;
-  ta.select();
-  document.execCommand('copy');
-  const orig = btn.textContent;
-  btn.textContent = '✓ Copiado';
-  setTimeout(() => btn.textContent = orig, 1800);
-}
 </script>
 <html lang="pt-BR">
 <head>
@@ -1111,7 +1101,7 @@ function buildSemana(s) {
     </div>`).join('');
 
   /* Content cards */
-  const postsHtml = s.posts.map(p => {
+  const postsHtml = s.posts.map((p, i) => {
     const storiesHtml = p.stories ? `
       <div class="label">Stories IG</div>
       <ul class="story-list">${p.stories.map(st => `<li>${esc(st)}</li>`).join('')}</ul>` : '';
@@ -1363,6 +1353,7 @@ function buildRadar() {
   SEMANAS.forEach(s => buildSemana(s));
   buildRadar();
   initRadarToggleM();
+  showPage('dashboard', document.querySelector('.tab'));
 })();
 
 function _radarAutoModeM(){var d=new Date().getDay();return(d>=4||d===0)?'proxima':'corrente';}
@@ -1386,6 +1377,17 @@ function setRadarModeM(m){
     badge.textContent='🔮 Input semana seguinte';
     badge.className='rt-ctx-badge-m rt-ctx-proxima-m';
   }
+}
+
+/* ── AI Prompt Copy ── */
+function copyAiPrompt(id, btn) {
+  var ta = document.getElementById(id);
+  if (!ta) return;
+  ta.select();
+  document.execCommand('copy');
+  var orig = btn.textContent;
+  btn.textContent = '✓ Copiado!';
+  setTimeout(function(){ btn.textContent = orig; }, 1800);
 }
 function initRadarToggleM(){
   var auto=_radarAutoModeM();

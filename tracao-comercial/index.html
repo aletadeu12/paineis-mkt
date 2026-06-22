@@ -886,7 +886,7 @@ function buildSemana(s) {
   });
   gradeHtml += `</div></div>`;
 
-  const postsHtml = (s.posts||[]).map(p => `
+  const postsHtml = (s.posts||[]).map((p, i) => `
     <div class="content-card">
       <div class="content-header">
         <span class="day">${esc(p.dia)}</span>
@@ -1126,7 +1126,18 @@ function initRadarToggleT() {
   SEMANAS.forEach(s => buildSemana(s));
   buildRadar();
   initRadarToggleT();
+  showPage('dashboard', document.querySelector('.tab'));
 })();
+/* ── AI Prompt Copy ── */
+function copyAiPrompt(id, btn) {
+  var ta = document.getElementById(id);
+  if (!ta) return;
+  ta.select();
+  document.execCommand('copy');
+  var orig = btn.textContent;
+  btn.textContent = '✓ Copiado!';
+  setTimeout(function(){ btn.textContent = orig; }, 1800);
+}
 </script>
 
 </body>
