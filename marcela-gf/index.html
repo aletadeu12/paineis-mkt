@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <script type="application/json" id="cowork-artifact-meta">
 {"name":"Painel Marcela Pinheiro GF","schemaVersion":1,"description":"Painel interno de gestão — Marcela Pinheiro, Gestora Financeira. Grade editorial, Canva links, arquivos Drive e captions por semana."}
+
+function copyAiPrompt(id, btn) {
+  const ta = document.getElementById(id);
+  if (!ta) return;
+  ta.select();
+  document.execCommand('copy');
+  const orig = btn.textContent;
+  btn.textContent = '✓ Copiado';
+  setTimeout(() => btn.textContent = orig, 1800);
+}
 </script>
 <html lang="pt-BR">
 <head>
@@ -84,6 +94,12 @@ body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color
 .edl  { background: #F5F3FF; border-left: 3px solid #8B5CF6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
 .story-list { background: #FAFAFA; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
 .story-list li { font-size: 12px; margin-left: 14px; margin-bottom: 3px; line-height: 1.5; }
+
+.ai-prompt-block { background: #FDF2F8; border-left: 3px solid #BE185D; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.ai-prompt-label { font-size: 10px; font-weight: 700; color: #BE185D; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.ai-prompt-textarea { width: 100%; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.5; background: #FFF; border: 1px solid #FBCFE8; border-radius: 4px; padding: 8px; resize: vertical; min-height: 120px; box-sizing: border-box; color: #374151; }
+.copy-ai-btn { margin-top: 4px; background: #BE185D; color: #FFF; border: none; border-radius: 4px; padding: 4px 10px; font-size: 10px; cursor: pointer; font-weight: 600; }
+.copy-ai-btn:hover { background: #9D174D; }
 .extra-block { background: #F8F5EE; border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
 .hashtags { font-size: 11px; color: #6B7280; font-family: monospace; margin-top: 6px; }
 
@@ -633,6 +649,23 @@ const SEMANAS = [
           "Frame 2 — Dado provocador: 'R$ 800 de anuidade + juros do rotativo podem custar mais que a passagem inteira.'",
           "Frame 3 — CTA: 'Post novo no feed. Arrasta até o slide 3 — você vai se surpreender. 👆'",
         ],
+        aiPrompt: `=== CARROSSEL MILHAS — 6 slides 1080×1350 ===
+
+SLIDE 1 (Capa):
+Financial planning editorial slide for personal finance advisor in Brazil: bold headline 'A viagem paga com milhas do seu cartao de credito esta custando o futuro financeiro dos seus filhos. Deixa eu te provar nos numeros.' · Forest green #1B6A39 background · White Montserrat Black typography · Olive green #83983A accent on 'provar nos numeros' · Minimal editorial layout with breathing room · Brand style inspired by JPMorgan Wealth Management campaigns and American Express Platinum · Natural editorial lighting feel · No cold banking imagery no stock photo look no blue financial aesthetic · No complex charts on this slide
+
+SLIDE 2 (Dado PEIC/CNC): Editorial data slide: bold statistic '73,4%' in large Forest Green #1B6A39 on Cream #F8F5EE background, full text 'das famílias com renda acima de 10 salários mínimos estão endividadas' in Montserrat Black below, IBGE/CNC source tag in small olive #83983A, JPMorgan editorial style — no charts no graphs, pure typography
+
+SLIDE 3 (Armadilha das Milhas): Step-by-step process slide on Cream #F8F5EE, four numbered arrows in Forest Green #1B6A39 showing the trap cycle, each step in Montserrat Bold dark text, '#83983A' Olive accent on key trigger words, clean editorial financial layout — Style: AmEx Platinum education
+
+SLIDE 4 (O que você perde): Three-column loss layout on Cream #F8F5EE, Forest Green #1B6A39 bold headers for each loss type, Olive #83983A decorative dash accents, Montserrat typography, minimal empowering financial editorial — no red warning colors no alarm aesthetics
+
+SLIDE 5 (A conta real): Calculation breakdown slide on Forest Green #1B6A39 background, white Montserrat numbers showing real cost, 'DE GRAÇA SAIU CARO.' conclusion in large white bold at bottom, Olive #83983A accent on key numbers — Style: Goldman Sachs consumer education
+
+SLIDE 6 (CTA): Clean CTA on Cream #F8F5EE, 'Quer ver quanto as milhas estão custando no seu orçamento?' in Forest Green #1B6A39 Montserrat Bold, 'sessão de diagnóstico gratuita · 20 minutos' in smaller dark text, Marcela Pinheiro name/handle in Olive #83983A, warm editorial close
+
+=== WHATSAPP STATUS (1080×1080) ===
+Financial planning status image for WhatsApp: bold readable text 'Sua viagem de ferias com milhas pode estar custando 2x mais do que voce pensa.' centered on forest green #1B6A39 background · White Montserrat Bold typography · Olive green #83983A accent underline · Marcela Pinheiro name/handle bottom · High contrast legible on mobile screen · No complex layout no multiple elements — single clean statement`,
       },
       {
         dia: "TER 23/06", pilar: "E",
@@ -645,9 +678,30 @@ const SEMANAS = [
         hashtags: "#revisaofinanceira #planejamentofinanceiro #marcelapinheiro",
         stories: null,
         extras: [
-          { label: "LinkedIn (Terça)", txt: "Hoje é o primeiro dia útil antes do segundo semestre comecar. Para muitas famílias, é o dia em que elas percebem que o plano de janeiro ficou pelo caminho. Sem julgamento — isso acontece com 80% das pessoas. O problema não é a falta de disciplina. É a falta de uma revisão estruturada em junho. 5 perguntas que toda família deveria responder antes de julho: [lista]. CTA: Qual pergunta mais te incomoda? Comenta aqui." },
+          { label: "LinkedIn (Terça)", txt: "Hoje é o primeiro dia útil antes do segundo semestre comecar. Para muitas famílias, é o dia em que elas percebem que o plano de janeiro ficou pelo caminho. Sem julgamento — isso acontece com 80% das pessoas. O problema não é a falta de disciplina. É a falta de uma revisão estruturada em junho. 5 perguntas que toda família deveria responder antes de julho: [lista]. CTA: Qual pergunta mais te incomoda? Comenta aqui." 
+      },
           { label: "Speech Reel — Timecodes", txt: "[00:00-00:05] Câmera frontal: 'Hoje é o primeiro dia antes do segundo semestre. A maioria das famílias vai deixar passar — de novo.' [00:05-00:35] 5 perguntas rapidamente. [00:35-00:45] CTA: '30 minutos agora valem 6 meses de paz. Segue @marcelapinheirogf'" },
         ],
+        aiPrompt: `=== POST CASAL 1080×1080 ===
+Warm editorial photograph: couple sitting at a kitchen table with papers and a laptop, both looking at the same document in a collaborative posture — not confrontational · Soft morning light through window · Forest green tones in the environment (plant, accent cushion) · Clean middle-class home setting · Overlay text: 'Se so falam de dinheiro quando a conta esta no vermelho, o problema financeiro logo sera conjugal.' in Montserrat Bold #1B6A39 on #F8F5EE semi-transparent card · Brand style inspired by JPMorgan Wealth Management and UBS editorial campaigns · No cold stock photo feel no arguments or stress body language no blue banking aesthetic
+
+=== STORIES (1080×1920) ===
+AI PROMPT STORY 1 (Enquete) (1080×1920):
+Poll story on Forest Green #1B6A39, 'Vocês conversam sobre dinheiro abertamente em casa?' in white Montserrat Bold centered, two poll option buttons in Cream #F8F5EE below with dark text options, Olive #83983A accent on selected state, clean mobile editorial — Style: JPMorgan Wealth client education
+
+AI PROMPT STORY 2 (Validação) (1080×1920):
+Validation story on Cream #F8F5EE, 'Você não está sozinha.' in large Forest Green #1B6A39 bold centered, supporting text 'Não é fraqueza — é falta de estrutura, não de amor.' in dark Montserrat below, Olive #83983A small accent dash, warm empowering Marcela aesthetic
+
+AI PROMPT STORY 3 (Gancho) (1080×1920):
+Teaser story on Forest Green #1B6A39, 'Fui direto ao assunto no feed hoje.' in white bold, arrow pointing down with 'Va lá ver' in Olive #83983A, clean link sticker area at bottom, Marcela Pinheiro branding
+
+AI PROMPT STORY 4 (CTA) (1080×1920):
+Direct action story on Cream #F8F5EE, 'DM CASAL' in large Forest Green #1B6A39 ExtraBold top half, 'para o roteiro da primeira reunião financeira sem brigas.' in dark Montserrat below, Olive #83983A accent underline, Marcela signature bottom — warm authoritative
+WHATSAPP — STATUS TEXTO (faltante — ≤160 chars)
+STATUS TEXTO (publicar SEG 22/06 às 8h — 141 chars):
+A viagem de graça com milhas pode estar custando 2x mais do que você pensa. Veja os números no feed. Link na bio.`,
+        aiPrompt: `=== LINKEDIN 1200×1200 ===
+Person sitting at a clean desk reviewing financial documents with genuine focus and calm determination · Warm natural window light · Forest green tones reflecting on papers · Cream background #F8F5EE · Text overlay: '5 perguntas que toda familia deveria responder agora' in Montserrat Bold #1B6A39 · Empowering editorial financial aesthetic · No stress no urgency — clarity and control · Brand style inspired by JPMorgan Wealth Management and BlackRock brand campaigns · No cold corporate banking look no stock photo feel no intimidating complexity`,
       },
       {
         dia: "QUA 24/06", pilar: "C",
@@ -659,6 +713,22 @@ const SEMANAS = [
         cta: "Me chama no DM.",
         hashtags: "#financasdafamilia #escolaparticular #marcelapinheiro",
         stories: null,
+        aiPrompt: `=== CARROSSEL CARRO vs ESCOLA — 7 slides 1080×1350 ===
+
+SLIDE 1 (Capa):
+Editorial financial planning slide: bold statement 'O seu carro na garagem e o que faz voce suar frio toda vez que chega o boleto da escola do seu filho.' · Cream background #F8F5EE · Forest green #1B6A39 headline in Montserrat Black · Olive green #83983A underline accent · Clean minimal layout with generous white space · Subtle car silhouette and school icon in muted tones · Brand style inspired by American Express Platinum campaigns and Goldman Sachs brand · No stock photo no cold banking aesthetic no clipart
+
+SLIDE 2 (Dado IBGE): Data editorial on Cream #F8F5EE, 'Inflação de educação acima da inflação geral por 3 anos consecutivos' in Forest Green #1B6A39 bold, IBGE source tag in Olive #83983A, 'mas o problema raramente é a escola' below in italic Montserrat — empowering not alarming
+
+SLIDE 3 (Custo real 2 carros): Cost breakdown card on Cream #F8F5EE, three line items with Forest Green #1B6A39 bullet dashes, 'Total: R$3.200 a R$6.200/mês' conclusion in large Forest Green bold at bottom, Olive #83983A accent on 'só para ter carro' — Style: JPMorgan Wealth editorial
+
+SLIDE 4 (Comparação): Side-by-side comparison on Forest Green #1B6A39, left column 'CARRO' in white with cost range, right column 'ESCOLA' in Olive #83983A with equivalent range, 'O carro pode estar custando mais que a escola.' in large white below — clear visual revelation
+
+SLIDE 5 (Erro de lógica): Statement slide on Cream #F8F5EE, 'FAMÍLIAS REDUZEM ESCOLA (impacto na formação do filho) PARA MANTER DOIS CARROS FINANCIADOS (impacto zero na formação de ninguém).' in Forest Green #1B6A39 Montserrat Black, Olive accent on contrast — powerful editorial
+
+SLIDE 6 (O que mudar): Action list on Cream #F8F5EE, three numbered items with Forest Green #1B6A39 numbers, each action in dark Montserrat text, Olive #83983A checkmark-style accents, empowering financial advisor tone — Style: AmEx Platinum
+
+SLIDE 7 (CTA): Warm CTA on Forest Green #1B6A39, 'Quer ver como isso ficaria no seu orçamento específico?' in white Montserrat Bold, 'Diagnóstico gratuito. 20 minutos. Não é julgamento. É matemática.' in smaller Olive #83983A, Marcela name bottom right`,
       },
       {
         dia: "QUI 25/06", pilar: "E",
@@ -670,6 +740,8 @@ const SEMANAS = [
         cta: "Me manda 'FÉRIAS' no DM.",
         hashtags: "#feriasdejulho #planejamento #marcelapinheiro",
         stories: null,
+        aiPrompt: `=== REEL THUMBNAIL/CAPA 1080×1080 ===
+Empowering editorial portrait: woman at kitchen table reviewing household finances with calm confidence, warm natural morning light, Forest Green tones in environment (notebook, pen), Cream #F8F5EE dominant background, text overlay 'TODO ANO A MESMA HISTÓRIA.' in Montserrat Bold #1B6A39, warm financial advisor aesthetic — Style: JPMorgan Wealth Management human campaign, BlackRock brand editorial`,
       },
       {
         dia: "SEX 26/06", pilar: "C",
@@ -1046,6 +1118,13 @@ function buildSemana(s) {
     const extrasHtml = (p.extras||[]).map(e => `
       <div class="label">${esc(e.label)}</div>
       <div class="extra-block">${esc(e.txt)}</div>`).join('');
+    const aiPromptId = 'aip-' + i + '-' + (p.dia||'').replace(/[^a-z0-9]/gi,'');
+    const aiPromptHtml = p.aiPrompt ? `
+      <div class="ai-prompt-block">
+        <div class="ai-prompt-label">🎨 AI Prompt (usar no ChatGPT / Midjourney / Gemini)</div>
+        <textarea class="ai-prompt-textarea" id="${aiPromptId}" readonly>${esc(p.aiPrompt)}</textarea>
+        <button class="copy-ai-btn" onclick="copyAiPrompt('${aiPromptId}',this)">Copiar Prompt</button>
+      </div>` : '';
     return `
       <div class="content-card">
         <div class="content-header">
@@ -1063,6 +1142,7 @@ function buildSemana(s) {
           ${p.hashtags ? `<div class="hashtags">${esc(p.hashtags)}</div>` : ''}
           ${storiesHtml}
           ${extrasHtml}
+          ${aiPromptHtml}
         </div>
       </div>`;
   }).join('');

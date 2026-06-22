@@ -61,6 +61,12 @@ body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color
 .edl     { background: #F5F3FF; border-left: 3px solid #8B5CF6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
 .story-list { background: #FAFAFA; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; margin: 6px 0; }
 .story-list li { font-size: 12px; margin-left: 14px; margin-bottom: 3px; }
+
+.ai-prompt-block { background: #1A0A1F; border-left: 3px solid #BE185D; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.ai-prompt-label { font-size: 10px; font-weight: 700; color: #BE185D; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.ai-prompt-textarea { width: 100%; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.5; background: #0D0D0D; border: 1px solid #3B1F4A; border-radius: 4px; padding: 8px; resize: vertical; min-height: 120px; box-sizing: border-box; color: #E5E7EB; }
+.copy-ai-btn { margin-top: 4px; background: #BE185D; color: #FFF; border: none; border-radius: 4px; padding: 4px 10px; font-size: 10px; cursor: pointer; font-weight: 600; }
+.copy-ai-btn:hover { background: #9D174D; }
 .extra-block { background: #F5F5F5; border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
 .hashtags { font-size: 11px; color: #6B7280; font-family: monospace; margin-top: 6px; }
 .grade-wrap { overflow-x: auto; margin-bottom: 20px; }
@@ -471,6 +477,42 @@ const SEMANAS = [
         cta: "DM 'MÉTODO'",
         hashtags: "#MarketingB2B #TrãçãoMKT #PME",
         stories: null,
+        aiPrompt: `Create a premium Instagram carousel, 6 slides, vertical format 1080x1350 (4:5).
+Brand style inspired by Linear, Notion brand campaigns, HubSpot visual marketing, Mailchimp editorial and premium B2B results-driven marketing tech brands.
+
+Color palette:
+* Carbon Black #0D0D0D — primary background (dominant)
+* Electric Blue #3B82F6 — headline accent, data highlights
+* Result Green #10B981 — metrics and ROI callouts only
+* Charcoal #1F2937 — card backgrounds
+* White #FFFFFF — body text and numbers
+
+Typography: Bold geometric sans-serif. Headlines in heavy weight. Data stats oversized. No decorative fonts.
+Visual style: Dark editorial B2B authority. Data-forward minimal. Clean grid layouts. No gradients — flat dark. No corporate stock photography. No handshakes or office clichés.
+
+Slides:
+
+SLIDE 1 (Capa): Dark authority slide on #0D0D0D, bold white stat '80%' in oversized weight, below 'do seu cliente B2B já decidiu antes de falar com você.' in white, small Electric Blue #3B82F6 accent line below. Linear/Notion editorial precision. No images — pure typography.
+
+SLIDE 2 (O problema): Dark #0D0D0D split layout. Left: downward red arrow with 'Lead chega frio.' Right: 'Vendedor começa do zero.' Electric Blue #3B82F6 connecting line between. Source 'Gartner 2024' tag in small #10B981 green bottom right.
+
+SLIDE 3 (Por que acontece): #1F2937 card background. Bold white headline 'Seu conteúdo não existe quando ele pesquisa.' Below, 3 bullet lines in white small text: '→ Não há artigos · → Sem cases · → Sem autoridade'. Electric Blue left border bar.
+
+SLIDE 4 (O que muda): Dark editorial reveal. Headline 'Com conteúdo estratégico:' in white. Below, stat block: '80% chegam pré-convencidos' in #10B981 green large. 'em vez de céticos' below in white smaller.
+
+SLIDE 5 (Método TRAÇÃO): Clean dark grid. 3 columns labeled 'MÉTODO', 'PROVA', 'CONSISTÊNCIA' in white caps on #1F2937 cards. Electric Blue #3B82F6 ascending bar under each column (30%, 60%, 100% height). Result Green #10B981 check mark at top of tallest bar.
+
+SLIDE 6 (CTA): Full dark #0D0D0D. Bold white 'Quer entender como isso funciona?' center. Below, Electric Blue #3B82F6 button outline 'DM MÉTODO'. Small '@tracao_mkt' handle bottom right in gray.
+
+=== LINKEDIN (1200×1200) ===
+Create a premium LinkedIn square professional image, 1200x1200 (1:1).
+Brand style inspired by Linear, Notion brand campaigns, HubSpot visual marketing and premium B2B authority brands.
+
+Color palette: Carbon Black #0D0D0D background · Electric Blue #3B82F6 headline accent · White #FFFFFF text · Charcoal #1F2937 secondary elements.
+Typography: Bold geometric sans-serif. Authority-first layout.
+Visual style: Dark minimal B2B editorial. Data dashboard aesthetic. No stock photos. No office imagery.
+
+Scene: Dark #0D0D0D background. Bold white headline centered 'Seu marketing tem que ser o melhor SDR da empresa.' Below, small Electric Blue #3B82F6 divider line. Below that: '80% dos compradores B2B pesquisam sozinhos antes de aceitar uma reunião.' in white smaller weight. Bottom right: '@tracao_mkt' in muted gray.`,
       },
       {
         dia: "TER 23/06", pilar: "E",
@@ -482,6 +524,14 @@ const SEMANAS = [
         cta: "Comenta 'MÉTODO'",
         hashtags: "#LinkedIn #PersonalBranding #TrãçãoMKT",
         stories: null,
+        aiPrompt: `Create a premium LinkedIn square professional image, 1200x1200 (1:1).
+Brand style inspired by Linear, Notion brand campaigns, Figma brand and premium B2B personal branding authority.
+
+Color palette: Carbon Black #0D0D0D background · Electric Blue #3B82F6 data accent · White #FFFFFF text · Charcoal #1F2937 cards.
+Typography: Bold geometric sans-serif. Data-forward. No decorative fonts.
+Visual style: Split comparison dark editorial. Minimal. No stock photos. No corporate handshakes.
+
+Scene: Dark #0D0D0D. Left column header 'PÁGINA DA EMPRESA' with downward empty chart in muted gray, '70% menos engajamento' in red below. Right column header 'PERFIL PESSOAL' with upward filled chart in Electric Blue #3B82F6, 'Autoridade real' in #10B981 green below. Center divider line in #1F2937. Bottom: '@tracao_mkt'.`,
       },
       {
         dia: "QUA 24/06", pilar: "B",
@@ -493,6 +543,14 @@ const SEMANAS = [
         cta: "Segue pra ver mais bastidores",
         hashtags: "#TrãçãoMKT #BastidorMarketing",
         stories: null,
+        aiPrompt: `Create a premium Instagram Reel cover thumbnail, square format 1080x1080 (1:1).
+Brand style inspired by Linear, Notion brand campaigns, HubSpot visual marketing and premium B2B marketing tech brands.
+
+Color palette: Carbon Black #0D0D0D background · Electric Blue #3B82F6 accent · White #FFFFFF text.
+Typography: Bold geometric sans-serif. Maximum weight. No decorative fonts.
+Visual style: Dark editorial behind-the-scenes authority. Screen/monitor aesthetic. No staged photography.
+
+Scene: Dark #0D0D0D background. Center: stylized laptop/monitor screen outline in #1F2937 showing a calendar/schedule grid in Electric Blue #3B82F6. Bold white headline above screen 'BASTIDOR REAL.' Small white subtext below 'Esta semana na TRAÇÃO.' Minimal and bold — editorial B2B.`,
       },
       {
         dia: "QUI 25/06", pilar: "E",
@@ -504,6 +562,14 @@ const SEMANAS = [
         cta: "DM pra entender o modelo",
         hashtags: "#MarketingB2B #TrãçãoMKT #AltoTicket",
         stories: null,
+        aiPrompt: `Create a premium LinkedIn square professional image, 1200x1200 (1:1).
+Brand style inspired by Linear, HubSpot visual marketing, Mailchimp editorial and premium B2B performance marketing brands.
+
+Color palette: Carbon Black #0D0D0D background · Electric Blue #3B82F6 data accent · Result Green #10B981 for positive metric · White #FFFFFF text.
+Typography: Bold geometric sans-serif. Data hierarchy.
+Visual style: Dark data editorial. Trend/performance chart aesthetic. No stock photos.
+
+Scene: Dark #0D0D0D. Bold white headline 'O tráfego pago quebrou para serviços de alto ticket.' Below: split data block — left side shows 'CPL +340%' in large muted red, right shows 'Orgânico B2B +180%' in #10B981 green large. Small source 'Meta Ads 2025/2026' in muted gray bottom. '@tracao_mkt' bottom right.`,
       },
       {
         dia: "SEX 26/06", pilar: "P",
@@ -515,6 +581,22 @@ const SEMANAS = [
         cta: "DM 'MÉTODO'",
         hashtags: "#TrãçãoMKT #MarketingComIA #PME",
         stories: null,
+        aiPrompt: `Create a premium Instagram carousel, 5 slides, vertical format 1080x1350 (4:5).
+Brand style inspired by Linear, Notion brand campaigns, Figma brand and premium B2B thought leadership brands.
+
+Color palette: Carbon Black #0D0D0D background · Electric Blue #3B82F6 key accent · White #FFFFFF text · Charcoal #1F2937 secondary cards.
+Typography: Bold geometric sans-serif. Provocative editorial weight.
+Visual style: Dark authority editorial. Provocation-forward. No AI illustrations. No stock. No tech clichés (no robot images).
+
+SLIDE 1 (Provocação): Full dark #0D0D0D. Bold white oversized text 'IA.' with period. Below in smaller Electric Blue #3B82F6: 'Todo mundo vai falar.' Below in white strike-through line: 'A pergunta certa é outra.'
+
+SLIDE 2 (O problema com IA genérica): #1F2937 card. Bold white 'Ferramenta ≠ Estratégia.' Below, 3 short lines in white small: '→ ChatGPT escreve. · → Quem pensa pelo cliente? · → Quem garante consistência?' Electric Blue left border.
+
+SLIDE 3 (O que a TRAÇÃO faz diferente): Dark #0D0D0D. 3-column grid. 'IA' on left (tool icon, muted), '+' center (white), 'MÉTODO' on right (Electric Blue), '=' below all, 'RESULTADO CONSISTENTE' in #10B981 green large below.
+
+SLIDE 4 (Prova): #1F2937 background. Bold headline 'Toda segunda. Sem falha.' Electric Blue divider. Below: 'Não é IA. É processo com IA.' in white. Small gray: '8 semanas de consistência vs. 1 post viral.'
+
+SLIDE 5 (CTA): Full dark. 'Quer ver o método funcionando?' bold white. Electric Blue button outline 'DM MÉTODO'. '@tracao_mkt' gray bottom right.`,
       },
     ],
     metricas: [
@@ -820,6 +902,7 @@ function buildSemana(s) {
         ${p.hashtags?`<div class="hashtags">${esc(p.hashtags)}</div>`:''}
         ${p.stories?`<div class="label">Stories IG</div><ul class="story-list">${p.stories.map(st=>`<li>${esc(st)}</li>`).join('')}</ul>`:''}
         ${(p.extras||[]).map(e=>`<div class="label">${esc(e.label)}</div><div class="extra-block">${esc(e.txt).replace(/\n/g,'<br>')}</div>`).join('')}
+      ${p.aiPrompt ? `<div class="ai-prompt-block"><div class="ai-prompt-label">🎨 AI Prompt (5 elementos — usar no ChatGPT / Midjourney)</div><textarea class="ai-prompt-textarea" id="aip-trac-${i}" readonly>${esc(p.aiPrompt)}</textarea><button class="copy-ai-btn" onclick="copyAiPrompt('aip-trac-${i}',this)">Copiar Prompt</button></div>` : ''}
       </div>
     </div>`).join('');
 
