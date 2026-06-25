@@ -1,7 +1,10 @@
 # deploy-paineis.ps1
 # Copia os paineis para o repo Git e faz push para o GitHub
-# Roda automaticamente toda segunda as 7h30 via Windows Task Scheduler
-# Cada painel vai para sua propria subpasta -- cada cliente tem seu proprio site Netlify
+# GitHub Pages serve automaticamente em: https://aletadeu12.github.io/paineis-mkt/
+#   - Marcela : .../marcela-gf/
+#   - TRACAO  : .../tracao-comercial/
+#   - Controle: .../controle-mkt/
+#   - Semanal : .../painel-semanal/
 
 $REPO_DIR  = $PSScriptRoot
 $WORKSPACE = Split-Path $REPO_DIR -Parent
