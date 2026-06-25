@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--
+  painel-alechef.html
+  AleChef em Casa · Agência MKT Alexandre Tadeu
+  Criado: 25/06/2026 · Estrutura simétrica RADAR v2
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — AleChef em Casa</title>
+<style>
+:root { --primary:#22324F; --accent:#C9A77A; --bglight:#FAF7F2; --dark:#1A1A2E; --gray:#6B7280; --border:#E8DFD0; --light:#FAF7F2; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,Arial,sans-serif;background:#F5F0EA;color:#1F2937;font-size:14px;}
+.topbar{background:var(--primary);color:white;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.topbar h1{font-size:15px;font-weight:700;letter-spacing:.5px;}
+.topbar .badge{background:var(--accent);color:var(--primary);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.tabs{display:flex;background:white;border-bottom:2px solid var(--border);padding:0 20px;gap:4px;overflow-x:auto;}
+.tab{padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;color:var(--gray);transition:all .2s;white-space:nowrap;user-select:none;}
+.tab:hover{color:#374151;background:#FFFDF9;}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary);}
+.page{display:none;padding:20px;max-width:1100px;margin:0 auto;}
+.page.active{display:block;}
+.card{background:white;border-radius:10px;padding:16px;border:1px solid var(--border);}
+.section-title{font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 10px;display:flex;align-items:center;gap:8px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.files-bar{background:white;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:20px;}
+.files-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;}
+.path-row{display:flex;align-items:center;gap:8px;background:var(--bglight);border:1px solid var(--border);border-radius:6px;padding:7px 10px;}
+.path-icon{font-size:15px;flex-shrink:0;}
+.path-info{flex:1;min-width:0;}
+.path-name{font-size:12px;font-weight:600;color:#1F2937;}
+.path-txt{font-family:monospace;font-size:10px;color:#64748B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.copy-btn{padding:4px 9px;background:var(--primary);color:white;border:none;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;transition:background .2s;}
+.copy-btn:hover{background:var(--accent);color:var(--primary);}
+.copy-btn.ok{background:#16A085;color:white;}
+.delivery-banner{background:linear-gradient(135deg,var(--primary) 0%,#3D5280 100%);color:white;border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.delivery-banner h3{font-size:14px;font-weight:800;margin:0;}
+.delivery-banner p{font-size:12px;opacity:.8;margin:3px 0 0;}
+.brand-strip{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.swatch{display:flex;align-items:center;gap:8px;background:white;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;}
+.swatch-box{width:28px;height:28px;border-radius:4px;flex-shrink:0;border:1px solid rgba(0,0,0,.1);}
+.swatch-label{font-weight:700;}
+.swatch-hex{font-family:monospace;color:var(--gray);font-size:10px;}
+.swatch-uso{font-size:10px;color:var(--gray);}
+.pilar-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.pilar-card{flex:1;min-width:120px;background:white;border:1px solid var(--border);border-radius:8px;padding:10px 14px;border-top:3px solid var(--accent);}
+.pilar-cod{font-size:18px;font-weight:800;color:var(--primary);}
+.pilar-nome{font-size:12px;font-weight:700;color:#374151;}
+.pilar-pct{font-size:20px;font-weight:800;color:var(--accent);margin-top:4px;}
+.weeks-table{width:100%;border-collapse:collapse;font-size:13px;}
+.weeks-table th{background:var(--primary);color:white;padding:8px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;}
+.weeks-table td{padding:9px 14px;border-bottom:1px solid var(--border);}
+.weeks-table tr:hover td{background:#FFFDF9;}
+.s-done{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#D1FAE5;color:#065F46;}
+.s-progress{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#FEF3C7;color:#92400E;}
+.s-pending{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:#F3F4F6;color:#6B7280;}
+#toast{position:fixed;bottom:16px;right:16px;background:#16A085;color:white;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
+#toast.show{opacity:1;}
+/* RADAR */
+.tab.radar.active{color:var(--accent);border-bottom-color:var(--accent);}
+.radar-header{background:linear-gradient(135deg,var(--primary) 0%,#3D5280 100%);color:white;border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.radar-header h2{font-size:16px;font-weight:800;margin:0;}
+.radar-header .radar-meta{font-size:12px;opacity:.75;}
+.radar-badge{background:var(--accent);color:var(--primary);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.rt-toggle-c{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;padding:10px 0;}
+.rt-chip-c{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .2s;user-select:none;}
+.rt-chip-corrente-c{background:#FAF7F2;color:#22324F;border-color:#C9A77A;}
+.rt-chip-corrente-c.active{background:#22324F;color:#fff;border-color:#22324F;}
+.rt-chip-proxima-c{background:#F3F4F6;color:#9CA3AF;border-color:#E5E7EB;}
+.rt-chip-proxima-c.active{background:var(--accent);color:var(--primary);border-color:var(--accent);}
+.rt-chip-proxima-c.locked{opacity:.35;cursor:not-allowed;border-style:dashed;}
+.rt-ctx-badge-c{margin-left:auto;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;}
+.rt-ctx-corrente-c{background:#FAF7F2;color:#22324F;}
+.rt-ctx-proxima-c{background:#FEF3C7;color:#92400E;}
+.radar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:20px;}
+.radar-card{background:white;border-radius:10px;border:1px solid var(--border);overflow:hidden;}
+.radar-card-head{padding:12px 16px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.radar-card-body{padding:14px 16px;font-size:13px;line-height:1.6;color:#374151;}
+.radar-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin:2px;}
+.comp-fields{display:grid;grid-template-columns:1fr;gap:8px;margin:10px 0;}
+.comp-field{background:var(--bglight);border:1px solid var(--border);border-radius:6px;padding:8px 10px;}
+.comp-field .cf-label{font-size:10px;font-weight:700;text-transform:uppercase;color:#64748B;letter-spacing:.4px;margin-bottom:4px;}
+.comp-field .cf-value{font-size:12px;color:#1F2937;line-height:1.5;}
+.trend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:20px;}
+.trend-card{background:#fff;border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:10px;padding:14px 16px;}
+.trend-card h4{font-size:12px;font-weight:700;color:#1F2937;margin-bottom:6px;line-height:1.4;}
+.trend-card p{font-size:12px;color:#4B5563;line-height:1.65;}
+.threat-card{border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.threat-alto{background:#FEE2E2;border:1px solid #FECACA;}
+.threat-medio{background:#FFFBEB;border:1px solid #FDE68A;}
+.threat-opp{background:#FAF7F2;border:1px solid #C9A77A;}
+.threat-card h4{font-size:13px;font-weight:700;margin-bottom:5px;}
+.threat-alto h4{color:#7F1D1D;}
+.threat-medio h4{color:#78350F;}
+.threat-opp h4{color:#22324F;}
+.threat-card .threat-corpo{font-size:12px;color:#374151;line-height:1.65;}
+.pulse-strip{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.pulse-chip{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:12px;}
+.pulse-chip .pulse-num{font-size:22px;font-weight:800;color:#1F2937;}
+.pulse-chip .pulse-lbl{font-size:11px;color:var(--gray);line-height:1.3;}
+.pulse-chip.alert{background:#FFF1F2;border-color:#FCA5A5;}
+.pulse-chip.alert .pulse-num{color:#DC2626;}
+.alert-banner{background:#FFFBEB;border:1px solid #FCD34D;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
+.alert-banner .ab-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.alert-banner .ab-title{font-size:13px;font-weight:700;color:#78350F;margin-bottom:3px;}
+.alert-banner .ab-acao{font-size:12px;color:#92400E;font-style:italic;}
+</style>
+</head>
+<body>
+<div id="toast">✓ Copiado!</div>
+<script>
+const CLIENTE = {
+  nome:     "AleChef em Casa",
+  cargo:    "Personal Chef · Marmitas · Eventos Exclusivos",
+  instagram:"@alechefemcasa",
+  segmento: "Gastronomia Premium · Experiências Culinárias",
+  inicio:   "25/05/2026",
+  emoji:    "👨‍🍳",
+  primary:  "#22324F",
+  accent:   "#C9A77A",
+  bgLight:  "#FAF7F2",
+  pastaLocal: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef",
+  driveFolder: "",
+  canais: ["Instagram","WhatsApp"],
+  pilares: [
+    { cod: "E",  nome: "Experiência/Conexão",    pct: "35%" },
+    { cod: "A",  nome: "Autoridade Culinária",    pct: "25%" },
+    { cod: "P",  nome: "Prova Social/Clientes",   pct: "25%" },
+    { cod: "CV", nome: "Chef-Empresário/Visão",   pct: "15%" },
+  ],
+  cores: [
+    { nome: "Navy Profundo", hex: "#22324F", uso: "Fundo primário, headers, textos" },
+    { nome: "Dourado",       hex: "#C9A77A", uso: "CTAs, destaques, bordas premium" },
+    { nome: "Branco Off",    hex: "#FAF7F2", uso: "Background, fundos de cards" },
+  ],
+};
+
+const SEMANAS = [
+  {
+    id: "s25-28-06", label: "25–28/06", labelFull: "Semana GO LIVE · 25/05 — Semana 4 em curso",
+    badge: "SEM. 4", status: "progress",
+    objetivo: "Comfort Food Inverno · Experiência vs. Commodity · Meal Prep",
+    notionUrl: "",
+    arquivos: [
+      { icon: "📁", nome: "Pasta da semana", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 22-28-06-2026", driveId: null }
+    ],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════════════
+   RADAR — AleChef em Casa
+   ══════════════════════════════════════════════════════════════════════ */
+const RADAR = {
+  semanaCorrente: {
+    label: "22–28/06",
+    execucao: "25/06/2026",
+    tendencias: [
+      { titulo: "Marmita gourmet chegou aos supermercados — commodity de prateleira", corpo: "Marmitas ultracongeladas por chef já presentes em supermercados, hotéis e cafeterias. A marmita 'premium de chef' virou categoria massificada — o diferencial agora não pode ser o produto em si.", src: "personalchefsbr.com" },
+      { titulo: "Segmento premium do foodservice mantém resiliência sob pressão econômica", corpo: "Público de renda mais alta menos sensível a preço sustenta o segmento premium mesmo em cenário de aperto. Enquanto o mercado corta preço, a demanda por qualidade real persiste.", src: "mercadoeconsumo.com.br" },
+      { titulo: "Meal prep: mercado global de US$ 6,77 bilhões crescendo 9,2% ao ano", corpo: "Consumidor busca equilíbrio entre praticidade e sabor/valor nutricional. Meal prep está em aceleração mas comunicação do mercado ainda é 100% voltada para 'economizar tempo'.", src: "businessresearchinsights.com" },
+      { titulo: "Inverno 2026 — comfort food e experiência nostálgica em alta", corpo: "Junho/julho é o pico sazonal para pratos reconfortantes. Oportunidade de posicionamento emocional: chef que conhece o que te aquece, não só o que te alimenta.", src: "Radar nicho gastronomia" },
+    ],
+    concorrentes: [
+      { nome: "@achefemcasa — Bianca Folla SP", tag: "Premium Competidor", tagBg: "#22324F", tagFg: "#C9A77A", headBg: "#FAF7F2", headFg: "#22324F", oQuePublicaram: "Posicionamento premium SP médio-alto. Forte no IG — conteúdo de bastidores e experiência. Sem menção a personal chef acessível ou chef-empresário.", opp: "AleChef diferencia com o chef-empresário que conhece o cliente pelo nome — não é chef anônimo de supermercado nem chef de restaurante estrelado. Nicho relacional." },
+      { nome: "@personalchefsbrasil — 70k seguidores", tag: "Volume/Expansão", tagBg: "#059669", tagFg: "#fff", headBg: "#ECFDF5", headFg: "#064E3B", oQuePublicaram: "Expansão de seguidores, conteúdo voltado para o mercado de personal chef em geral. Crescendo mas sem posicionamento editorial forte em conexão humana.", opp: "AleChef entra com o diferencial da conexão: 'o chef que conhece seu nome' é o oposto do personal chef escalado de plataforma." },
+      { nome: "@minhamarmitatem — Marmitas Premium", tag: "Commodity/Escala", tagBg: "#F59E0B", tagFg: "#fff", headBg: "#FFFBEB", headFg: "#78350F", oQuePublicaram: "Marmita gourmet com entrega — competindo em variedade e preço premium. Exatamente o que chegou ao supermercado.", opp: "AleChef não compete com marmita de plataforma. Compete com a experiência de ter UM chef que conhece sua rotina, suas restrições, seu gosto. O supermercado nunca vai oferecer isso." },
+    ],
+    alertas: [
+      { titulo: "Marmita gourmet virou commodity — o argumento 'premium' sozinho não basta mais", corpo: "Se a comunicação do AleChef continua em 'marmita gourmet de chef', o supermercado faz o mesmo por R$25. O diferencial tem que ser a relação, não o produto.", nivel: "medio" },
+      { titulo: "Inverno 2026 é janela de ouro para comfort food + conexão emocional", corpo: "Junho/julho: pico de busca por comida reconfortante. Posicionar AleChef como 'o chef que sabe o que te aquece' — antes da concorrência ocupar esse espaço sazonal.", nivel: "opp" },
+    ],
+  },
+  semanaProxima: {
+    label: "29/06–05/07",
+    execucao: "25/06/2026",
+    tendencias: [
+      { titulo: "Marmita gourmet de chef virou commodity — o diferencial real é a relação", corpo: "Supermercados já vendem marmita gourmet. Hotéis. Cafeterias. O produto 'marmita premium' perdeu poder de diferenciação. O que o supermercado não entrega é o chef que conhece você.", gancho: "\"Supermercado já vende marmita gourmet. O que ele não vende é o chef que conhece seu nome.\"", src: "personalchefsbr.com" },
+      { titulo: "Segmento premium resiliente — comunicar por que vale mais, não por que custa menos", corpo: "Público de renda mais alta mantém escolhas premium mesmo sob pressão. Em vez de justificar preço, a comunicação certa é sobre o que NÃO se abre mão — mesmo no aperto.", gancho: "\"Enquanto o mercado de comida corta preço para sobreviver, a pergunta certa é: o que você não corta na sua casa, mesmo no aperto?\"", src: "mercadoeconsumo.com.br" },
+      { titulo: "Meal prep cresce 9,2% ao ano — mas toda comunicação vende 'economizar tempo'", corpo: "O mercado de meal prep está em aceleração, mas todos comunicam a mesma coisa: praticidade e economia de tempo. O AleChef pode ocupar o ângulo oposto: o prazer, não a produtividade.", gancho: "\"Meal prep não existe para você cozinhar menos. Existe para você nunca mais cozinhar o que não te dá prazer.\"", src: "businessresearchinsights.com" },
+    ],
+    concorrentes: [
+      { nome: "@achefemcasa — Bianca Folla SP", tag: "Monitorar Posicionamento", tagBg: "#22324F", tagFg: "#C9A77A", headBg: "#FAF7F2", headFg: "#22324F", oQuePublicaram: "Padrão: conteúdo premium visual, foco em SP, sem argumentação de relação pessoal com o cliente.", opp: "Semana que vem o ângulo 'chef que conhece seu nome' precisa aparecer claramente na grade — diferencia direto da maior concorrente." },
+      { nome: "@personalchefsbrasil", tag: "Volume sem Conexão", tagBg: "#059669", tagFg: "#fff", headBg: "#ECFDF5", headFg: "#064E3B", oQuePublicaram: "Crescimento de seguidores mas sem posicionamento de conexão emocional com o cliente.", opp: "AleChef pode ocupar 'personal chef relacional' como território — sem concorrência direta nesse ângulo." },
+    ],
+    alertas: [
+      { titulo: "3 ganchos editoriais prontos — usar antes que a concorrência perceba a lacuna", corpo: "Os 3 ganchos mapeados ('chef que conhece seu nome', 'não corta no aperto', 'prazer não produtividade') são ângulos sem concorrência identificada. Janela de 1-2 semanas.", nivel: "opp" },
+      { titulo: "Comfort food de inverno: semana 29/06 é pico sazonal — não perder timing", corpo: "Julho começa segunda-feira. Conteúdo de inverno/comfort food nessa semana pega o pico sazonal.", nivel: "medio" },
+    ],
+  },
+  ultimaExecucao: "25/06/2026",
+  proximaExecucao: "quinta 02/07 às 08h",
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   RENDER ENGINE
+   ══════════════════════════════════════════════════════════════════════ */
+function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function cp(txt,btn){if(!txt)return;navigator.clipboard.writeText(txt).then(()=>{btn.classList.add('ok');btn.textContent='✓';const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>{t.classList.remove('show');btn.classList.remove('ok');btn.textContent='Copiar';},1800);});}
+function showPage(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(el)el.classList.add('active');}
+function statusBadge(s){if(s==='done')return`<span class="s-done">✅ Entregue</span>`;if(s==='progress')return`<span class="s-progress">🔄 Em andamento</span>`;return`<span class="s-pending">⏳ Pendente</span>`;}
+
+function buildTopbar(){document.body.insertAdjacentHTML('afterbegin',`<div class="topbar"><h1>${CLIENTE.emoji} ${esc(CLIENTE.nome.toUpperCase())}</h1><span class="badge">👨‍🍳 ${esc(CLIENTE.instagram)}</span></div>`);}
+
+function buildTabs(){let h=`<div class="tabs"><div class="tab active" onclick="showPage('dashboard',this)">📊 Dashboard</div>`;SEMANAS.forEach(s=>{const ic=s.status==='done'?'✅':s.status==='progress'?'🔄':'📅';h+=`<div class="tab" onclick="showPage('${s.id}',this)">${ic} Sem. ${esc(s.label)}</div>`;});h+=`<div class="tab radar" onclick="showPage('radar',this)">🔭 Radar</div></div>`;document.getElementById('tabs-container').innerHTML=h;}
+
+function buildDashboard(){
+  const swatches=(CLIENTE.cores||[]).map(c=>`<div class="swatch"><div class="swatch-box" style="background:${esc(c.hex)}"></div><div><div class="swatch-label">${esc(c.nome)}</div><div class="swatch-hex">${esc(c.hex)}</div><div class="swatch-uso">${esc(c.uso)}</div></div></div>`).join('');
+  const pilares=(CLIENTE.pilares||[]).map(p=>`<div class="pilar-card"><div class="pilar-cod">${esc(p.cod)}</div><div class="pilar-nome">${esc(p.nome)}</div><div class="pilar-pct">${esc(p.pct)}</div></div>`).join('');
+  const semRows=SEMANAS.map(s=>`<tr><td><strong>${esc(s.labelFull)}</strong><br><small style="color:var(--gray)">${esc(s.objetivo)}</small></td><td>${statusBadge(s.status)}</td><td>${esc(s.badge)}</td><td>${s.notionUrl?`<a href="${esc(s.notionUrl)}" target="_blank" style="font-size:11px;padding:4px 10px;background:var(--primary);color:white;border-radius:4px;text-decoration:none;font-weight:700">📋 Notion</a>`:'—'}</td></tr>`).join('');
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend',`
+  <div id="page-dashboard" class="page active">
+    <div class="delivery-banner"><div><h3>👨‍🍳 AleChef em Casa</h3><p>${esc(CLIENTE.cargo)} · ${esc(CLIENTE.instagram)}</p></div></div>
+    <div class="files-bar"><div style="font-size:12px;font-weight:700;color:var(--dark);margin-bottom:10px">📁 Pasta local</div><div class="files-grid"><div class="path-row"><span class="path-icon">📁</span><div class="path-info"><div class="path-name">Pasta raiz AleChef</div><div class="path-txt">${esc(CLIENTE.pastaLocal)}</div></div><div style="flex-shrink:0"><button class="copy-btn" onclick="cp('${CLIENTE.pastaLocal.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button></div></div></div></div>
+    <div class="section-title">🎨 Identidade Visual</div><div class="brand-strip">${swatches}</div>
+    <div class="section-title">📌 Pilares de Conteúdo</div><div class="pilar-row">${pilares}</div>
+    <div class="section-title">📅 Status das Semanas</div>
+    <table class="weeks-table"><thead><tr><th>Semana</th><th>Status</th><th>Badge</th><th>Links</th></tr></thead><tbody>${semRows}</tbody></table>
+  </div>`);
+}
+
+function buildSemana(s){
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend',`
+  <div id="page-${s.id}" class="page">
+    <div style="background:linear-gradient(135deg,var(--primary) 0%,#3D5280 100%);color:white;border-radius:12px;padding:16px 20px;margin-bottom:20px;">
+      <div style="font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">📅 Semana</div>
+      <div style="font-size:16px;font-weight:800;">${esc(s.labelFull)}</div>
+      <div style="font-size:12px;opacity:.8;margin-top:4px;">${esc(s.objetivo)}</div>
+    </div>
+    ${statusBadge(s.status)}
+    <div class="section-title">📂 Arquivos</div>
+    <div class="files-bar"><div class="files-grid">${(s.arquivos||[]).map(a=>`<div class="path-row"><span class="path-icon">${a.icon}</span><div class="path-info"><div class="path-name">${esc(a.nome)}</div><div class="path-txt">${esc(a.path||'')}</div></div><div style="flex-shrink:0">${a.path?`<button class="copy-btn" onclick="cp('${(a.path||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>`:''}</div></div>`).join('')}</div></div>
+    <p style="color:var(--gray);font-size:13px;margin-top:20px">Pacote completo em elaboração. Consulte o PACOTE-FULL na pasta da semana.</p>
+  </div>`);
+}
+
+function buildRadar(){
+  const SC=RADAR.semanaCorrente, SP=RADAR.semanaProxima;
+  function buildCards(lista){return lista.map(c=>`<div class="radar-card"><div class="radar-card-head" style="background:${esc(c.headBg)};color:${esc(c.headFg)}">${esc(c.nome)}<span class="radar-tag" style="background:${esc(c.tagBg)};color:${esc(c.tagFg)};margin-left:auto">${esc(c.tag)}</span></div><div class="radar-card-body"><div class="comp-fields"><div class="comp-field"><div class="cf-label">📢 O que publicaram</div><div class="cf-value">${esc(c.oQuePublicaram||'—')}</div></div><div class="comp-field"><div class="cf-label">🎯 O que AleChef usa disso</div><div class="cf-value">${esc(c.opp)}</div></div></div></div></div>`).join('');}
+  function buildTend(lista){return lista.map(t=>`<div class="trend-card"><h4>${esc(t.titulo)}</h4><p>${esc(t.corpo)}</p>${t.gancho?`<div style="margin-top:8px;padding:8px 12px;background:#FAF0E4;border-left:3px solid #C9A77A;border-radius:4px;font-size:12px;color:#5C3D1A;font-style:italic">${esc(t.gancho)}</div>`:''} ${t.src?`<div style="font-size:10px;opacity:.5;margin-top:6px">Fonte: ${esc(t.src)}</div>`:''}</div>`).join('');}
+  function buildAlertas(lista){return lista.map(a=>{const cls=a.nivel==='alto'?'threat-alto':a.nivel==='opp'?'threat-opp':'threat-medio';return`<div class="threat-card ${cls}"><h4>${esc(a.titulo)}</h4><div class="threat-corpo">${esc(a.corpo)}</div></div>`;}).join('');}
+  const alertasAltos=(SC.alertas||[]).filter(a=>a.nivel==='alto').length;
+  const pulseHtml=`<div class="pulse-strip"><div class="pulse-chip"><div class="pulse-num">${SC.concorrentes.length}</div><div class="pulse-lbl">perfis<br>monitorados</div></div><div class="pulse-chip"><div class="pulse-num">${SC.tendencias.length}</div><div class="pulse-lbl">tendências<br>monitoradas</div></div><div class="pulse-chip ${alertasAltos>0?'alert':''}"><div class="pulse-num">${SC.alertas.length}</div><div class="pulse-lbl">alertas &<br>oportunidades</div></div></div>`;
+  const topAlerta=(SC.alertas||[]).find(a=>a.nivel==='alto'||a.nivel==='medio');
+  const alertBanner=topAlerta?`<div class="alert-banner"><div class="ab-icon">💡</div><div><div class="ab-title">${esc(topAlerta.titulo)}</div><div class="ab-acao">${esc(topAlerta.corpo)}</div></div></div>`:'';
+  document.getElementById('pages-container').insertAdjacentHTML('beforeend',`
+  <div id="page-radar" class="page">
+    <div class="radar-header"><div><div style="font-size:11px;opacity:.6;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">🔭 Inteligência Competitiva</div><h2>Radar · AleChef em Casa</h2><div class="radar-meta">Última execução: ${esc(RADAR.ultimaExecucao)} · Próxima: ${esc(RADAR.proximaExecucao)}</div></div><span class="radar-badge">${SC.concorrentes.length} perfis monitorados</span></div>
+    ${pulseHtml}${alertBanner}
+    <div class="rt-toggle-c" id="radarToggleC">
+      <span class="rt-chip-c rt-chip-corrente-c" id="rtCChipCorrente" onclick="setRadarModeC('corrente')">📊 Semana em curso · ${esc(SC.label)}</span>
+      <span class="rt-chip-c rt-chip-proxima-c" id="rtCChipProxima" onclick="setRadarModeC('proxima')">🔮 Próxima semana · ${esc(SP.label)}</span>
+      <span id="rtCContextBadge" class="rt-ctx-badge-c"></span>
+    </div>
+    <div id="rtCSecCorrente">
+      <div class="section-title">👥 Perfis monitorados</div>
+      <div class="radar-grid">${buildCards(SC.concorrentes)}</div>
+      <div class="section-title">📈 Tendências de mercado</div><div class="trend-grid">${buildTend(SC.tendencias)}</div>
+      <div class="section-title">🚨 Alertas e oportunidades</div>${buildAlertas(SC.alertas)}
+    </div>
+    <div id="rtCSecProxima" style="display:none">
+      <div class="section-title">👥 Perfis monitorados</div>
+      <div class="radar-grid">${buildCards(SP.concorrentes)}</div>
+      <div class="section-title">📈 Tendências de mercado <span style="margin-left:8px;font-size:11px;background:#FAF0E4;color:#5C3D1A;padding:2px 8px;border-radius:10px;font-weight:500">com gancho editorial</span></div><div class="trend-grid">${buildTend(SP.tendencias)}</div>
+      <div class="section-title">🚨 Alertas e oportunidades</div>${buildAlertas(SP.alertas)}
+    </div>
+  </div>`);
+}
+
+function _radarAutoModeC(){var d=new Date().getDay();return(d>=4||d===0)?'proxima':'corrente';}
+function setRadarModeC(m){var auto=_radarAutoModeC();if(m==='proxima'&&auto!=='proxima')return;var cc=document.getElementById('rtCChipCorrente');var cp2=document.getElementById('rtCChipProxima');var badge=document.getElementById('rtCContextBadge');var secC=document.getElementById('rtCSecCorrente');var secP=document.getElementById('rtCSecProxima');if(!cc)return;cc.classList.toggle('active',m==='corrente');cp2.classList.toggle('active',m==='proxima');if(secC)secC.style.display=m==='corrente'?'block':'none';if(secP)secP.style.display=m==='proxima'?'block':'none';if(m==='corrente'){badge.textContent='Semana em andamento';badge.className='rt-ctx-badge-c rt-ctx-corrente-c';}else{badge.textContent='🔮 Próxima semana';badge.className='rt-ctx-badge-c rt-ctx-proxima-c';}}
+function initRadarToggleC(){var auto=_radarAutoModeC();var cp2=document.getElementById('rtCChipProxima');if(!cp2)return;if(auto!=='proxima'){cp2.classList.add('locked');cp2.title='Disponível toda quinta às 08h';}setRadarModeC(auto);}
+
+(function init(){
+  document.body.insertAdjacentHTML('beforeend','<div id="tabs-container"></div><div id="pages-container"></div>');
+  buildTopbar(); buildTabs(); buildDashboard();
+  SEMANAS.forEach(s=>buildSemana(s));
+  buildRadar(); initRadarToggleC();
+  showPage('dashboard',document.querySelector('.tab'));
+})();
+</script>
+</body>
+</html>
