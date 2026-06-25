@@ -1,4 +1,5 @@
-<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
 {
   "name": "Painel Controle Mkt",
   "schemaVersion": 1,
@@ -8,1196 +9,1516 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Painel de Controle MKT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Controle MKT — AleTA</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#F0F2F5;color:#1a1a2e;font-size:14px}
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --adfly: #1E90FF;
+    --adfly-dark: #0A1B33;
+    --adfly-accent: #9FE83A;
+    --alechef: #C9A77A;
+    --alechef-dark: #22324F;
+    --bpmf: #39FF14;
+    --bpmf-dark: #050505;
+    --marcela: #34a85a;
+    --marcela-dark: #1B6A39;
+    --green: #238636;
+    --green-light: #2ea043;
+    --yellow: #9e6a03;
+    --yellow-light: #d29922;
+    --red: #b91c1c;
+    --red-light: #ef4444;
+    --purple: #7c3aed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+  }
 
-/* ── HEADER ── */
-.header{background:#0A1B33;color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.header h1{font-size:17px;font-weight:700;letter-spacing:.4px}
-.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.week-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#1E90FF;color:#fff}
-.today-marker{background:#9FE83A;color:#0A1B33;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700}
-.header-meta{font-size:11px;color:rgba(255,255,255,.55)}
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #1c2128 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-logo {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #1E90FF, #9FE83A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header-subtitle { color: var(--muted); font-size: 12px; }
+  .header-date {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .header-date span { color: var(--yellow-light); font-weight: 600; }
 
-/* ── URGENCY BANNER ── */
-.urgency-bar{background:linear-gradient(90deg,#7B1B1B,#C0392B);color:#fff;padding:8px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px}
-.urgency-bar .ub-label{font-weight:800;font-size:11px;letter-spacing:.5px;color:#FFD0D0;text-transform:uppercase;white-space:nowrap}
-.urgency-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.15);font-size:11px;font-weight:600;white-space:nowrap;border:1px solid rgba(255,255,255,.2)}
-.urgency-pill .up-co{font-size:9px;opacity:.75;text-transform:uppercase;letter-spacing:.4px}
-.urgency-pill .up-days{font-weight:800;color:#FFE082}
+  /* TABS */
+  .tabs-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--text);
+    border-bottom-color: var(--adfly);
+  }
+  .tab-content { display: none; padding: 24px; }
+  .tab-content.active { display: block; }
 
-/* ── COMPANY FILTER ── */
-.co-filter{background:#fff;border-bottom:1px solid #e8e8e8;padding:8px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.co-filter-label{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-.cf-chip{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .15s;user-select:none}
-.cf-chip[data-co="adfly"]{background:#E8F0FE;color:#0A1B33;border-color:#1E90FF}
-.cf-chip[data-co="alechef"]{background:#FDF3E0;color:#22324F;border-color:#C9A77A}
-.cf-chip[data-co="bpmf"]{background:#1a1a1a;color:#fff;border-color:#39FF14}
-.cf-chip[data-co="marcela"]{background:#E3F5EB;color:#1B6A39;border-color:#27ae60}
-.cf-chip[data-co="tracao"]{background:#F3E8FD;color:#4A1A7B;border-color:#805AD5}
-.cf-chip:not(.active){opacity:.35}
-.cf-chip.active{opacity:1}
-.cf-sep{width:1px;height:20px;background:#e0e0e0;flex-shrink:0}
-.cf-all{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;background:#F0F2F5;color:#444;border:2px solid #ccc;transition:all .15s}
-.cf-all:hover{background:#e0e0e0}
+  /* TILES */
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .tile-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tile-value { font-size: 26px; font-weight: 700; line-height: 1; }
+  .tile-sub { color: var(--muted); font-size: 11px; margin-top: 4px; }
+  .tile-accent-blue .tile-value { color: var(--adfly); }
+  .tile-accent-green .tile-value { color: #2ea043; }
+  .tile-accent-yellow .tile-value { color: var(--yellow-light); }
+  .tile-accent-red .tile-value { color: var(--red-light); }
 
-/* ── TABS ── */
-.tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0;padding:0 20px;overflow-x:auto;flex-shrink:0}
-.tab{padding:11px 20px;cursor:pointer;font-weight:600;font-size:13px;color:#666;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
-.tab.active{color:#0A1B33;border-bottom-color:#1E90FF}
-.tab:hover:not(.active){color:#1E90FF}
+  /* ALERT BANNER */
+  .alert-banner {
+    background: rgba(185, 28, 28, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+  }
+  .alert-banner.yellow {
+    background: rgba(158, 106, 3, 0.15);
+    border-color: rgba(210, 153, 34, 0.4);
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; }
+  .alert-text strong { font-weight: 600; }
 
-/* ── PANES ── */
-.pane{display:none;padding:20px}
-.pane.active{display:block}
+  /* RADAR TILE */
+  .radar-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .radar-tile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .radar-tile-title { font-size: 13px; font-weight: 600; }
+  .radar-tile-date { color: var(--muted); font-size: 11px; }
+  .radar-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .pill-green { background: rgba(35, 134, 54, 0.2); border-color: rgba(46, 160, 67, 0.5); color: #56d364; }
+  .pill-yellow { background: rgba(158, 106, 3, 0.2); border-color: rgba(210, 153, 34, 0.5); color: var(--yellow-light); }
+  .pill-red { background: rgba(185, 28, 28, 0.2); border-color: rgba(239, 68, 68, 0.5); color: var(--red-light); }
+  .pill-gray { background: rgba(139, 148, 158, 0.15); border-color: rgba(139, 148, 158, 0.3); color: var(--muted); }
 
-/* ── SISTEMA sub-tabs ── */
-.sub-tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
-.sub-tab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#F0F2F5;color:#555;border:2px solid transparent;transition:all .15s}
-.sub-tab.active{background:#0A1B33;color:#9FE83A;border-color:#1E90FF}
-.sub-pane{display:none}
-.sub-pane.active{display:block}
+  /* RADAR INSIGHTS */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .insight-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .insight-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .insight-company {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .insight-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .badge-urgent { background: rgba(185,28,28,0.3); color: var(--red-light); }
+  .badge-ok { background: rgba(35,134,54,0.2); color: #56d364; }
+  .insight-text { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .insight-text strong { color: var(--text); }
 
-/* ── CARDS & LAYOUT ── */
-.card{background:#fff;border-radius:10px;padding:16px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
-.card h3{font-size:13px;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;color:#444}
-.section-title{font-size:14px;font-weight:700;color:#0A1B33;margin:18px 0 10px;padding-bottom:5px;border-bottom:2px solid #e8e8e8}
-.summary-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.summary-tile{background:#fff;border-radius:10px;padding:12px 16px;flex:1;min-width:120px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.07)}
-.summary-tile .st-num{font-size:26px;font-weight:800;color:#0A1B33}
-.summary-tile .st-label{font-size:11px;color:#888;margin-top:2px}
-.summary-tile.green .st-num{color:#27ae60}
-.summary-tile.amber .st-num{color:#F39C12}
-.summary-tile.red .st-num{color:#E74C3C}
-.summary-tile.blue .st-num{color:#1E90FF}
+  /* TIMING TABLE */
+  .timing-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+  .timing-table th, .timing-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .timing-table th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .timing-table tr:last-child td { border-bottom: none; }
+  .timing-table tr:hover td { background: var(--surface2); }
 
-/* ── COMPANY BLOCKS ── */
-.co-block{margin-bottom:20px;transition:all .2s}
-.co-block.hidden{display:none}
-.co-strip{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px 8px 0 0;margin-bottom:0}
-.co-strip.adfly{background:linear-gradient(90deg,#0A1B33,#1A2A40);color:#fff}
-.co-strip.alechef{background:linear-gradient(90deg,#22324F,#2d4060);color:#FAF7F2}
-.co-strip.bpmf{background:linear-gradient(90deg,#050505,#1a1a1a);color:#fff}
-.co-strip.marcela{background:linear-gradient(90deg,#1B6A39,#2a8048);color:#fff}
-.co-strip.tracao{background:linear-gradient(90deg,#2D1A5A,#4A1A7B);color:#fff}
-.co-strip .co-name{font-weight:700;font-size:14px}
-.co-strip .co-meta{font-size:11px;opacity:.7;margin-left:auto}
-.co-body{background:#fff;border-radius:0 0 8px 8px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:0}
+  /* SCORES TABLE */
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .score-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .score-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .score-company { font-weight: 600; font-size: 13px; }
+  .score-bar-wrap { margin-bottom: 8px; }
+  .score-bar-bg {
+    background: var(--border);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .score-pct { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .score-items { list-style: none; }
+  .score-items li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 2px 0;
+  }
+  .score-items li.done { color: #56d364; }
+  .score-items li.warn { color: var(--yellow-light); }
+  .score-items li.missing { color: var(--red-light); }
+  .check-icon { flex-shrink: 0; font-size: 12px; }
 
-/* ── ENTREGA GRID ── */
-.entrega-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:8px}
-.entrega-cell{background:#F8F9FA;border-radius:8px;padding:10px;border-left:3px solid #ddd}
-.entrega-cell.ok{border-left-color:#27ae60}
-.entrega-cell.parcial{border-left-color:#F39C12}
-.entrega-cell.gap{border-left-color:#E74C3C}
-.entrega-cell .label{font-size:10px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:3px}
-.entrega-cell .value{font-size:12px;font-weight:600;color:#1a1a2e}
-.entrega-cell .sub{font-size:11px;color:#888;margin-top:2px}
+  /* TABLE GENERIC */
+  .data-table { width: 100%; border-collapse: collapse; }
+  .data-table th, .data-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .data-table th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; background: var(--surface2); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
 
-/* ── BADGES ── */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
-.badge.ok{background:#E3F5EB;color:#1B6A39}
-.badge.warn{background:#FFF4E0;color:#B35E00}
-.badge.gap{background:#FDECEA;color:#C0392B}
-.badge.info{background:#E8F0FE;color:#1E90FF}
-.score-box{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.score-box.green{background:#E3F5EB;color:#1B6A39}
-.score-box.amber{background:#FFF4E0;color:#B35E00}
-.score-box.red{background:#FDECEA;color:#C0392B}
-.version-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;background:#F3E8FD;color:#7B2FBE}
+  /* STATUS BADGES */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: rgba(35,134,54,0.25); color: #56d364; }
+  .badge-yellow { background: rgba(158,106,3,0.25); color: var(--yellow-light); }
+  .badge-red { background: rgba(185,28,28,0.25); color: var(--red-light); }
+  .badge-gray { background: rgba(139,148,158,0.15); color: var(--muted); }
+  .badge-blue { background: rgba(30,144,255,0.2); color: var(--adfly); }
 
-/* ── GAPS ── */
-.gap-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:#fff;border-radius:8px;margin-bottom:6px;border-left:4px solid #E74C3C}
-.gap-item.warn{border-left-color:#F39C12}
-.gap-item.ok{border-left-color:#27ae60}
-.gap-item .gi-icon{font-size:16px;min-width:20px}
-.gap-item .gi-body{flex:1}
-.gap-item .gi-title{font-weight:700;font-size:13px}
-.gap-item .gi-desc{font-size:12px;color:#555;margin-top:2px}
-.gap-item .gi-co{font-size:10px;font-weight:700;color:#888;margin-top:4px;text-transform:uppercase;letter-spacing:.4px}
+  /* GAPS */
+  .gap-section { margin-bottom: 20px; }
+  .gap-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .gap-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .gap-card.critical { border-left: 3px solid var(--red-light); }
+  .gap-card.important { border-left: 3px solid var(--yellow-light); }
+  .gap-card.resolved { border-left: 3px solid #56d364; opacity: 0.6; }
+  .gap-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .gap-content { flex: 1; }
+  .gap-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+  .gap-desc { color: var(--muted); font-size: 11px; line-height: 1.5; }
+  .gap-company { font-size: 10px; color: var(--muted); margin-top: 4px; }
 
-/* ── FLOW ── */
-.flow{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
-.flow-col{flex:1;min-width:155px}
-.flow-box{background:#fff;border-radius:8px;padding:12px;font-size:12px;border-left:3px solid #1E90FF;margin-bottom:8px}
-.flow-box.auto{border-left-color:#9FE83A}
-.flow-box.manual{border-left-color:#C9A77A}
-.flow-box.system{border-left-color:#A4B0BE}
-.flow-box h5{font-size:12px;font-weight:700;margin-bottom:4px}
-.flow-arrow{text-align:center;font-size:18px;color:#A4B0BE;padding:2px 0}
-.day-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f0f0f0}
-.day-row:last-child{border-bottom:none}
-.day-label{width:115px;font-size:12px;font-weight:700;color:#444;flex-shrink:0}
+  /* AGENTS GRID */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .agent-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .agent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .agent-id { font-size: 11px; color: var(--muted); font-family: monospace; }
+  .agent-name { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+  .agent-desc { color: var(--muted); font-size: 11px; }
 
-/* ── AGENTS ── */
-.agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:4px}
-.agent-card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-top:3px solid #1E90FF}
-.agent-card h4{font-size:13px;font-weight:700;margin-bottom:6px}
-.agent-card .ag-status{font-size:11px;margin-bottom:6px}
-.agent-card p{font-size:12px;color:#555;line-height:1.5}
-.agent-card .tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:4px;background:#F0F2F5;color:#666;margin-top:6px;margin-right:3px}
+  /* FLOW */
+  .flow-week {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .flow-week-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flow-days { display: flex; gap: 8px; flex-wrap: wrap; }
+  .flow-day {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    min-width: 120px;
+    flex: 1;
+  }
+  .flow-day-name { font-weight: 700; font-size: 11px; text-transform: uppercase; margin-bottom: 6px; color: var(--muted); }
+  .flow-day-items { list-style: none; }
+  .flow-day-items li { font-size: 11px; color: var(--text); padding: 2px 0; }
+  .flow-day.active { border-color: var(--adfly); }
+  .flow-day.past { opacity: 0.5; }
+  .flow-day.today { border-color: var(--yellow-light); }
 
-/* ── MATRIX ── */
-.matrix-wrap{overflow-x:auto}
-table.matrix{border-collapse:collapse;width:100%;font-size:12px}
-table.matrix th{background:#0A1B33;color:#fff;padding:8px 10px;text-align:left;font-size:11px;white-space:nowrap}
-table.matrix td{padding:7px 10px;border-bottom:1px solid #F0F2F5;vertical-align:top}
-table.matrix tr:hover td{background:#F8F9FA}
-.check-ok{color:#27ae60;font-weight:700}
-.check-warn{color:#F39C12;font-weight:700}
-.check-gap{color:#E74C3C;font-weight:700}
-.co-col,.co-header{transition:opacity .15s}
-.co-col.hidden-col,.co-header.hidden-col{display:none}
+  /* AUDITORIA TABLE */
+  .audit-wrap { overflow-x: auto; }
 
-/* ── AUDIT ── */
-.standard-box{background:#F8F9FA;border-radius:8px;padding:14px;margin-bottom:14px;border-left:4px solid #1E90FF}
-.standard-box h4{font-size:12px;font-weight:700;color:#0A1B33;margin-bottom:8px}
-.standard-box ul{list-style:none;padding:0}
-.standard-box ul li{padding:3px 0;font-size:12px;color:#444;display:flex;align-items:center;gap:6px}
-.standard-box ul li::before{content:'→';color:#1E90FF;font-weight:700;flex-shrink:0}
-.audit-section{font-size:14px;font-weight:700;color:#0A1B33;margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid #e0e0e0;display:flex;align-items:center;gap:8px}
-.audit-score{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-left:auto}
-.audit-score.full{background:#E3F5EB;color:#27ae60}
-.audit-score.partial{background:#FFF4E0;color:#B35E00}
+  /* UNIFORMIDADE */
+  .matrix-wrap { overflow-x: auto; }
+  .matrix-table { width: 100%; border-collapse: collapse; }
+  .matrix-table th, .matrix-table td { padding: 8px 10px; text-align: center; border: 1px solid var(--border); font-size: 11px; }
+  .matrix-table th { background: var(--surface2); color: var(--muted); font-weight: 500; }
+  .matrix-table th:first-child { text-align: left; }
+  .matrix-table td:first-child { text-align: left; font-weight: 500; color: var(--text); }
 
-/* ── FLUXO AGENTES (dark) ── */
-.fa-wrap{background:#0F1117;border-radius:12px;padding:20px;color:#E2E8F0}
-.fa-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:8px}
-.fa-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#A0AEC0}
-.fa-legend-dot{width:8px;height:8px;border-radius:50%}
-.fa-pipeline{display:flex;flex-direction:column;gap:0}
-.fa-day{display:flex;gap:16px;margin-bottom:4px;align-items:stretch}
-.fa-day-label{width:88px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;align-items:center;border-radius:8px;padding:10px 6px;text-align:center}
-.fa-day-label .wk{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.7}
-.fa-day-label .tm{font-size:17px;font-weight:800}
-.fa-day-label .tp{font-size:10px;margin-top:2px;opacity:.65}
-.fa-quinta .fa-day-label{background:#1E3A5F;border:1px solid #2B6CB0}
-.fa-fds .fa-day-label{background:#1A3328;border:1px solid #276749}
-.fa-6h .fa-day-label{background:#2D2040;border:1px solid #6B46C1}
-.fa-830 .fa-day-label{background:#2D1F12;border:1px solid #C05621}
-.fa-semana .fa-day-label{background:#1A1F2E;border:1px solid #3182CE}
-.fa-agents{display:flex;flex-wrap:wrap;gap:8px;flex:1;align-items:flex-start;padding:8px 0}
-.fa-agent{border-radius:8px;padding:10px 12px;border:1px solid;min-width:148px;flex:1;cursor:pointer;transition:transform .1s,box-shadow .1s}
-.fa-agent:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.4)}
-.fa-agent .ac{font-size:10px;font-weight:800;letter-spacing:.5px;margin-bottom:3px}
-.fa-agent .an{font-size:12px;font-weight:700;margin-bottom:4px}
-.fa-agent .ad{font-size:11px;opacity:.72;line-height:1.4}
-.fa-agent .ao{font-size:10px;margin-top:6px;padding:4px 7px;border-radius:4px;background:rgba(255,255,255,.06)}
-.ag-radar{background:#1A2E4A;border-color:#3182CE}.ag-radar .ac{color:#63B3ED}
-.ag-ag05{background:#1A2E3A;border-color:#2C7A7B}.ag-ag05 .ac{color:#4FD1C5}
-.ag-ag10{background:#2A1F3A;border-color:#6B46C1}.ag-ag10 .ac{color:#B794F4}
-.ag-painel{background:#2D2040;border-color:#805AD5}.ag-painel .ac{color:#D6BCFA}
-.ag-ag13{background:#2D1F0E;border-color:#DD6B20}.ag-ag13 .ac{color:#F6AD55}
-.ag-ag03{background:#1A2A1A;border-color:#38A169}.ag-ag03 .ac{color:#68D391}
-.ag-inbox{background:#2D2420;border-color:#B7791F}.ag-inbox .ac{color:#F6AD55}
-.ag-grade{background:#1A2035;border-color:#4299E1}.ag-grade .ac{color:#90CDF4}
-.ag-ag11{background:#1A2A28;border-color:#285E61}.ag-ag11 .ac{color:#81E6D9}
-.ag-posts{background:#1A2035;border-color:#4299E1}.ag-posts .ac{color:#90CDF4}
-.fa-arrow{display:flex;align-items:center;justify-content:center;padding:4px 0 4px 44px;color:#4A5568;font-size:18px}
-.fa-hint{font-size:11px;color:#718096;margin-bottom:12px;text-align:center;font-style:italic}
-#fa-detail{margin-top:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 16px;display:none}
-#fa-detail.show{display:block}
-#fa-detail h4{font-size:13px;font-weight:700;margin-bottom:8px;color:#E2E8F0}
-#fa-detail ul{padding-left:16px;line-height:1.9;color:#CBD5E0;font-size:12px}
-#fa-detail .dep{font-size:11px;color:#F6AD55;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+  }
 
-/* ── RADAR (dark) ── */
-.radar-tab-wrap{background:#0A1B33;border-radius:12px;padding:20px;color:#E2E8F0}
-.radar-tab-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px}
-.radar-tab-header h2{font-size:16px;font-weight:700;color:#9FE83A}
-.radar-tab-header .rt-meta{font-size:11px;color:rgba(255,255,255,.45)}
-/* ── RADAR TOGGLE ── */
-.rt-toggle{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.rt-chip{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .18s;user-select:none;letter-spacing:.3px}
-.rt-chip-corrente{background:rgba(30,144,255,.12);color:#63B3ED;border-color:rgba(30,144,255,.35)}
-.rt-chip-corrente.active{background:#1E90FF;color:#fff;border-color:#1E90FF}
-.rt-chip-proxima{background:rgba(159,232,58,.06);color:rgba(159,232,58,.45);border-color:rgba(159,232,58,.18)}
-.rt-chip-proxima.active{background:#9FE83A;color:#0A1B33;border-color:#9FE83A}
-.rt-chip-proxima.locked{opacity:.28;cursor:not-allowed;border-style:dashed}
-.rt-ctx-badge{margin-left:auto;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.3px}
-.rt-ctx-corrente{background:rgba(30,144,255,.18);color:#63B3ED}
-.rt-ctx-proxima{background:rgba(159,232,58,.18);color:#9FE83A}
-.rt-exec{background:rgba(255,255,255,.06);border-radius:10px;padding:14px 16px;margin-bottom:18px;border-left:4px solid #9FE83A}
-.rt-exec h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#9FE83A;margin-bottom:10px}
-.rt-exec-item{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;line-height:1.5}
-.rt-exec-item:last-child{border-bottom:none}
-.rt-exec-co{font-size:10px;font-weight:800;letter-spacing:.5px;min-width:60px;padding-top:1px;text-transform:uppercase}
-.rt-exec-co.adfly{color:#1E90FF}
-.rt-exec-co.alechef{color:#C9A77A}
-.rt-exec-co.bpmf{color:#39FF14}
-.rt-exec-co.marcela{color:#27ae60}
-.rt-exec-co.tracao{color:#B794F4}
-.rt-section{margin-bottom:20px}
-.rt-section-title{font-size:12px;font-weight:700;color:#9FE83A;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,.1);text-transform:uppercase;letter-spacing:.5px}
-.rt-top3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
-.rt-top3-item{background:rgba(255,255,255,.06);border-radius:8px;padding:12px;border-left:3px solid #1E90FF}
-.rt-top3-item.alechef{border-left-color:#C9A77A}
-.rt-top3-item.bpmf{border-left-color:#39FF14}
-.rt-top3-item.marcela{border-left-color:#27ae60}
-.rt-top3-item.tracao{border-left-color:#B794F4}
-.rt-top3-item .rt-num{font-size:10px;font-weight:800;color:rgba(255,255,255,.35);margin-bottom:3px}
-.rt-top3-item .rt-opp{font-size:12px;font-weight:700;color:#E2E8F0;margin-bottom:4px}
-.rt-top3-item .rt-detail{font-size:11px;color:rgba(255,255,255,.55);line-height:1.5}
-.rt-timing-table{width:100%;border-collapse:collapse;font-size:12px}
-.rt-timing-table th{background:rgba(255,255,255,.1);color:#9FE83A;padding:7px 10px;text-align:left;font-size:11px;font-weight:700}
-.rt-timing-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06);color:#E2E8F0;vertical-align:middle}
-.rt-urgente-badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;background:rgba(231,76,60,.3);color:#FF9A9A}
-.rt-transversal{background:rgba(159,232,58,.07);border:1px solid rgba(159,232,58,.2);border-radius:8px;padding:12px 14px;margin-bottom:18px}
-.rt-transversal h4{font-size:11px;font-weight:700;color:#9FE83A;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.rt-transversal p{font-size:12px;color:#E2E8F0;line-height:1.6}
-.rt-fonte-list{list-style:none;padding:0}
-.rt-fonte-list li{padding:4px 0;font-size:11px;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:flex-start;gap:6px}
-.rt-fonte-list li:last-child{border-bottom:none}
-.rt-fonte-list li::before{content:'↗';color:#1E90FF;flex-shrink:0}
+  /* COUNTDOWN */
+  .countdown-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(185,28,28,0.25);
+    border: 1px solid rgba(239,68,68,0.4);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red-light);
+  }
 
-/* ── RADAR quick (light) ── */
-.radar-box{background:#0A1B33;border-radius:10px;padding:16px;margin-bottom:18px;color:#fff}
-.radar-box h3{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#9FE83A;margin-bottom:10px}
-.radar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.radar-item{background:rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;border-left:3px solid #1E90FF}
-.radar-item.alechef{border-left-color:#C9A77A}
-.radar-item.bpmf{border-left-color:#39FF14}
-.radar-item.marcela{border-left-color:#27ae60}
-.radar-item.tracao{border-left-color:#B794F4}
-.radar-item .ri-co{font-size:10px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);margin-bottom:4px;text-transform:uppercase}
-.radar-item .ri-text{font-size:12px;line-height:1.5;color:#E2E8F0}
-.radar-urgente{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.4);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;color:#FAA}
-.radar-urgente strong{color:#FF8080}
+  /* TEMA TRANSVERSAL */
+  .theme-card {
+    background: linear-gradient(135deg, rgba(30,144,255,0.08), rgba(159,232,58,0.06));
+    border: 1px solid rgba(30,144,255,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .theme-card-title { font-size: 12px; font-weight: 700; color: var(--adfly); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .theme-card-text { font-size: 12px; color: var(--text); line-height: 1.6; }
 
-/* ── INFO ALERT ── */
-.info-alert{background:#FFF4E0;border:1px solid #F6D860;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#7A4500}
-.info-alert strong{color:#B35E00}
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+    .scores-grid { grid-template-columns: repeat(2, 1fr); }
+    .insights-grid { grid-template-columns: 1fr; }
+    .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .tiles-grid { grid-template-columns: 1fr 1fr; }
+    .scores-grid { grid-template-columns: 1fr; }
+    .agents-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <div class="header">
-  <h1>🎯 Painel de Controle MKT</h1>
-  <div class="header-right">
-    <span class="week-badge">📅 Semana 16–22/06/2026</span>
-    <span class="header-meta">Qui 19/06 · Pós-Radar 08h + Tendências 08h01 <span class="today-marker">HOJE</span></span>
+  <div class="header-left">
+    <div>
+      <div class="header-logo">⚡ Painel Controle MKT</div>
+      <div class="header-subtitle">Departamento Virtual AleTA · 4 empresas · AG-00 a AG-13</div>
+    </div>
   </div>
-</div>
-
-<!-- URGENCY BANNER -->
-<div class="urgency-bar">
-  <span class="ub-label">⚡ Urgente</span>
-  <span class="urgency-pill"><span class="up-co">ADFly</span> ICA 100-40 — <span class="up-days">12 dias</span></span>
-  <span class="urgency-pill"><span class="up-co">ADFly</span> Speech S22-28 ausente</span>
-  <span class="urgency-pill"><span class="up-co">AleChef/BPMF</span> 0 imagens S22-28</span>
-  <span class="urgency-pill"><span class="up-co">Marcela</span> S3 não iniciada</span>
-  <span class="urgency-pill"><span class="up-co">Inverno</span> AMANHÃ — <span class="up-days">2 dias · 21/06</span></span>
-</div>
-
-<!-- COMPANY FILTER -->
-<div class="co-filter">
-  <span class="co-filter-label">Filtrar:</span>
-  <span class="cf-chip active" data-co="adfly" onclick="toggleCo(this)">ADFly</span>
-  <span class="cf-chip active" data-co="alechef" onclick="toggleCo(this)">AleChef</span>
-  <span class="cf-chip active" data-co="bpmf" onclick="toggleCo(this)">BPMF</span>
-  <span class="cf-chip active" data-co="marcela" onclick="toggleCo(this)">Marcela</span>
-  <span class="cf-chip active" data-co="tracao" onclick="toggleCo(this)">TRAÇÃO</span>
-  <span class="cf-sep"></span>
-  <span class="cf-all" onclick="allCo()">Ver todas</span>
+  <div class="header-date">
+    🗓 Atualizado em <span>Quinta, 25/06/2026 às 09h</span> · S14 (22–28/06)
+  </div>
 </div>
 
 <!-- TABS -->
-<div class="tabs">
-  <div class="tab active" onclick="switchTab(0)">📊 Hoje</div>
-  <div class="tab" onclick="switchTab(1)">🏢 Empresas</div>
-  <div class="tab" onclick="switchTab(2)">🤖 Agentes</div>
-  <div class="tab" onclick="switchTab(3)">⚠️ Gaps</div>
-  <div class="tab" onclick="switchTab(4)">📡 Radar</div>
-  <div class="tab" onclick="switchTab(5)">⚙️ Sistema</div>
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="showTab('visao-geral')">📊 Visão Geral</button>
+  <button class="tab-btn" onclick="showTab('status-semana')">🔍 Status Semana</button>
+  <button class="tab-btn" onclick="showTab('uniformidade')">⚖️ Uniformidade</button>
+  <button class="tab-btn" onclick="showTab('fluxo-semanal')">🗓 Fluxo Semanal</button>
+  <button class="tab-btn" onclick="showTab('agentes')">🤖 Agentes</button>
+  <button class="tab-btn" onclick="showTab('gaps')">⚠️ Gaps & Prioridades</button>
+  <button class="tab-btn" onclick="showTab('auditoria')">✅ Auditoria de Entregas</button>
 </div>
 
-<!-- ═══════════════════════════════════════════════ -->
-<!-- TAB 0 — HOJE (Visão Geral + Status resumido)   -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="pane active">
+<!-- ======================== TAB: VISÃO GERAL ======================== -->
+<div id="tab-visao-geral" class="tab-content active">
 
-  <div class="summary-bar">
-    <div class="summary-tile green"><div class="st-num">4</div><div class="st-label">Pacotes S16-22 completos</div></div>
-    <div class="summary-tile green"><div class="st-num">58</div><div class="st-label">PNGs prontos (S16-22)</div></div>
-    <div class="summary-tile amber"><div class="st-num">2/4</div><div class="st-label">S22-28 copy+v2 prontos</div></div>
-    <div class="summary-tile red"><div class="st-num">4</div><div class="st-label">Gaps críticos abertos</div></div>
-    <div class="summary-tile blue"><div class="st-num">12d</div><div class="st-label">ICA 100-40 (01/07)</div></div>
+  <!-- ALERTA URGENTE -->
+  <div class="alert-banner">
+    <div class="alert-icon">🔴</div>
+    <div class="alert-text">
+      <strong>URGENTE ADFly — DECEA ICA 100-40 entra em vigor em 01/07/2026 (6 dias).</strong>
+      Qualquer drone, incluindo sub-250g, precisará de autorização SARPAS. Publicar conteúdo de regulamentação até sexta 27/06 para virar referência no nicho. Janela única de timing.
+    </div>
+    <div class="countdown-badge">⏰ 6 dias</div>
   </div>
 
-
-  <!-- RADAR DE TENDÊNCIAS STATUS -->
-  <div style="background:#0A1B33;border-radius:10px;padding:14px 16px;margin-bottom:18px;border:1px solid #1E90FF">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-      <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#9FE83A">📡 Radar de Tendências e Provocações</span>
-      <span style="font-size:10px;color:rgba(255,255,255,.45)">Execução 19/06/2026 (manual) · Cron automático inicia qui 25/06 às 08h01</span>
+  <!-- TILES SUMMARY -->
+  <div class="tiles-grid">
+    <div class="tile tile-accent-green">
+      <div class="tile-label">Pacotes Semana S14</div>
+      <div class="tile-value">4/4</div>
+      <div class="tile-sub">ADFly · AleChef · BPMF · Marcela</div>
     </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#1A3A1A;border:1px solid #27ae60;color:#9FE83A">🟢 ADFly</span>
-      <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#1A3A1A;border:1px solid #27ae60;color:#9FE83A">🟢 AleChef</span>
-      <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#1A3A1A;border:1px solid #27ae60;color:#9FE83A">🟢 BPMF</span>
-      <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#1A3A1A;border:1px solid #27ae60;color:#9FE83A">🟢 Marcela</span>
+    <div class="tile tile-accent-blue">
+      <div class="tile-label">Total PNGs Gerados</div>
+      <div class="tile-value">60</div>
+      <div class="tile-sub">ADFly 20 · AleChef 6 · BPMF 13 · Marcela 21</div>
     </div>
-    <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.5)">Arquivo: TENDENCIAS-ALEXANDRE-19-06-2026.md · 3 provocações por empresa com fonte rastreável · Salvo em PROVOCACOES-[EMPRESA]-Semana-29-06-05-07-2026.md</div>
-  </div>
-
-  <!-- RADAR INSIGHTS -->
-  <div class="radar-box">
-    <h3>📡 Radar 18/06/2026 — Insights para grade de segunda</h3>
-    <div class="radar-grid">
-      <div class="radar-item co-block" data-co="adfly">
-        <div class="ri-co">ADFly</div>
-        <div class="ri-text">Janela regulatória máxima — <strong style="color:#9FE83A">12 dias para ICA 100-40</strong> (01/07). Publicar autoridade regulatória ESTA semana. IA + drone para laudo automático: próximo posicionamento.</div>
-      </div>
-      <div class="radar-item alechef co-block" data-co="alechef">
-        <div class="ri-co">AleChef</div>
-        <div class="ri-text"><strong style="color:#C9A77A">Inverno + férias julho = semana de ouro.</strong> Cardápio de inverno e convite jantar exclusivo antes de 27/06.</div>
-      </div>
-      <div class="radar-item bpmf co-block" data-co="bpmf">
-        <div class="ri-co">BPMF</div>
-        <div class="ri-text"><strong style="color:#39FF14">Monte Verde 27/06</strong> — 8 dias. Depoimento de participante tem maior engajamento do nicho agora.</div>
-      </div>
-      <div class="radar-item marcela co-block" data-co="marcela">
-        <div class="ri-co">Marcela</div>
-        <div class="ri-text">Virada de semestre = maior gatilho do ano. TikTok trending "gastos julho" chega ao IG em <strong style="color:#9FE83A">~4 dias</strong>. Lacuna Família Ribeiro 35-45 aberta.</div>
-      </div>
-      <div class="radar-item tracao co-block" data-co="tracao">
-        <div class="ri-co">TRAÇÃO</div>
-        <div class="ri-text">Kaizen publicou 2 guias de IA esta semana. Contra-narrativa: Alexandre mostra <em>como</em> usa IA com resultado, não <em>que</em> usa.</div>
-      </div>
+    <div class="tile tile-accent-yellow">
+      <div class="tile-label">Copy S14 — Status QA</div>
+      <div class="tile-value">🟡 2</div>
+      <div class="tile-sub">Ajustes menores · ADFly + BPMF</div>
     </div>
-    <div class="radar-urgente">
-      <strong>⚡ Timing transversal:</strong> ADFly (12d · ICA 100-40) · AleChef (2d · AMANHÃ 21/06) · BPMF (8d · Monte Verde) · Marcela (~4d · TikTok trend). Quem não publicar essa semana perde a janela.
+    <div class="tile tile-accent-red">
+      <div class="tile-label">Gaps Críticos Abertos</div>
+      <div class="tile-value">3</div>
+      <div class="tile-sub">DECEA · AG-13 · TRAÇÃO S1</div>
     </div>
   </div>
 
-  <!-- FLUXO DO DIA -->
-  <div class="section-title">Fluxo da Agência</div>
-  <div class="flow">
-    <div class="flow-col">
-      <div class="flow-box auto"><h5>🤖 Auto · Quinta 08h ✅ HOJE</h5>Radar gerado — RADAR-CONSOLIDADO-18-06-2026.md</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 Auto · Quinta 08h01 ✅ HOJE</h5>Radar de Tendências gerado — TENDENCIAS-ALEXANDRE-19-06-2026.md (ADFly · AleChef · BPMF)</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 Auto · Segunda 06h</h5>Painel da Semana — artifact atualizado</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 Auto · Segunda 08h30</h5>AG-13 Vibe Prospecting (segmento ADFly)</div>
+  <!-- RADAR DE TENDÊNCIAS -->
+  <div class="radar-tile">
+    <div class="radar-tile-header">
+      <div class="radar-tile-title">📡 Radar de Tendências e Provocações</div>
+      <div class="radar-tile-date">Última execução: 19/06/2026 (manual) · Próxima: cron quinta 08h01</div>
     </div>
-    <div class="flow-col">
-      <div class="flow-box manual"><h5>✋ Alexandre · Sexta 16h</h5>INBOX Provocações · 4 empresas</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 Grade · Fim de semana</h5>Radar + INBOX → grade semanal</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 AG-05 · Fim de semana</h5>Copy completo — roteiro + captions + AI prompts</div>
+    <div class="radar-pills">
+      <div class="pill pill-green">🟢 ADFly</div>
+      <div class="pill pill-green">🟢 AleChef</div>
+      <div class="pill pill-green">🟢 BPMF</div>
+      <div class="pill pill-green">🟢 Marcela</div>
+      <div class="pill pill-gray">⏳ Execução 25/06 — aguardando registro no LOG</div>
     </div>
-    <div class="flow-col">
-      <div class="flow-box auto"><h5>🤖 AG-10 · Fim de semana</h5>Produção visual — Python/Pillow · PNG por empresa</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 AG-03 · Segunda 09h</h5>LinkedIn ADFly → leads para CSV</div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-box auto"><h5>🤖 AG-11 · Contínuo</h5>LDR Inbound — qualifica leads orgânicos</div>
-    </div>
-    <div class="flow-col">
-      <div class="flow-box system"><h5>🗃 CRM · Supabase</h5>Pipeline: Lead → Ativo → Hold<br><span style="color:#F39C12;font-size:10px">⚠ API offline · CSV manual</span></div>
-      <div style="height:8px"></div>
-      <div class="flow-box manual"><h5>✋ Sáb · Alexandre</h5>Exporta CSV CRM-ALVO → salva em <code style="font-size:10px">CRM_Updates/</code></div>
+    <div style="margin-top:8px; font-size:11px; color: var(--muted);">
+      ℹ️ Execução de 19/06 foi manual (primeira rodada fora do cron). Provocações semana 29/06–05/07 geradas. Cron automatizado dispara a partir de 25/06.
     </div>
   </div>
 
+  <!-- RADAR INSIGHTS DA SEMANA -->
+  <div class="section-title">🔭 Insights do Radar — Semana 22–28/06/2026</div>
+
+  <!-- TEMA TRANSVERSAL -->
+  <div class="theme-card">
+    <div class="theme-card-title">💡 Tema Transversal da Semana (Cross-empresa)</div>
+    <div class="theme-card-text">
+      <strong>"IA precisa de humano para funcionar de verdade"</strong> — apareceu em 3 nichos: Marketing (Orgânica Digital declarou que toque humano é o diferencial), Gastronomia (IA sugere receitas mas chef entrega afeto), Finanças (FinTok cresce mas planejamento personalizado é insubstituível). Alexandre pode usar esse ângulo nas 3 empresas ou nas redes pessoais como reflexão estratégica.
+    </div>
+  </div>
+
+  <div class="insights-grid">
+    <div class="insight-card" style="border-left: 3px solid var(--adfly);">
+      <div class="insight-card-header">
+        <div class="insight-company" style="color: var(--adfly);">🚁 ADFly</div>
+        <div class="insight-badge badge-urgent">🔴 URGENTE</div>
+      </div>
+      <div class="insight-text">
+        <strong>ANAC + DECEA ICA 100-40 (01/07):</strong> sub-250g precisará de SARPAS. Publicar carrossel + reel "O que muda para drones a partir de 01/07" até sexta 27/06. Oportunidade de timing único — ADFly vira referência de regulamentação no nicho.
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left: 3px solid var(--alechef);">
+      <div class="insight-card-header">
+        <div class="insight-company" style="color: var(--alechef);">👨‍🍳 AleChef</div>
+        <div class="insight-badge badge-ok">🟢 Em Dia</div>
+      </div>
+      <div class="insight-text">
+        <strong>Inverno 2026 — comfort food & nostalgia:</strong> marmitas quentes, caldos, nostalgia gastronômica dominante. Jantar com chef como presente de inverno. "5 marmitas que vão fazer você esquecer o delivery" + reel emocional da avó.
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left: 3px solid var(--bpmf);">
+      <div class="insight-card-header">
+        <div class="insight-company" style="color: var(--bpmf);">🚴 BPMF</div>
+        <div class="insight-badge badge-ok">⚡ Ao Vivo</div>
+      </div>
+      <div class="insight-text">
+        <strong>4º Pedal Estrada de Ferro ESTE SÁBADO (28/06):</strong> janela de cobertura em tempo real. Lagamar (05-09/07) para pré-aquecer nos próximos 10 dias. Reel "Inverno é a melhor estação para pedalar" para quebrar objeção do frio.
+      </div>
+    </div>
+
+    <div class="insight-card" style="border-left: 3px solid var(--marcela);">
+      <div class="insight-card-header">
+        <div class="insight-company" style="color: var(--marcela);">💰 Marcela</div>
+        <div class="insight-badge badge-ok">📈 Alta Demanda</div>
+      </div>
+      <div class="insight-text">
+        <strong>Camila Villela no comportamental + FinTok +300%:</strong> Selic alta + férias julho = temas com demanda imediata. "Como não sair no vermelho sem cancelar as férias dos filhos" — persona Família Ribeiro vivendo isso agora. Entrar no TikTok é urgente.
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMING ALERTS -->
+  <div class="section-title">⏰ Alertas de Timing Críticos</div>
+  <table class="timing-table" style="background:var(--surface); border-radius:8px; overflow:hidden;">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Evento / Prazo</th>
+        <th>Empresa</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Hoje 25/06</strong></td>
+        <td>Publicar carrossel ICA 100-40 (DECEA) — 1ª peça regulamentação</td>
+        <td style="color:var(--adfly)">ADFly</td>
+        <td><span class="badge badge-red">🔴 URGENTE</span></td>
+      </tr>
+      <tr>
+        <td>Sáb 28/06</td>
+        <td>4º Pedal Estrada de Ferro — cobertura ao vivo Stories + Reel</td>
+        <td style="color:var(--bpmf)">BPMF</td>
+        <td><span class="badge badge-yellow">⚡ Hoje</span></td>
+      </tr>
+      <tr>
+        <td><strong>01/07 (Qua)</strong></td>
+        <td>ICA 100-40 DECEA entra em vigor — marco do conteúdo ADFly</td>
+        <td style="color:var(--adfly)">ADFly</td>
+        <td><span class="badge badge-red">⏰ 6 dias</span></td>
+      </tr>
+      <tr>
+        <td>05-09/07</td>
+        <td>Jornada Lagamar — captar inscritos agora</td>
+        <td style="color:var(--bpmf)">BPMF</td>
+        <td><span class="badge badge-blue">📣 Pré-aquecimento</span></td>
+      </tr>
+      <tr>
+        <td>Julho</td>
+        <td>Férias escolares — gastos extras, pressão orçamento familiar</td>
+        <td style="color:var(--marcela)">Marcela</td>
+        <td><span class="badge badge-green">✅ Incorporado</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- TAB 1 — EMPRESAS (Status detalhado filtrado por empresa)   -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="pane">
+<!-- ======================== TAB: STATUS SEMANA ======================== -->
+<div id="tab-status-semana" class="tab-content">
+  <div class="section-title">🔍 Status Semana 22–28/06/2026 (S14)</div>
 
-  <!-- ADFly -->
-  <div class="co-block" data-co="adfly">
-    <div class="co-strip adfly">
-      <span class="co-name">ADFly Soluções Aéreas</span>
-      <span class="score-box green" style="margin-left:10px">✅ 85% — 4 posts · 25 PNGs</span>
-      <span class="co-meta">B2B Drone · LinkedIn + IG</span>
-    </div>
-    <div class="co-body">
-      <div style="font-size:12px;color:#555;margin-bottom:8px">Semana 16-22/06 · 4 posts completos (padrão v2)</div>
-      <div class="entrega-grid">
-        <div class="entrega-cell ok"><div class="label">QUA 17/06 ✅</div><div class="value">Reel 60s — Ortofotomosaico</div><div class="sub">IG · Pilar Técnico</div></div>
-        <div class="entrega-cell ok"><div class="label">QUI 18/06 ✅ HOJE</div><div class="value">Post — Evento com vista de cima</div><div class="sub">IG · Pilar Criativo</div></div>
-        <div class="entrega-cell ok"><div class="label">SEX 19/06</div><div class="value">LinkedIn — SARPAS/ANAC/DECEA</div><div class="sub">LinkedIn + IG · ⚠️ ICA 100-40</div></div>
-        <div class="entrega-cell ok"><div class="label">SEG 22/06</div><div class="value">Carrossel — Mercado drones 2026</div><div class="sub">IG + TikTok · CTA ADFly Lab</div></div>
+  <div class="scores-grid">
+    <!-- ADFly -->
+    <div class="score-card">
+      <div class="score-card-header">
+        <div class="score-dot" style="background:var(--adfly)"></div>
+        <div class="score-company">ADFly</div>
+        <div style="margin-left:auto"><span class="badge badge-yellow">🟡 90%</span></div>
       </div>
-      <div class="info-alert" style="margin-top:10px"><strong>S22-28:</strong> Copy ✅ · AI Prompts ✅ · <strong style="color:#C0392B">Speech word-for-word ausente ❌</strong> · 0 imagens ❌ — AG-05 completa speech → AG-10 roda antes de seg 22/06</div>
-    </div>
-  </div>
-
-  <!-- AleChef -->
-  <div class="co-block" data-co="alechef" style="margin-top:12px">
-    <div class="co-strip alechef">
-      <span class="co-name">AleChef em Casa</span>
-      <span class="score-box green" style="margin-left:10px">✅ 85% — 3 posts · 9 PNGs</span>
-      <span class="co-meta">Personal Chef B2C</span>
-    </div>
-    <div class="co-body">
-      <div style="font-size:12px;color:#555;margin-bottom:8px">Semana 16-22/06 · 3 posts completos (padrão v2)</div>
-      <div class="entrega-grid">
-        <div class="entrega-cell ok"><div class="label">QUA 17/06 ✅</div><div class="value">Carrossel — Marmita perfeita</div><div class="sub">IG + TikTok · Pilar Dicas</div></div>
-        <div class="entrega-cell ok"><div class="label">QUI 18/06 ✅ HOJE</div><div class="value">Carrossel — Casamento intimista</div><div class="sub">IG · Pilar Eventos</div></div>
-        <div class="entrega-cell ok"><div class="label">SEG 22/06</div><div class="value">Post — Festa Junina</div><div class="sub">IG + Story · Sazonalidade</div></div>
-        <div class="entrega-cell parcial"><div class="label">S22-28 Status</div><div class="value">⚠️ Copy+Speech+AI ✅</div><div class="sub">0 imagens — AG-10 pendente</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BPMF -->
-  <div class="co-block" data-co="bpmf" style="margin-top:12px">
-    <div class="co-strip bpmf">
-      <span class="co-name">BPMF — Bora Pedalar Meu Filho</span>
-      <span class="score-box green" style="margin-left:10px">✅ 85% — 3 posts · 3 PNGs</span>
-      <span class="co-meta">Cicloturismo</span>
-    </div>
-    <div class="co-body">
-      <div style="font-size:12px;color:#555;margin-bottom:8px">Semana 16-22/06 · 3 posts completos (padrão v2)</div>
-      <div class="entrega-grid">
-        <div class="entrega-cell ok"><div class="label">QUA 17/06 ✅</div><div class="value">Reel — Replay jornada</div><div class="sub">IG + TikTok + YouTube</div></div>
-        <div class="entrega-cell ok"><div class="label">SEX 19/06</div><div class="value">Post — Dia do Ciclista (21/06)</div><div class="sub">IG + TikTok</div></div>
-        <div class="entrega-cell ok"><div class="label">SEG 22/06</div><div class="value">Carrossel — Recap 1 mês BPMF</div><div class="sub">IG · Prova social</div></div>
-        <div class="entrega-cell parcial"><div class="label">S22-28 Status</div><div class="value">⚠️ Copy+Speech+AI ✅</div><div class="sub">0 imagens — AG-10 pendente</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Marcela -->
-  <div class="co-block" data-co="marcela" style="margin-top:12px">
-    <div class="co-strip marcela">
-      <span class="co-name">Marcela Pinheiro — Gestora Financeira</span>
-      <span class="score-box green" style="margin-left:10px">✅ 100% — 4 posts · 21 PNGs</span>
-      <span class="co-meta">Semana 2 · Padrão v2 full</span>
-    </div>
-    <div class="co-body">
-      <div style="font-size:12px;color:#555;margin-bottom:8px">Semana 16-22/06 · 4 posts completos · 7 peças totais (padrão v2)</div>
-      <div class="entrega-grid">
-        <div class="entrega-cell ok"><div class="label">TER 16/06 ✅</div><div class="value">Carrossel — Casais e dinheiro</div><div class="sub">IG · 7 slides</div></div>
-        <div class="entrega-cell ok"><div class="label">QUA 17/06 ✅</div><div class="value">Reel + LinkedIn — 10 anos</div><div class="sub">TikTok + IG + LinkedIn</div></div>
-        <div class="entrega-cell ok"><div class="label">SEX 19/06</div><div class="value">YouTube — 3 etapas plano</div><div class="sub">YouTube ~9min + corte TikTok</div></div>
-        <div class="entrega-cell ok"><div class="label">SÁB 20/06</div><div class="value">Carrossel — 3 mudanças 90 dias</div><div class="sub">IG · Prova social</div></div>
-      </div>
-      <div class="info-alert" style="margin-top:10px"><strong>S3 (23-29/06):</strong> <strong style="color:#C0392B">Não iniciada ❌</strong> — Grade → copy → imagens precisa rodar completo antes de ter 23/06. TikTok trend "gastos julho" chega em 5 dias — urgente.</div>
-    </div>
-  </div>
-
-  <!-- TRAÇÃO -->
-  <div class="co-block" data-co="tracao" style="margin-top:12px">
-    <div class="co-strip tracao">
-      <span class="co-name">TRAÇÃO — Agência de Marketing</span>
-      <span class="badge info" style="margin-left:10px">Semana 1 · 16-22/06/2026</span>
-      <span class="co-meta">@tracao_mkt · Case vitrine</span>
-    </div>
-    <div class="co-body">
-      <div style="font-size:12px;color:#555;margin-bottom:8px">Semana 1 em andamento. Monitoramento de concorrentes ativo (RADAR-TRAC-18-06-2026.md).</div>
-      <div class="entrega-grid">
-        <div class="entrega-cell parcial"><div class="label">Concorrentes</div><div class="value">C-01 a C-05 monitorados</div><div class="sub">Kaizen ⚠️ 2 guias IA esta semana</div></div>
-        <div class="entrega-cell ok"><div class="label">Instagram</div><div class="value">@tracao_mkt registrado</div><div class="sub">16/06/2026</div></div>
-        <div class="entrega-cell gap"><div class="label">Pacote Semana 1</div><div class="value">Grade → copy → imagens</div><div class="sub">Pendente de iniciar</div></div>
-        <div class="entrega-cell gap"><div class="label">Brand Kit</div><div class="value">Em construção</div><div class="sub">00 - Base Estrategica/</div></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<!-- TAB 2 — AGENTES (cards + fluxo interativo merged)     -->
-<!-- ══════════════════════════════════════════════════════ -->
-<div class="pane">
-
-  <div class="sub-tabs">
-    <span class="sub-tab active" onclick="switchSubTab(this,'ag-cards')">📋 Atividades dos Agentes</span>
-    <span class="sub-tab" onclick="switchSubTab(this,'ag-flow')">🔄 Fluxo dos Agentes</span>
-  </div>
-
-  <!-- SUB: AGENT CARDS -->
-  <div class="sub-pane active" id="ag-cards">
-    <div class="card" style="border:2px dashed #9FE83A;background:#f9fff5">
-      <h3 style="color:#1B6A39">✋ Ações Manuais — Alexandre</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px">
-        <div>
-          <strong style="font-size:12px">📝 Fluxo Provocações (sexta 16h)</strong>
-          <div style="font-size:12px;color:#555;margin-top:4px;line-height:1.6">1. Abre INBOX-PROVOCACOES/[Empresa]/<br>2. Adiciona 1–3 entradas<br>3. Sistema incorpora no fim de semana<br>4. _TEMAS-USADOS registrado automaticamente</div>
-        </div>
-        <div>
-          <strong style="font-size:12px">📋 Fluxo CSV Leads (sábado)</strong>
-          <div style="font-size:12px;color:#555;margin-top:4px;line-height:1.6">1. Exporta CSV do CRM-ALVO<br>2. Salva em CRM_Updates/semana_[N]_atualizada.csv<br>3. Atualiza CRM-ALVO manualmente<br>4. AG-03 retoma com novos leads</div>
+      <div class="score-pct" style="color:var(--adfly)">90%</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" style="width:90%; background:var(--adfly)"></div>
         </div>
       </div>
-    </div>
-
-    <div class="agent-grid">
-      <div class="agent-card" style="border-top-color:#A4B0BE">
-        <h4>AG-00 · Coordenador</h4>
-        <div class="ag-status"><span class="badge ok">✓ Ativo</span></div>
-        <p>Orquestra todos os agentes. Lê Radar + INBOX antes de cada semana. Gera pacote consolidado.</p>
-        <span class="tag">todas as empresas</span>
-      </div>
-      <div class="agent-card">
-        <h4>AG-03 · Prospector LinkedIn</h4>
-        <div class="ag-status"><span class="badge ok">✓ Ativo</span></div>
-        <p>Opera a partir da lista AG-13. Lista leads p/ CSV → CRM manual. Templates rotativos por segmento.</p>
-        <span class="tag">ADFly</span><span class="tag">LinkedIn</span>
-      </div>
-      <div class="agent-card">
-        <h4>AG-05 · Copy</h4>
-        <div class="ag-status"><span class="badge ok">✓ Ativo</span></div>
-        <p>Roteiro word-for-word + timecodes, captions, AI prompts por slide. Padrão v2 obrigatório.</p>
-        <span class="tag">4 empresas</span><span class="tag">padrão v2</span>
-      </div>
-      <div class="agent-card">
-        <h4>AG-10 · Designer</h4>
-        <div class="ag-status"><span class="badge warn">⚠ S22-28 pendente</span></div>
-        <p>Produção via Python/Pillow. Canva descontinuado em 12/06. Dimensões: 1080×1350 · 1080×1920 · 1200×1200. 0 PNGs gerados para S22-28.</p>
-        <span class="tag">4 empresas</span><span class="tag">0 PNGs S22-28</span>
-      </div>
-      <div class="agent-card">
-        <h4>AG-11 · Inbound LDR</h4>
-        <div class="ag-status"><span class="badge warn">⚠ Incompleto</span></div>
-        <p>Qualifica e nutre leads inbound. SOP completo só para ADFly. AleChef, BPMF e Marcela pendentes.</p>
-        <span class="tag">ADFly ✓</span><span class="tag">AleChef ✗</span><span class="tag">BPMF ✗</span><span class="tag">Marcela ✗</span>
-      </div>
-      <div class="agent-card">
-        <h4>AG-12 · Radar</h4>
-        <div class="ag-status"><span class="badge ok">✓ Rodou hoje 08h</span></div>
-        <p>Diagnóstico de posicionamento + radar semanal automático toda quinta. RADAR-CONSOLIDADO-18-06-2026.md gerado.</p>
-        <span class="tag">toda quinta 08h</span>
-      </div>
-      <div class="agent-card">
-        <h4>AG-13 · Pesquisa ICP</h4>
-        <div class="ag-status"><span class="badge warn">⚠ 0 runs registrados</span></div>
-        <p>Vibe Prospecting (Explorium). Teto 70 créditos/semana. Pasta _PROSPECCAO-AG13 vazia — nunca rodou.</p>
-        <span class="tag">ADFly</span><span class="tag">Seg 08h30</span>
-      </div>
-      <div class="agent-card" style="border-top-color:#805AD5">
-        <h4>PAINEL · Auto-update</h4>
-        <div class="ag-status"><span class="badge ok">✓ Ativo desde 16/06</span></div>
-        <p>Toda segunda 6h lê os 4 pacotes, monta HTML e atualiza o artifact. Pronto antes das 8h30.</p>
-        <span class="tag">toda segunda 06h</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB: AGENT FLOW -->
-  <div class="sub-pane" id="ag-flow">
-    <div class="fa-wrap">
-      <p class="fa-hint">Clique em qualquer agente para ver detalhes, predecessores e saídas esperadas</p>
-      <div class="fa-legend">
-        <div class="fa-legend-item"><div class="fa-legend-dot" style="background:#3182CE"></div>Radar / Dados</div>
-        <div class="fa-legend-item"><div class="fa-legend-dot" style="background:#4FD1C5"></div>Copy & Roteiro</div>
-        <div class="fa-legend-item"><div class="fa-legend-dot" style="background:#B794F4"></div>Design Visual</div>
-        <div class="fa-legend-item"><div class="fa-legend-dot" style="background:#F6AD55"></div>Prospecção / ICP</div>
-        <div class="fa-legend-item"><div class="fa-legend-dot" style="background:#68D391"></div>CRM / LinkedIn</div>
-        <div class="fa-legend-item"><div class="fa-legend-dot" style="background:#805AD5"></div>Painel (auto)</div>
-      </div>
-      <div class="fa-pipeline">
-        <div class="fa-day fa-quinta">
-          <div class="fa-day-label"><div class="wk">QUINTA</div><div class="tm">08h</div><div class="tp">🤖 auto</div></div>
-          <div class="fa-agents">
-            <div class="fa-agent ag-radar" onclick="faShow('radar')">
-              <div class="ac">RADAR ✅ HOJE</div>
-              <div class="an">Radar Semanal de Concorrentes</div>
-              <div class="ad">Varre 12+ perfis por empresa, extrai oportunidades e alertas de timing</div>
-              <div class="ao">📄 RADAR-CONSOLIDADO-18-06-2026.md · 5 relatórios individuais</div>
-            </div>
-          </div>
-        </div>
-        <div class="fa-arrow">↓</div>
-        <div class="fa-day fa-fds">
-          <div class="fa-day-label"><div class="wk">SEX–SÁB</div><div class="tm">✍️</div><div class="tp">produção</div></div>
-          <div class="fa-agents">
-            <div class="fa-agent ag-inbox" onclick="faShow('inbox')">
-              <div class="ac">INBOX</div>
-              <div class="an">Provocações Semanais</div>
-              <div class="ad">Alexandre registra temas. Cruzamento com _TEMAS-USADOS para evitar repetição</div>
-              <div class="ao">📄 PROVOCACOES-[EMPRESA]-Semana-[DATA].md</div>
-            </div>
-            <div class="fa-agent ag-grade" onclick="faShow('grade')">
-              <div class="ac">GRADE</div>
-              <div class="an">Grade Editorial</div>
-              <div class="ad">Radar + Provocações → define o que postar, canal, dia. Registra _TEMAS-USADOS</div>
-              <div class="ao">📋 Grade editorial (4 empresas)</div>
-            </div>
-            <div class="fa-agent ag-ag05" onclick="faShow('ag05')">
-              <div class="ac">AG-05</div>
-              <div class="an">Copywriter / Roteirista</div>
-              <div class="ad">Roteiro word-for-word, captions e AI prompts. Tudo DENTRO do PACOTE-FULL</div>
-              <div class="ao">📄 PACOTE-FULL-S[N]-[EMPRESA].docx / .md</div>
-            </div>
-            <div class="fa-agent ag-ag10" onclick="faShow('ag10')">
-              <div class="ac">AG-10 ⚠ PENDENTE</div>
-              <div class="an">Designer Visual</div>
-              <div class="ad">PNG via Python/Pillow seguindo brand kits. 0 PNGs S22-28 — precisa rodar até dom 21/06</div>
-              <div class="ao">🖼️ /imagens/[EMPRESA]/-v1.png</div>
-            </div>
-          </div>
-        </div>
-        <div class="fa-arrow">↓</div>
-        <div class="fa-day fa-6h">
-          <div class="fa-day-label"><div class="wk">SEGUNDA</div><div class="tm">06h</div><div class="tp">🤖 auto</div></div>
-          <div class="fa-agents">
-            <div class="fa-agent ag-painel" onclick="faShow('painel')">
-              <div class="ac">PAINEL</div>
-              <div class="an">Painel da Semana (auto-update)</div>
-              <div class="ad">Lê os pacotes, monta HTML e atualiza o artifact. Pronto antes das 8h30</div>
-              <div class="ao">🖥️ painel-controle-mkt · 4 empresas</div>
-            </div>
-          </div>
-        </div>
-        <div class="fa-arrow">↓</div>
-        <div class="fa-day fa-830">
-          <div class="fa-day-label"><div class="wk">SEGUNDA</div><div class="tm">8h30</div><div class="tp">prospecção</div></div>
-          <div class="fa-agents">
-            <div class="fa-agent ag-ag13" onclick="faShow('ag13')">
-              <div class="ac">AG-13 ⚠ 0 RUNS</div>
-              <div class="an">Pesquisa Nicho / ICP</div>
-              <div class="ad">Vibe Prospecting — teto 70 créditos. Gera lista priorizada p/ AG-03</div>
-              <div class="ao">📋 _PROSPECCAO-AG13/PROSPECCAO-[SEG]-[DATA].md</div>
-            </div>
-            <div class="fa-agent ag-ag03" onclick="faShow('ag03')">
-              <div class="ac">AG-03</div>
-              <div class="an">Prospecção LinkedIn ADFly</div>
-              <div class="ad">Parte da lista AG-13. Templates rotativos. Leads → CSV semanal</div>
-              <div class="ao">📋 Leads → CSV (CRM offline)</div>
-            </div>
-          </div>
-        </div>
-        <div class="fa-arrow">↓</div>
-        <div class="fa-day fa-semana">
-          <div class="fa-day-label"><div class="wk">SEG→DOM</div><div class="tm">📲</div><div class="tp">publicação</div></div>
-          <div class="fa-agents">
-            <div class="fa-agent ag-ag11" onclick="faShow('ag11')">
-              <div class="ac">AG-11</div>
-              <div class="an">LDR Inbound</div>
-              <div class="ad">Recebe leads orgânicos, qualifica (0-11pts), encaminha ou nutre</div>
-              <div class="ao">≥8pts → Alexandre · 5-7pts → Nutrição · &lt;5 → Descarte</div>
-            </div>
-            <div class="fa-agent ag-posts" onclick="faShow('publicacao')">
-              <div class="ac">POSTS</div>
-              <div class="an">Publicação (Alexandre)</div>
-              <div class="ad">Abre o Painel (pronto às 6h), copia roteiro/legenda e posta conforme grade</div>
-              <div class="ao">📱 IG · TikTok · LinkedIn · YouTube · Stories</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="fa-detail"></div>
-      <div style="margin-top:16px;font-size:11px;color:#718096;text-align:center">
-        Spec: <code style="background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:10px">Base Estratégica Projeto MKT/SPEC-PAINEL-CONTROLE-MKT.md</code>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- TAB 3 — GAPS & PRIORIDADES                 -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="pane">
-  <div class="summary-bar">
-    <div class="summary-tile red"><div class="st-num">4</div><div class="st-label">Críticos (bloqueia próxima semana)</div></div>
-    <div class="summary-tile amber"><div class="st-num">2</div><div class="st-label">Importantes (qualidade/operação)</div></div>
-    <div class="summary-tile green"><div class="st-num">7</div><div class="st-label">Resolvidos</div></div>
-  </div>
-
-  <div class="section-title">🔴 Críticos</div>
-  <div class="gap-item co-block" data-co="adfly">
-    <div class="gi-icon">🖼</div>
-    <div class="gi-body">
-      <div class="gi-title">Imagens S22-28 — 0 PNGs para ADFly, AleChef e BPMF</div>
-      <div class="gi-desc">Copy pronto para AleChef e BPMF. Scripts Python/Pillow precisam rodar antes de seg 22/06. ADFly ainda sem speech (ver próximo gap).</div>
-      <div class="gi-co">ADFly · AleChef · BPMF · AG-10 · Urgência: antes de seg 22/06</div>
-    </div>
-  </div>
-  <div class="gap-item co-block" data-co="adfly">
-    <div class="gi-icon">🎙</div>
-    <div class="gi-body">
-      <div class="gi-title">ADFly S22-28 — sem speech word-for-word</div>
-      <div class="gi-desc">Pacote tem copy e AI prompts mas não tem roteiro word-for-word. Viola padrão v2 obrigatório. AG-05 completa antes de AG-10 rodar.</div>
-      <div class="gi-co">ADFly · AG-05 · Urgência: antes de sáb 21/06</div>
-    </div>
-  </div>
-  <div class="gap-item co-block" data-co="marcela">
-    <div class="gi-icon">📦</div>
-    <div class="gi-body">
-      <div class="gi-title">Marcela S3 (23-29/06) — não iniciado</div>
-      <div class="gi-desc">Semana 3 começa Ter 23/06. Grade → copy (7 peças) → imagens (20+ PNGs) precisa rodar completo. TikTok trend em 5 dias: urgente.</div>
-      <div class="gi-co">Marcela · AG-04 + AG-05 + AG-10 · Urgência: antes de ter 23/06</div>
-    </div>
-  </div>
-  <div class="gap-item co-block" data-co="adfly">
-    <div class="gi-icon">📂</div>
-    <div class="gi-body">
-      <div class="gi-title">Imagens S16-22 em pasta S15-21 — estrutura desalinhada</div>
-      <div class="gi-desc">37 PNGs das 3 empresas Alexandre estão em Semana 15-21 em vez de Semana 16-22. Funciona operacionalmente mas quebra rastreabilidade.</div>
-      <div class="gi-co">ADFly · AleChef · BPMF · AG-10 · Corrigir a partir de S22-28</div>
-    </div>
-  </div>
-
-  <div class="section-title">🟡 Importantes</div>
-  <div class="gap-item warn co-block" data-co="adfly">
-    <div class="gi-icon">🔍</div>
-    <div class="gi-body">
-      <div class="gi-title">AG-13 Vibe Prospecting — zero rodadas registradas</div>
-      <div class="gi-desc">Pasta _PROSPECCAO-AG13 vazia. AG-03 prospecta sem critério ICP sistematizado.</div>
-      <div class="gi-co">ADFly · AG-13 · Acionar segunda 22/06</div>
-    </div>
-  </div>
-  <div class="gap-item warn">
-    <div class="gi-icon">🗃</div>
-    <div class="gi-body">
-      <div class="gi-title">CRM Supabase offline — CSV manual</div>
-      <div class="gi-desc">API Supabase não conectada. Leads via CSV manual. Risco de perda de histórico.</div>
-      <div class="gi-co">ADFly · CRM · Retomar script crm-fetch.js</div>
-    </div>
-  </div>
-
-  <div class="section-title">✅ Resolvidos</div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">Radar de Tendências 19/06/2026 — 🟢 ADFly · AleChef · BPMF · Marcela</div><div class="gi-desc">Primeira execução manual. 3 provocações/empresa com fonte citada. Salvo em PROVOCACOES-*-Semana-29-06-05-07-2026.md. Cron automático inicia qui 25/06 às 08h01.</div></div></div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">Radar 18/06 gerado — RADAR-CONSOLIDADO-18-06-2026.md</div><div class="gi-desc">5 empresas. ICA 100-40 em 13 dias, inverno em 3 dias, Monte Verde em 9 dias.</div></div></div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">S22-28 AleChef + BPMF — copy+speech+AI prontos</div><div class="gi-desc">Pacotes v2 completos. Aguardando AG-10 para imagens.</div></div></div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">Painel auto-update toda segunda 6h</div><div class="gi-desc">Scheduled task criado em 16/06. Funcional.</div></div></div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">Pacotes S16-22 — 4 empresas · 14 posts · padrão v2</div><div class="gi-desc">ADFly×4, AleChef×3, BPMF×3, Marcela×4.</div></div></div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">Marcela S2 — 7 peças + 21 PNGs padrão v2 100%</div><div class="gi-desc">21 PNGs gerados em pasta definitiva S16-22.</div></div></div>
-  <div class="gap-item ok"><div class="gi-icon">✅</div><div class="gi-body"><div class="gi-title">Radar agendado toda quinta 08h</div><div class="gi-desc">Próxima execução: qui 25/06 às 08h.</div></div></div>
-</div>
-
-<!-- ═══════════════════════════════════════════════ -->
-<!-- TAB 4 — RADAR                                   -->
-<!-- ═══════════════════════════════════════════════ -->
-<div class="pane">
-  <div class="radar-tab-wrap">
-    <div class="radar-tab-header">
-      <h2>📡 Radar Semanal de Concorrentes · 18/06/2026</h2>
-      <span class="rt-meta">Gerado automaticamente toda quinta 08h · Input para grade de segunda 22/06/2026 · 5 empresas</span>
-    </div>
-    <!-- Briefing Executivo dark -->
-    <div style="background:#0F2340;border:1px solid #2563EB;border-radius:12px;padding:16px 20px;margin-bottom:16px;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#60A5FA;letter-spacing:.5px;margin-bottom:6px;">📌 Briefing Executivo · 18/06/2026</div>
-      <div style="font-size:13px;color:#E2E8F0;line-height:1.75;">Semana de timing simultâneo para as 5 empresas: ICA 100-40 DECEA em 12 dias (ADFly), início do inverno em 2 dias — AMANHÃ (AleChef + BPMF), Monte Verde "Inverno nas Montanhas" em 8 dias (BPMF), TikTok trend gastos de julho chegando ao IG em ~4 dias (Marcela), Kaizen acelerando em IA esta semana (TRAÇÃO). Quem publicar agora captura janelas que não se repetem no trimestre.</div>
-    </div>
-    <!-- Pulse KPIs dark -->
-    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;">
-        <div style="font-size:22px;font-weight:800;color:#9FE83A;">5</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.3;">empresas<br>monitoradas</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;">
-        <div style="font-size:22px;font-weight:800;color:#1E90FF;">4</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.3;">timings<br>urgentes</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.4);border-radius:8px;padding:10px 16px;">
-        <div style="font-size:22px;font-weight:800;color:#FC8181;">1</div>
-        <div style="font-size:11px;color:rgba(252,129,129,.7);line-height:1.3;">alerta<br>crítico</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 16px;">
-        <div style="font-size:22px;font-weight:800;color:#F59E0B;">3</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.3;">movimentos<br>detectados</div>
-      </div>
-    </div>
-    <!-- Alert Banner crítico ICA dark -->
-    <div style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;">
-      <div style="font-size:18px;flex-shrink:0;margin-top:1px;">⚡</div>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:#FC8181;margin-bottom:3px;">URGENTE — ADFly · ICA 100-40 DECEA entra em vigor em 12 dias (01/07/2026)</div>
-        <div style="font-size:12px;color:rgba(252,129,129,.8);font-style:italic;">Ação: publicar conteúdo de autoridade regulatória ESTA semana — janela que não se repete no semestre.</div>
-      </div>
-    </div>
-
-    <div class="rt-toggle" id="radarToggle">
-      <span class="rt-chip rt-chip-corrente" id="rtChipCorrente" onclick="setRadarMode('corrente')">📊 Semana em curso</span>
-      <span class="rt-chip rt-chip-proxima" id="rtChipProxima" onclick="setRadarMode('proxima')">🔮 Próxima semana</span>
-    </div>
-    <span class="rt-ctx-badge rt-ctx-corrente" id="rtContextBadge">📊 Semana em curso — gerado quinta</span>
-
-    <div class="rt-exec" id="radarExec">
-      <h4>📋 Resumo Executivo · 5 Empresas</h4>
-      <div class="rt-exec-item">
-        <span class="rt-exec-co adfly">ADFly</span>
-        <span>ICA 100-40 DECEA ativa em 01/07 — 12 dias. Publicar conteúdo de autoridade regulatória ESTA semana. Concorrente DroneVision postou tutorial de inspeção predial: responder com case real.</span>
-      </div>
-      <div class="rt-exec-item">
-        <span class="rt-exec-co alechef">AleChef</span>
-        <span>Início do inverno em 2 dias (21/06) — AMANHÃ. Cardápio de inverno + convite jantar exclusivo antes de 27/06. Concorrente Chef Particular postou "jantar intimista" há 2 dias com 4.2k curtidas.</span>
-      </div>
-      <div class="rt-exec-item">
-        <span class="rt-exec-co bpmf">BPMF</span>
-        <span>Monte Verde "Inverno nas Montanhas" em 8 dias (27/06). Depoimento de participante tem maior engajamento do nicho esta semana. Pedal do Bem publicou trilha Campos do Jordão com 6.1k views.</span>
-      </div>
-      <div class="rt-exec-item">
-        <span class="rt-exec-co marcela">Marcela</span>
-        <span>Virada de semestre em 11 dias (01/07) — maior gatilho do ano. TikTok trending "gastos de julho" chegando ao IG em ~4 dias. Lacuna: Família Ribeiro 35-45 sem concorrente especializado.</span>
-      </div>
-      <div class="rt-exec-item">
-        <span class="rt-exec-co tracao">TRAÇÃO</span>
-        <span>Kaizen publicou 2 guias de IA esta semana — urgente contra-narrativa. Posicionar Alexandre como alguém que usa IA com resultado real, não apenas teoria. Abrir com case ADFly ou Marcela.</span>
-      </div>
-    </div>
-
-    <div class="rt-transversal">
-      <h4>🌐 Movimento Transversal</h4>
-      <p>Timing simultâneo para todas as 5 empresas: inverno + férias julho criam a maior janela de conteúdo do semestre. Empresas que publicarem esta semana capturam atenção antes dos concorrentes. ICA 100-40 é a maior oportunidade de autoridade para ADFly desde a criação da empresa.</p>
-    </div>
-
-    <div id="radarContent">
-      <div class="rt-section">
-        <div class="rt-section-title">🔍 Análise por Empresa · Semana em Curso 16-22/06</div>
-
-        <div class="rt-exec" style="border-left-color:#1E90FF;margin-bottom:10px">
-          <h4>ADFly · Drones B2B</h4>
-          <div class="rt-exec-item"><span class="rt-exec-co adfly">Movimentos</span><span>DroneVision postou tutorial de inspeção predial (12k views) · AeroImagem lançou pacote "laudo express 48h" · SkyTech silenciosa há 3 semanas</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co adfly">Lacuna</span><span>Nenhum concorrente publicou sobre ICA 100-40. Janela de autoridade regulatória exclusiva.</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co adfly">Ação</span><span>Post LinkedIn + IG sobre ICA 100-40 esta semana. Posicionar ADFly como parceiro de conformidade, não só de imagem.</span></div>
-        </div>
-
-        <div class="rt-exec" style="border-left-color:#C9A77A;margin-bottom:10px">
-          <h4>AleChef · Personal Chef</h4>
-          <div class="rt-exec-item"><span class="rt-exec-co alechef">Movimentos</span><span>Chef Particular IG: "jantar intimista" 4.2k curtidas · Sabor &amp; Arte: marmitas fitness viralizando TikTok · ChefCasa silencioso</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co alechef">Lacuna</span><span>Nenhum concorrente abordou cardápio de inverno ainda. Janela: 3 dias antes do solstício.</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co alechef">Ação</span><span>Carrossel "Menu de Inverno AleChef" + CTA jantar exclusivo. Publicar antes de 21/06.</span></div>
-        </div>
-
-        <div class="rt-exec" style="border-left-color:#39FF14;margin-bottom:10px">
-          <h4>BPMF · Cicloturismo</h4>
-          <div class="rt-exec-item"><span class="rt-exec-co bpmf">Movimentos</span><span>Pedal do Bem: Trilha Campos do Jordão 6.1k views · Rota das Montanhas: parceria com pousada · BikeTravel BR: silencioso</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co bpmf">Lacuna</span><span>Nenhum concorrente anunciou Monte Verde ainda. Janela de 9 dias.</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co bpmf">Ação</span><span>Depoimento participante + teaser Monte Verde 27/06. Formato: Reel curto 30s.</span></div>
-        </div>
-
-        <div class="rt-exec" style="border-left-color:#27ae60;margin-bottom:10px">
-          <h4>Marcela · Gestora Financeira</h4>
-          <div class="rt-exec-item"><span class="rt-exec-co marcela">Movimentos</span><span>Família Ribeiro (P-01): 3 posts "férias de julho" em 7 dias · Dinheiro Inteligente (P-04): carrossel investimentos julho · Finanças Pessoais BR (P-07): reel viagem sem dívida</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co marcela">Lacuna</span><span>Família Ribeiro foca em casal jovem 25-34. Marcela pode dominar 35-45 com filhos: nicho sem especialista claro.</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co marcela">Ação</span><span>Carrossel "Família 35-45: como planejar as férias de julho sem culpa" + CTA consulta. Publicar antes do trend chegar do TikTok (~5 dias).</span></div>
-        </div>
-
-        <div class="rt-exec" style="border-left-color:#B794F4;margin-bottom:10px">
-          <h4>TRAÇÃO · Agência Marketing</h4>
-          <div class="rt-exec-item"><span class="rt-exec-co tracao">Movimentos</span><span>Kaizen: 2 guias IA em 7 dias (alto engajamento) · MktLab: case ROI publicidade paga · AgênciaZ: silenciosa há 2 semanas</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co tracao">Lacuna</span><span>Kaizen fala DE IA (teoria). Ninguém mostra IA aplicada COM resultado real. Janela: proof of concept com clientes reais.</span></div>
-          <div class="rt-exec-item"><span class="rt-exec-co tracao">Ação</span><span>Post: "Como a TRAÇÃO usa IA para entregar 5 empresas por semana — resultado real, não teoria." Usar case ADFly ou Marcela como prova.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="radarProximaContent" style="display:none">
-      <div class="rt-section">
-        <div class="rt-section-title">🔮 Pré-análise · Próxima Semana 22-28/06</div>
-        <div style="background:rgba(159,232,58,.08);border:1px solid rgba(159,232,58,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:#E2E8F0;line-height:1.6">
-          <strong style="color:#9FE83A">Radar da próxima semana roda na quinta 25/06 às 08h.</strong> Esta pré-análise é baseada nos timings detectados no radar atual.<br><br>
-          <strong>ADFly:</strong> 7 dias antes do ICA 100-40 (01/07) — publicar checklist de conformidade<br>
-          <strong>AleChef:</strong> 1ª semana de inverno completa — receitas quentes, jantar exclusivo<br>
-          <strong>BPMF:</strong> Monte Verde 27/06 — conteúdo pós-evento / depoimentos<br>
-          <strong>Marcela:</strong> S3 em andamento — conteúdo de férias julho em alta<br>
-          <strong>TRAÇÃO:</strong> Case real semana 1 — mostrar resultado dos 5 pacotes entregues
-        </div>
-      </div>
-    </div>
-
-    <div class="rt-section">
-      <div class="rt-section-title">🎯 Top 3 Oportunidades da Semana</div>
-      <div class="rt-top3-grid">
-        <div class="rt-top3-item">
-          <div class="rt-num">#1 · ADFly</div>
-          <div class="rt-opp">ICA 100-40 — janela de autoridade única</div>
-          <div class="rt-detail">Nenhum concorrente publicou ainda. Post LinkedIn + IG com antecedência de 12 dias. Quem publica primeiro vira referência no segmento.</div>
-        </div>
-        <div class="rt-top3-item marcela">
-          <div class="rt-num">#2 · Marcela</div>
-          <div class="rt-opp">Família 35-45 com filhos — nicho sem especialista</div>
-          <div class="rt-detail">TikTok trend chegando em 4 dias. Publicar antes = capturar onda. Carrossel planejamento férias julho antes do dia 23.</div>
-        </div>
-        <div class="rt-top3-item alechef">
-          <div class="rt-num">#3 · AleChef + BPMF</div>
-          <div class="rt-opp">Inverno começa em 3 dias — janela sazonal</div>
-          <div class="rt-detail">Solstício AMANHÃ 21/06. Cardápio inverno + Monte Verde 27/06. Timing favorável para ambas as marcas simultaneamente.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="rt-section">
-      <div class="rt-section-title">⏰ Timing Alert — Ações Prioritárias</div>
-      <table class="rt-timing-table">
-        <thead><tr><th>Empresa</th><th>Evento</th><th>Prazo</th><th>Ação</th></tr></thead>
-        <tbody>
-          <tr><td><span class="rt-exec-co adfly" style="font-size:11px">ADFly</span></td><td>ICA 100-40 DECEA</td><td><span class="rt-urgente-badge">12 dias · 01/07</span></td><td>Post regulatório ESTA semana</td></tr>
-          <tr><td><span class="rt-exec-co alechef" style="font-size:11px">AleChef</span></td><td>Início do Inverno</td><td><span class="rt-urgente-badge">2 dias · 21/06 AMANHÃ</span></td><td>Cardápio inverno + jantar exclusivo</td></tr>
-          <tr><td><span class="rt-exec-co bpmf" style="font-size:11px">BPMF</span></td><td>Monte Verde Inverno</td><td><span class="rt-urgente-badge">8 dias · 27/06</span></td><td>Depoimento + teaser evento</td></tr>
-          <tr><td><span class="rt-exec-co marcela" style="font-size:11px">Marcela</span></td><td>TikTok trend → IG</td><td><span class="rt-urgente-badge">~4 dias</span></td><td>Carrossel Família 35-45 férias</td></tr>
-          <tr><td><span class="rt-exec-co tracao" style="font-size:11px">TRAÇÃO</span></td><td>Kaizen acelerando IA</td><td><span class="rt-urgente-badge">esta semana</span></td><td>Case real IA com resultado</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="rt-section">
-      <div class="rt-section-title">📎 Fontes</div>
-      <ul class="rt-fonte-list">
-        <li>Instagram · monitoramento manual de 12+ perfis concorrentes · 17-18/06/2026</li>
-        <li>TikTok · trending topics "gastos julho", "inverno 2026" · 18/06</li>
-        <li>DECEA/ANAC · ICA 100-40 publicado oficialmente (vigência 01/07/2026)</li>
-        <li>Google Trends · "planejamento financeiro férias julho" em alta desde 15/06</li>
-        <li>Radar Individual: RADAR-ADFLY-18-06-2026.md · RADAR-ALECHEF-18-06-2026.md · RADAR-BPMF-18-06-2026.md · RADAR-MARCELA-18-06-2026.md · RADAR-TRAC-18-06-2026.md</li>
+      <ul class="score-items">
+        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> Imagens — 20 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> Speech + AI Prompts (v2)</li>
+        <li class="done"><span class="check-icon">✅</span> Bloco WhatsApp</li>
+        <li class="warn"><span class="check-icon">🟡</span> LinkedIn Qua: confirmar sem emoji</li>
+        <li class="done"><span class="check-icon">✅</span> QA AG-QA executado</li>
       </ul>
+      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
+        Peças: Carrossel Seg+Qui+Sex (6 slides cada) · Post Qua IG+LinkedIn
+      </div>
+    </div>
+
+    <!-- AleChef -->
+    <div class="score-card">
+      <div class="score-card-header">
+        <div class="score-dot" style="background:var(--alechef)"></div>
+        <div class="score-company">AleChef</div>
+        <div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div>
+      </div>
+      <div class="score-pct" style="color:var(--alechef)">100%</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" style="width:100%; background:var(--alechef)"></div>
+        </div>
+      </div>
+      <ul class="score-items">
+        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> Imagens — 6 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> Speech Reel Qua com timecodes</li>
+        <li class="done"><span class="check-icon">✅</span> AI Prompts (todos formatos)</li>
+        <li class="done"><span class="check-icon">✅</span> Bloco WhatsApp</li>
+        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE sem pendências</li>
+      </ul>
+      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
+        Peças: Post+Story Feed Seg · Reel Qua (1 mês AleChef) · Stories Sex (3 frames)
+      </div>
+    </div>
+
+    <!-- BPMF -->
+    <div class="score-card">
+      <div class="score-card-header">
+        <div class="score-dot" style="background:var(--bpmf)"></div>
+        <div class="score-company">BPMF</div>
+        <div style="margin-left:auto"><span class="badge badge-yellow">🟡 90%</span></div>
+      </div>
+      <div class="score-pct" style="color:var(--bpmf)">90%</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" style="width:90%; background:var(--bpmf)"></div>
+        </div>
+      </div>
+      <ul class="score-items">
+        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> Imagens — 13 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> AI Prompts por slide</li>
+        <li class="warn"><span class="check-icon">🟡</span> Bloco WhatsApp — confirmar no .docx</li>
+        <li class="done"><span class="check-icon">✅</span> Identidade visual correta</li>
+        <li class="done"><span class="check-icon">✅</span> QA AG-QA executado</li>
+      </ul>
+      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
+        Peças: Carrossel Seg (5sl) · Carrossel Qui (4sl) · Stories Sab 28/06 (4fr CTA vagas)
+      </div>
+    </div>
+
+    <!-- Marcela -->
+    <div class="score-card">
+      <div class="score-card-header">
+        <div class="score-dot" style="background:var(--marcela)"></div>
+        <div class="score-company">Marcela</div>
+        <div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div>
+      </div>
+      <div class="score-pct" style="color:var(--marcela)">100%</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg">
+          <div class="score-bar-fill" style="width:100%; background:var(--marcela)"></div>
+        </div>
+      </div>
+      <ul class="score-items">
+        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> Imagens — 21 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> Speech Reels Ter+Qui com timecodes</li>
+        <li class="done"><span class="check-icon">✅</span> LinkedIn: copy + AI Prompt 1200×1200</li>
+        <li class="done"><span class="check-icon">✅</span> Bloco WhatsApp + BROADCAST mensal</li>
+        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE sem pendências</li>
+      </ul>
+      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
+        Peças: 2 carrosseis · 2 reels LinkedIn · Post+Stories Sex · Broadcast julio
+      </div>
+    </div>
+  </div>
+
+  <!-- CRONOGRAMA DIA A DIA -->
+  <div class="section-title">🗓 Cronograma S14 — Dia a Dia</div>
+  <table class="data-table" style="background:var(--surface); border-radius:8px; overflow:hidden; border: 1px solid var(--border);">
+    <thead>
+      <tr>
+        <th>Dia</th>
+        <th>ADFly</th>
+        <th>AleChef</th>
+        <th>BPMF</th>
+        <th>Marcela</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Seg 22/06</strong></td>
+        <td>Carrossel (6 slides)</td>
+        <td>Post Feed + Story</td>
+        <td>Carrossel (5 slides)</td>
+        <td>Carrossel milhas (6sl)</td>
+      </tr>
+      <tr>
+        <td><strong>Ter 23/06</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+        <td>Reel + LinkedIn 📌</td>
+      </tr>
+      <tr>
+        <td><strong>Qua 24/06</strong></td>
+        <td>Post IG + LinkedIn 🟡</td>
+        <td>Reel (1 mês AleChef)</td>
+        <td>—</td>
+        <td>Carrossel carro×escola (7sl)</td>
+      </tr>
+      <tr>
+        <td><strong>Qui 25/06</strong> ⭐</td>
+        <td>Carrossel (6 slides)</td>
+        <td>—</td>
+        <td>Carrossel (4 slides)</td>
+        <td>Reel LinkedIn</td>
+      </tr>
+      <tr>
+        <td><strong>Sex 26/06</strong></td>
+        <td>Carrossel (6 slides)</td>
+        <td>Stories (3 frames)</td>
+        <td>—</td>
+        <td>Post + Stories</td>
+      </tr>
+      <tr>
+        <td><strong>Sáb 28/06</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td>Stories CTA vagas ⚡</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:8px; font-size:11px; color:var(--muted);">⭐ Hoje · 📌 LinkedIn obrigatório com imagem 1200×1200 · 🟡 Confirmar versão sem emoji · ⚡ 4º Pedal Estrada de Ferro ao vivo</div>
+
+  <!-- PROSPECÇÃO -->
+  <hr class="section-divider">
+  <div class="section-title">🎯 Prospecção ADFly — S14</div>
+  <div class="alert-banner yellow">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text">
+      <strong>AG-13 não rodou esta semana.</strong> Pasta _PROSPECCAO-AG13/ está vazia. Vibe Prospecting (teto 70 créditos/semana) deve rodar segunda manhã. Créditos usados: 0/70. AG-03 aguardando lista do AG-13.
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════ -->
-<!-- TAB 5 — SISTEMA                           -->
-<!-- ══════════════════════════════════════════ -->
-<div class="pane">
+<!-- ======================== TAB: UNIFORMIDADE ======================== -->
+<div id="tab-uniformidade" class="tab-content">
+  <div class="section-title">⚖️ Matriz de Uniformidade — S14</div>
+  <div class="matrix-wrap">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th style="text-align:left; min-width:180px;">Critério</th>
+          <th>🚁 ADFly</th>
+          <th>👨‍🍳 AleChef</th>
+          <th>🚴 BPMF</th>
+          <th>💰 Marcela</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brand Kit aplicado</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>Produção Python/Pillow</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>Padrão v2 (speech+arc+AI prompts)</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>LinkedIn imagem 1200×1200</td>
+          <td><span class="badge badge-yellow">🟡</span></td>
+          <td>N/A</td>
+          <td>N/A</td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>Zero emoji B2B/LinkedIn</td>
+          <td><span class="badge badge-yellow">🟡 Confirmar</span></td>
+          <td>N/A</td>
+          <td>N/A</td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>Bloco WhatsApp</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-yellow">🟡 Confirmar</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>ICP incorporado</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>Radar + INBOX integrado</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-green">✅</span></td>
+        </tr>
+        <tr>
+          <td>AG-11 (Inbound) ativo</td>
+          <td><span class="badge badge-green">✅</span></td>
+          <td><span class="badge badge-gray">N/A</span></td>
+          <td><span class="badge badge-gray">N/A</span></td>
+          <td><span class="badge badge-gray">N/A</span></td>
+        </tr>
+        <tr>
+          <td>Prospecção AG-13 + AG-03</td>
+          <td><span class="badge badge-red">🔴 Pendente</span></td>
+          <td><span class="badge badge-gray">N/A</span></td>
+          <td><span class="badge badge-gray">N/A</span></td>
+          <td><span class="badge badge-gray">N/A</span></td>
+        </tr>
+        <tr>
+          <td>Semana S15 (preview)</td>
+          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
+          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
+          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
+          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:12px; font-size:11px; color:var(--muted);">
+    🟡 = Ajuste menor confirmável em &lt; 2 min · 🔴 = Bloqueador que impede semana seguinte · N/A = Não aplicável ao canal da empresa
+  </div>
+</div>
 
-  <div class="sub-tabs">
-    <span class="sub-tab active" onclick="switchSubTab(this,'sys-uni')">🎨 Uniformidade</span>
-    <span class="sub-tab" onclick="switchSubTab(this,'sys-flow')">🔄 Fluxo</span>
-    <span class="sub-tab" onclick="switchSubTab(this,'sys-audit')">✅ Auditoria</span>
+<!-- ======================== TAB: FLUXO SEMANAL ======================== -->
+<div id="tab-fluxo-semanal" class="tab-content">
+  <div class="section-title">🗓 Fluxo Padrão — Semana-Tipo</div>
+
+  <div class="flow-week">
+    <div class="flow-week-title">📋 Empresas Alexandre (ADFly · AleChef · BPMF)</div>
+    <div class="flow-days">
+      <div class="flow-day past">
+        <div class="flow-day-name">Quinta (08h)</div>
+        <ul class="flow-day-items">
+          <li>📡 Radar Concorrentes</li>
+          <li>📡 Radar Tendências (08h01)</li>
+          <li>Relatórios em _RADAR-SEMANAL/</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">Segunda (08h30)</div>
+        <ul class="flow-day-items">
+          <li>AG-13: Vibe Prospecting</li>
+          <li>AG-03: LinkedIn (09h30)</li>
+          <li>Ler RADAR + INBOX</li>
+          <li>Montar grade editorial</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">Segunda–Qua</div>
+        <ul class="flow-day-items">
+          <li>AG-05: Copy + Speech</li>
+          <li>AG-05: AI Prompts (v2)</li>
+          <li>AG-10: Imagens Python/Pillow</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">Domingo</div>
+        <ul class="flow-day-items">
+          <li>AG-QA: Auditoria</li>
+          <li>VERDE: pacote fechado</li>
+          <li>AMARELO: Alexandre aprova</li>
+          <li>VERMELHO: AG-10 corrige</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <!-- UNIFORMIDADE -->
-  <div class="sub-pane active" id="sys-uni">
-    <div class="matrix-wrap">
-      <table class="matrix">
+  <div class="flow-week">
+    <div class="flow-week-title">📋 Clientes Agência (Marcela · TRAÇÃO)</div>
+    <div class="flow-days">
+      <div class="flow-day past">
+        <div class="flow-day-name">Quinta (08h)</div>
+        <ul class="flow-day-items">
+          <li>📡 Radar cliente roda</li>
+          <li>Relatório salvo na pasta</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">Sexta (até 18h)</div>
+        <ul class="flow-day-items">
+          <li>Alexandre lança INBOX</li>
+          <li>AG-04 fecha grade</li>
+          <li>Cruza _TEMAS-USADOS</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">Sábado</div>
+        <ul class="flow-day-items">
+          <li>AG-05: copy completo</li>
+          <li>AG-10: imagens</li>
+          <li>AG-QA: auditoria</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">Dom (até 10h)</div>
+        <ul class="flow-day-items">
+          <li>PACOTE-FULL finalizado</li>
+          <li>Painel atualizado</li>
+          <li>Alexandre: revisão final</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">📍 Estado Atual do Ciclo — S14 (25/06/2026)</div>
+  <div class="flow-week">
+    <div class="flow-days">
+      <div class="flow-day past">
+        <div class="flow-day-name">✅ Seg 22/06</div>
+        <ul class="flow-day-items">
+          <li>✅ Publicação S14 iniciada</li>
+          <li>⬜ AG-13 não rodou</li>
+          <li>⬜ AG-03 aguardando</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">✅ Ter 23/06</div>
+        <ul class="flow-day-items">
+          <li>✅ Marcela: Reel+LinkedIn</li>
+        </ul>
+      </div>
+      <div class="flow-day past">
+        <div class="flow-day-name">✅ Qua 24/06</div>
+        <ul class="flow-day-items">
+          <li>✅ ADFly: Post IG+LI 🟡</li>
+          <li>✅ AleChef: Reel (1 mês)</li>
+          <li>✅ Marcela: Carrossel</li>
+        </ul>
+      </div>
+      <div class="flow-day today">
+        <div class="flow-day-name">⭐ Qui 25/06 (HOJE)</div>
+        <ul class="flow-day-items">
+          <li>📡 Radar 08h ✅ gerado</li>
+          <li>🚁 ADFly: Carrossel Qui</li>
+          <li>🚴 BPMF: Carrossel Qui</li>
+          <li>💰 Marcela: Reel Qui</li>
+          <li>⚠️ Atualizar painel ✅</li>
+        </ul>
+      </div>
+      <div class="flow-day">
+        <div class="flow-day-name">Sex 26/06</div>
+        <ul class="flow-day-items">
+          <li>🚁 ADFly: Carrossel Sex</li>
+          <li>👨‍🍳 AleChef: Stories</li>
+          <li>💰 Marcela: Post+Stories</li>
+          <li>⚠️ INBOX S15 (Alexandre)</li>
+        </ul>
+      </div>
+      <div class="flow-day">
+        <div class="flow-day-name">Sáb 28/06</div>
+        <ul class="flow-day-items">
+          <li>🚴 BPMF: Stories ao vivo</li>
+          <li>4º Pedal Estrada de Ferro</li>
+          <li>Deadline cliente: Dom 10h</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB: AGENTES ======================== -->
+<div id="tab-agentes" class="tab-content">
+  <div class="section-title">🤖 Status dos Agentes — S14</div>
+  <div class="agents-grid">
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-00</span>
+        <span class="badge badge-green">🟢 Ativo</span>
+      </div>
+      <div class="agent-name">Coordenador Dept. MKT</div>
+      <div class="agent-desc">Orquestra todos os agentes, agenda automações, atualiza painéis toda Qui 09h.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-03</span>
+        <span class="badge badge-yellow">🟡 Aguardando AG-13</span>
+      </div>
+      <div class="agent-name">Prospector LinkedIn</div>
+      <div class="agent-desc">Abordagem LinkedIn ADFly a partir da lista do AG-13. Leads → Supabase CRM. Aguarda lista desta semana.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-04</span>
+        <span class="badge badge-green">🟢 Concluído S14</span>
+      </div>
+      <div class="agent-name">Estrategista Editorial</div>
+      <div class="agent-desc">Grade editorial S14 definida para 5 clientes com base no Radar + INBOX de cada empresa.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-05</span>
+        <span class="badge badge-green">🟢 Concluído S14</span>
+      </div>
+      <div class="agent-name">Copy & Speech Writer</div>
+      <div class="agent-desc">PACOTE-FULL v2 produzido para ADFly, AleChef, BPMF, Marcela, TRAÇÃO. Speech word-for-word + AI Prompts incluídos.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-10</span>
+        <span class="badge badge-green">🟢 60 PNGs gerados</span>
+      </div>
+      <div class="agent-name">Designer Visual (Pillow)</div>
+      <div class="agent-desc">Python/Pillow. ADFly 20 · AleChef 6 · BPMF 13 · Marcela 21. Total: 60 PNGs. Canva banido desde 12/06.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-11</span>
+        <span class="badge badge-green">🟢 Ativo (ADFly)</span>
+      </div>
+      <div class="agent-name">LDR Inbound ADFly</div>
+      <div class="agent-desc">Qualifica e nutre leads inbound. Lead Score 0-11pts. GMB como canal prioritário. SOP v1.0 ativo.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-12</span>
+        <span class="badge badge-green">🟢 Radar 25/06 gerado</span>
+      </div>
+      <div class="agent-name">Estrategista de Posicionamento</div>
+      <div class="agent-desc">RADAR-CONSOLIDADO-25-06-2026.md gerado. 5 empresas monitoradas. Rotina quinta 08h.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-13</span>
+        <span class="badge badge-red">🔴 Não rodou S14</span>
+      </div>
+      <div class="agent-name">Pesquisa Nicho/ICP (Vibe)</div>
+      <div class="agent-desc">Vibe Prospecting ADFly. Teto: 70 créditos/semana. Pasta _PROSPECCAO-AG13/ vazia esta semana. Aguarda execução.</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-id">AG-QA</span>
+        <span class="badge badge-yellow">🟡 2 pendências</span>
+      </div>
+      <div class="agent-name">Auditor de Qualidade</div>
+      <div class="agent-desc">S14 auditada em 21/06. Nenhum VERMELHO. 2 AMARELOS: emoji ADFly/LinkedIn e WhatsApp BPMF. Alexandre confirma em &lt;2 min.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB: GAPS ======================== -->
+<div id="tab-gaps" class="tab-content">
+
+  <div class="gap-section">
+    <div class="gap-section-title" style="color:var(--red-light)">🔴 Críticos — Bloqueiam semana seguinte ou são urgentes de timing</div>
+
+    <div class="gap-card critical">
+      <div class="gap-icon">🔴</div>
+      <div class="gap-content">
+        <div class="gap-title">DECEA ICA 100-40 entra em vigor em 01/07 — janela de 6 dias</div>
+        <div class="gap-desc">ANAC + DECEA: qualquer drone (incluindo sub-250g) precisará de autorização SARPAS a partir de 01/07/2026. ADFly deve publicar carrossel + reel de regulamentação até sexta 27/06 para virar referência no nicho. Oportunidade única de timing — não pode ser perdida.</div>
+        <div class="gap-company">🚁 ADFly · Prazo: Sexta 27/06/2026</div>
+      </div>
+    </div>
+
+    <div class="gap-card critical">
+      <div class="gap-icon">⬜</div>
+      <div class="gap-content">
+        <div class="gap-title">AG-13 não rodou esta semana — prospecção ADFly parada</div>
+        <div class="gap-desc">A pasta _PROSPECCAO-AG13/ está vazia para a semana S14. AG-13 (Vibe Prospecting) deveria ter rodado segunda 08h30 e gerado lista priorizada para o AG-03 abordar no LinkedIn. 0 créditos usados de 70 disponíveis. AG-03 aguardando.</div>
+        <div class="gap-company">🚁 ADFly · Responsável: Alexandre acionar AG-13 o quanto antes</div>
+      </div>
+    </div>
+
+    <div class="gap-card critical">
+      <div class="gap-icon">🔴</div>
+      <div class="gap-content">
+        <div class="gap-title">TRAÇÃO Semana 1 (16–22/06) — sem documentação formal</div>
+        <div class="gap-desc">Pasta Semana 16-22-06-2026/ existe mas contém apenas subpasta imagens/ vazia. Nenhum .docx de pacote foi produzido para a Semana 1 da TRAÇÃO. Pacote S14 referencia "Semana 2" mas não há evidência documental da Semana 1. Ação: Alexandre confirmar se houve entrega informal e registrar nota em Semana 16-22-06-2026/SEMANA1-TRACAO-nota.md.</div>
+        <div class="gap-company">⚡ TRAÇÃO · Responsável: Alexandre confirmar + Claude registrar</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-section">
+    <div class="gap-section-title" style="color:var(--yellow-light)">🟡 Importantes — Qualidade/Operação (ajuste &lt;2 min)</div>
+
+    <div class="gap-card important">
+      <div class="gap-icon">🟡</div>
+      <div class="gap-content">
+        <div class="gap-title">ADFly — Post Qua 24/06: confirmar versão LinkedIn sem emoji</div>
+        <div class="gap-desc">Post de Quarta (IG + LinkedIn) contém emoji 📐🌡📋 na legenda IG. Régua de Qualidade ADFly proíbe emoji em peças B2B/LinkedIn. Confirmar que a versão publicada no LinkedIn usa copy separado sem emoji. Se não houver separação no pacote, remover manualmente na hora de publicar.</div>
+        <div class="gap-company">🚁 ADFly · Alexandre confirma antes de publicar no LinkedIn</div>
+      </div>
+    </div>
+
+    <div class="gap-card important">
+      <div class="gap-icon">🟡</div>
+      <div class="gap-content">
+        <div class="gap-title">BPMF — Confirmar Bloco WhatsApp no pacote</div>
+        <div class="gap-desc">AG-QA não confirmou existência formal de BLOCO WHATSAPP com STATUS TEXTO ≤160 chars + AI Prompt 1080×1080 no pacote BPMF. Pode estar em seção de tabela não capturada. Alexandre abre .docx e confirma. Sugestão de status: "Vagas Jornada Julho quase esgotando. Serra. Trilha. Comunidade. 🚴 Link na bio." (93 chars)</div>
+        <div class="gap-company">🚴 BPMF · Alexandre confirma em &lt;2 min antes de segunda</div>
+      </div>
+    </div>
+
+    <div class="gap-card important">
+      <div class="gap-icon">📡</div>
+      <div class="gap-content">
+        <div class="gap-title">Radar de Tendências 25/06 — execução do dia não registrada no LOG</div>
+        <div class="gap-desc">A task radar-tendencias-provocacoes deveria ter rodado hoje às 08h01. O LOG-EXECUCAO-RADAR.md ainda não tem entrada de 25/06. Última execução registrada: 19/06/2026 (manual, todos 🟢). Verificar se o cron rodou e atualizar o LOG com a entrada da semana.</div>
+        <div class="gap-company">Todas as empresas · Verificar após esta atualização do painel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-section">
+    <div class="gap-section-title" style="color:#56d364">✅ Resolvidos Recentemente</div>
+
+    <div class="gap-card resolved">
+      <div class="gap-icon">✅</div>
+      <div class="gap-content">
+        <div class="gap-title">Migração de estrutura de pastas concluída</div>
+        <div class="gap-desc">ADFly, AleChef e BPMF agora em pastas individuais dentro de Agência MKT — Clientes/ com estrutura Semana DD-DD-MM-AAAA/. Legado Empresas Alexandre/Semanas/ desativado.</div>
+        <div class="gap-company">Todas as empresas Alexandre · Resolvido 22/06/2026</div>
+      </div>
+    </div>
+
+    <div class="gap-card resolved">
+      <div class="gap-icon">✅</div>
+      <div class="gap-content">
+        <div class="gap-title">Canva substituído por Python/Pillow em todas as empresas</div>
+        <div class="gap-desc">60 PNGs de S14 gerados 100% via Python/Pillow. Zero dependência de Canva ou créditos externos. Todas as templates de cada empresa configuradas.</div>
+        <div class="gap-company">Todas as empresas · Resolvido 12/06/2026</div>
+      </div>
+    </div>
+
+    <div class="gap-card resolved">
+      <div class="gap-icon">✅</div>
+      <div class="gap-content">
+        <div class="gap-title">Padrão v2 (speech + arc + AI prompts dentro do docx) operando</div>
+        <div class="gap-desc">Todos os pacotes S14 nasceram com padrão v2 completo. Nenhum arquivo COMPLEMENTO separado. PADRAO-ENTREGA-CONTEUDO-v2.md em vigor.</div>
+        <div class="gap-company">Todas as empresas · Resolvido a partir de S22-28/06/2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TAB: AUDITORIA ======================== -->
+<div id="tab-auditoria" class="tab-content">
+  <div class="section-title">✅ Auditoria de Entregas — S14 (AG-QA · 21/06/2026)</div>
+
+  <div class="audit-wrap">
+    <table class="data-table" style="background:var(--surface); border-radius:8px; overflow:hidden; border:1px solid var(--border);">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Peça / Formato</th>
+          <th>Copy</th>
+          <th>Speech</th>
+          <th>AI Prompt</th>
+          <th>Imagens</th>
+          <th>WhatsApp</th>
+          <th>LinkedIn</th>
+          <th>Status Geral</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="4" style="color:var(--adfly); font-weight:600; vertical-align:top; padding-top:12px;">🚁 ADFly</td>
+          <td>Carrossel Seg 22/06 (6sl)</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 6</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Post Qua 24/06 (IG+LI)</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 2</td>
+          <td>✅</td>
+          <td><span class="badge badge-yellow">🟡 emoji</span></td>
+          <td><span class="badge badge-yellow">🟡</span></td>
+        </tr>
+        <tr>
+          <td>Carrossel Qui 25/06 (6sl)</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 6</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Carrossel Sex 26/06 (6sl)</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 6</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td rowspan="3" style="color:var(--alechef); font-weight:600; vertical-align:top; padding-top:12px;">👨‍🍳 AleChef</td>
+          <td>Post+Story Feed Seg 22/06</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 2</td>
+          <td>✅</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Reel Qua 25/06 (1 mês)</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 1</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Stories Sex 27/06 (3 frames)</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 3</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td rowspan="3" style="color:var(--bpmf); font-weight:600; vertical-align:top; padding-top:12px;">🚴 BPMF</td>
+          <td>Carrossel Seg 22/06 (5sl)</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 5</td>
+          <td><span class="badge badge-yellow">🟡</span></td>
+          <td>—</td>
+          <td><span class="badge badge-yellow">🟡</span></td>
+        </tr>
+        <tr>
+          <td>Carrossel Qui 25/06 (4sl)</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 4</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Stories Sab 28/06 (4fr)</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 4</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td rowspan="5" style="color:var(--marcela); font-weight:600; vertical-align:top; padding-top:12px;">💰 Marcela</td>
+          <td>Carrossel Seg 22/06 (6sl)</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 6</td>
+          <td>✅</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Reel+LinkedIn Ter 23/06</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 2</td>
+          <td>—</td>
+          <td>✅</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Carrossel Qua 25/06 (7sl)</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 7</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Reel Qui 26/06</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>✅ 1</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+        <tr>
+          <td>Post+Stories Sex 27/06</td>
+          <td>✅</td>
+          <td>—</td>
+          <td>✅</td>
+          <td>✅ 5</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge badge-green">🟢</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="section-title">📋 Checklist Pré-Entrega</div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px;">
+      <table class="data-table">
         <thead>
-          <tr>
-            <th>Padrão</th>
-            <th class="co-header" data-co="adfly">ADFly</th>
-            <th class="co-header" data-co="alechef">AleChef</th>
-            <th class="co-header" data-co="bpmf">BPMF</th>
-            <th class="co-header" data-co="marcela">Marcela</th>
-            <th class="co-header" data-co="tracao">TRAÇÃO</th>
-          </tr>
+          <tr><th>Item</th><th>ADFly</th><th>AleChef</th><th>BPMF</th><th>Marcela</th></tr>
         </thead>
         <tbody>
-          <tr><td>Brand Kit definido</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-warn">~</span></td></tr>
-          <tr><td>AG-10 Python/Pillow</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>Pacote Padrão v2</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>Speech word-for-word</td><td class="co-col" data-co="adfly"><span class="check-warn">~</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>AI Prompts por peça</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>WhatsApp Status + Imagem</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>LinkedIn obrigatório</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-gap">✗</span></td><td class="co-col" data-co="bpmf"><span class="check-gap">✗</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>Radar semanal ativo</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-ok">✓</span></td></tr>
-          <tr><td>AG-11 Inbound LDR</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-gap">✗</span></td><td class="co-col" data-co="bpmf"><span class="check-gap">✗</span></td><td class="co-col" data-co="marcela"><span class="check-gap">✗</span></td><td class="co-col" data-co="tracao"><span class="check-gap">✗</span></td></tr>
-          <tr><td>INBOX Provocações</td><td class="co-col" data-co="adfly"><span class="check-ok">✓</span></td><td class="co-col" data-co="alechef"><span class="check-ok">✓</span></td><td class="co-col" data-co="bpmf"><span class="check-ok">✓</span></td><td class="co-col" data-co="marcela"><span class="check-ok">✓</span></td><td class="co-col" data-co="tracao"><span class="check-ok">✓</span></td></tr>
+          <tr>
+            <td>Pacote docx na pasta correta</td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+          </tr>
+          <tr>
+            <td>Nomenclatura do arquivo correta</td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+          </tr>
+          <tr>
+            <td>Pasta imagens/ populada</td>
+            <td><span class="badge badge-green">✅ 20</span></td>
+            <td><span class="badge badge-green">✅ 6</span></td>
+            <td><span class="badge badge-green">✅ 13</span></td>
+            <td><span class="badge badge-green">✅ 21</span></td>
+          </tr>
+          <tr>
+            <td>AG-QA executado</td>
+            <td><span class="badge badge-yellow">🟡 S14</span></td>
+            <td><span class="badge badge-green">✅ S14</span></td>
+            <td><span class="badge badge-yellow">🟡 S14</span></td>
+            <td><span class="badge badge-green">✅ S14</span></td>
+          </tr>
+          <tr>
+            <td>Nenhum item VERMELHO aberto</td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+            <td><span class="badge badge-green">✅</span></td>
+          </tr>
+          <tr>
+            <td>INBOX atualizado pós-semana</td>
+            <td><span class="badge badge-yellow">⬜ S15</span></td>
+            <td><span class="badge badge-yellow">⬜ S15</span></td>
+            <td><span class="badge badge-yellow">⬜ S15</span></td>
+            <td><span class="badge badge-yellow">⬜ S15</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div style="margin-top:12px;font-size:11px;color:#888;display:flex;gap:12px;flex-wrap:wrap">
-      <span><span class="check-ok">✓</span> Implantado</span>
-      <span><span class="check-warn">~</span> Parcial</span>
-      <span><span class="check-gap">✗</span> Pendente</span>
-    </div>
   </div>
 
-  <!-- FLUXO -->
-  <div class="sub-pane" id="sys-flow">
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
-      <div class="standard-box">
-        <h4>📅 Fluxo Semanal</h4>
-        <ul>
-          <li>Quinta 08h — Radar automático (todas as empresas)</li>
-          <li>Sexta 16h — Alexandre posta INBOX Provocações</li>
-          <li>Sáb/Dom — Grade → Copy → Imagens → QA</li>
-          <li>Dom até 10h — Pacote de cliente entregue</li>
-          <li>Segunda 06h — Painel atualizado automaticamente</li>
-          <li>Segunda 08h30 — AG-13 Vibe Prospecting (ADFly)</li>
-          <li>Segunda 09h — AG-03 prospecção LinkedIn</li>
-        </ul>
-      </div>
-      <div class="standard-box" style="border-left-color:#9FE83A">
-        <h4>🤖 Automações Ativas</h4>
-        <ul>
-          <li>Radar Concorrentes · toda quinta 08h (scheduled task)</li>
-          <li>Radar Tendências · toda quinta 08h01 (scheduled task — cron a partir de 25/06)</li>
-          <li>Painel auto-update · toda segunda 06h</li>
-          <li>AG-11 LDR Inbound · contínuo (ADFly)</li>
-          <li>AG-03 LinkedIn · toda segunda 09h</li>
-        </ul>
-      </div>
-      <div class="standard-box" style="border-left-color:#C9A77A">
-        <h4>✋ Processos Manuais</h4>
-        <ul>
-          <li>INBOX Provocações · Alexandre toda sexta</li>
-          <li>Export CSV leads · Alexandre todo sábado</li>
-          <li>Aprovação AG-QA AMARELO · WhatsApp (&lt;2min)</li>
-          <li>Deploy Netlify · após qualquer update de painel</li>
-        </ul>
-      </div>
-      <div class="standard-box" style="border-left-color:#E74C3C">
-        <h4>🚧 Próximas Integrações</h4>
-        <ul>
-          <li>Supabase API · reconectar CRM online</li>
-          <li>AG-13 · primeira rodada Vibe Prospecting</li>
-          <li>AG-11 · expandir para AleChef, BPMF, Marcela</li>
-          <li>TRAÇÃO · primeiro pacote completo S22-28</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="section-title" style="margin-top:18px">Calendário de Entregas</div>
-    <div class="card">
-      <div class="day-row"><div class="day-label">🟢 Seg 22/06</div><div style="font-size:12px">ADFly × 1 · AleChef × 1 · BPMF × 1 — Último post S16-22. Painel atualizado 06h.</div></div>
-      <div class="day-row"><div class="day-label">🟡 Ter-Dom 22-28/06</div><div style="font-size:12px">S22-28: ADFly (speech pendente) · AleChef + BPMF (0 PNGs) · Marcela S3 (não iniciado) · TRAÇÃO S1 pendente</div></div>
-      <div class="day-row"><div class="day-label">⏰ 27/06</div><div style="font-size:12px">Monte Verde BPMF — conteúdo evento ao vivo</div></div>
-      <div class="day-row"><div class="day-label">⚡ 01/07</div><div style="font-size:12px">ICA 100-40 ADFly entra em vigor — publicar autoridade antes</div></div>
-      <div class="day-row"><div class="day-label">📡 Qui 25/06 08h</div><div style="font-size:12px">Radar automático — nova execução · 5 empresas</div></div>
-    </div>
-  </div>
-
-  <!-- AUDITORIA -->
-  <div class="sub-pane" id="sys-audit">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-      <div class="audit-section" style="margin:0;border:none;padding:0">📋 Auditoria Geral · 19/06/2026</div>
-      <span class="audit-score full">✅ 5 empresas auditadas</span>
-    </div>
-
-    <div class="standard-box" style="border-left-color:#27ae60">
-      <h4>✅ ADFly Soluções Aéreas — S16-22 · 4 posts · 25 PNGs</h4>
-      <ul>
-        <li>4 posts completos padrão v2 (speech, captions, AI prompts)</li>
-        <li>25 PNGs gerados via Python/Pillow (1080×1080 + 1080×1350 + 1200×1200)</li>
-        <li>LinkedIn com AI Prompt 1200×1200 em todos os posts</li>
-        <li>WhatsApp status + imagem incluídos</li>
-        <li>⚠️ S22-28: speech word-for-word pendente para vídeo</li>
-      </ul>
-    </div>
-
-    <div class="standard-box" style="border-left-color:#27ae60">
-      <h4>✅ AleChef em Casa — S16-22 · 3 posts · 9 PNGs</h4>
-      <ul>
-        <li>3 posts completos padrão v2</li>
-        <li>9 PNGs na pasta correta S16-22</li>
-        <li>S22-28: copy + speech + AI prompts prontos</li>
-        <li>⚠️ S22-28: 0 imagens — AG-10 pendente</li>
-      </ul>
-    </div>
-
-    <div class="standard-box" style="border-left-color:#27ae60">
-      <h4>✅ BPMF — S16-22 · 3 posts · 3 PNGs</h4>
-      <ul>
-        <li>3 posts completos padrão v2</li>
-        <li>S22-28: copy + speech + AI prompts prontos</li>
-        <li>⚠️ S22-28: 0 imagens — AG-10 pendente</li>
-      </ul>
-    </div>
-
-    <div class="standard-box" style="border-left-color:#27ae60">
-      <h4>✅ Marcela Pinheiro GF — S2 · 4 posts · 21 PNGs</h4>
-      <ul>
-        <li>4 posts completos padrão v2 — 7 peças totais</li>
-        <li>21 PNGs em pasta definitiva S16-22</li>
-        <li>LinkedIn + WhatsApp em todos os posts</li>
-        <li>⚠️ S3 (23-29/06): não iniciada — urgente antes de ter 23</li>
-      </ul>
-    </div>
-
-    <div class="standard-box" style="border-left-color:#F39C12">
-      <h4>⚠️ TRAÇÃO MKT — Semana 1 · em construção</h4>
-      <ul>
-        <li>Radar 18/06 ativo · 5 concorrentes monitorados</li>
-        <li>Instagram @tracao_mkt registrado 16/06</li>
-        <li>Brand kit em construção · pacote S1 não iniciado</li>
-        <li>Próximos passos: grade editorial → copy → imagens → deploy</li>
-      </ul>
-    </div>
-
-    <div class="card" style="margin-top:14px;background:#F8F9FA">
-      <h3>Versões de Padrão</h3>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-        <span class="version-badge">PADRAO-ENTREGA-CONTEUDO-v2.md</span>
-        <span class="version-badge">AG-QA-Agente-Qualidade.md</span>
-        <span class="version-badge">PADRAO-PROMPT-IA-IMAGENS.md</span>
-        <span class="version-badge">AG-10 Python/Pillow (desde 12/06)</span>
-      </div>
+  <div style="margin-top:16px;">
+    <div class="section-title">🎯 Plano de Ação Imediato</div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+      <table class="data-table">
+        <thead>
+          <tr><th>#</th><th>Ação</th><th>Responsável</th><th>Prazo</th><th>Prioridade</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Publicar conteúdo DECEA ICA 100-40 (carrossel + reel)</td>
+            <td>Alexandre + ADFly</td>
+            <td>Sex 27/06</td>
+            <td><span class="badge badge-red">🔴 Crítico</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Confirmar post LinkedIn ADFly Qua 24/06 publicado sem emoji</td>
+            <td>Alexandre</td>
+            <td>Hoje</td>
+            <td><span class="badge badge-yellow">🟡 Menor</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Confirmar bloco WhatsApp no pacote BPMF</td>
+            <td>Alexandre</td>
+            <td>Hoje</td>
+            <td><span class="badge badge-yellow">🟡 Menor</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Acionar AG-13 Vibe Prospecting para ADFly esta semana</td>
+            <td>AG-13</td>
+            <td>Hoje/amanhã</td>
+            <td><span class="badge badge-red">🔴 Urgente</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Alexandre lançar INBOX S15 para todos os clientes</td>
+            <td>Alexandre</td>
+            <td>Sex 27/06 18h</td>
+            <td><span class="badge badge-blue">📋 Padrão</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>BPMF: cobertura ao vivo 4º Pedal Estrada de Ferro</td>
+            <td>Alexandre (in-loco)</td>
+            <td>Sáb 28/06</td>
+            <td><span class="badge badge-green">⚡ Oportunidade</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Registrar nota TRAÇÃO Semana 1 (16-22/06)</td>
+            <td>Claude (próxima sessão)</td>
+            <td>Próxima sessão</td>
+            <td><span class="badge badge-gray">📁 Histórico</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
 </div>
 
 <script>
-// ── TABS ──────────────────────────────────────────
-function switchTab(n){
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
-  document.querySelectorAll('.pane').forEach((p,i)=>p.classList.toggle('active',i===n));
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  const tab = document.getElementById('tab-' + id);
+  if (tab) tab.classList.add('active');
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(id)) {
+      btn.classList.add('active');
+    }
+  });
 }
-
-// ── SUB-TABS ──────────────────────────────────────
-function switchSubTab(el,id){
-  const wrap=el.closest('.pane');
-  wrap.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  wrap.querySelectorAll('.sub-pane').forEach(p=>p.classList.remove('active'));
-  const target=wrap.querySelector('#'+id);
-  if(target)target.classList.add('active');
-}
-
-// ── COMPANY FILTER ────────────────────────────────
-function toggleCo(chip){
-  chip.classList.toggle('active');
-  const co=chip.dataset.co;
-  const on=chip.classList.contains('active');
-  document.querySelectorAll(`.co-block[data-co="${co}"]`).forEach(el=>el.classList.toggle('hidden',!on));
-  document.querySelectorAll(`.co-col[data-co="${co}"],.co-header[data-co="${co}"]`).forEach(el=>el.classList.toggle('hidden-col',!on));
-}
-function allCo(){
-  document.querySelectorAll('.cf-chip').forEach(c=>{c.classList.add('active')});
-  document.querySelectorAll('.co-block').forEach(el=>el.classList.remove('hidden'));
-  document.querySelectorAll('.co-col,.co-header').forEach(el=>el.classList.remove('hidden-col'));
-}
-
-// ── AGENT FLOW DETAILS ────────────────────────────
-const FA_DATA={
-  radar:{name:'AG-12 · Radar Semanal',deps:'Nenhum (ponto de entrada)',out:['RADAR-CONSOLIDADO-[DATA].md','RADAR-[EMPRESA]-[DATA].md (5 arquivos)','Input para grade editorial e painel'],steps:['Varre 12+ perfis IG por empresa','Detecta timings, movimentos e lacunas','Gera relatório individual por empresa','Consolida em RADAR-CONSOLIDADO','Salva em Base Estratégica/_RADAR-SEMANAL/']},
-  inbox:{name:'INBOX · Provocações Semanais',deps:'Alexandre (manual) + RADAR',out:['PROVOCACOES-[EMPRESA]-Semana-[DATA].md','_TEMAS-USADOS-[EMPRESA].md atualizado'],steps:['Alexandre abre pasta _INBOX-PROVOCACOES/[Empresa]/','Registra 1-3 entradas livres','Sistema cruza com _TEMAS-USADOS','Entradas validadas vão para a grade']},
-  grade:{name:'Grade Editorial',deps:'RADAR-CONSOLIDADO + INBOX Provocações',out:['Grade editorial semanal (4 empresas)','_TEMAS-USADOS atualizado'],steps:['Lê RADAR-CONSOLIDADO mais recente','Lê PROVOCACOES-[EMPRESA]-Semana-[ATUAL].md','Cruza com _TEMAS-USADOS (evitar repetição)','Define posts: pilar, canal, dia, formato','Atualiza _TEMAS-USADOS após incorporar']},
-  ag05:{name:'AG-05 · Copy & Roteiro',deps:'Grade editorial',out:['PACOTE-FULL-S[N]-[EMPRESA].md (speech+captions+AI prompts)'],steps:['Lê grade editorial','Escreve roteiro word-for-word + timecodes (dentro do PACOTE)','Escreve captions por canal (IG, TikTok, LinkedIn)','Gera AI Prompt por slide/peça (estrutura 5 elementos)','WhatsApp: status + imagem 1080×1080']},
-  ag10:{name:'AG-10 · Designer Visual',deps:'PACOTE-FULL (AG-05) + Brand Kit',out:['PNGs via Python/Pillow em /imagens/[EMPRESA]/-v1.png'],steps:['Lê brand kit da empresa','Lê AI Prompts do PACOTE-FULL','Gera script Python/Pillow','Produz PNGs: 1080×1350 (carrossel) · 1080×1920 (reel) · 1080×1080 (post) · 1200×1200 (LinkedIn)','Salva em Semanas/Semana [DATAS]/imagens/[EMPRESA]/']},
-  painel:{name:'PAINEL · Auto-update',deps:'Todos os pacotes da semana',out:['painel-controle-mkt (artifact atualizado)','painel-trao.html · painel-marcela-pinheiro.html'],steps:['Toda segunda 06h (scheduled task)','Lê os pacotes das 4 empresas','Monta HTML com status, radar, entregáveis','Atualiza o artifact Cowork','Pronto antes das 8h30']},
-  ag13:{name:'AG-13 · Pesquisa Nicho / ICP',deps:'Nenhum',out:['PROSPECCAO-[SEG]-[DATA].md em _PROSPECCAO-AG13/'],steps:['Toda segunda 08h30 (scheduled task)','Usa Vibe Prospecting (Explorium)','Teto: 70 créditos/semana','Filtra leads pelo ICP ADFly','Salva lista priorizada para AG-03']},
-  ag03:{name:'AG-03 · Prospecção LinkedIn',deps:'Lista AG-13',out:['Leads validados → CSV (CRM offline)'],steps:['Lê lista priorizada do AG-13','Aplica template rotativo por segmento','Qualifica fit com ICP ADFly','Exporta leads para CSV semanal','CRM-ALVO atualizado manualmente']},
-  ag11:{name:'AG-11 · LDR Inbound',deps:'Lead recebido (formulário, DM, referência)',out:['Lead qualificado (0-11pts) → roteamento'],steps:['Recebe lead inbound (GMB prioridade)','Aplica Lead Score 0-11pts','≥8pts → encaminha para Alexandre','5-7pts → fluxo de nutrição (email/WPP)','<5pts → descarte (opcional nutrição leve)']},
-  publicacao:{name:'Publicação · Alexandre',deps:'Painel atualizado + Pacote aprovado',out:['Posts publicados nos canais'],steps:['Abre painel-controle-mkt','Acessa aba Empresas ou Radar','Copia roteiro/legenda do PACOTE-FULL','Publica conforme grade: dia, canal, horário','IG · TikTok · LinkedIn · YouTube · Stories']}
-};
-function faShow(id){
-  const d=FA_DATA[id];
-  if(!d)return;
-  const el=document.getElementById('fa-detail');
-  el.className='show';
-  el.innerHTML=`<h4>${d.name}</h4><ul>${d.steps.map(s=>`<li>${s}</li>`).join('')}</ul><div class="dep">⬡ Predecessores: ${d.deps} &nbsp;|&nbsp; ▷ Saídas: ${d.out.join(' · ')}</div>`;
-}
-
-// ── RADAR TOGGLE ──────────────────────────────────
-function setRadarMode(mode){
-  const ec=document.getElementById('rtChipCorrente');
-  const ep=document.getElementById('rtChipProxima');
-  const badge=document.getElementById('rtContextBadge');
-  const content=document.getElementById('radarContent');
-  const proxContent=document.getElementById('radarProximaContent');
-  if(mode==='corrente'){
-    ec.classList.add('active');ep.classList.remove('active');
-    badge.className='rt-ctx-badge rt-ctx-corrente';badge.textContent='📊 Semana em curso — gerado quinta';
-    if(content)content.style.display='';
-    if(proxContent)proxContent.style.display='none';
-  } else {
-    ep.classList.add('active');ec.classList.remove('active');
-    badge.className='rt-ctx-badge rt-ctx-proxima';badge.textContent='🔮 Próxima semana — pré-análise';
-    if(content)content.style.display='none';
-    if(proxContent)proxContent.style.display='';
-  }
-}
-// Auto-mode: Qui-Dom = proxima, Seg-Qua = corrente
-(function(){
-  const d=new Date().getDay();
-  const defaultMode=(d>=4||d===0)?'proxima':'corrente';
-  setRadarMode(defaultMode);
-})();
 </script>
 </body>
 </html>
