@@ -768,123 +768,50 @@ Empowering editorial portrait: woman at kitchen table reviewing household financ
    Arquivo radar: CLIENTE-Marcela-Pinheiro-GF/00 - Base Estrategica/_RADAR-SEMANAL/
    ══════════════════════════════════════════════════════════════════════ */
 const RADAR = {
+  semanaCorrente: {
+    label: "22–28/06",
+    execucao: "25/06/2026",
+    tendencias: [
+      { titulo: "Endividamento das famílias chega a 78,4% — quinto mês consecutivo", corpo: "Cartão de crédito presente em 83,3% das famílias endividadas. A dívida escondida de quem 'ganha bem' é maior que a estatística mostra.", src: "CNC/PEIC · jun/2026" },
+      { titulo: "19,2% dedicam mais da metade da renda ao pagamento de dívidas", corpo: "Orçamento médio comprometido em 29,6%. Para o ICP da Marcela (R$8-18k/mês), a causa raramente é gasto supérfluo — é ausência de estrutura de decisão.", src: "PEIC · pesquisascnc.com.br" },
+      { titulo: "Planejador financeiro: 3º cargo de maior crescimento no Brasil em 2026", corpo: "Demanda por orientação financeira profissional cresce aceleradamente. O diferencial que o mercado valoriza é posicionamento humano + método, não certificação isolada.", src: "BM&C News · 2026" },
+      { titulo: "CNC projeta piora até o fim de 2026 — quem organiza agora sai na frente", corpo: "Endividamento pode subir mais 2,5 pontos percentuais. Timing perfeito para posicionar o início da organização financeira como vantagem.", src: "CNN Brasil · CNC" },
+    ],
+    concorrentes: [
+      { nome: "@mepoupe — Nathalia Arcuri (P-01)", tag: "Grande referência", tagBg: "#F59E0B", tagFg: "#fff", headBg: "#FFFBEB", headFg: "#78350F", oQuePublicaram: "Tendência geral de renda extra e 'como ganhar mais sem depender de emprego fixo'. Sem foco em família.", opp: "Nathalia não fala com famílias. Marcela domina o ângulo 'família 35-45 + comportamento + resultado rápido' que a Arcuri deixa vago." },
+      { nome: "@veragimenezfinancas — Vera Gimenez (P-02)", tag: "Planejamento 2º sem.", tagBg: "#2563EB", tagFg: "#fff", headBg: "#EFF6FF", headFg: "#1E3A5F", oQuePublicaram: "Revisão de planejamento para o 2º semestre. Carrossel 'Primeiro dia útil do 2º semestre: 3 perguntas que toda família deveria responder hoje'.", opp: "Vera está no mesmo timing mas com ângulo técnico/patrimonial. Marcela entra com ângulo familiar/comportamental — mais próximo da Família Ribeiro." },
+      { nome: "@camilavillelafinancas — Camila Villela (P-03)", tag: "⚠️ Psicologia do $", tagBg: "#EC4899", tagFg: "#fff", headBg: "#FDF2F8", headFg: "#831843", oQuePublicaram: "Psicologia do dinheiro em julho — gasto emocional com férias como sabotagem do planejamento. Reel 30s com gancho emocional nos 3 primeiros segundos.", opp: "Camila fala da dor. Marcela entrega o plano. Diferencial: não só diagnóstico, mas SOLUÇÃO RÁPIDA." },
+      { nome: "@ricardovieirafinancas — Ricardo Vieira (P-04)", tag: "Renda Fixa", tagBg: "#059669", tagFg: "#fff", headBg: "#ECFDF5", headFg: "#064E3B", oQuePublicaram: "Renda fixa: CDB, Tesouro Selic, IPCA. CTA em toda peça educacional — 'me chama no direct'. Frequência 5x/semana.", opp: "Ricardo domina RF com ângulo técnico. Marcela entra com ângulo familiar: 'Com a Selic de hoje, quanto rende R$500/mês da Família Ribeiro em 12 meses?'" },
+    ],
+    alertas: [
+      { titulo: "⚠️ Camila Villela cobrindo comportamento antes de férias", corpo: "Se publicar sobre gastos de julho antes de Marcela, posicionamento fica como 'mais uma sobre o mesmo tema'. Camila fala da dor — Marcela entrega o plano.", nivel: "medio" },
+      { titulo: "Ricardo Vieira com CTA em cada peça educacional", corpo: "Consistência de convite comercial em toda peça é padrão que Marcela ainda não replicou. Cada post sem CTA é oportunidade de captura perdida.", nivel: "medio" },
+      { titulo: "Lacuna da Família Ribeiro 35-45 segue aberta", corpo: "Nenhum dos 12 perfis fala especificamente para casal com filhos, renda dupla e gastos invisíveis. Espaço 100% de Marcela.", nivel: "opp" },
+    ],
+  },
+  semanaProxima: {
+    label: "29/06–05/07",
+    execucao: "25/06/2026",
+    tendencias: [
+      { titulo: "Dívida de vergonha — 78,4% das famílias endividadas", corpo: "Famílias de renda média-alta escondem dívida no cartão porque têm vergonha de admitir que 'ganham bem e não sobra'. O silêncio é maior em quem tem mais a perder socialmente.", gancho: "\"Você não tem dívida de pobre. Você tem dívida de vergonha — e é por isso que ninguém fala sobre ela no seu grupo de amigos.\"", src: "CNC/PEIC · jun/2026" },
+      { titulo: "29,6% do orçamento comprometido — não é corte, é estrutura", corpo: "Para o ICP da Marcela (R$8-18k/mês), o problema raramente é gasto supérfluo — é ausência de estrutura de decisão. Cortar não resolve o que é falta de plano.", gancho: "\"Você não precisa cortar o cafezinho. Precisa de alguém que te diga, com números na mesa, o que de fato come 30% do seu orçamento.\"", src: "PEIC · pesquisascnc.com.br" },
+      { titulo: "Vai ficar mais difícil, não mais fácil", corpo: "CNC projeta piora de até 2,5pp no endividamento até dez/2026. A maioria espera o 'ano ficar mais fácil' — o dado mostra o oposto. Quem começa agora sai na frente.", gancho: "\"O mercado já avisou: vai ficar mais difícil, não mais fácil. A pergunta não é 'quando vai melhorar' — é 'o que você decide agora'.\"", src: "CNN Brasil · CNC" },
+    ],
+    concorrentes: [
+      { nome: "@mepoupe — Nathalia Arcuri (P-01)", tag: "Autoridade ↑", tagBg: "#F59E0B", tagFg: "#fff", headBg: "#FFFBEB", headFg: "#78350F", oQuePublicaram: "Eco do Fórum Econômico Mundial ainda circula. YouTube sobre Tesouro Direto com alto alcance orgânico.", opp: "Marcela não compete em escala — compete em profundidade e personalização familiar." },
+      { nome: "@veragimenezfinancas — Vera Gimenez (P-02)", tag: "RF/Aposentadoria", tagBg: "#2563EB", tagFg: "#fff", headBg: "#EFF6FF", headFg: "#1E3A5F", oQuePublicaram: "Comparativos renda fixa + carrossel aposentadoria com dado concreto na abertura. Médio-alto engajamento.", opp: "Vera é técnico — Marcela traduz para a família Ribeiro com comportamento prático." },
+      { nome: "@camilavillelafinancas — Camila Villela (P-03)", tag: "⚠️ Acelerando", tagBg: "#EC4899", tagFg: "#fff", headBg: "#FDF2F8", headFg: "#831843", oQuePublicaram: "Psicologia do dinheiro no inverno + sazonalidade (tédio). Reel curto, gancho 3s. Alto engajamento.", opp: "Camila toca na dor — Marcela entra com a solução prática. Ângulo: não é fraqueza, tem saída." },
+      { nome: "@ricardovieirafinancas — Ricardo Vieira (P-04)", tag: "Selic alta", tagBg: "#059669", tagFg: "#fff", headBg: "#ECFDF5", headFg: "#064E3B", oQuePublicaram: "Carrossel 'como montar carteira de renda fixa agora'. CTA direto em todos os posts. 5x/semana.", opp: "Mesmo tema (Selic) — Marcela entra com ângulo família: o que muda no planejamento do casal?" },
+    ],
+    alertas: [
+      { titulo: "⚠️ Camila Villela no território de Marcela — acelerando", corpo: "P-03 crescendo rápido com pilar comportamental. Urgência: Marcela precisa publicar mais e ir mais fundo neste ângulo.", nivel: "medio" },
+      { titulo: "⚠️ FinTok crescendo 300% — janela orgânica aberta", corpo: "Se Marcela não entrar no TikTok, perde a janela de alcance orgânico mais fácil do momento. Mínimo: repostar Reels.", nivel: "medio" },
+      { titulo: "Selic alta → ângulo família Ribeiro ainda não explorado", corpo: "P-01 e P-04 cobrem o ângulo produto. Marcela tem espaço exclusivo: 'o que a Selic muda no planejamento do seu casal?'", nivel: "opp" },
+      { titulo: "Julho = férias = pressão no orçamento = demanda real", corpo: "Google Trends: 'planejamento férias julho' crescendo. Persona Família Ribeiro vivendo isso agora — timing perfeito.", nivel: "opp" },
+    ],
+  },
   ultimaExecucao: "25/06/2026",
-  proximaExecucao: "quinta 02/07 às 08h00",
-  resumoExecutivo: "Semana de revisão financeira de meio de ano — abertura do 2º semestre é o gatilho de conteúdo mais forte de junho. Férias de julho criam demanda urgente por planejamento de gastos familiares. Concorrentes P-01 a P-04 seguem com frequência alta e temas educacionais, mas nenhum está falando especificamente para família 35-45 com foco em comportamento + resultado rápido. Essa lacuna segue aberta e exclusiva de Marcela.",
-  concorrentes: [
-    {
-      nome: "@mepoupe — Nathalia Arcuri (P-01)",
-      tag: "Grande referência",
-      tagBg: "#F59E0B", tagFg: "#fff",
-      headBg: "#FFFBEB", headFg: "#78350F",
-      oQuePublicaram: "Sem dados de post individual disponíveis esta semana — tendência geral de renda extra e 'como ganhar mais sem depender de emprego fixo'.",
-      mencionouIA: false,
-      mudancaDetectada: false,
-      opp: "Nathalia não fala com famílias. Conteúdo macro/educacional. Marcela domina o ângulo 'família 35-45 + comportamento + resultado rápido' que a Arcuri deixa vago.",
-      angulo: "Tom de provocação que não intimida. Gancho que fala com quem 'acha que não tem saída'.",
-    },
-    {
-      nome: "@veragimenezfinancas — Vera Gimenez (P-02)",
-      tag: "Planejamento 2º sem.",
-      tagBg: "#2563EB", tagFg: "#fff",
-      headBg: "#EFF6FF", headFg: "#1E3A5F",
-      oQuePublicaram: "Revisão de planejamento para o 2º semestre. Carrossel comparativo 'se você fez X em janeiro, agora precisa de Y'. Gancho: 'Primeiro dia útil do 2º semestre: 3 perguntas que toda família deveria responder hoje'.",
-      mencionouIA: false,
-      mudancaDetectada: false,
-      opp: "Vera está no mesmo timing (virada de semestre) mas com ângulo técnico/patrimonial. Marcela entra com ângulo familiar/comportamental — mais próximo da Família Ribeiro.",
-      angulo: "Formato 'perguntas que toda família deveria responder' — roteiro pronto para carrossel com ângulo comportamental.",
-    },
-    {
-      nome: "@camilavillelafinancas — Camila Villela (P-03)",
-      tag: "⚠️ Psicologia do $",
-      tagBg: "#EC4899", tagFg: "#fff",
-      headBg: "#FDF2F8", headFg: "#831843",
-      oQuePublicaram: "Psicologia do dinheiro em julho — gasto emocional com férias como sabotagem do planejamento. Reel 30s com gancho emocional nos 3 primeiros segundos.",
-      mencionouIA: false,
-      mudancaDetectada: true,
-      opp: "Camila fala da dor. Marcela entrega o plano. Se Camila publicar sobre gastos de julho primeiro, Marcela responde com SOLUÇÃO RÁPIDA — não diagnóstico. Essa diferença é o posicionamento.",
-      angulo: "Todo ano você gasta mais do que planejou nas férias de julho — vem ver por que isso acontece (e como mudar de vez).",
-    },
-    {
-      nome: "@ricardovieirafinancas — Ricardo Vieira (P-04)",
-      tag: "Renda Fixa",
-      tagBg: "#059669", tagFg: "#fff",
-      headBg: "#ECFDF5", headFg: "#064E3B",
-      oQuePublicaram: "Renda fixa como protagonista: CDB, Tesouro Selic, IPCA. CTA em toda peça educacional — 'me chama no direct' + 'link na bio'. Frequência 5x/semana com depoimentos em Stories.",
-      mencionouIA: false,
-      mudancaDetectada: false,
-      opp: "Ricardo domina renda fixa com ângulo técnico. Marcela entra com mesmo tema mas ângulo familiar: 'Com juros de hoje, quanto rende R$500/mês da Família Ribeiro em 12 meses?' — dado real, contexto família.",
-      angulo: "CTA em toda peça educacional — Ricardo prova que funciona. Marcela pode melhorar nessa dimensão imediatamente.",
-    },
-  ],
-  tendencias: [
-    {
-      titulo: "Endividamento das famílias chega a 78,4% — quinto mês consecutivo",
-      corpo: "Cartão de crédito presente em 83,3% das famílias endividadas. Dado abre brecha para ângulo comportamental: a dívida escondida de quem 'ganha bem' é maior que a estatística mostra. Fonte: CNC/PEIC, junho/2026.",
-    },
-    {
-      titulo: "19,2% dedicam mais da metade da renda ao pagamento de dívidas",
-      corpo: "Orçamento médio comprometido em 29,6%. Para o ICP da Marcela (R$8-18k/mês), a causa raramente é gasto supérfluo — é ausência de estrutura de decisão. Cortar não resolve o que é falta de plano.",
-    },
-    {
-      titulo: "Planejador financeiro: 3º cargo de maior crescimento no Brasil em 2026",
-      corpo: "Demanda por orientação financeira profissional cresce aceleradamente. O diferencial que o mercado valoriza é posicionamento humano + método, não certificação isolada. Reforça a tese da Marcela.",
-    },
-    {
-      titulo: "CNC projeta piora até o fim de 2026 — quem organiza agora sai na frente",
-      corpo: "Endividamento pode subir mais 2,5 pontos percentuais. Timing perfeito para Marcela posicionar o início da organização financeira como vantagem competitiva — não esperar o 'ano melhorar'.",
-    },
-  ],
-  alertas: [
-    {
-      titulo: "⚠️ Camila Villela cobrindo comportamento antes de férias",
-      corpo: "Se publicar sobre gastos emocionais de julho antes de Marcela, o posicionamento fica como 'mais uma sobre o mesmo tema'. Diferencial: Camila fala da dor — Marcela entrega o plano.",
-      nivel: "medio",
-      acao: "Publicar solução antes que Camila ocupe o tema — não só o diagnóstico, mas os 3 passos práticos.",
-    },
-    {
-      titulo: "Ricardo Vieira com CTA em cada peça educacional",
-      corpo: "Consistência de convite comercial em toda peça educacional é padrão que Marcela ainda não replicou. Cada post educacional sem CTA é uma oportunidade de captura perdida.",
-      nivel: "medio",
-      acao: "Adicionar CTA claro em todas as peças desta semana — mesmo nas educacionais. 'Quer um plano personalizado para sua família? Me manda mensagem.'",
-    },
-    {
-      titulo: "Lacuna da Família Ribeiro 35-45 segue aberta",
-      corpo: "Nenhum dos 12 perfis monitorados fala especificamente para casal com filhos, renda dupla, gastos invisíveis e férias de julho. Me Poupe é jovem-first, Vera é patrimônio-first, Camila é individual-first.",
-      nivel: "opp",
-      acao: "Nomear explicitamente a persona no conteúdo — 'se você tem 35-45 anos, filhos e duas rendas, este post é para você'.",
-    },
-  ],
-  oportunidades: [
-    {
-      titulo: "Comportamento financeiro no inverno + tédio",
-      pilar: "Comportamental / Psicologia do dinheiro",
-      formato: "Reel curto 30-45s",
-      trigger: "Camila Villela (P-03)",
-      prioridade: "alta",
-      tema: "Você gasta mais no inverno? Não é fraqueza — é biologia (e tem solução). O tédio é o maior inimigo do orçamento familiar em julho.",
-      porqueAgora: "P-03 (Camila Villela) tocou no tema com diagnóstico — Marcela entra com solução prática. Tema com alto engajamento emocional no frio. Janela aberta nos próximos 7-10 dias.",
-    },
-    {
-      titulo: "Selic alta — o que isso muda para a família Ribeiro?",
-      pilar: "Planejamento / Educação Financeira",
-      formato: "Carrossel",
-      trigger: "P-01 (Nathalia Arcuri) + P-04 (Ricardo Vieira) + Google Trends",
-      prioridade: "alta",
-      tema: "Selic em [X]% — o que você deveria fazer agora no seu planejamento familiar? (não é produto de investimento, é comportamento e reorganização do orçamento)",
-      porqueAgora: "Tema dominante no nicho esta semana. P-01 e P-04 já abordaram com ângulo técnico — Marcela diferencia com ângulo familiar e comportamental. Zero concorrência nesse ângulo específico.",
-    },
-    {
-      titulo: "Férias de julho sem arrependimento — como planejar antes que seja tarde",
-      pilar: "Planejamento / Família",
-      formato: "Carrossel",
-      trigger: "TikTok trending · Google Trends",
-      prioridade: "alta",
-      tema: "Julho chegou: como não sair no vermelho sem cancelar as férias dos filhos. Persona Família Ribeiro está vivendo isso agora — gastos extras de julho vs. planejamento que ainda dá tempo.",
-      porqueAgora: "FinTok 'gastos julho' crescendo — chega ao Instagram em 3-5 dias. Marcela antecipa e captura atenção antes da saturação do tema.",
-    },
-  ],
-  radarFile: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\Marcela-Pinheiro-GF\\00 - Base Estrategica\\_RADAR-SEMANAL\\RADAR-MARCELA-25-06-2026.md",
+  proximaExecucao: "quinta 02/07 às 08h",
 };
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -1186,45 +1113,12 @@ function buildSemana(s) {
 
 /* ── Radar page ── */
 function buildRadar() {
-  /* ── Pulse KPIs ── */
-  const movimentos = RADAR.concorrentes.filter(c => c.mencionouIA || c.mudancaDetectada).length;
-  const alertasAltos = (RADAR.alertas||[]).filter(a => a.nivel === 'alto').length;
-  const pulseHtml = `
-    <div class="pulse-strip">
-      <div class="pulse-chip">
-        <div class="pulse-num">${RADAR.concorrentes.length}</div>
-        <div class="pulse-lbl">concorrentes<br>diretos (Grupo A)</div>
-      </div>
-      <div class="pulse-chip">
-        <div class="pulse-num">${movimentos}</div>
-        <div class="pulse-lbl">movimentos<br>detectados</div>
-      </div>
-      <div class="pulse-chip ${alertasAltos > 0 ? 'alert' : ''}">
-        <div class="pulse-num">${alertasAltos}</div>
-        <div class="pulse-lbl">alerta${alertasAltos!==1?'s':''}<br>${alertasAltos!==1?'altos':'alto'}</div>
-      </div>
-    </div>`;
+  const SC = RADAR.semanaCorrente;
+  const SP = RADAR.semanaProxima;
 
-  /* ── Alert banner (top alerta alto) ── */
-  const topAlerta = (RADAR.alertas||[]).find(a => a.nivel === 'alto');
-  const alertBannerHtml = topAlerta ? `
-    <div class="alert-banner">
-      <div class="ab-icon">⚠️</div>
-      <div>
-        <div class="ab-title">${esc(topAlerta.titulo)}</div>
-        <div class="ab-acao">Ação recomendada: ${esc(topAlerta.acao)}</div>
-      </div>
-    </div>` : '';
-
-  /* ── Competitor cards (enriched) ── */
-  const cardsHtml = RADAR.concorrentes.map(c => {
-    const iaBadge = c.mencionouIA
-      ? `<span class="ia-badge ia-sim">✓ SIM</span>`
-      : `<span class="ia-badge ia-nao">NÃO</span>`;
-    const mudBadge = c.mudancaDetectada
-      ? `<span class="ia-badge mud-sim">⚡ SIM</span>`
-      : `<span class="ia-badge mud-nao">NÃO</span>`;
-    return `
+  /* helper: gera cards de concorrentes (sem badges de IA/mudança) */
+  function buildCards(lista) {
+    return lista.map(c => `
     <div class="radar-card">
       <div class="radar-card-head" style="background:${esc(c.headBg)};color:${esc(c.headFg)}">
         ${esc(c.nome)}
@@ -1233,58 +1127,79 @@ function buildRadar() {
       <div class="radar-card-body">
         <div class="comp-fields">
           <div class="comp-field" style="grid-column:1/-1">
-            <div class="cf-label">📢 O que publicaram esta semana</div>
+            <div class="cf-label">📢 O que publicaram</div>
             <div class="cf-value">${esc(c.oQuePublicaram||'—')}</div>
-          </div>
-          <div class="comp-field">
-            <div class="cf-label">🤖 Mencionou IA?</div>
-            <div class="cf-value">${iaBadge}</div>
-          </div>
-          <div class="comp-field">
-            <div class="cf-label">🔄 Mudança detectada?</div>
-            <div class="cf-value">${mudBadge}</div>
           </div>
           <div class="comp-field" style="grid-column:1/-1">
             <div class="cf-label">🎯 O que Marcela usa disso</div>
             <div class="cf-value">${esc(c.opp)}</div>
           </div>
         </div>
-        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "${esc(c.angulo)}"</div>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
+  }
 
-  /* ── Tendências ── */
-  const tendenciasHtml = (RADAR.tendencias||[]).map(t => `
+  /* helper: gera cards de tendências (semanaCorrente sem gancho, semanaProxima com gancho) */
+  function buildTendencias(lista) {
+    return lista.map(t => `
     <div class="trend-card">
       <h4>${esc(t.titulo)}</h4>
       <p>${esc(t.corpo)}</p>
+      ${t.gancho ? `<div style="margin-top:8px;padding:8px 12px;background:#EAF4ED;border-left:3px solid #1B6A39;border-radius:4px;font-size:12px;color:#1B6A39;font-style:italic">${esc(t.gancho)}</div>` : ''}
+      ${t.src ? `<div style="font-size:10px;opacity:.5;margin-top:6px">Fonte: ${esc(t.src)}</div>` : ''}
     </div>`).join('');
+  }
 
-  /* ── Alertas/ameaças ── */
-  const ameacasHtml = (RADAR.alertas||[]).map(a => {
-    const cls = a.nivel === 'alto' ? 'threat-alto' : a.nivel === 'opp' ? 'threat-opp' : 'threat-medio';
-    return `
+  /* helper: gera cards de alertas */
+  function buildAlertas(lista) {
+    return lista.map(a => {
+      const cls = a.nivel === 'alto' ? 'threat-alto' : a.nivel === 'opp' ? 'threat-opp' : 'threat-medio';
+      return `
     <div class="threat-card ${cls}">
       <h4>${esc(a.titulo)}</h4>
       <div class="threat-corpo">${esc(a.corpo)}</div>
-      <div class="threat-acao">→ ${esc(a.acao)}</div>
     </div>`;
-  }).join('');
+    }).join('');
+  }
 
-  /* ── Oportunidades (próxima semana) ── */
-  const oppsHtml = (RADAR.oportunidades||[]).map(o => `
-    <div class="opp-card">
-      <h4>🎯 ${esc(o.titulo)}</h4>
-      <div class="opp-meta">
-        <span>${esc(o.pilar)}</span>
-        <span>${esc(o.formato)}</span>
-        ${o.trigger?`<span style="background:#FEF3C7;color:#92400E;">trigger: ${esc(o.trigger)}</span>`:''}
-        ${o.prioridade==='alta'?`<span style="background:#FEE2E2;color:#A32D2D;">prioridade alta</span>`:`<span>prioridade média</span>`}
+  /* ── Pulse KPIs (baseados na semana em curso) ── */
+  const alertasAltos = (SC.alertas||[]).filter(a => a.nivel === 'alto').length;
+  const pulseHtml = `
+    <div class="pulse-strip">
+      <div class="pulse-chip">
+        <div class="pulse-num">${SC.concorrentes.length}</div>
+        <div class="pulse-lbl">concorrentes<br>diretos (Grupo A)</div>
       </div>
-      <div class="opp-tema">"${esc(o.tema)}"</div>
-      <div class="opp-why">⚡ <strong>Por que agora:</strong> ${esc(o.porqueAgora)}</div>
-    </div>`).join('');
+      <div class="pulse-chip">
+        <div class="pulse-num">${SC.tendencias.length}</div>
+        <div class="pulse-lbl">tendências<br>monitoradas</div>
+      </div>
+      <div class="pulse-chip ${alertasAltos > 0 ? 'alert' : ''}">
+        <div class="pulse-num">${SC.alertas.length}</div>
+        <div class="pulse-lbl">alertas &<br>oportunidades</div>
+      </div>
+    </div>`;
+
+  /* ── Alert banner (top alerta alto na semana em curso) ── */
+  const topAlerta = (SC.alertas||[]).find(a => a.nivel === 'alto');
+  const alertBannerHtml = topAlerta ? `
+    <div class="alert-banner">
+      <div class="ab-icon">⚠️</div>
+      <div>
+        <div class="ab-title">${esc(topAlerta.titulo)}</div>
+        <div class="ab-acao">${esc(topAlerta.corpo)}</div>
+      </div>
+    </div>` : '';
+
+  /* ── Blocos semanaCorrente ── */
+  const cardsHtml = buildCards(SC.concorrentes);
+  const tendenciasHtml = buildTendencias(SC.tendencias);
+  const ameacasHtml = buildAlertas(SC.alertas);
+
+  /* ── Blocos semanaProxima ── */
+  const cardsHtmlP = buildCards(SP.concorrentes);
+  const tendenciasHtmlP = buildTendencias(SP.tendencias);
+  const ameacasHtmlP = buildAlertas(SP.alertas);
 
   const html = `
     <div id="page-radar" class="page">
@@ -1294,50 +1209,30 @@ function buildRadar() {
           <h2>Radar · ${esc(CLIENTE.nome)}</h2>
           <div class="radar-meta">Última execução: ${esc(RADAR.ultimaExecucao)} · Próxima: ${esc(RADAR.proximaExecucao)}</div>
         </div>
-        <span class="radar-badge">${RADAR.concorrentes.length} perfis Grupo A + 8 referências</span>
+        <span class="radar-badge">${SC.concorrentes.length} perfis Grupo A + 8 referências</span>
       </div>
-
-      ${RADAR.resumoExecutivo ? `
-      <div class="exec-brief">
-        <div class="exec-label">📌 Briefing Executivo · ${esc(RADAR.ultimaExecucao)}</div>
-        <div class="exec-text">${esc(RADAR.resumoExecutivo)}</div>
-      </div>` : ''}
 
       ${pulseHtml}
       ${alertBannerHtml}
 
       <div class="rt-toggle-m" id="radarToggleM">
-        <span class="rt-chip-m rt-chip-corrente-m" id="rtMChipCorrente" onclick="setRadarModeM('corrente')">📊 Semana em curso</span>
-        <span class="rt-chip-m rt-chip-proxima-m" id="rtMChipProxima" onclick="setRadarModeM('proxima')">🔮 Próxima semana</span>
+        <span class="rt-chip-m rt-chip-corrente-m" id="rtMChipCorrente" onclick="setRadarModeM('corrente')">📊 Semana em curso · ${esc(SC.label)}</span>
+        <span class="rt-chip-m rt-chip-proxima-m" id="rtMChipProxima" onclick="setRadarModeM('proxima')">🔮 Próxima semana · ${esc(SP.label)}</span>
         <span id="rtMContextBadge" class="rt-ctx-badge-m"></span>
       </div>
 
       <div id="rtMSecCorrente">
+        <div class="section-title">👥 Concorrentes monitorados · Grupo A</div>
         <div class="radar-grid">${cardsHtml}</div>
-        ${tendenciasHtml ? `<div class="section-title">📈 Tendências do nicho (semana)</div><div class="trend-grid">${tendenciasHtml}</div>` : ''}
-        ${ameacasHtml ? `<div class="section-title">🚨 Alertas · Ameaças · Oportunidades</div>${ameacasHtml}` : ''}
+        ${tendenciasHtml ? `<div class="section-title">📈 Tendências de mercado</div><div class="trend-grid">${tendenciasHtml}</div>` : ''}
+        ${ameacasHtml ? `<div class="section-title">🚨 Alertas e oportunidades</div>${ameacasHtml}` : ''}
       </div>
 
       <div id="rtMSecProxima" style="display:none">
-        <div class="section-title">🎯 Oportunidades para a próxima semana</div>
-        ${oppsHtml}
-      </div>
-
-      <div class="section-title">📂 Relatório Radar completo</div>
-      <div class="files-bar">
-        <div class="files-bar-title">🔭 Arquivo do Radar — clique Copiar → Win+R → cole → Enter</div>
-        <div class="files-grid">
-          <div class="path-row">
-            <span class="path-icon">📄</span>
-            <div class="path-info">
-              <div class="path-name">Radar ${esc(CLIENTE.nome)} · ${esc(RADAR.ultimaExecucao)}</div>
-              <div class="path-txt">${esc(RADAR.radarFile.split('\\').slice(-3).join('\\'))}</div>
-            </div>
-            <div class="btn-row">
-              <button class="copy-btn" onclick="cp('${RADAR.radarFile.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>
-            </div>
-          </div>
-        </div>
+        <div class="section-title">👥 Concorrentes monitorados · Grupo A</div>
+        <div class="radar-grid">${cardsHtmlP}</div>
+        ${tendenciasHtmlP ? `<div class="section-title">📈 Tendências de mercado <span style="margin-left:8px;font-size:11px;background:#EAF4ED;color:#1B6A39;padding:2px 8px;border-radius:10px;font-weight:500">com gancho editorial</span></div><div class="trend-grid">${tendenciasHtmlP}</div>` : ''}
+        ${ameacasHtmlP ? `<div class="section-title">🚨 Alertas e oportunidades</div>${ameacasHtmlP}` : ''}
       </div>
     </div>`;
 
