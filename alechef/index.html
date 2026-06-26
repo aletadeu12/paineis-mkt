@@ -106,6 +106,14 @@ body{font-family:-apple-system,Arial,sans-serif;background:#F5F0EA;color:#1F2937
 .alert-banner .ab-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
 .alert-banner .ab-title{font-size:13px;font-weight:700;color:#78350F;margin-bottom:3px;}
 .alert-banner .ab-acao{font-size:12px;color:#92400E;font-style:italic;}
+
+.grade-wrap{overflow-x:auto;margin-top:16px;margin-bottom:20px;}
+.grade-grid{display:grid;min-width:620px;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;}
+.grade-cell{background:white;padding:9px 12px;font-size:12px;}
+.grade-cell.header{background:var(--primary);color:white;font-weight:700;font-size:11px;text-transform:uppercase;}
+.grade-cell.dayname{background:#F8F9FA;font-weight:700;color:var(--dark);font-size:11px;}
+.grade-cell.empty{background:#F8F9FA;color:#9CA3AF;font-size:11px;text-align:center;}
+.chip{display:inline-block;background:#EBF5FF;color:#1E3A5F;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-bottom:3px;}
 </style>
 </head>
 <body>
@@ -164,7 +172,68 @@ const SEMANAS = [
       { dia: "QUI 03/07", ig: { chip: "Post", txt: "Collab BPMF — real food para quem pedala" }, tk: null, li: { chip: "Post", txt: "Collab BPMF" }, yt: null },
       { dia: "SEX 04/07", ig: { chip: "Post", txt: "Jantar executivo — fim de semestre corporativo" }, tk: null, li: { chip: "Post", txt: "Jantar executivo" }, yt: null },
     ],
-    posts: [],
+    posts: [
+      {
+        dia: "SEG 29/06", pilar: "D",
+        titulo: "Chef que Sabe que Você Detesta Coentro",
+        formato: "Post Feed IG · 1080×1080 · 08h00",
+        gancho: "O supermercado já vende marmita gourmet. O que ele não vende é o chef que sabe que você detesta coentro.",
+        slides: null,
+        legenda: "O supermercado já vende marmita gourmet.\nEmbalagem bonita. Ingredientes escritos em francês.\n\nO que ele não vende é o chef que sabe que você detesta coentro.\n\nQue lembra que na semana passada você pediu o frango mais leve porque estava com o estômago sensível.\n\nQue adapta o tempero porque você está tentando reduzir o sódio.\n\nQue mandou mensagem na quarta perguntando se você queria algo diferente na quinta.\n\nIsso não é entrega de marmita. É cozinha de verdade — feita por alguém que conhece a sua cozinha como a própria.\n\n📲 Link na bio ou WhatsApp no perfil.\n#alechefemcasa #personalchef #comidareal #marmita #saopaulofoodies",
+        cta: "Link na bio ou WhatsApp",
+        hashtags: "#alechefemcasa #personalchef #comidareal #marmita #saopaulofoodies",
+        stories: null,
+        aiPrompt: `Warm intimate Instagram feed post 1080x1080. AleChef em Casa brand. Inspired by Casa do Porco, Alex Atala. Colors: Navy #22324F deep background · Gold #C9A77A warm accent · Off-White #FAF7F2 text. Cormorant Garamond serif. Scene: Shallow depth-of-field — chef's hands holding ceramic ramekin, other hand writing in small notebook. Warm amber kitchen light. Overlay Off-White serif: "O chef que sabe que você detesta coentro." Bottom: AleChef em Casa in Gold small.`,
+      },
+      {
+        dia: "TER 01/07", pilar: "C",
+        titulo: "Spoilers Cardápio de Inverno — Julho",
+        formato: "Story Sequência 3 stories · IG · 12h00",
+        gancho: "🥘 JULHO CHEGOU. Cardápio de inverno novo. Pratos quentes. Caldos. O que faz sentido quando a temperatura cai.",
+        slides: "Story 1: Hook — Julho chegou, cardápio de inverno novo | Story 2: Spoiler Cozido Paulistano — músculo, mandioquinha, 4h caldo | Story 3: CTA — cardápio completo amanhã, lista de prioridade",
+        legenda: "🥘 Julho chegou com cardápio de inverno novo.\n\nCozido Paulistano. Frango ao Creme de Cogumelos. Sopa Creme de Mandioquinha.\n\nSe você quer garantir um prato antes de abrir para todo mundo:\n📲 Me manda mensagem aqui ou link na bio.",
+        cta: "Me manda mensagem ou link na bio",
+        hashtags: "#alechefemcasa #personalchef #comidareal #cardapiodesemana",
+        stories: "3 stories: [1] Hook '🥘 JULHO CHEGOU · Cardápio de inverno novo' | [2] Spoiler Cozido Paulistano — músculo de boi, mandioquinha, cenoura, 4h caldo | [3] CTA lista de prioridade",
+        aiPrompt: `Instagram Story 1080x1920. AleChef em Casa brand. Navy #22324F background · Gold #C9A77A accent · Off-White #FAF7F2 text. Cormorant Garamond serif. Scene: Navy background. Gold italic large: "🥘 JULHO CHEGOU." Center: "Cardápio de inverno novo." Off-White bold. Below: "Pratos quentes. Caldos." Bottom arrow "↓ Desliza para os spoilers" in Gold.`,
+      },
+      {
+        dia: "QUA 02/07", pilar: "C",
+        titulo: "Reveal Cardápio de Inverno — 3 Pratos",
+        formato: "Reel 45s · IG · 12h00",
+        gancho: "Julho chegou. E chegou com frio. Isso significa uma coisa: cardápio de inverno.",
+        slides: null,
+        legenda: "🥘 Cardápio de inverno do AleChef.\n\nTrês pratos novos para julho. Todos feitos do zero, toda semana:\n\nCozido Paulistano · Frango ao Creme de Cogumelos · Sopa Creme de Mandioquinha\n\nEntrega semanal ou encomenda avulsa para eventos.\n\n📲 Link na bio ou me chama no WhatsApp.\n#alechefemcasa #cardapiodesemana #personalchef #comidareal #cozidopaulistano",
+        cta: "Link na bio ou WhatsApp",
+        hashtags: "#alechefemcasa #cardapiodesemana #personalchef #comidareal",
+        stories: "Speech word-for-word: [00:00] Julho chegou, frio = cardápio de inverno | [00:13] Cozido Paulistano — músculo, mandioquinha, cenoura, 4h | [00:21] Frango ao Creme de Cogumelos com Risoto | [00:29] Sopa Creme de Mandioquinha | [00:37] Entrega semanal ou evento | [00:42] WhatsApp ou link na bio",
+        aiPrompt: `Vertical Reel thumbnail 1080x1920. AleChef em Casa brand. Casa do Porco artisan food style. Navy #22324F background frame · Gold #C9A77A accents · Off-White text. Overhead shot: rustic bowl of Cozido Paulistano — rich broth, tender beef, mandioquinha, carrots. Steam rising. Warm golden light. Text overlay: Gold script "Cardápio de Inverno" top. White bold: "🥘 JULHO". Bottom: "AleChef em Casa" in Gold small.`,
+      },
+      {
+        dia: "QUI 03/07", pilar: "R",
+        titulo: "Collab BPMF — Real Food para Atleta",
+        formato: "Post Feed IG + LinkedIn · 1080×1080 / 1200×1200 · 08h00",
+        gancho: "Você pedala. O BPMF cuida da jornada. O AleChef cuida do que você come na chegada.",
+        slides: null,
+        legenda: "Você pedala.\nA @adfly e o @bpmfoficial cuidam da jornada.\nO AleChef cuida do que você come na chegada.\n\nReal food. Ingrediente de qualidade. Prep que respeita quem treina.\n\nSem ultraprocessado. Sem cardápio genérico.\nO chef que adapta o prato ao esforço do seu dia.\n\n📲 Me chama no WhatsApp ou link na bio.\n#alechefemcasa #bpmf #personalchef #comidareal #ciclismo #realfood",
+        cta: "WhatsApp ou link na bio",
+        hashtags: "#alechefemcasa #bpmf #personalchef #comidareal #ciclismo",
+        stories: null,
+        aiPrompt: `Instagram post 1080x1080. AleChef em Casa brand. Navy #22324F · Gold #C9A77A · Off-White. Warm intimate food photo — grilled protein with roasted vegetables, real plate, natural light. Top-left badge "COLLAB" in Gold. Bottom: "Real food para quem pedala" Off-White elegant serif. Bottom-right: "AleChef em Casa × BPMF" in Gold. Authentic home-chef aesthetic.`,
+      },
+      {
+        dia: "SEX 04/07", pilar: "PS",
+        titulo: "Jantar Executivo — Fim de Semestre Corporativo",
+        formato: "Post Feed IG + LinkedIn · 1080×1080 / 1200×1200 · 07h30",
+        gancho: "Fim de semestre chegou. E com ele: jantares de equipe, confraternizações de empresa, encontros de diretoria.",
+        slides: null,
+        legenda: "Fim de semestre chegou.\n\nE com ele: jantares de equipe, confraternizações de empresa, encontros de diretoria.\n\nO AleChef transforma qualquer sala de reuniões em uma experiência gastronômica.\n\nSem restaurante. Sem barulho. Sem menu fixo que não agrada ninguém.\n\nUm chef particular que vai até o local, monta o mise en place, cozinha na hora e serve — com a atenção de quem cozinha para 6 pessoas, não para 60.\n\nÉ o tipo de jantar que as pessoas comentam na semana seguinte.\n\nAgenda aberta — mas não por muito tempo.\n📲 Me chama no WhatsApp ou link no perfil.\n#alechefemcasa #personalchef #jantarcorporativo #eventoscorporativos #chefparticular",
+        cta: "WhatsApp ou link no perfil",
+        hashtags: "#alechefemcasa #personalchef #jantarcorporativo #eventoscorporativos",
+        stories: null,
+        aiPrompt: `Instagram feed post 1080x1080. AleChef em Casa. Alex Atala intimate elegance. Navy #22324F · Gold #C9A77A · Off-White. Overhead flat-lay: elegant dinner table for 6, beautiful plated courses, linen napkins, warm candlelight. Overlay: Off-White serif "Fim de semestre." top-left. Bottom: "Jantar executivo. AleChef em Casa." in Gold italic. Handle "@alechefemcasa" white. Intimate, not corporate.`,
+      },
+    ],
   }
 ];
 
@@ -250,7 +319,8 @@ function buildSemana(s){
     ${statusBadge(s.status)}
     <div class="section-title">📂 Arquivos</div>
     <div class="files-bar"><div class="files-grid">${(s.arquivos||[]).map(a=>`<div class="path-row"><span class="path-icon">${a.icon}</span><div class="path-info"><div class="path-name">${esc(a.nome)}</div><div class="path-txt">${esc(a.path||'')}</div></div><div style="flex-shrink:0">${a.path?`<button class="copy-btn" onclick="cp('${(a.path||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>`:''}</div></div>`).join('')}</div></div>
-    <p style="color:var(--gray);font-size:13px;margin-top:20px">Pacote completo em elaboração. Consulte o PACOTE-FULL na pasta da semana.</p>
+    <div class="section-title">&#128197; Grade Editorial</div>
+    ${(function(){if(!s.grade||!s.grade.length)return'';var cols='grid-template-columns:90px repeat(4,1fr)';var h='<div class="grade-wrap"><div class="grade-grid" style="'+cols+'">';h+='<div class="grade-cell header">DIA</div><div class="grade-cell header" style="background:#E1306C;color:white">Instagram</div><div class="grade-cell header" style="background:#000;color:white">TikTok</div><div class="grade-cell header" style="background:#0A66C2;color:white">LinkedIn</div><div class="grade-cell header" style="background:#FF0000;color:white">YouTube</div>';(s.grade||[]).forEach(function(g){h+='<div class="grade-cell dayname">'+esc(g.dia)+'</div>';[g.ig,g.tk,g.li,g.yt].forEach(function(c){h+=c?'<div class="grade-cell"><span class="chip">'+esc(c.chip)+'</span><br>'+esc(c.txt)+'</div>':'<div class="grade-cell empty">&#8212;</div>';});});return h+'</div></div>';})()} 
   </div>`);
 }
 

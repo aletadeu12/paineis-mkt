@@ -1,1467 +1,475 @@
-<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
-{
-  "name": "Painel Controle Mkt",
-  "schemaVersion": 1,
-  "description": "Painel de controle do departamento de MKT virtual — 5 empresas (ADFly, AleChef, BPMF, Marcela, TRAÇÃO). 6 abas: Hoje | Empresas | Agentes | Gaps | Radar | Sistema. Filtro global por empresa + banner de urgência."
-}
-</script>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel Controle MKT — AleTA</title>
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">{"name":"Painel Controle Mkt","schemaVersion":1,"description":"Painel de controle do departamento de MKT virtual — 5 empresas (ADFly, AleChef, BPMF, Marcela, TRAÇÃO). 7 abas: Visão Geral | Status Semana | Uniformidade | Fluxo Semanal | Agentes | Gaps | Auditoria."}</script>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Painel Controle MKT — AleTA</title>
 <style>
-  :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --surface2: #1c2128;
-    --border: #30363d;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --adfly: #1E90FF;
-    --adfly-dark: #0A1B33;
-    --adfly-accent: #9FE83A;
-    --alechef: #C9A77A;
-    --alechef-dark: #22324F;
-    --bpmf: #39FF14;
-    --bpmf-dark: #050505;
-    --marcela: #34a85a;
-    --marcela-dark: #1B6A39;
-    --green: #238636;
-    --green-light: #2ea043;
-    --yellow: #9e6a03;
-    --yellow-light: #d29922;
-    --red: #b91c1c;
-    --red-light: #ef4444;
-    --purple: #7c3aed;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 13px;
-    line-height: 1.5;
-  }
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--adfly:#1E90FF;--alechef:#C9A77A;--bpmf:#39FF14;--marcela:#34a85a;--green-light:#2ea043;--yellow:#9e6a03;--yellow-light:#d29922;--red:#b91c1c;--red-light:#ef4444;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.5;}
+.header{background:linear-gradient(135deg,#0d1117 0%,#1c2128 100%);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.header-logo{font-size:18px;font-weight:700;background:linear-gradient(90deg,#1E90FF,#9FE83A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.header-subtitle{color:var(--muted);font-size:12px;}
+.header-date{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.header-date span{color:var(--yellow-light);font-weight:600;}
+.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;gap:2px;overflow-x:auto;}
+.tab-btn{background:none;border:none;color:var(--muted);padding:12px 16px;cursor:pointer;font-size:12px;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.15s;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--adfly);}
+.tab-content{display:none;padding:24px;}
+.tab-content.active{display:block;}
+.tiles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;}
+.tile-label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.tile-value{font-size:26px;font-weight:700;line-height:1;}
+.tile-sub{color:var(--muted);font-size:11px;margin-top:4px;}
+.tile-blue .tile-value{color:var(--adfly);}
+.tile-green .tile-value{color:#2ea043;}
+.tile-yellow .tile-value{color:var(--yellow-light);}
+.tile-red .tile-value{color:var(--red-light);}
+.alert-banner{background:rgba(185,28,28,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-size:12px;}
+.alert-banner.yellow{background:rgba(158,106,3,.15);border-color:rgba(210,153,34,.4);}
+.alert-banner.blue{background:rgba(30,144,255,.1);border-color:rgba(30,144,255,.3);}
+.alert-banner.green{background:rgba(35,134,54,.15);border-color:rgba(46,160,67,.4);}
+.alert-icon{font-size:16px;flex-shrink:0;}
+.alert-text strong{font-weight:600;}
+.countdown-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(185,28,28,.25);border:1px solid rgba(239,68,68,.4);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;color:var(--red-light);white-space:nowrap;}
+.radar-tile{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:20px;}
+.radar-tile-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.radar-tile-title{font-size:13px;font-weight:600;}
+.radar-tile-date{color:var(--muted);font-size:11px;}
+.radar-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid;}
+.pill-green{background:rgba(35,134,54,.2);border-color:rgba(46,160,67,.5);color:#56d364;}
+.pill-yellow{background:rgba(158,106,3,.2);border-color:rgba(210,153,34,.5);color:var(--yellow-light);}
+.insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+.insight-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.insight-card-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.insight-company{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.insight-badge{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;}
+.badge-urgent{background:rgba(185,28,28,.3);color:var(--red-light);}
+.badge-ok{background:rgba(35,134,54,.2);color:#56d364;}
+.insight-text{color:var(--muted);font-size:12px;line-height:1.5;}
+.insight-text strong{color:var(--text);}
+.timing-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+.timing-table th,.timing-table td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:12px;}
+.timing-table th{color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.4px;}
+.timing-table tr:last-child td{border-bottom:none;}
+.timing-table tr:hover td{background:var(--surface2);}
+.scores-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.score-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;}
+.score-card-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.score-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.score-company{font-weight:600;font-size:13px;}
+.score-bar-bg{background:var(--border);border-radius:4px;height:6px;overflow:hidden;margin-bottom:8px;}
+.score-bar-fill{height:100%;border-radius:4px;}
+.score-pct{font-size:22px;font-weight:700;margin-bottom:8px;}
+.score-items{list-style:none;}
+.score-items li{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:11px;padding:2px 0;}
+.score-items li.done{color:#56d364;}
+.score-items li.warn{color:var(--yellow-light);}
+.check-icon{flex-shrink:0;font-size:12px;}
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th,.data-table td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:12px;}
+.data-table th{color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;background:var(--surface2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,.02);}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;}
+.badge-green{background:rgba(35,134,54,.25);color:#56d364;}
+.badge-yellow{background:rgba(158,106,3,.25);color:var(--yellow-light);}
+.badge-red{background:rgba(185,28,28,.25);color:var(--red-light);}
+.badge-gray{background:rgba(139,148,158,.15);color:var(--muted);}
+.badge-blue{background:rgba(30,144,255,.2);color:var(--adfly);}
+.gap-section{margin-bottom:20px;}
+.gap-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.gap-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;}
+.gap-card.critical{border-left:3px solid var(--red-light);}
+.gap-card.important{border-left:3px solid var(--yellow-light);}
+.gap-card.resolved{border-left:3px solid #56d364;opacity:.6;}
+.gap-card.ops{border-left:3px solid var(--muted);}
+.gap-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.gap-content{flex:1;}
+.gap-title{font-weight:600;font-size:12px;margin-bottom:2px;}
+.gap-desc{color:var(--muted);font-size:11px;line-height:1.5;}
+.gap-company{font-size:10px;color:var(--muted);margin-top:4px;}
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.agent-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;}
+.agent-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.agent-id{font-size:11px;color:var(--muted);font-family:monospace;}
+.agent-name{font-weight:600;font-size:12px;margin-bottom:2px;}
+.agent-desc{color:var(--muted);font-size:11px;}
+.flow-week{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px;}
+.flow-week-title{font-size:13px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.flow-days{display:flex;gap:8px;flex-wrap:wrap;}
+.flow-day{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;min-width:110px;flex:1;}
+.flow-day-name{font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:6px;color:var(--muted);}
+.flow-day-items{list-style:none;}
+.flow-day-items li{font-size:11px;color:var(--text);padding:2px 0;}
+.flow-day.past{opacity:.5;}
+.flow-day.today{border-color:var(--yellow-light);}
+.flow-day.next{border-color:var(--adfly);}
+.audit-wrap{overflow-x:auto;}
+.matrix-wrap{overflow-x:auto;}
+.matrix-table{width:100%;border-collapse:collapse;}
+.matrix-table th,.matrix-table td{padding:8px 10px;text-align:center;border:1px solid var(--border);font-size:11px;}
+.matrix-table th{background:var(--surface2);color:var(--muted);font-weight:500;}
+.matrix-table th:first-child,.matrix-table td:first-child{text-align:left;font-weight:500;color:var(--text);}
+.section-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--text);}
+.section-divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
+.theme-card{background:linear-gradient(135deg,rgba(30,144,255,.08),rgba(159,232,58,.06));border:1px solid rgba(30,144,255,.2);border-radius:8px;padding:14px 16px;margin-bottom:20px;}
+.theme-card-title{font-size:12px;font-weight:700;color:var(--adfly);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;}
+.theme-card-text{font-size:12px;color:var(--text);line-height:1.6;}
+.s15-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.s15-card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;}
+.s15-company{font-weight:700;font-size:12px;margin-bottom:6px;}
+.s15-items{list-style:none;font-size:11px;color:var(--muted);}
+.s15-items li{padding:2px 0;}
+.s15-items li.done{color:#56d364;}
+.s15-items li.warn{color:var(--yellow-light);}
+@media(max-width:900px){.tiles-grid{grid-template-columns:repeat(2,1fr)}.scores-grid{grid-template-columns:repeat(2,1fr)}.insights-grid{grid-template-columns:1fr}.agents-grid{grid-template-columns:repeat(2,1fr)}.s15-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.tiles-grid{grid-template-columns:1fr 1fr}.scores-grid{grid-template-columns:1fr}.agents-grid{grid-template-columns:1fr}.s15-grid{grid-template-columns:1fr 1fr}}
+</style></head><body>
 
-  /* HEADER */
-  .header {
-    background: linear-gradient(135deg, #0d1117 0%, #1c2128 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .header-left { display: flex; align-items: center; gap: 12px; }
-  .header-logo {
-    font-size: 18px;
-    font-weight: 700;
-    background: linear-gradient(90deg, #1E90FF, #9FE83A);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .header-subtitle { color: var(--muted); font-size: 12px; }
-  .header-date {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 14px;
-    font-size: 12px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .header-date span { color: var(--yellow-light); font-weight: 600; }
-
-  /* TABS */
-  .tabs-bar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    display: flex;
-    gap: 2px;
-    overflow-x: auto;
-  }
-  .tab-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    padding: 12px 16px;
-    cursor: pointer;
-    font-size: 12px;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: all 0.15s;
-  }
-  .tab-btn:hover { color: var(--text); }
-  .tab-btn.active {
-    color: var(--text);
-    border-bottom-color: var(--adfly);
-  }
-  .tab-content { display: none; padding: 24px; }
-  .tab-content.active { display: block; }
-
-  /* TILES */
-  .tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .tile {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .tile-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-  .tile-value { font-size: 26px; font-weight: 700; line-height: 1; }
-  .tile-sub { color: var(--muted); font-size: 11px; margin-top: 4px; }
-  .tile-accent-blue .tile-value { color: var(--adfly); }
-  .tile-accent-green .tile-value { color: #2ea043; }
-  .tile-accent-yellow .tile-value { color: var(--yellow-light); }
-  .tile-accent-red .tile-value { color: var(--red-light); }
-
-  /* ALERT BANNER */
-  .alert-banner {
-    background: rgba(185, 28, 28, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.4);
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
-  }
-  .alert-banner.yellow {
-    background: rgba(158, 106, 3, 0.15);
-    border-color: rgba(210, 153, 34, 0.4);
-  }
-  .alert-icon { font-size: 16px; flex-shrink: 0; }
-  .alert-text strong { font-weight: 600; }
-
-  /* RADAR TILE */
-  .radar-tile {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 20px;
-  }
-  .radar-tile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
-  .radar-tile-title { font-size: 13px; font-weight: 600; }
-  .radar-tile-date { color: var(--muted); font-size: 11px; }
-  .radar-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-    border: 1px solid;
-  }
-  .pill-green { background: rgba(35, 134, 54, 0.2); border-color: rgba(46, 160, 67, 0.5); color: #56d364; }
-  .pill-yellow { background: rgba(158, 106, 3, 0.2); border-color: rgba(210, 153, 34, 0.5); color: var(--yellow-light); }
-  .pill-red { background: rgba(185, 28, 28, 0.2); border-color: rgba(239, 68, 68, 0.5); color: var(--red-light); }
-  .pill-gray { background: rgba(139, 148, 158, 0.15); border-color: rgba(139, 148, 158, 0.3); color: var(--muted); }
-
-  /* RADAR INSIGHTS */
-  .insights-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .insight-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px;
-  }
-  .insight-card-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .insight-company {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .insight-badge {
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-  }
-  .badge-urgent { background: rgba(185,28,28,0.3); color: var(--red-light); }
-  .badge-ok { background: rgba(35,134,54,0.2); color: #56d364; }
-  .insight-text { color: var(--muted); font-size: 12px; line-height: 1.5; }
-  .insight-text strong { color: var(--text); }
-
-  /* TIMING TABLE */
-  .timing-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-  .timing-table th, .timing-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; }
-  .timing-table th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
-  .timing-table tr:last-child td { border-bottom: none; }
-  .timing-table tr:hover td { background: var(--surface2); }
-
-  /* SCORES TABLE */
-  .scores-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .score-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .score-card-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .score-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .score-company { font-weight: 600; font-size: 13px; }
-  .score-bar-wrap { margin-bottom: 8px; }
-  .score-bar-bg {
-    background: var(--border);
-    border-radius: 4px;
-    height: 6px;
-    overflow: hidden;
-  }
-  .score-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.5s ease;
-  }
-  .score-pct { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  .score-items { list-style: none; }
-  .score-items li {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--muted);
-    font-size: 11px;
-    padding: 2px 0;
-  }
-  .score-items li.done { color: #56d364; }
-  .score-items li.warn { color: var(--yellow-light); }
-  .score-items li.missing { color: var(--red-light); }
-  .check-icon { flex-shrink: 0; font-size: 12px; }
-
-  /* TABLE GENERIC */
-  .data-table { width: 100%; border-collapse: collapse; }
-  .data-table th, .data-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; }
-  .data-table th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; background: var(--surface2); }
-  .data-table tr:last-child td { border-bottom: none; }
-  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  /* STATUS BADGES */
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-  .badge-green { background: rgba(35,134,54,0.25); color: #56d364; }
-  .badge-yellow { background: rgba(158,106,3,0.25); color: var(--yellow-light); }
-  .badge-red { background: rgba(185,28,28,0.25); color: var(--red-light); }
-  .badge-gray { background: rgba(139,148,158,0.15); color: var(--muted); }
-  .badge-blue { background: rgba(30,144,255,0.2); color: var(--adfly); }
-
-  /* GAPS */
-  .gap-section { margin-bottom: 20px; }
-  .gap-section-title {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .gap-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .gap-card.critical { border-left: 3px solid var(--red-light); }
-  .gap-card.important { border-left: 3px solid var(--yellow-light); }
-  .gap-card.resolved { border-left: 3px solid #56d364; opacity: 0.6; }
-  .gap-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-  .gap-content { flex: 1; }
-  .gap-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
-  .gap-desc { color: var(--muted); font-size: 11px; line-height: 1.5; }
-  .gap-company { font-size: 10px; color: var(--muted); margin-top: 4px; }
-
-  /* AGENTS GRID */
-  .agents-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  .agent-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px;
-  }
-  .agent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-  .agent-id { font-size: 11px; color: var(--muted); font-family: monospace; }
-  .agent-name { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
-  .agent-desc { color: var(--muted); font-size: 11px; }
-
-  /* FLOW */
-  .flow-week {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-  .flow-week-title {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .flow-days { display: flex; gap: 8px; flex-wrap: wrap; }
-  .flow-day {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 12px;
-    min-width: 120px;
-    flex: 1;
-  }
-  .flow-day-name { font-weight: 700; font-size: 11px; text-transform: uppercase; margin-bottom: 6px; color: var(--muted); }
-  .flow-day-items { list-style: none; }
-  .flow-day-items li { font-size: 11px; color: var(--text); padding: 2px 0; }
-  .flow-day.active { border-color: var(--adfly); }
-  .flow-day.past { opacity: 0.5; }
-  .flow-day.today { border-color: var(--yellow-light); }
-
-  /* AUDITORIA TABLE */
-  .audit-wrap { overflow-x: auto; }
-
-  /* UNIFORMIDADE */
-  .matrix-wrap { overflow-x: auto; }
-  .matrix-table { width: 100%; border-collapse: collapse; }
-  .matrix-table th, .matrix-table td { padding: 8px 10px; text-align: center; border: 1px solid var(--border); font-size: 11px; }
-  .matrix-table th { background: var(--surface2); color: var(--muted); font-weight: 500; }
-  .matrix-table th:first-child { text-align: left; }
-  .matrix-table td:first-child { text-align: left; font-weight: 500; color: var(--text); }
-
-  /* SECTION TITLE */
-  .section-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text);
-  }
-  .section-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 20px 0;
-  }
-
-  /* COUNTDOWN */
-  .countdown-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(185,28,28,0.25);
-    border: 1px solid rgba(239,68,68,0.4);
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--red-light);
-  }
-
-  /* TEMA TRANSVERSAL */
-  .theme-card {
-    background: linear-gradient(135deg, rgba(30,144,255,0.08), rgba(159,232,58,0.06));
-    border: 1px solid rgba(30,144,255,0.2);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-  }
-  .theme-card-title { font-size: 12px; font-weight: 700; color: var(--adfly); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
-  .theme-card-text { font-size: 12px; color: var(--text); line-height: 1.6; }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .tiles-grid { grid-template-columns: repeat(2, 1fr); }
-    .scores-grid { grid-template-columns: repeat(2, 1fr); }
-    .insights-grid { grid-template-columns: 1fr; }
-    .agents-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .tiles-grid { grid-template-columns: 1fr 1fr; }
-    .scores-grid { grid-template-columns: 1fr; }
-    .agents-grid { grid-template-columns: 1fr; }
-  }
-</style>
-</head>
-<body>
-
-<!-- HEADER -->
 <div class="header">
-  <div class="header-left">
-    <div>
-      <div class="header-logo">⚡ Painel Controle MKT</div>
-      <div class="header-subtitle">Departamento Virtual AleTA · 4 empresas · AG-00 a AG-13</div>
-    </div>
+  <div>
+    <div class="header-logo">⚡ Painel Controle MKT</div>
+    <div class="header-subtitle">Departamento Virtual AleTA · 5 empresas · AG-00 a AG-13</div>
   </div>
-  <div class="header-date">
-    🗓 Atualizado em <span>Quinta, 25/06/2026 às 09h</span> · S14 (22–28/06)
-  </div>
+  <div class="header-date">🗓 Atualizado em <span>Sexta, 26/06/2026 às 07h</span> · S14 encerra Sáb · S15 inicia Seg 29/06</div>
 </div>
 
-<!-- TABS -->
 <div class="tabs-bar">
-  <button class="tab-btn active" onclick="showTab('visao-geral')">📊 Visão Geral</button>
-  <button class="tab-btn" onclick="showTab('status-semana')">🔍 Status Semana</button>
-  <button class="tab-btn" onclick="showTab('uniformidade')">⚖️ Uniformidade</button>
-  <button class="tab-btn" onclick="showTab('fluxo-semanal')">🗓 Fluxo Semanal</button>
-  <button class="tab-btn" onclick="showTab('agentes')">🤖 Agentes</button>
-  <button class="tab-btn" onclick="showTab('gaps')">⚠️ Gaps & Prioridades</button>
-  <button class="tab-btn" onclick="showTab('auditoria')">✅ Auditoria de Entregas</button>
+  <button class="tab-btn active" onclick="showTab('visao-geral',this)">📊 Visão Geral</button>
+  <button class="tab-btn" onclick="showTab('status-semana',this)">🔍 Status Semana</button>
+  <button class="tab-btn" onclick="showTab('uniformidade',this)">⚖️ Uniformidade</button>
+  <button class="tab-btn" onclick="showTab('fluxo-semanal',this)">🗓 Fluxo Semanal</button>
+  <button class="tab-btn" onclick="showTab('agentes',this)">🤖 Agentes</button>
+  <button class="tab-btn" onclick="showTab('gaps',this)">⚠️ Gaps &amp; Prioridades</button>
+  <button class="tab-btn" onclick="showTab('auditoria',this)">✅ Auditoria</button>
 </div>
 
-<!-- ======================== TAB: VISÃO GERAL ======================== -->
+<!-- VISÃO GERAL -->
 <div id="tab-visao-geral" class="tab-content active">
-
-  <!-- ALERTA URGENTE -->
   <div class="alert-banner">
     <div class="alert-icon">🔴</div>
-    <div class="alert-text">
-      <strong>URGENTE ADFly — DECEA ICA 100-40 entra em vigor em 01/07/2026 (6 dias).</strong>
-      Qualquer drone, incluindo sub-250g, precisará de autorização SARPAS. Publicar conteúdo de regulamentação até sexta 27/06 para virar referência no nicho. Janela única de timing.
-    </div>
-    <div class="countdown-badge">⏰ 6 dias</div>
+    <div class="alert-text"><strong>URGENTE ADFly — DECEA ICA 100-40 entra em vigor em 01/07/2026 (5 dias).</strong> Sub-250g precisará de SARPAS. Carrossel publicado HOJE (Sex 26/06) é o gancho de timing. S15 consolida autoridade regulatória na vigência.</div>
+    <div class="countdown-badge">⏰ 5 dias</div>
+  </div>
+  <div class="alert-banner blue">
+    <div class="alert-icon">✈️</div>
+    <div class="alert-text"><strong>Alexandre em viagem.</strong> Pacotes S14 e S15 prontos. Confirmar dados BPMF (165km · Mogi · 1.070m) e portfólio ADFly antes de publicar peças com números específicos.</div>
+  </div>
+  <div class="alert-banner yellow">
+    <div class="alert-icon">🤝</div>
+    <div class="alert-text"><strong>Collab AleChef × BPMF — publicar coordenado QUI 03/07 às 08h.</strong> Toque do Chef + Lagamar. Janela: Inverno + pré-jornada. Ambas as peças em S15.</div>
   </div>
 
-  <!-- TILES SUMMARY -->
   <div class="tiles-grid">
-    <div class="tile tile-accent-green">
-      <div class="tile-label">Pacotes Semana S14</div>
-      <div class="tile-value">4/4</div>
-      <div class="tile-sub">ADFly · AleChef · BPMF · Marcela</div>
-    </div>
-    <div class="tile tile-accent-blue">
-      <div class="tile-label">Total PNGs Gerados</div>
-      <div class="tile-value">60</div>
-      <div class="tile-sub">ADFly 20 · AleChef 6 · BPMF 13 · Marcela 21</div>
-    </div>
-    <div class="tile tile-accent-yellow">
-      <div class="tile-label">Copy S14 — Status QA</div>
-      <div class="tile-value">🟡 2</div>
-      <div class="tile-sub">Ajustes menores · ADFly + BPMF</div>
-    </div>
-    <div class="tile tile-accent-red">
-      <div class="tile-label">Gaps Críticos Abertos</div>
-      <div class="tile-value">2</div>
-      <div class="tile-sub">AG-13 parado · TRAÇÃO S1 sem doc</div>
-    </div>
+    <div class="tile tile-green"><div class="tile-label">Pacotes S14 + S15</div><div class="tile-value">5/5</div><div class="tile-sub">Todas empresas prontas · QA 🟢</div></div>
+    <div class="tile tile-blue"><div class="tile-label">PNGs S14 Gerados</div><div class="tile-value">80</div><div class="tile-sub">ADFly 40 · AleChef 6 · BPMF 13 · Marcela 21</div></div>
+    <div class="tile tile-blue"><div class="tile-label">PNGs S15 Prontos</div><div class="tile-value">30</div><div class="tile-sub">ADFly 14 · AleChef 6 · BPMF 10 · Marcela AI ext.</div></div>
+    <div class="tile tile-yellow"><div class="tile-label">Confirmações Pendentes</div><div class="tile-value">5</div><div class="tile-sub">BPMF percurso · ADFly números · Marcela PEIC · R$4.300 · TRAÇÃO WA</div></div>
   </div>
 
-  <!-- RADAR DE TENDÊNCIAS — ATUALIZADO COM LOG 25/06 -->
   <div class="radar-tile">
     <div class="radar-tile-header">
       <div class="radar-tile-title">📡 Radar de Tendências e Provocações</div>
-      <div class="radar-tile-date">Última execução: 25/06/2026 (automatizado) · Próxima: cron quinta 08h01</div>
+      <div class="radar-tile-date">Última execução: 25/06/2026 (automatizado) · Próxima: qui 02/07 08h01</div>
     </div>
     <div class="radar-pills">
       <div class="pill pill-green">🟢 ADFly</div>
       <div class="pill pill-green">🟢 AleChef</div>
       <div class="pill pill-green">🟢 BPMF</div>
       <div class="pill pill-green">🟢 Marcela</div>
+      <div class="pill pill-green">🟢 TRAÇÃO</div>
     </div>
-    <div style="margin-top:10px; font-size:11px; color: var(--muted); background: var(--surface2); border-radius:6px; padding: 8px 12px; border: 1px solid var(--border);">
-      ℹ️ <strong style="color:var(--yellow-light)">Atenção antes de usar:</strong> ADFly Provocações 1 e 2 reusam tema-guarda-chuva já incorporado em S22-28 (ICA 100-40, NBR 5674) — usar com ângulo adaptado. TRAÇÃO Provocação 1 (página vs. perfil pessoal LinkedIn) próxima de tema recente — revisar espaçamento antes de usar na grade S15.
+    <div style="margin-top:10px;font-size:11px;color:var(--muted);background:var(--surface2);border-radius:6px;padding:8px 12px;border:1px solid var(--border);">
+      ℹ️ <strong style="color:var(--yellow-light)">Antes de usar em S15:</strong> ADFly Provocações 1 e 2 reusam tema ICA/NBR (já em S14) — ângulo adaptado. TRAÇÃO Provocação 1 (página vs. perfil LinkedIn) — revisar espaçamento. Adaptações já incorporadas nos pacotes S15.
     </div>
   </div>
 
-  <!-- RADAR INSIGHTS DA SEMANA -->
   <div class="section-title">🔭 Insights do Radar — Semana 22–28/06/2026</div>
 
-  <!-- TEMA TRANSVERSAL -->
   <div class="theme-card">
-    <div class="theme-card-title">💡 Tema Transversal da Semana (Cross-empresa)</div>
-    <div class="theme-card-text">
-      <strong>"IA precisa de humano para funcionar de verdade"</strong> — apareceu em 3 nichos: Marketing (Orgânica Digital declarou que toque humano é o diferencial), Gastronomia (IA sugere receitas mas chef entrega afeto), Finanças (FinTok cresce mas planejamento personalizado é insubstituível). Alexandre pode usar esse ângulo nas 3 empresas ou nas redes pessoais como reflexão estratégica.
-    </div>
+    <div class="theme-card-title">💡 Tema Transversal da Semana</div>
+    <div class="theme-card-text"><strong>"IA precisa de humano para funcionar de verdade"</strong> — apareceu em 3 nichos: Marketing (toque humano é o diferencial), Gastronomia (IA sugere receitas mas chef entrega afeto), Finanças (FinTok cresce mas planejamento personalizado é insubstituível). Alexandre pode usar nas redes pessoais como reflexão cross-empresa.</div>
   </div>
 
   <div class="insights-grid">
-    <div class="insight-card" style="border-left: 3px solid var(--adfly);">
-      <div class="insight-card-header">
-        <div class="insight-company" style="color: var(--adfly);">🚁 ADFly</div>
-        <div class="insight-badge badge-urgent">🔴 URGENTE</div>
-      </div>
-      <div class="insight-text">
-        <strong>ANAC + DECEA ICA 100-40 (01/07):</strong> sub-250g precisará de SARPAS. Publicar carrossel + reel "O que muda para drones a partir de 01/07" até sexta 27/06. Oportunidade de timing único — ADFly vira referência de regulamentação no nicho.
-      </div>
+    <div class="insight-card" style="border-left:3px solid var(--adfly)">
+      <div class="insight-card-header"><div class="insight-company" style="color:var(--adfly)">🚁 ADFly</div><div class="insight-badge badge-urgent">⏰ 5 DIAS</div></div>
+      <div class="insight-text"><strong>ICA 100-40 DECEA vigência 01/07:</strong> carrossel hoje (Sex) é o gancho. S15 consolida autoridade regulatória. Webinar ADFly Lab em julho — janela de captação começa Seg 29/06.</div>
     </div>
-
-    <div class="insight-card" style="border-left: 3px solid var(--alechef);">
-      <div class="insight-card-header">
-        <div class="insight-company" style="color: var(--alechef);">👨‍🍳 AleChef</div>
-        <div class="insight-badge badge-ok">🟢 Em Dia</div>
-      </div>
-      <div class="insight-text">
-        <strong>Inverno 2026 — comfort food &amp; nostalgia:</strong> marmitas quentes, caldos, nostalgia gastronômica dominante. Jantar com chef como presente de inverno. "5 marmitas que vão fazer você esquecer o delivery" + reel emocional da avó.
-      </div>
+    <div class="insight-card" style="border-left:3px solid var(--alechef)">
+      <div class="insight-card-header"><div class="insight-company" style="color:var(--alechef)">👨‍🍳 AleChef</div><div class="insight-badge badge-ok">🤝 Collab Qui 03/07</div></div>
+      <div class="insight-text"><strong>Inverno 2026 — comfort food e nostalgia:</strong> marmitas quentes, caldos. S15 inclui collab BPMF para Jornada Lagamar (Toque do Chef na jornada). Publicação coordenada QUI 03/07 08h.</div>
     </div>
-
-    <div class="insight-card" style="border-left: 3px solid var(--bpmf);">
-      <div class="insight-card-header">
-        <div class="insight-company" style="color: var(--bpmf);">🚴 BPMF</div>
-        <div class="insight-badge badge-ok">⚡ Ao Vivo</div>
-      </div>
-      <div class="insight-text">
-        <strong>4º Pedal Estrada de Ferro ESTE SÁBADO (28/06):</strong> janela de cobertura em tempo real. Lagamar (05-09/07) para pré-aquecer nos próximos 10 dias. Reel "Inverno é a melhor estação para pedalar" para quebrar objeção do frio.
-      </div>
+    <div class="insight-card" style="border-left:3px solid var(--bpmf)">
+      <div class="insight-card-header"><div class="insight-company" style="color:var(--bpmf)">🚴 BPMF</div><div class="insight-badge badge-ok">⚡ Ao Vivo Sáb</div></div>
+      <div class="insight-text"><strong>4º Pedal Estrada de Ferro amanhã (27/06):</strong> cobertura ao vivo Stories + Reel. S15 com Lagamar (05-09/07) — pré-aquecimento inicia Seg. Confirmar dados 165km · 1.070m altimetria.</div>
     </div>
-
-    <div class="insight-card" style="border-left: 3px solid var(--marcela);">
-      <div class="insight-card-header">
-        <div class="insight-company" style="color: var(--marcela);">💰 Marcela</div>
-        <div class="insight-badge badge-ok">📈 Alta Demanda</div>
-      </div>
-      <div class="insight-text">
-        <strong>Camila Villela no comportamental + FinTok +300%:</strong> Selic alta + férias julho = temas com demanda imediata. "Como não sair no vermelho sem cancelar as férias dos filhos" — persona Família Ribeiro vivendo isso agora. Entrar no TikTok é urgente.
-      </div>
+    <div class="insight-card" style="border-left:3px solid var(--marcela)">
+      <div class="insight-card-header"><div class="insight-company" style="color:var(--marcela)">💰 Marcela</div><div class="insight-badge badge-ok">📈 Alta Demanda</div></div>
+      <div class="insight-text"><strong>Selic alta + férias julho = pressão orçamento:</strong> S15 com "como não sair no vermelho nas férias". Verificar dado PEIC/CNC 78,4% jun/2026 antes de publicar peças com números específicos.</div>
     </div>
   </div>
 
-  <!-- TIMING ALERTS -->
   <div class="section-title">⏰ Alertas de Timing Críticos</div>
-  <table class="timing-table" style="background:var(--surface); border-radius:8px; overflow:hidden;">
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Evento / Prazo</th>
-        <th>Empresa</th>
-        <th>Status</th>
-      </tr>
-    </thead>
+  <table class="timing-table" style="background:var(--surface);border-radius:8px;overflow:hidden;">
+    <thead><tr><th>Data</th><th>Evento / Prazo</th><th>Empresa</th><th>Status</th></tr></thead>
     <tbody>
-      <tr>
-        <td><strong>Sex 27/06</strong></td>
-        <td>Publicar carrossel + reel ICA 100-40 (DECEA) — prazo para virar referência</td>
-        <td style="color:var(--adfly)">ADFly</td>
-        <td><span class="badge badge-red">🔴 URGENTE</span></td>
-      </tr>
-      <tr>
-        <td><strong>Sáb 28/06</strong></td>
-        <td>4º Pedal Estrada de Ferro — cobertura ao vivo Stories + Reel</td>
-        <td style="color:var(--bpmf)">BPMF</td>
-        <td><span class="badge badge-yellow">⚡ Em 3 dias</span></td>
-      </tr>
-      <tr>
-        <td><strong>01/07 (Qua)</strong></td>
-        <td>ICA 100-40 DECEA entra em vigor — marco do conteúdo ADFly</td>
-        <td style="color:var(--adfly)">ADFly</td>
-        <td><span class="badge badge-red">⏰ 6 dias</span></td>
-      </tr>
-      <tr>
-        <td>05-09/07</td>
-        <td>Jornada Lagamar — captar inscritos agora (pré-aquecimento)</td>
-        <td style="color:var(--bpmf)">BPMF</td>
-        <td><span class="badge badge-blue">📣 Pré-aquecimento</span></td>
-      </tr>
-      <tr>
-        <td>Julho</td>
-        <td>Férias escolares — gastos extras, pressão orçamento familiar</td>
-        <td style="color:var(--marcela)">Marcela</td>
-        <td><span class="badge badge-green">✅ Incorporado</span></td>
-      </tr>
+      <tr><td><strong>Sex 26/06 HOJE</strong></td><td>Carrossel ICA 100-40 — timing único de autoridade regulatória</td><td style="color:var(--adfly)">ADFly</td><td><span class="badge badge-red">🔴 HOJE</span></td></tr>
+      <tr><td><strong>Sáb 27/06</strong></td><td>4º Pedal Estrada de Ferro — cobertura ao vivo Stories + Reel</td><td style="color:var(--bpmf)">BPMF</td><td><span class="badge badge-yellow">⚡ Amanhã</span></td></tr>
+      <tr style="background:rgba(30,144,255,.04)"><td><strong>Seg 29/06</strong></td><td>Início S15 · AG-13 08h30 · AG-03 LinkedIn 09h30 · Publicação S15</td><td style="color:var(--adfly)">Todas</td><td><span class="badge badge-blue">📋 S15 pronta</span></td></tr>
+      <tr><td><strong>01/07 (Qua)</strong></td><td>ICA 100-40 DECEA entra em vigor — marco do conteúdo ADFly</td><td style="color:var(--adfly)">ADFly</td><td><span class="badge badge-red">⏰ 5 dias</span></td></tr>
+      <tr><td><strong>Qui 03/07</strong></td><td>Collab AleChef × BPMF — publicação coordenada 08h</td><td style="color:var(--alechef)">AleChef + BPMF</td><td><span class="badge badge-yellow">🤝 Coordenar</span></td></tr>
+      <tr><td>05-09/07</td><td>Jornada Lagamar — pré-aquecimento S15</td><td style="color:var(--bpmf)">BPMF</td><td><span class="badge badge-blue">📣 Pré-aquecimento</span></td></tr>
+      <tr><td>Julho</td><td>Férias escolares (Marcela) + Webinar ADFly Lab</td><td>Marcela + ADFly</td><td><span class="badge badge-green">✅ S15 incorporado</span></td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- ======================== TAB: STATUS SEMANA ======================== -->
+<!-- STATUS SEMANA -->
 <div id="tab-status-semana" class="tab-content">
-  <div class="section-title">🔍 Status Semana 22–28/06/2026 (S14)</div>
-
+  <div class="section-title">🔍 S14 — Status de Fechamento (22–28/06/2026)</div>
   <div class="scores-grid">
-    <!-- ADFly -->
     <div class="score-card">
-      <div class="score-card-header">
-        <div class="score-dot" style="background:var(--adfly)"></div>
-        <div class="score-company">ADFly</div>
-        <div style="margin-left:auto"><span class="badge badge-yellow">🟡 90%</span></div>
-      </div>
-      <div class="score-pct" style="color:var(--adfly)">90%</div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-bg">
-          <div class="score-bar-fill" style="width:90%; background:var(--adfly)"></div>
-        </div>
-      </div>
+      <div class="score-card-header"><div class="score-dot" style="background:var(--adfly)"></div><div class="score-company">ADFly</div><div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div></div>
+      <div class="score-pct" style="color:var(--adfly)">100%</div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:100%;background:var(--adfly)"></div></div>
       <ul class="score-items">
-        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
-        <li class="done"><span class="check-icon">✅</span> Imagens — 20 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> PACOTE-FULL .md + docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> 40 PNGs gerados</li>
         <li class="done"><span class="check-icon">✅</span> Speech + AI Prompts (v2)</li>
         <li class="done"><span class="check-icon">✅</span> Bloco WhatsApp</li>
-        <li class="warn"><span class="check-icon">🟡</span> LinkedIn Qua: confirmar sem emoji</li>
-        <li class="done"><span class="check-icon">✅</span> QA AG-QA executado</li>
+        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE</li>
       </ul>
-      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
-        Peças: Carrossel Seg+Qui+Sex (6 slides cada) · Post Qua IG+LinkedIn
-      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted)">Carrossel Seg · Post Qua IG+LI · Carrossel Qui · Carrossel Sex ICA</div>
     </div>
-
-    <!-- AleChef -->
     <div class="score-card">
-      <div class="score-card-header">
-        <div class="score-dot" style="background:var(--alechef)"></div>
-        <div class="score-company">AleChef</div>
-        <div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div>
-      </div>
+      <div class="score-card-header"><div class="score-dot" style="background:var(--alechef)"></div><div class="score-company">AleChef</div><div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div></div>
       <div class="score-pct" style="color:var(--alechef)">100%</div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-bg">
-          <div class="score-bar-fill" style="width:100%; background:var(--alechef)"></div>
-        </div>
-      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:100%;background:var(--alechef)"></div></div>
       <ul class="score-items">
-        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
-        <li class="done"><span class="check-icon">✅</span> Imagens — 6 PNGs gerados</li>
-        <li class="done"><span class="check-icon">✅</span> Speech Reel Qua com timecodes</li>
-        <li class="done"><span class="check-icon">✅</span> AI Prompts (todos formatos)</li>
-        <li class="done"><span class="check-icon">✅</span> Bloco WhatsApp</li>
-        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE sem pendências</li>
+        <li class="done"><span class="check-icon">✅</span> Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> 6 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> Speech Reel Qua (1 mês)</li>
+        <li class="done"><span class="check-icon">✅</span> AI Prompts + WhatsApp</li>
+        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE</li>
       </ul>
-      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
-        Peças: Post+Story Feed Seg · Reel Qua (1 mês AleChef) · Stories Sex (3 frames)
-      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted)">Post+Story Seg · Reel Qua · Stories Sex</div>
     </div>
-
-    <!-- BPMF -->
     <div class="score-card">
-      <div class="score-card-header">
-        <div class="score-dot" style="background:var(--bpmf)"></div>
-        <div class="score-company">BPMF</div>
-        <div style="margin-left:auto"><span class="badge badge-yellow">🟡 90%</span></div>
-      </div>
+      <div class="score-card-header"><div class="score-dot" style="background:var(--bpmf)"></div><div class="score-company">BPMF</div><div style="margin-left:auto"><span class="badge badge-yellow">🟡 90%</span></div></div>
       <div class="score-pct" style="color:var(--bpmf)">90%</div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-bg">
-          <div class="score-bar-fill" style="width:90%; background:var(--bpmf)"></div>
-        </div>
-      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:90%;background:var(--bpmf)"></div></div>
       <ul class="score-items">
-        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
-        <li class="done"><span class="check-icon">✅</span> Imagens — 13 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> 13 PNGs gerados</li>
         <li class="done"><span class="check-icon">✅</span> AI Prompts por slide</li>
-        <li class="warn"><span class="check-icon">🟡</span> Bloco WhatsApp — confirmar no .docx</li>
-        <li class="done"><span class="check-icon">✅</span> Identidade visual correta</li>
-        <li class="done"><span class="check-icon">✅</span> QA AG-QA executado</li>
+        <li class="done"><span class="check-icon">✅</span> QA executado</li>
+        <li class="warn"><span class="check-icon">🟡</span> Confirmar 165km · Mogi · 1.070m</li>
       </ul>
-      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
-        Peças: Carrossel Seg (5sl) · Carrossel Qui (4sl) · Stories Sab 28/06 (4fr CTA vagas)
-      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted)">Carrossel Seg (5sl) · Carrossel Qui (4sl) · Stories Sab CTA</div>
     </div>
-
-    <!-- Marcela -->
     <div class="score-card">
-      <div class="score-card-header">
-        <div class="score-dot" style="background:var(--marcela)"></div>
-        <div class="score-company">Marcela</div>
-        <div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div>
-      </div>
+      <div class="score-card-header"><div class="score-dot" style="background:var(--marcela)"></div><div class="score-company">Marcela</div><div style="margin-left:auto"><span class="badge badge-green">🟢 100%</span></div></div>
       <div class="score-pct" style="color:var(--marcela)">100%</div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-bg">
-          <div class="score-bar-fill" style="width:100%; background:var(--marcela)"></div>
-        </div>
-      </div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:100%;background:var(--marcela)"></div></div>
       <ul class="score-items">
-        <li class="done"><span class="check-icon">✅</span> Copy — Pacote docx v1.0</li>
-        <li class="done"><span class="check-icon">✅</span> Imagens — 21 PNGs gerados</li>
-        <li class="done"><span class="check-icon">✅</span> Speech Reels Ter+Qui com timecodes</li>
-        <li class="done"><span class="check-icon">✅</span> LinkedIn: copy + AI Prompt 1200×1200</li>
-        <li class="done"><span class="check-icon">✅</span> Bloco WhatsApp + BROADCAST mensal</li>
-        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE sem pendências</li>
+        <li class="done"><span class="check-icon">✅</span> Pacote docx v1.0</li>
+        <li class="done"><span class="check-icon">✅</span> 21 PNGs gerados</li>
+        <li class="done"><span class="check-icon">✅</span> Speech Reels + LinkedIn</li>
+        <li class="done"><span class="check-icon">✅</span> WhatsApp + Broadcast julho</li>
+        <li class="done"><span class="check-icon">✅</span> QA 🟢 VERDE</li>
       </ul>
-      <div style="margin-top:8px; font-size:11px; color:var(--muted);">
-        Peças: 2 carrosseis · 2 reels LinkedIn · Post+Stories Sex · Broadcast julho
-      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted)">2 carrosseis · 2 Reels LinkedIn · Post+Stories Sex</div>
     </div>
   </div>
 
-  <!-- CRONOGRAMA DIA A DIA -->
   <div class="section-title">🗓 Cronograma S14 — Dia a Dia</div>
-  <table class="data-table" style="background:var(--surface); border-radius:8px; overflow:hidden; border: 1px solid var(--border);">
-    <thead>
-      <tr>
-        <th>Dia</th>
-        <th>ADFly</th>
-        <th>AleChef</th>
-        <th>BPMF</th>
-        <th>Marcela</th>
-      </tr>
-    </thead>
+  <table class="data-table" style="background:var(--surface);border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+    <thead><tr><th>Dia</th><th>ADFly</th><th>AleChef</th><th>BPMF</th><th>Marcela</th></tr></thead>
     <tbody>
-      <tr>
-        <td><strong>Seg 22/06</strong> ✅</td>
-        <td>Carrossel (6 slides)</td>
-        <td>Post Feed + Story</td>
-        <td>Carrossel (5 slides)</td>
-        <td>Carrossel milhas (6sl)</td>
-      </tr>
-      <tr>
-        <td><strong>Ter 23/06</strong> ✅</td>
-        <td>—</td>
-        <td>—</td>
-        <td>—</td>
-        <td>Reel + LinkedIn 📌</td>
-      </tr>
-      <tr>
-        <td><strong>Qua 24/06</strong> ✅</td>
-        <td>Post IG + LinkedIn 🟡</td>
-        <td>Reel (1 mês AleChef)</td>
-        <td>—</td>
-        <td>Carrossel carro×escola (7sl)</td>
-      </tr>
-      <tr style="background: rgba(210,153,34,0.06);">
-        <td><strong>Qui 25/06</strong> ⭐ HOJE</td>
-        <td>Carrossel (6 slides)</td>
-        <td>—</td>
-        <td>Carrossel (4 slides)</td>
-        <td>Reel LinkedIn</td>
-      </tr>
-      <tr>
-        <td><strong>Sex 26/06</strong></td>
-        <td>Carrossel (6 slides)</td>
-        <td>Stories (3 frames)</td>
-        <td>—</td>
-        <td>Post + Stories</td>
-      </tr>
-      <tr>
-        <td><strong>Sáb 28/06</strong></td>
-        <td>—</td>
-        <td>—</td>
-        <td>Stories CTA vagas ⚡</td>
-        <td>—</td>
-      </tr>
+      <tr><td><strong>Seg 22/06</strong> ✅</td><td>Carrossel (6sl)</td><td>Post Feed + Story</td><td>Carrossel (5sl)</td><td>Carrossel milhas (6sl)</td></tr>
+      <tr><td><strong>Ter 23/06</strong> ✅</td><td>—</td><td>—</td><td>—</td><td>Reel + LinkedIn 📌</td></tr>
+      <tr><td><strong>Qua 24/06</strong> ✅</td><td>Post IG + LinkedIn 📌</td><td>Reel (1 mês AleChef)</td><td>—</td><td>Carrossel carro×escola (7sl)</td></tr>
+      <tr><td><strong>Qui 25/06</strong> ✅</td><td>Carrossel (6sl)</td><td>—</td><td>Carrossel (4sl)</td><td>Reel LinkedIn 📌</td></tr>
+      <tr style="background:rgba(210,153,34,.06)"><td><strong>Sex 26/06 ⭐ HOJE</strong></td><td>Carrossel ICA 🔴 timing</td><td>Stories (3 frames)</td><td>—</td><td>Post + Stories</td></tr>
+      <tr><td><strong>Sáb 27/06</strong></td><td>—</td><td>—</td><td>Stories CTA vagas ⚡ ao vivo</td><td>—</td></tr>
     </tbody>
   </table>
-  <div style="margin-top:8px; font-size:11px; color:var(--muted);">⭐ Hoje · 📌 LinkedIn obrigatório com imagem 1200×1200 · 🟡 Confirmar versão sem emoji · ⚡ 4º Pedal Estrada de Ferro ao vivo</div>
+  <div style="margin-top:8px;font-size:11px;color:var(--muted)">⭐ Hoje · 📌 LinkedIn obrigatório 1200×1200 · 🔴 Timing crítico ICA · ⚡ 4º Pedal Estrada de Ferro ao vivo</div>
 
-  <!-- S15 PREVIEW -->
   <hr class="section-divider">
-  <div class="section-title">🔮 Preview S15 — 29/06–05/07/2026</div>
-  <div class="alert-banner yellow">
-    <div class="alert-icon">📋</div>
-    <div class="alert-text">
-      <strong>Produção S15 inicia segunda 30/06.</strong> Alexandre lança INBOX na sexta 27/06 até 18h. AG-04 fecha grade com base no RADAR-CONSOLIDADO-25-06-2026.md + INBOX. Temas quentes: DECEA vigência (ADFly) · Lagamar pré-aquecimento (BPMF) · Férias julho (Marcela/AleChef).
-    </div>
+  <div class="section-title">🚀 S15 — Prontos para Publicação (29/06–05/07/2026)</div>
+  <div class="s15-grid">
+    <div class="s15-card"><div class="s15-company" style="color:var(--adfly)">🚁 ADFly</div><ul class="s15-items"><li class="done">✅ PACOTE-FULL S15 .md + .docx</li><li class="done">✅ 14 PNGs gerados</li><li class="done">✅ QA 🟢 aprovado</li><li class="warn">🟡 Conf. R$4.300 Reel Ter 01/07</li><li class="warn">🟡 Conf. números portfólio</li></ul></div>
+    <div class="s15-card"><div class="s15-company" style="color:var(--alechef)">👨‍🍳 AleChef</div><ul class="s15-items"><li class="done">✅ PACOTE-FULL S15 .md + .docx</li><li class="done">✅ 6 PNGs gerados</li><li class="done">✅ QA 🟢 aprovado</li><li class="done">✅ Collab BPMF Qui 03/07 pronto</li></ul></div>
+    <div class="s15-card"><div class="s15-company" style="color:var(--bpmf)">🚴 BPMF</div><ul class="s15-items"><li class="done">✅ PACOTE-FULL S15 .md + .docx</li><li class="done">✅ 10 PNGs gerados</li><li class="done">✅ QA 🟢 aprovado</li><li class="warn">🟡 Conf. dados 165km · 1.070m</li></ul></div>
+    <div class="s15-card"><div class="s15-company" style="color:var(--marcela)">💰 Marcela</div><ul class="s15-items"><li class="done">✅ PACOTE-FULL S15 .md + .docx</li><li class="done">✅ AI Prompts (sem PNGs)</li><li class="done">✅ QA 🟢 aprovado</li><li class="warn">🟡 Verificar dado PEIC 78,4%</li></ul></div>
   </div>
 
-  <!-- PROSPECÇÃO -->
   <hr class="section-divider">
-  <div class="section-title">🎯 Prospecção ADFly — S14</div>
-  <div class="alert-banner yellow">
-    <div class="alert-icon">⚠️</div>
-    <div class="alert-text">
-      <strong>AG-13 não rodou esta semana.</strong> Pasta _PROSPECCAO-AG13/ está vazia. Vibe Prospecting (teto 70 créditos/semana) deve rodar segunda manhã. Créditos usados: 0/70. AG-03 aguardando lista do AG-13.
-    </div>
-  </div>
+  <div class="section-title">🎯 Prospecção ADFly — S15</div>
+  <div class="alert-banner yellow"><div class="alert-icon">⏳</div><div class="alert-text"><strong>AG-13 roda Seg 29/06 às 08h30.</strong> Pasta _PROSPECCAO-AG13/ vazia — aguarda início de S15. Teto: 70 créditos/semana. AG-03 segue às 09h30 com lista do AG-13 para LinkedIn. Créditos usados: 0/70.</div></div>
 </div>
 
-<!-- ======================== TAB: UNIFORMIDADE ======================== -->
+<!-- UNIFORMIDADE -->
 <div id="tab-uniformidade" class="tab-content">
-  <div class="section-title">⚖️ Matriz de Uniformidade — S14</div>
+  <div class="section-title">⚖️ Matriz de Uniformidade — Transição S14→S15 (26/06/2026)</div>
   <div class="matrix-wrap">
     <table class="matrix-table">
-      <thead>
-        <tr>
-          <th style="text-align:left; min-width:180px;">Critério</th>
-          <th>🚁 ADFly</th>
-          <th>👨‍🍳 AleChef</th>
-          <th>🚴 BPMF</th>
-          <th>💰 Marcela</th>
-        </tr>
-      </thead>
+      <thead><tr><th style="min-width:200px">Critério</th><th>🚁 ADFly</th><th>👨‍🍳 AleChef</th><th>🚴 BPMF</th><th>💰 Marcela</th></tr></thead>
       <tbody>
-        <tr>
-          <td>Brand Kit aplicado</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>Produção Python/Pillow</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>Padrão v2 (speech+arc+AI prompts)</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>LinkedIn imagem 1200×1200</td>
-          <td><span class="badge badge-yellow">🟡</span></td>
-          <td>N/A</td>
-          <td>N/A</td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>Zero emoji B2B/LinkedIn</td>
-          <td><span class="badge badge-yellow">🟡 Confirmar</span></td>
-          <td>N/A</td>
-          <td>N/A</td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>Bloco WhatsApp</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-yellow">🟡 Confirmar</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>ICP incorporado</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>Radar + INBOX integrado</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-green">✅</span></td>
-        </tr>
-        <tr>
-          <td>Radar de Tendências S14</td>
-          <td><span class="badge badge-green">🟢 25/06</span></td>
-          <td><span class="badge badge-green">🟢 25/06</span></td>
-          <td><span class="badge badge-green">🟢 25/06</span></td>
-          <td><span class="badge badge-green">🟢 25/06</span></td>
-        </tr>
-        <tr>
-          <td>AG-11 (Inbound) ativo</td>
-          <td><span class="badge badge-green">✅</span></td>
-          <td><span class="badge badge-gray">N/A</span></td>
-          <td><span class="badge badge-gray">N/A</span></td>
-          <td><span class="badge badge-gray">N/A</span></td>
-        </tr>
-        <tr>
-          <td>Prospecção AG-13 + AG-03</td>
-          <td><span class="badge badge-red">🔴 Pendente</span></td>
-          <td><span class="badge badge-gray">N/A</span></td>
-          <td><span class="badge badge-gray">N/A</span></td>
-          <td><span class="badge badge-gray">N/A</span></td>
-        </tr>
-        <tr>
-          <td>Semana S15 (preview)</td>
-          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
-          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
-          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
-          <td><span class="badge badge-yellow">⬜ Pend.</span></td>
-        </tr>
+        <tr><td>Brand Kit aplicado (S14)</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>Produção Python/Pillow</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>Padrão v2 (speech+arc+AI prompts)</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>LinkedIn imagem 1200×1200</td><td><span class="badge badge-green">✅</span></td><td>N/A</td><td>N/A</td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>Zero emoji B2B/LinkedIn (ADFly)</td><td><span class="badge badge-green">✅ Conf.</span></td><td>N/A</td><td>N/A</td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>Bloco WhatsApp</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-yellow">🟡 Confirmar docx</span></td><td><span class="badge badge-green">✅ + Broadcast</span></td></tr>
+        <tr><td>ICP incorporado</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>Radar + INBOX integrado</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+        <tr><td>Radar de Tendências 25/06</td><td><span class="badge badge-green">🟢 25/06</span></td><td><span class="badge badge-green">🟢 25/06</span></td><td><span class="badge badge-green">🟢 25/06</span></td><td><span class="badge badge-green">🟢 25/06</span></td></tr>
+        <tr><td>AG-11 (Inbound) ativo</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-gray">N/A</span></td></tr>
+        <tr><td>Prospecção AG-13 + AG-03</td><td><span class="badge badge-yellow">⏳ Seg 29/06</span></td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-gray">N/A</span></td></tr>
+        <tr><td>Semana S15 (pronta)</td><td><span class="badge badge-yellow">🟡 Conf. números</span></td><td><span class="badge badge-green">✅ Pronta</span></td><td><span class="badge badge-yellow">🟡 Conf. percurso</span></td><td><span class="badge badge-yellow">🟡 Conf. PEIC%</span></td></tr>
+        <tr><td>Deploy GitHub Pages</td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-gray">N/A</span></td><td><span class="badge badge-yellow">⬜ Pós-viagem</span></td></tr>
       </tbody>
     </table>
   </div>
-  <div style="margin-top:12px; font-size:11px; color:var(--muted);">
-    🟡 = Ajuste menor confirmável em &lt; 2 min · 🔴 = Bloqueador que impede semana seguinte · N/A = Não aplicável ao canal da empresa
-  </div>
+  <div style="margin-top:12px;font-size:11px;color:var(--muted)">🟡 = Ajuste menor confirmável em &lt;2 min · 🔴 = Bloqueador · N/A = Não aplicável ao canal</div>
 </div>
 
-<!-- ======================== TAB: FLUXO SEMANAL ======================== -->
+<!-- FLUXO SEMANAL -->
 <div id="tab-fluxo-semanal" class="tab-content">
   <div class="section-title">🗓 Fluxo Padrão — Semana-Tipo</div>
-
   <div class="flow-week">
     <div class="flow-week-title">📋 Empresas Alexandre (ADFly · AleChef · BPMF)</div>
     <div class="flow-days">
-      <div class="flow-day past">
-        <div class="flow-day-name">Quinta (08h)</div>
-        <ul class="flow-day-items">
-          <li>📡 Radar Concorrentes</li>
-          <li>📡 Radar Tendências (08h01)</li>
-          <li>Relatórios em _RADAR-SEMANAL/</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">Segunda (08h30)</div>
-        <ul class="flow-day-items">
-          <li>AG-13: Vibe Prospecting</li>
-          <li>AG-03: LinkedIn (09h30)</li>
-          <li>Ler RADAR + INBOX</li>
-          <li>Montar grade editorial</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">Segunda–Qua</div>
-        <ul class="flow-day-items">
-          <li>AG-05: Copy + Speech</li>
-          <li>AG-05: AI Prompts (v2)</li>
-          <li>AG-10: Imagens Python/Pillow</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">Domingo</div>
-        <ul class="flow-day-items">
-          <li>AG-QA: Auditoria</li>
-          <li>VERDE: pacote fechado</li>
-          <li>AMARELO: Alexandre aprova</li>
-          <li>VERMELHO: AG-10 corrige</li>
-        </ul>
-      </div>
+      <div class="flow-day"><div class="flow-day-name">Quinta (08h)</div><ul class="flow-day-items"><li>📡 Radar Concorrentes</li><li>📡 Radar Tendências (08h01)</li><li>Relatórios em _RADAR-SEMANAL/</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Segunda (08h30)</div><ul class="flow-day-items"><li>AG-13: Vibe Prospecting</li><li>AG-03: LinkedIn (09h30)</li><li>Ler POSICIONAMENTO + RADAR + INBOX</li><li>Montar grade editorial</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Segunda–Qua</div><ul class="flow-day-items"><li>AG-05: Copy + Speech (v2)</li><li>AG-05: AI Prompts</li><li>AG-10: Imagens Python/Pillow</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Domingo</div><ul class="flow-day-items"><li>AG-QA: Auditoria completa</li><li>🟢: pacote fechado</li><li>🟡: Alexandre aprova</li><li>🔴: AG-10 corrige</li></ul></div>
     </div>
   </div>
-
   <div class="flow-week">
     <div class="flow-week-title">📋 Clientes Agência (Marcela · TRAÇÃO)</div>
     <div class="flow-days">
-      <div class="flow-day past">
-        <div class="flow-day-name">Quinta (08h)</div>
-        <ul class="flow-day-items">
-          <li>📡 Radar cliente roda</li>
-          <li>Relatório salvo na pasta</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">Sexta (até 18h)</div>
-        <ul class="flow-day-items">
-          <li>Alexandre lança INBOX</li>
-          <li>AG-04 fecha grade</li>
-          <li>Cruza _TEMAS-USADOS</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">Sábado</div>
-        <ul class="flow-day-items">
-          <li>AG-05: copy completo</li>
-          <li>AG-10: imagens</li>
-          <li>AG-QA: auditoria</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">Dom (até 10h)</div>
-        <ul class="flow-day-items">
-          <li>PACOTE-FULL finalizado</li>
-          <li>Painel atualizado</li>
-          <li>Alexandre: revisão final</li>
-        </ul>
-      </div>
+      <div class="flow-day"><div class="flow-day-name">Quinta (08h)</div><ul class="flow-day-items"><li>📡 Radar cliente roda</li><li>Relatório salvo na pasta do cliente</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Sexta (até 18h)</div><ul class="flow-day-items"><li>Alexandre lança INBOX</li><li>AG-04 fecha grade</li><li>Cruza _TEMAS-USADOS</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Sábado</div><ul class="flow-day-items"><li>AG-05: copy completo</li><li>AG-10: imagens</li><li>AG-QA: auditoria</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Dom (até 10h)</div><ul class="flow-day-items"><li>PACOTE-FULL finalizado</li><li>Painel atualizado</li><li>Alexandre: revisão final</li></ul></div>
     </div>
   </div>
 
-  <div class="section-title">📍 Estado Atual do Ciclo — S14 (25/06/2026 · Qui)</div>
+  <div class="section-title">📍 Estado Atual do Ciclo — Sexta 26/06 · Transição S14→S15</div>
   <div class="flow-week">
     <div class="flow-days">
-      <div class="flow-day past">
-        <div class="flow-day-name">✅ Seg 22/06</div>
-        <ul class="flow-day-items">
-          <li>✅ Publicação S14 iniciada</li>
-          <li>⬜ AG-13 não rodou</li>
-          <li>⬜ AG-03 aguardando</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">✅ Ter 23/06</div>
-        <ul class="flow-day-items">
-          <li>✅ Marcela: Reel+LinkedIn</li>
-        </ul>
-      </div>
-      <div class="flow-day past">
-        <div class="flow-day-name">✅ Qua 24/06</div>
-        <ul class="flow-day-items">
-          <li>✅ ADFly: Post IG+LI 🟡</li>
-          <li>✅ AleChef: Reel (1 mês)</li>
-          <li>✅ Marcela: Carrossel</li>
-        </ul>
-      </div>
-      <div class="flow-day today">
-        <div class="flow-day-name">⭐ Qui 25/06 (HOJE)</div>
-        <ul class="flow-day-items">
-          <li>📡 Radar 08h ✅ gerado</li>
-          <li>📡 Tendências ✅ todas 🟢</li>
-          <li>🚁 ADFly: Carrossel Qui</li>
-          <li>🚴 BPMF: Carrossel Qui</li>
-          <li>💰 Marcela: Reel Qui</li>
-          <li>⚠️ Painel atualizado ✅</li>
-        </ul>
-      </div>
-      <div class="flow-day">
-        <div class="flow-day-name">Sex 26/06</div>
-        <ul class="flow-day-items">
-          <li>🚁 ADFly: Carrossel Sex</li>
-          <li>👨‍🍳 AleChef: Stories</li>
-          <li>💰 Marcela: Post+Stories</li>
-          <li>⚠️ INBOX S15 (Alexandre até 18h)</li>
-        </ul>
-      </div>
-      <div class="flow-day">
-        <div class="flow-day-name">Sáb 28/06</div>
-        <ul class="flow-day-items">
-          <li>🚴 BPMF: Stories ao vivo</li>
-          <li>4º Pedal Estrada de Ferro</li>
-          <li>Deadline cliente: Dom 10h</li>
-        </ul>
-      </div>
+      <div class="flow-day past"><div class="flow-day-name">✅ Seg–Qua 22-24</div><ul class="flow-day-items"><li>✅ S14 publicação iniciada</li><li>✅ ADFly · AleChef · Marcela</li><li>✅ BPMF (sem Qua)</li></ul></div>
+      <div class="flow-day past"><div class="flow-day-name">✅ Qui 25/06</div><ul class="flow-day-items"><li>📡 Radar 🟢 todas</li><li>🚁 ADFly: Carrossel</li><li>🚴 BPMF: Carrossel</li><li>💰 Marcela: Reel</li><li>📦 S15 produzida ✅</li></ul></div>
+      <div class="flow-day today"><div class="flow-day-name">⭐ Sex 26/06 HOJE</div><ul class="flow-day-items"><li>🚁 ADFly: Carrossel ICA 🔴</li><li>👨‍🍳 AleChef: Stories</li><li>💰 Marcela: Post+Stories</li><li>📊 Painel atualizado ✅</li></ul></div>
+      <div class="flow-day"><div class="flow-day-name">Sáb 27/06</div><ul class="flow-day-items"><li>🚴 BPMF: Stories ao vivo</li><li>4º Pedal Estrada de Ferro</li><li>S14 encerra</li></ul></div>
+      <div class="flow-day next"><div class="flow-day-name">▶ Seg 29/06 S15</div><ul class="flow-day-items"><li>▶ S15 inicia publicação</li><li>AG-13: Vibe 08h30</li><li>AG-03: LinkedIn 09h30</li><li>✅ Pacotes prontos</li></ul></div>
     </div>
   </div>
 </div>
 
-<!-- ======================== TAB: AGENTES ======================== -->
+<!-- AGENTES -->
 <div id="tab-agentes" class="tab-content">
-  <div class="section-title">🤖 Status dos Agentes — S14</div>
+  <div class="section-title">🤖 Status dos Agentes — 26/06/2026</div>
   <div class="agents-grid">
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-00</span>
-        <span class="badge badge-green">🟢 Ativo</span>
-      </div>
-      <div class="agent-name">Coordenador Dept. MKT</div>
-      <div class="agent-desc">Orquestra todos os agentes, agenda automações, atualiza painéis toda Qui 09h. Painel atualizado hoje 25/06 às 09h.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-03</span>
-        <span class="badge badge-yellow">🟡 Aguardando AG-13</span>
-      </div>
-      <div class="agent-name">Prospector LinkedIn</div>
-      <div class="agent-desc">Abordagem LinkedIn ADFly a partir da lista do AG-13. Leads → Supabase CRM. Aguarda lista desta semana.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-04</span>
-        <span class="badge badge-green">🟢 Concluído S14</span>
-      </div>
-      <div class="agent-name">Estrategista Editorial</div>
-      <div class="agent-desc">Grade editorial S14 definida para 5 clientes com base no Radar + INBOX de cada empresa.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-05</span>
-        <span class="badge badge-green">🟢 Concluído S14</span>
-      </div>
-      <div class="agent-name">Copy &amp; Speech Writer</div>
-      <div class="agent-desc">PACOTE-FULL v2 produzido para ADFly, AleChef, BPMF, Marcela, TRAÇÃO. Speech word-for-word + AI Prompts incluídos.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-10</span>
-        <span class="badge badge-green">🟢 60 PNGs gerados</span>
-      </div>
-      <div class="agent-name">Designer Visual (Pillow)</div>
-      <div class="agent-desc">Python/Pillow. ADFly 20 · AleChef 6 · BPMF 13 · Marcela 21. Total: 60 PNGs. Canva banido desde 12/06.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-11</span>
-        <span class="badge badge-green">🟢 Ativo (ADFly)</span>
-      </div>
-      <div class="agent-name">LDR Inbound ADFly</div>
-      <div class="agent-desc">Qualifica e nutre leads inbound. Lead Score 0-11pts. GMB como canal prioritário. SOP v1.0 ativo.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-12</span>
-        <span class="badge badge-green">🟢 Radar 25/06 gerado</span>
-      </div>
-      <div class="agent-name">Estrategista de Posicionamento</div>
-      <div class="agent-desc">RADAR-CONSOLIDADO-25-06-2026.md gerado. 5 empresas monitoradas. Rotina quinta 08h. Tendências 25/06 todas 🟢.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-13</span>
-        <span class="badge badge-red">🔴 Não rodou S14</span>
-      </div>
-      <div class="agent-name">Pesquisa Nicho/ICP (Vibe)</div>
-      <div class="agent-desc">Vibe Prospecting ADFly. Teto: 70 créditos/semana. Pasta _PROSPECCAO-AG13/ vazia esta semana. Aguarda execução segunda S15.</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <span class="agent-id">AG-QA</span>
-        <span class="badge badge-yellow">🟡 2 pendências</span>
-      </div>
-      <div class="agent-name">Auditor de Qualidade</div>
-      <div class="agent-desc">S14 auditada em 21/06. Nenhum VERMELHO. 2 AMARELOS: emoji ADFly/LinkedIn e WhatsApp BPMF. Alexandre confirma em &lt;2 min.</div>
-    </div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-00</span><span class="badge badge-green">🟢 Ativo</span></div><div class="agent-name">Coordenador Dept. MKT</div><div class="agent-desc">Orquestra todos os agentes, agenda automações, atualiza painéis. Painel atualizado Sex 26/06 07h (task painel-controle-mkt-segunda).</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-03</span><span class="badge badge-yellow">⏳ Seg 29/06</span></div><div class="agent-name">Prospector LinkedIn</div><div class="agent-desc">Abordagem LinkedIn ADFly a partir da lista do AG-13. Leads → Supabase CRM. Aguarda lista S15 (segunda 09h30).</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-04</span><span class="badge badge-green">🟢 S14+S15 Fechados</span></div><div class="agent-name">Estrategista Editorial</div><div class="agent-desc">Grade S14 e S15 definidas para 5 clientes. POSICIONAMENTO v mais recente + Radar + INBOX. S16 depende do INBOX de próxima sexta.</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-05</span><span class="badge badge-green">🟢 S14+S15 Entregues</span></div><div class="agent-name">Copy &amp; Speech Writer</div><div class="agent-desc">PACOTE-FULL v2 para ADFly, AleChef, BPMF, Marcela, TRAÇÃO em S14 e S15. Speech word-for-word + AI Prompts incluídos.</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-10</span><span class="badge badge-green">🟢 110 PNGs total</span></div><div class="agent-name">Designer Visual (Pillow)</div><div class="agent-desc">Python/Pillow. S14: 80 PNGs (ADFly 40 · AleChef 6 · BPMF 13 · Marcela 21). S15: 30 PNGs (ADFly 14 · AleChef 6 · BPMF 10). Canva banido 12/06.</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-11</span><span class="badge badge-green">🟢 Ativo (ADFly)</span></div><div class="agent-name">LDR Inbound ADFly</div><div class="agent-desc">Qualifica e nutre leads inbound. Lead Score 0-11pts. GMB canal prioritário. SOP v1.0 ativo.</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-12</span><span class="badge badge-green">🟢 Radar 25/06 🟢</span></div><div class="agent-name">Estrategista de Posicionamento</div><div class="agent-desc">RADAR-CONSOLIDADO-25-06-2026.md gerado. 5 empresas monitoradas. Próxima execução: qui 02/07 08h01. POSICIONAMENTOs: ADFly/AleChef/BPMF/TRAÇÃO v1 · Marcela v2.</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-13</span><span class="badge badge-yellow">⏳ Seg 29/06 08h30</span></div><div class="agent-name">Pesquisa Nicho/ICP (Vibe)</div><div class="agent-desc">Vibe Prospecting ADFly. Teto: 70 créditos/semana. _PROSPECCAO-AG13/ vazia — aguarda execução segunda 29/06 às 08h30.</div></div>
+    <div class="agent-card"><div class="agent-header"><span class="agent-id">AG-QA</span><span class="badge badge-green">🟢 S14+S15 Aprovados</span></div><div class="agent-name">Auditor de Qualidade</div><div class="agent-desc">S14 e S15: todos 🟢 VERDE. BPMF S14: 🟡 dados percurso (Alexandre confirma). TRAÇÃO S14: COMPLEMENTO-WA pendente de merge no docx.</div></div>
   </div>
 </div>
 
-<!-- ======================== TAB: GAPS ======================== -->
+<!-- GAPS -->
 <div id="tab-gaps" class="tab-content">
-
   <div class="gap-section">
-    <div class="gap-section-title" style="color:var(--red-light)">🔴 Críticos — Bloqueiam semana seguinte ou são urgentes de timing</div>
-
-    <div class="gap-card critical">
-      <div class="gap-icon">⬜</div>
-      <div class="gap-content">
-        <div class="gap-title">AG-13 não rodou esta semana — prospecção ADFly parada</div>
-        <div class="gap-desc">A pasta _PROSPECCAO-AG13/ está vazia para a semana S14. AG-13 (Vibe Prospecting) deveria ter rodado segunda 08h30 e gerado lista priorizada para o AG-03 abordar no LinkedIn. 0 créditos usados de 70 disponíveis. AG-03 aguardando.</div>
-        <div class="gap-company">🚁 ADFly · Responsável: Alexandre acionar AG-13 na segunda 30/06</div>
-      </div>
-    </div>
-
-    <div class="gap-card critical">
-      <div class="gap-icon">🔴</div>
-      <div class="gap-content">
-        <div class="gap-title">TRAÇÃO Semana 1 (16–22/06) — sem documentação formal</div>
-        <div class="gap-desc">Pasta Semana 16-22-06-2026/ existe mas contém apenas subpasta imagens/ vazia. Nenhum .docx de pacote foi produzido para a Semana 1 da TRAÇÃO. Pacote S14 referencia "Semana 2" mas não há evidência documental da Semana 1. Ação: Alexandre confirmar se houve entrega informal e registrar nota em Semana 16-22-06-2026/SEMANA1-TRACAO-nota.md.</div>
-        <div class="gap-company">⚡ TRAÇÃO · Responsável: Alexandre confirmar + Claude registrar</div>
-      </div>
-    </div>
+    <div class="gap-section-title" style="color:var(--yellow-light)">🟡 Pendências de Confirmação — Antes de publicar peças específicas</div>
+    <div class="gap-card important"><div class="gap-icon">🟡</div><div class="gap-content"><div class="gap-title">BPMF — Confirmar dados do percurso Lagamar</div><div class="gap-desc">Stories CTA Sáb e peças S15 referenciam: 165km · 3 dias · Estação Mogi · 1.070m altimetria. Dados representativos — Alexandre confirmar reais antes de publicar peças que citam percurso.</div><div class="gap-company">🚴 BPMF · Alexandre confirma (< 2 min)</div></div></div>
+    <div class="gap-card important"><div class="gap-icon">🟡</div><div class="gap-content"><div class="gap-title">ADFly — Confirmar números do portfólio (S14 Sex hoje)</div><div class="gap-desc">Carrossel Sex 26/06 Slide 5 usa dados representativos: "12 projetos / R$2,1M / R$28K / R$320K". Alexandre confirmar se pode publicar ou ajustar para valores reais antes de publicar HOJE.</div><div class="gap-company">🚁 ADFly · Alexandre confirma antes de publicar hoje (Sex 26/06)</div></div></div>
+    <div class="gap-card important"><div class="gap-icon">🟡</div><div class="gap-content"><div class="gap-title">ADFly S15 — Confirmar valor Reel Ter 01/07 (R$4.300/2 dias)</div><div class="gap-desc">Reel de terça-feira 01/07 (S15) referencia "R$4.300 para 2 dias de inspeção". Confirmar se é dado real ou exemplar antes de publicar.</div><div class="gap-company">🚁 ADFly · Alexandre confirma antes de Ter 01/07</div></div></div>
+    <div class="gap-card important"><div class="gap-icon">🟡</div><div class="gap-content"><div class="gap-title">TRAÇÃO — COMPLEMENTO-WHATSAPP-S14 não incorporado ao docx</div><div class="gap-desc">Arquivo COMPLEMENTO-WHATSAPP-S14-TRAC.md existe em Semana 22-06-2026-28-06-2026/ mas o bloco WhatsApp precisa estar DENTRO do pacote .docx (regra padrão v2). Alexandre copiar conteúdo para o .docx antes de enviar ao cliente.</div><div class="gap-company">⚡ TRAÇÃO · Alexandre incorpora ao docx (< 5 min)</div></div></div>
+    <div class="gap-card important"><div class="gap-icon">🟡</div><div class="gap-content"><div class="gap-title">Marcela S15 — Verificar dado 78,4% PEIC/CNC jun/2026</div><div class="gap-desc">Pacote S15 usa "inadimplência 78,4% PEIC/CNC jun/2026 · CNC +2,5pp". SESSION-STATE sinaliza verificar precisão antes de publicar peças com esses números.</div><div class="gap-company">💰 Marcela · Verificar fonte antes de publicar peças com dados</div></div></div>
   </div>
 
   <div class="gap-section">
-    <div class="gap-section-title" style="color:var(--yellow-light)">🟡 Importantes — Qualidade/Operação (ajuste &lt;2 min)</div>
-
-    <div class="gap-card important">
-      <div class="gap-icon">🟡</div>
-      <div class="gap-content">
-        <div class="gap-title">ADFly — Post Qua 24/06: confirmar versão LinkedIn sem emoji</div>
-        <div class="gap-desc">Post de Quarta (IG + LinkedIn) contém emoji 📐🌡📋 na legenda IG. Régua de Qualidade ADFly proíbe emoji em peças B2B/LinkedIn. Confirmar que a versão publicada no LinkedIn usa copy separado sem emoji. Se não houver separação no pacote, remover manualmente na hora de publicar.</div>
-        <div class="gap-company">🚁 ADFly · Alexandre confirma antes de publicar no LinkedIn</div>
-      </div>
-    </div>
-
-    <div class="gap-card important">
-      <div class="gap-icon">🟡</div>
-      <div class="gap-content">
-        <div class="gap-title">BPMF — Confirmar Bloco WhatsApp no pacote</div>
-        <div class="gap-desc">AG-QA não confirmou existência formal de BLOCO WHATSAPP com STATUS TEXTO ≤160 chars + AI Prompt 1080×1080 no pacote BPMF. Pode estar em seção de tabela não capturada. Alexandre abre .docx e confirma. Sugestão de status: "Vagas Jornada Julho quase esgotando. Serra. Trilha. Comunidade. 🚴 Link na bio." (93 chars)</div>
-        <div class="gap-company">🚴 BPMF · Alexandre confirma em &lt;2 min antes de segunda</div>
-      </div>
-    </div>
-
-    <div class="gap-card important">
-      <div class="gap-icon">⚠️</div>
-      <div class="gap-content">
-        <div class="gap-title">ADFly — Provocações S15 reusam tema recente (ICA 100-40)</div>
-        <div class="gap-desc">Log do Radar de Tendências 25/06 aponta que Provocações 1 e 2 do ADFly para S15 têm sobreposição com tema ICA 100-40/NBR 5674 já incorporado em S22-28. Ângulo adaptado, mas AG-04 deve revisar antes de usar na grade de segunda 30/06 para garantir diferenciação suficiente.</div>
-        <div class="gap-company">🚁 ADFly · AG-04 revisar antes de fechar grade S15</div>
-      </div>
-    </div>
-
-    <div class="gap-card important">
-      <div class="gap-icon">⚠️</div>
-      <div class="gap-content">
-        <div class="gap-title">TRAÇÃO — Provocação S15 próxima de tema recente (LinkedIn)</div>
-        <div class="gap-desc">Log do Radar de Tendências 25/06 aponta que Provocação 1 da TRAÇÃO (página vs. perfil pessoal LinkedIn) está próxima de tema recente. Ângulo adaptado, mas revisar espaçamento antes de usar na grade S15.</div>
-        <div class="gap-company">⚡ TRAÇÃO · AG-04 revisar espaçamento antes de fechar grade S15</div>
-      </div>
-    </div>
+    <div class="gap-section-title" style="color:var(--muted)">📋 Pendências Operacionais — Pós-viagem Alexandre</div>
+    <div class="gap-card ops"><div class="gap-icon">⬜</div><div class="gap-content"><div class="gap-title">Deploy painéis GitHub Pages — Marcela + TRAÇÃO</div><div class="gap-desc">Rodar deploy-paineis.ps1 após retorno da viagem. Chip "Próxima semana" do painel TRAÇÃO também precisa ser atualizado antes do deploy.</div><div class="gap-company">Marcela + TRAÇÃO · Alexandre roda deploy-paineis.ps1 pós-viagem</div></div></div>
+    <div class="gap-card ops"><div class="gap-icon">⬜</div><div class="gap-content"><div class="gap-title">Pacotes S14 + S15 — Enviar para aprovação dos clientes</div><div class="gap-desc">Marcela e TRAÇÃO ainda não receberam os pacotes para aprovação formal. Enviar após retorno e agendar publicação a partir de Seg 29/06.</div><div class="gap-company">Marcela + TRAÇÃO · Alexandre após retorno</div></div></div>
+    <div class="gap-card ops"><div class="gap-icon">⏳</div><div class="gap-content"><div class="gap-title">AG-13 — Vibe Prospecting S15 (segunda 29/06 08h30)</div><div class="gap-desc">Pasta _PROSPECCAO-AG13/ vazia. Execução automática na segunda. Teto: 70 créditos/semana. AG-03 aguarda lista às 09h30.</div><div class="gap-company">🚁 ADFly · Automático · Alexandre não precisa intervir</div></div></div>
   </div>
 
   <div class="gap-section">
-    <div class="gap-section-title" style="color:#56d364">✅ Resolvidos Recentemente</div>
-
-    <div class="gap-card resolved">
-      <div class="gap-icon">✅</div>
-      <div class="gap-content">
-        <div class="gap-title">Radar de Tendências 25/06 — execução confirmada e registrada no LOG</div>
-        <div class="gap-desc">Cron automatizado rodou em 25/06/2026. Todas as 5 empresas com status 🟢. LOG-EXECUCAO-RADAR.md atualizado com entrada da semana.</div>
-        <div class="gap-company">Todas as empresas · Resolvido 25/06/2026</div>
-      </div>
-    </div>
-
-    <div class="gap-card resolved">
-      <div class="gap-icon">✅</div>
-      <div class="gap-content">
-        <div class="gap-title">Migração de estrutura de pastas concluída</div>
-        <div class="gap-desc">ADFly, AleChef e BPMF agora em pastas individuais dentro de Agência MKT — Clientes/ com estrutura Semana DD-DD-MM-AAAA/. Legado Empresas Alexandre/Semanas/ desativado.</div>
-        <div class="gap-company">Todas as empresas Alexandre · Resolvido 22/06/2026</div>
-      </div>
-    </div>
-
-    <div class="gap-card resolved">
-      <div class="gap-icon">✅</div>
-      <div class="gap-content">
-        <div class="gap-title">Canva substituído por Python/Pillow em todas as empresas</div>
-        <div class="gap-desc">60 PNGs de S14 gerados 100% via Python/Pillow. Zero dependência de Canva ou créditos externos. Todas as templates de cada empresa configuradas.</div>
-        <div class="gap-company">Todas as empresas · Resolvido 12/06/2026</div>
-      </div>
-    </div>
-
-    <div class="gap-card resolved">
-      <div class="gap-icon">✅</div>
-      <div class="gap-content">
-        <div class="gap-title">Padrão v2 (speech + arc + AI prompts dentro do docx) operando</div>
-        <div class="gap-desc">Todos os pacotes S14 nasceram com padrão v2 completo. Nenhum arquivo COMPLEMENTO separado. PADRAO-ENTREGA-CONTEUDO-v2.md em vigor.</div>
-        <div class="gap-company">Todas as empresas · Resolvido a partir de S22-28/06/2026</div>
-      </div>
-    </div>
+    <div class="gap-section-title" style="color:#56d364">✅ Resolvidos — S14 e S15</div>
+    <div class="gap-card resolved"><div class="gap-icon">✅</div><div class="gap-content"><div class="gap-title">S14 e S15 produzidas e aprovadas (QA 🟢) para todas as 5 empresas</div><div class="gap-desc">ADFly · AleChef · BPMF · Marcela · TRAÇÃO — padrão v2 completo. S14: 80 PNGs. S15: 30 PNGs. Total: 110 PNGs.</div><div class="gap-company">Todas as empresas · Resolvido 26/06/2026</div></div></div>
+    <div class="gap-card resolved"><div class="gap-icon">✅</div><div class="gap-content"><div class="gap-title">Radar de Tendências 25/06 — todas 5 empresas 🟢</div><div class="gap-desc">Cron automatizado rodou 25/06. LOG-EXECUCAO-RADAR.md atualizado. Provocações S15 incorporadas com revisão.</div><div class="gap-company">Todas as empresas · Resolvido 25/06/2026</div></div></div>
+    <div class="gap-card resolved"><div class="gap-icon">✅</div><div class="gap-content"><div class="gap-title">Migração estrutura de pastas — cada empresa em pasta individual dentro de Agência MKT — Clientes/</div><div class="gap-desc">ADFly, AleChef e BPMF agora em pastas individuais. Legado Empresas Alexandre/Semanas/ desativado.</div><div class="gap-company">Todas as empresas Alexandre · Resolvido 22/06/2026</div></div></div>
+    <div class="gap-card resolved"><div class="gap-icon">✅</div><div class="gap-content"><div class="gap-title">Padrão v2 (speech + arc + AI prompts dentro do docx) operando em S14 e S15</div><div class="gap-desc">Nenhum arquivo COMPLEMENTO separado (exceto TRAÇÃO S14 WhatsApp — pendente de merge).</div><div class="gap-company">Todas as empresas · Resolvido S22-28/06/2026</div></div></div>
   </div>
 </div>
 
-<!-- ======================== TAB: AUDITORIA ======================== -->
+<!-- AUDITORIA -->
 <div id="tab-auditoria" class="tab-content">
-  <div class="section-title">✅ Auditoria de Entregas — S14 (AG-QA · 21/06/2026)</div>
-
+  <div class="section-title">✅ Auditoria de Entregas — S14 (AG-QA consolidado · 26/06/2026)</div>
   <div class="audit-wrap">
-    <table class="data-table" style="background:var(--surface); border-radius:8px; overflow:hidden; border:1px solid var(--border);">
-      <thead>
-        <tr>
-          <th>Empresa</th>
-          <th>Peça / Formato</th>
-          <th>Copy</th>
-          <th>Speech</th>
-          <th>AI Prompt</th>
-          <th>Imagens</th>
-          <th>WhatsApp</th>
-          <th>LinkedIn</th>
-          <th>Status Geral</th>
-        </tr>
-      </thead>
+    <table class="data-table" style="background:var(--surface);border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+      <thead><tr><th>Empresa</th><th>Peça / Formato</th><th>Copy</th><th>Speech</th><th>AI Prompt</th><th>Imagens</th><th>WhatsApp</th><th>LinkedIn</th><th>Status</th></tr></thead>
       <tbody>
-        <tr>
-          <td rowspan="4" style="color:var(--adfly); font-weight:600; vertical-align:top; padding-top:12px;">🚁 ADFly</td>
-          <td>Carrossel Seg 22/06 (6sl)</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 6</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Post Qua 24/06 (IG+LI)</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 2</td><td>✅</td><td><span class="badge badge-yellow">🟡 emoji</span></td>
-          <td><span class="badge badge-yellow">🟡</span></td>
-        </tr>
-        <tr>
-          <td>Carrossel Qui 25/06 (6sl)</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 6</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Carrossel Sex 26/06 (6sl)</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 6</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td rowspan="3" style="color:var(--alechef); font-weight:600; vertical-align:top; padding-top:12px;">👨‍🍳 AleChef</td>
-          <td>Post+Story Feed Seg 22/06</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 2</td><td>✅</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Reel Qua 25/06 (1 mês)</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 1</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Stories Sex 27/06 (3 frames)</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 3</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td rowspan="3" style="color:var(--bpmf); font-weight:600; vertical-align:top; padding-top:12px;">🚴 BPMF</td>
-          <td>Carrossel Seg 22/06 (5sl)</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 5</td><td><span class="badge badge-yellow">🟡</span></td><td>—</td>
-          <td><span class="badge badge-yellow">🟡</span></td>
-        </tr>
-        <tr>
-          <td>Carrossel Qui 25/06 (4sl)</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 4</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Stories Sab 28/06 (4fr)</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 4</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td rowspan="5" style="color:var(--marcela); font-weight:600; vertical-align:top; padding-top:12px;">💰 Marcela</td>
-          <td>Carrossel Seg 22/06 (6sl)</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 6</td><td>✅</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Reel+LinkedIn Ter 23/06</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 2</td><td>—</td><td>✅</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Carrossel Qua 25/06 (7sl)</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 7</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Reel Qui 26/06</td>
-          <td>✅</td><td>✅</td><td>✅</td><td>✅ 1</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
-        <tr>
-          <td>Post+Stories Sex 27/06</td>
-          <td>✅</td><td>—</td><td>✅</td><td>✅ 5</td><td>—</td><td>—</td>
-          <td><span class="badge badge-green">🟢</span></td>
-        </tr>
+        <tr><td rowspan="4" style="color:var(--adfly);font-weight:600;vertical-align:top;padding-top:12px">🚁 ADFly</td><td>Carrossel Seg 22/06 (6sl)</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 6</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Post Qua 24/06 (IG+LI)</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 2</td><td>✅</td><td>✅ sem emoji</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Carrossel Qui 25/06 (6sl)</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 6</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Carrossel Sex 26/06 ICA (6sl)</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 6</td><td>—</td><td>—</td><td><span class="badge badge-yellow">🟡 Conf. portfólio</span></td></tr>
+        <tr><td rowspan="3" style="color:var(--alechef);font-weight:600;vertical-align:top;padding-top:12px">👨‍🍳 AleChef</td><td>Post+Story Feed Seg 22/06</td><td>✅</td><td>—</td><td>✅</td><td>✅ 2</td><td>✅</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Reel Qua 24/06 (1 mês)</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 1</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Stories Sex 26/06 (3 frames)</td><td>✅</td><td>—</td><td>✅</td><td>✅ 3</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td rowspan="3" style="color:var(--bpmf);font-weight:600;vertical-align:top;padding-top:12px">🚴 BPMF</td><td>Carrossel Seg 22/06 (5sl)</td><td>✅</td><td>—</td><td>✅</td><td>✅ 5</td><td><span class="badge badge-yellow">🟡</span></td><td>—</td><td><span class="badge badge-yellow">🟡</span></td></tr>
+        <tr><td>Carrossel Qui 25/06 (4sl)</td><td>✅</td><td>—</td><td>✅</td><td>✅ 4</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Stories Sab 27/06 CTA (4fr)</td><td>✅</td><td>—</td><td>✅</td><td>✅ 4</td><td>—</td><td>—</td><td><span class="badge badge-yellow">🟡 Conf. percurso</span></td></tr>
+        <tr><td rowspan="5" style="color:var(--marcela);font-weight:600;vertical-align:top;padding-top:12px">💰 Marcela</td><td>Carrossel Seg 22/06 (6sl)</td><td>✅</td><td>—</td><td>✅</td><td>✅ 6</td><td>✅ + Broadcast</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Reel+LinkedIn Ter 23/06</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 2</td><td>—</td><td>✅ 1200×1200</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Carrossel Qua 24/06 (7sl)</td><td>✅</td><td>—</td><td>✅</td><td>✅ 7</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Reel Qui 25/06 LinkedIn</td><td>✅</td><td>✅</td><td>✅</td><td>✅ 1</td><td>—</td><td>✅</td><td><span class="badge badge-green">🟢</span></td></tr>
+        <tr><td>Post+Stories Sex 26/06</td><td>✅</td><td>—</td><td>✅</td><td>✅ 5</td><td>—</td><td>—</td><td><span class="badge badge-green">🟢</span></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div style="margin-top:16px;">
-    <div class="section-title">📋 Checklist Pré-Entrega</div>
-    <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px;">
+  <div style="margin-top:16px">
+    <div class="section-title">📋 Checklist Pré-Publicação S15</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px">
       <table class="data-table">
-        <thead>
-          <tr><th>Item</th><th>ADFly</th><th>AleChef</th><th>BPMF</th><th>Marcela</th></tr>
-        </thead>
+        <thead><tr><th>Item</th><th>ADFly</th><th>AleChef</th><th>BPMF</th><th>Marcela</th></tr></thead>
         <tbody>
-          <tr>
-            <td>Pacote docx na pasta correta</td>
-            <td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td>
-          </tr>
-          <tr>
-            <td>Nomenclatura do arquivo correta</td>
-            <td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td>
-          </tr>
-          <tr>
-            <td>Pasta imagens/ populada</td>
-            <td><span class="badge badge-green">✅ 20</span></td><td><span class="badge badge-green">✅ 6</span></td><td><span class="badge badge-green">✅ 13</span></td><td><span class="badge badge-green">✅ 21</span></td>
-          </tr>
-          <tr>
-            <td>AG-QA executado</td>
-            <td><span class="badge badge-yellow">🟡 S14</span></td><td><span class="badge badge-green">✅ S14</span></td><td><span class="badge badge-yellow">🟡 S14</span></td><td><span class="badge badge-green">✅ S14</span></td>
-          </tr>
-          <tr>
-            <td>Nenhum item VERMELHO aberto</td>
-            <td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td>
-          </tr>
-          <tr>
-            <td>Radar Tendências executado</td>
-            <td><span class="badge badge-green">✅ 25/06</span></td><td><span class="badge badge-green">✅ 25/06</span></td><td><span class="badge badge-green">✅ 25/06</span></td><td><span class="badge badge-green">✅ 25/06</span></td>
-          </tr>
-          <tr>
-            <td>INBOX S15 lançado</td>
-            <td><span class="badge badge-yellow">⬜ Sex 27/06</span></td><td><span class="badge badge-yellow">⬜ Sex 27/06</span></td><td><span class="badge badge-yellow">⬜ Sex 27/06</span></td><td><span class="badge badge-yellow">⬜ Sex 27/06</span></td>
-          </tr>
+          <tr><td>PACOTE-FULL .md + .docx</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+          <tr><td>Speech word-for-word (Reels)</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+          <tr><td>AI Prompts por peça</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅ ext.</span></td></tr>
+          <tr><td>Imagens geradas</td><td><span class="badge badge-green">✅ 14 PNGs</span></td><td><span class="badge badge-green">✅ 6 PNGs</span></td><td><span class="badge badge-green">✅ 10 PNGs</span></td><td><span class="badge badge-yellow">🟡 AI ext.</span></td></tr>
+          <tr><td>Bloco WhatsApp</td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-green">✅</span></td></tr>
+          <tr><td>LinkedIn AI Prompt 1200×1200</td><td><span class="badge badge-green">✅</span></td><td>N/A</td><td>N/A</td><td><span class="badge badge-green">✅</span></td></tr>
+          <tr><td>QA AG-QA executado</td><td><span class="badge badge-green">🟢</span></td><td><span class="badge badge-green">🟢</span></td><td><span class="badge badge-green">🟢</span></td><td><span class="badge badge-green">🟢</span></td></tr>
+          <tr><td>Dados confirmados (Alexandre)</td><td><span class="badge badge-yellow">🟡 R$4.300</span></td><td><span class="badge badge-green">✅</span></td><td><span class="badge badge-yellow">🟡 percurso</span></td><td><span class="badge badge-yellow">🟡 PEIC 78,4%</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
-
-  <div style="margin-top:16px;">
-    <div class="section-title">🎯 Plano de Ação Imediato</div>
-    <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-      <table class="data-table">
-        <thead>
-          <tr><th>#</th><th>Ação</th><th>Responsável</th><th>Prazo</th><th>Prioridade</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Publicar conteúdo DECEA ICA 100-40 (carrossel + reel)</td>
-            <td>Alexandre + ADFly</td>
-            <td>Sex 27/06</td>
-            <td><span class="badge badge-red">🔴 Crítico</span></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Confirmar post LinkedIn ADFly Qua 24/06 publicado sem emoji</td>
-            <td>Alexandre</td>
-            <td>Hoje</td>
-            <td><span class="badge badge-yellow">🟡 Menor</span></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Confirmar bloco WhatsApp no pacote BPMF</td>
-            <td>Alexandre</td>
-            <td>Hoje</td>
-            <td><span class="badge badge-yellow">🟡 Menor</span></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>INBOX S15 para todos os clientes (ADFly, AleChef, BPMF, Marcela, TRAÇÃO)</td>
-            <td>Alexandre</td>
-            <td>Sex 27/06 18h</td>
-            <td><span class="badge badge-blue">📋 Padrão</span></td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>AG-04 revisar provocações ADFly + TRAÇÃO antes de fechar grade S15</td>
-            <td>AG-04</td>
-            <td>Seg 30/06 manhã</td>
-            <td><span class="badge badge-yellow">🟡 Revisão</span></td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>AG-13 Vibe Prospecting — acionar segunda 30/06 manhã</td>
-            <td>AG-13</td>
-            <td>Seg 30/06 08h30</td>
-            <td><span class="badge badge-red">🔴 Urgente</span></td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>BPMF: cobertura ao vivo 4º Pedal Estrada de Ferro</td>
-            <td>Alexandre (in-loco)</td>
-            <td>Sáb 28/06</td>
-            <td><span class="badge badge-green">⚡ Oportunidade</span></td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Registrar nota TRAÇÃO Semana 1 (16-22/06)</td>
-            <td>Claude (próxima sessão)</td>
-            <td>Próxima sessão</td>
-            <td><span class="badge badge-gray">📁 Histórico</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div style="margin-top:12px;font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px">
+    <strong style="color:var(--yellow-light)">Regra ICA 100-40 DECEA (hook até 01/07/2026):</strong> Reforçar como autoridade regulatória ADFly em todos os posts que citam drone/regulamentação. Após 01/07 o conteúdo vira referência consolidada — manter tom técnico-educativo.
   </div>
 </div>
 
 <script>
-function showTab(id) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-  const tab = document.getElementById('tab-' + id);
-  if (tab) tab.classList.add('active');
-  const btns = document.querySelectorAll('.tab-btn');
-  btns.forEach(btn => {
-    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(id)) {
-      btn.classList.add('active');
-    }
-  });
+function showTab(tabId,btn){
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+tabId).classList.add('active');
+  btn.classList.add('active');
 }
 </script>
-</body>
-</html>
+</body></html>

@@ -115,6 +115,14 @@ body{font-family:-apple-system,Arial,sans-serif;background:#F0F2F5;color:#1F2937
 .alert-banner .ab-title{font-size:13px;font-weight:700;color:#78350F;margin-bottom:3px;}
 .alert-banner .ab-acao{font-size:12px;color:#92400E;font-style:italic;}
 @media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+
+.grade-wrap{overflow-x:auto;margin-top:16px;margin-bottom:20px;}
+.grade-grid{display:grid;min-width:620px;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;}
+.grade-cell{background:white;padding:9px 12px;font-size:12px;}
+.grade-cell.header{background:var(--primary);color:white;font-weight:700;font-size:11px;text-transform:uppercase;}
+.grade-cell.dayname{background:#F8F9FA;font-weight:700;color:var(--dark);font-size:11px;}
+.grade-cell.empty{background:#F8F9FA;color:#9CA3AF;font-size:11px;text-align:center;}
+.chip{display:inline-block;background:#EBF5FF;color:#1E3A5F;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-bottom:3px;}
 </style>
 </head>
 <body>
@@ -182,7 +190,68 @@ const SEMANAS = [
       { dia: "QUI 03/07", ig: { chip: "Carrossel", txt: "5 habilidades que nenhum curso de drone ensina" }, tk: { chip: "Carrossel", txt: "5 habilidades B2B" }, li: null, yt: null },
       { dia: "SEX 04/07", ig: { chip: "Post", txt: "Seguradora + laudo ADFly: sinistro em 48h" }, tk: null, li: null, yt: null },
     ],
-    posts: [],
+    posts: [
+      {
+        dia: "SEG 29/06", pilar: "PS",
+        titulo: "Checklist do Contratante — ICA 100-40 em vigor",
+        formato: "Post LinkedIn · 1200×1200 · 07h30",
+        gancho: "01 de julho chegou. A ICA 100-40 está vigente. Mas a pergunta que poucos estão fazendo: como a empresa contratante sabe se o piloto que ela está pagando é legal?",
+        slides: null,
+        legenda: "01 de julho chegou.\nA ICA 100-40 está vigente.\n\nMas a pergunta que poucos estão fazendo:\nComo a empresa contratante sabe se o piloto que ela está pagando é legal?\n\nChecklist mínimo antes de assinar qualquer orçamento:\n\n1. SARPAS — aprovação de voo para o local e data exatos\n2. SISANT — drone cadastrado na ANAC\n3. RETA — certificação de piloto profissional\n4. Seguro de responsabilidade civil aeronáutica\n5. Nota Fiscal de serviço\n\nSem esses 5 pontos, o risco jurídico e financeiro é da empresa que contratou.\n\nA ADFly opera 100% em conformidade. Laudo técnico em 48h.\n\n📲 Me chama no WhatsApp ou acessa o link no perfil.\n\n#drone #construcaocivil #ICA10040 #inspecaopredial #ADFly #pilotodedrone",
+        cta: "WhatsApp ou link no perfil",
+        hashtags: "#drone #construcaocivil #ICA10040 #inspecaopredial #ADFly",
+        stories: null,
+        aiPrompt: `Create a premium LinkedIn post image, square format 1200x1200. Brand: ADFly. Deep Navy #0A1B33 background · Electric Blue #1E90FF accent · White text. Liberation Sans Bold. Scene: Full Navy background. Top: "CHECKLIST DO CONTRATANTE" in Electric Blue, bold, uppercase. Below: 5-item structured checklist — white numbered items with Signal Green #9FE83A checkboxes: 1. SARPAS 2. SISANT 3. RETA 4. Seguro RC 5. Nota Fiscal. Bottom: ADFly wordmark in white. Ultra-clean, no emoji, B2B authority.`,
+      },
+      {
+        dia: "TER 01/07", pilar: "R",
+        titulo: "R$4.300 em 2 dias — Skin in the Game ADFly Lab",
+        formato: "Reel 45s · IG + TikTok · 07h30",
+        gancho: "Eu recebi R$4.300 em dois dias de operação. E aqui está a nota fiscal.",
+        slides: null,
+        legenda: "R$ 4.300 em dois dias de operação de drone.\n\nNota fiscal emitida. Dois projetos B2B. Método replicável.\n\nDia 1: inspeção de fachada, condomínio 18 andares — R$2.100.\nDia 2: levantamento topográfico, obra civil — R$2.200.\n\nIsso não é sorte. É método: não vendi 'voo de drone'. Vendi laudo técnico com entrega documentada em 48h.\n\nO ADFly Lab está formando a turma de julho. 10 semanas, método comercial completo.\n\nComenta LAB ou acessa o link na bio.\n\n#adfly #pilotodedrone #droneb2b #adflylabdrone #empreendedorismo",
+        cta: "Comenta LAB ou link na bio",
+        hashtags: "#adfly #pilotodedrone #droneb2b #adflylabdrone",
+        stories: "Speech word-for-word: [00:00] R$4.300 em dois dias — NF na tela | [00:11] Dia 1: R$2.100 fachada · Dia 2: R$2.200 topografia | [00:28] ADFly Lab — turma julho, 10 semanas, R$4.997 | [00:42] Comenta LAB",
+        aiPrompt: `Vertical thumbnail Reel 1080x1920. ADFly brand. Deep Navy #0A1B33 background · Signal Green #9FE83A hero · White text. Liberation Sans ExtraBold. Scene: Full Navy. Top 40%: "R$4.300" in Signal Green, oversized hero. Center: "EM 2 DIAS DE DRONE" in white bold uppercase. Below: "2 projetos B2B · NF emitida · Método replicável" white smaller. Bottom: ADFly wordmark. Maximum impact, minimal elements.`,
+      },
+      {
+        dia: "QUA 02/07", pilar: "E",
+        titulo: "'Já temos drone na obra' vs Diagnóstico Aéreo Profissional",
+        formato: "Carrossel 5 slides · LinkedIn · 07h30",
+        gancho: "'Já temos drone na obra' — e diagnóstico aéreo profissional são coisas completamente diferentes.",
+        slides: "S1: Hook — frase de impacto | S2: O que você tem hoje — quadricóptero que grava vídeo, sem dado técnico | S3: O que entrega diagnóstico aéreo — ortofoto georreferenciada, termografia, relatório técnico 48h | S4: A diferença jurídica — vídeo vs laudo com validade legal | S5: CTA — SARPAS · SISANT · RETA · Seguro RC · WhatsApp",
+        legenda: "Quando o cliente diz 'já temos drone na obra', geralmente significa:\n\n✗ Quadricóptero que grava vídeo\n✗ Imagem bonita, zero dado técnico\n✗ Nenhum laudo auditável\n\nDiagnóstico aéreo profissional entrega:\n✓ Ortofotomosaico georreferenciado (±2,5cm)\n✓ Termografia de fachada com identificação de infiltrações\n✓ Relatório técnico assinado em 48h\n✓ Documento com validade jurídica\n\nSe o prédio tiver uma patologia pós-vistoria e você não tem laudo — o risco é seu.\n\n📲 ADFly — laudo técnico em 48h.\n#inspecaopredial #drone #construcaocivil #laudotecnico #ADFly",
+        cta: "WhatsApp ou link no perfil",
+        hashtags: "#inspecaopredial #drone #construcaocivil #laudotecnico #ADFly",
+        stories: null,
+        aiPrompt: `Carrossel 5 slides 1080x1350. ADFly brand. Navy #0A1B33 background · Electric Blue #1E90FF titles · White body text. Slide 1: hook bold centered. Slide 2: "O QUE VOCÊ TEM HOJE" left-aligned copy. Slide 3: "O QUE UM DIAGNÓSTICO AÉREO ENTREGA" checkmarks in Signal Green #9FE83A. Slide 4: two-column contrast — vídeo vs laudo. Slide 5 CTA: badges Signal Green + ADFly wordmark. No emoji, no orange.`,
+      },
+      {
+        dia: "QUI 03/07", pilar: "M",
+        titulo: "5 Habilidades que Nenhum Curso de Drone Ensina",
+        formato: "Carrossel 5 slides · IG + TikTok · 07h30",
+        gancho: "5 habilidades que nenhum curso de drone ensina. E que separam R$300/dia de R$2.000/projeto.",
+        slides: "S1: Hook | S2: Habilidade 1 — Diagnóstico, não serviço | S3: Habilidade 2 — Proposta com escopo | S4: Habilidades 3/4/5 — Relatório técnico · Negociação por valor · Rede em construtoras | S5: CTA — ADFly Lab, turma julho",
+        legenda: "5 habilidades que nenhum curso de drone ensina — e que separam R$300/dia de R$2.000/projeto:\n\n1. Diagnóstico, não serviço\n2. Proposta com escopo (área, equipamento, entregáveis, prazo)\n3. Relatório técnico legível para engenheiro e síndico\n4. Negociação por valor (não por hora de voo)\n5. Rede de indicação em construtoras e administradoras\n\nO ADFly Lab existe para ensinar exatamente isso. Turma julho — vagas limitadas.\n\nComenta LAB ou link na bio.\n#adfly #adflylabdrone #pilotodedrone #droneb2b",
+        cta: "Comenta LAB ou link na bio",
+        hashtags: "#adfly #adflylabdrone #pilotodedrone #droneb2b",
+        stories: null,
+        aiPrompt: `Carrossel 5 slides 1080x1350. ADFly brand. Navy #0A1B33 · Blue #1E90FF · White. Slide 1: "5 HABILIDADES" oversized Electric Blue · subtext white. Slides 2–4: numbered items, Electric Blue numbers, white copy. Slide 5 CTA: ADFly Lab, R$4.997, Signal Green CTA. No emoji, no orange.`,
+      },
+      {
+        dia: "SEX 04/07", pilar: "R",
+        titulo: "Seguradora + Laudo Aéreo ADFly — Sinistro em 48h",
+        formato: "Post · IG · 07h30",
+        gancho: "A seguradora pagou em 48 horas. Por quê? Porque o laudo técnico aéreo já estava pronto quando o processo foi aberto.",
+        slides: null,
+        legenda: "A seguradora pagou em 48 horas.\n\nPor quê? Porque o laudo técnico aéreo já estava pronto quando o processo foi aberto.\n\nFachada rachou após chuva intensa. A administradora chamou a ADFly antes de acionar a seguradora. Drone com câmera termográfica + georreferenciamento → relatório em PDF com coordenadas, extensão do dano, materiais afetados.\n\nA seguradora recebeu um documento técnico auditável — não fotos de celular e relato verbal.\n\nLaudo aéreo não é custo. É o que acelera o processo e reduz o risco jurídico.\n\n📲 Link no perfil ou me chama no WhatsApp.\n#drone #laudotecnico #seguradora #inspecaopredial #adfly",
+        cta: "Link no perfil ou WhatsApp",
+        hashtags: "#drone #laudotecnico #seguradora #inspecaopredial #adfly",
+        stories: null,
+        aiPrompt: `Square Instagram post 1080x1080. ADFly brand. FLIR/Leica inspection authority. Navy #0A1B33 · Electric Blue #1E90FF stat · White text. Scene: Signal Green badge "CASO REAL" top-left. Center: large "48h" in Electric Blue, oversized. Below: "A seguradora aprovou." white bold. Third line: "Laudo aéreo técnico. Fachada georreferenciada." ADFly wordmark bottom. Clean, institutional, high contrast.`,
+      },
+    ],
   }
 ];
 
@@ -270,7 +339,8 @@ function buildSemana(s){
     ${statusBadge(s.status)}
     <div class="section-title">📂 Arquivos</div>
     <div class="files-bar"><div class="files-grid">${(s.arquivos||[]).map(a=>`<div class="path-row"><span class="path-icon">${a.icon}</span><div class="path-info"><div class="path-name">${esc(a.nome)}</div><div class="path-txt">${esc(a.path||'')}</div></div><div class="btn-row">${a.path?`<button class="copy-btn" onclick="cp('${(a.path||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>`:''}</div></div>`).join('')}</div></div>
-    <p style="color:var(--gray);font-size:13px;margin-top:20px">Pacote completo em elaboração. Consulte o PACOTE-FULL na pasta da semana.</p>
+    <div class="section-title">&#128197; Grade Editorial</div>
+    ${(function(){if(!s.grade||!s.grade.length)return'';var cols='grid-template-columns:90px repeat(4,1fr)';var h='<div class="grade-wrap"><div class="grade-grid" style="'+cols+'">';h+='<div class="grade-cell header">DIA</div><div class="grade-cell header" style="background:#E1306C;color:white">Instagram</div><div class="grade-cell header" style="background:#000;color:white">TikTok</div><div class="grade-cell header" style="background:#0A66C2;color:white">LinkedIn</div><div class="grade-cell header" style="background:#FF0000;color:white">YouTube</div>';(s.grade||[]).forEach(function(g){h+='<div class="grade-cell dayname">'+esc(g.dia)+'</div>';[g.ig,g.tk,g.li,g.yt].forEach(function(c){h+=c?'<div class="grade-cell"><span class="chip">'+esc(c.chip)+'</span><br>'+esc(c.txt)+'</div>':'<div class="grade-cell empty">&#8212;</div>';});});return h+'</div></div>';})()} 
   </div>`);
 }
 

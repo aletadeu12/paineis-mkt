@@ -105,6 +105,14 @@ body{font-family:-apple-system,Arial,sans-serif;background:#0A0A0A;color:var(--t
 .alert-banner .ab-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
 .alert-banner .ab-title{font-size:13px;font-weight:700;color:#FDE68A;margin-bottom:3px;}
 .alert-banner .ab-acao{font-size:12px;color:#D97706;font-style:italic;}
+
+.grade-wrap{overflow-x:auto;margin-top:16px;margin-bottom:20px;}
+.grade-grid{display:grid;min-width:620px;gap:1px;background:var(--border);border-radius:8px;overflow:hidden;}
+.grade-cell{background:white;padding:9px 12px;font-size:12px;}
+.grade-cell.header{background:var(--primary);color:white;font-weight:700;font-size:11px;text-transform:uppercase;}
+.grade-cell.dayname{background:#F8F9FA;font-weight:700;color:var(--dark);font-size:11px;}
+.grade-cell.empty{background:#F8F9FA;color:#9CA3AF;font-size:11px;text-align:center;}
+.chip{display:inline-block;background:#EBF5FF;color:#1E3A5F;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-bottom:3px;}
 </style>
 </head>
 <body>
@@ -162,7 +170,68 @@ const SEMANAS = [
       { dia: "QUI 03/07", ig: { chip: "Post", txt: "Collab AleChef — real food na chegada" }, tk: null, li: null, yt: null },
       { dia: "SEX 04/07", ig: { chip: "Post", txt: "Não é o destino. É o que vira história." }, tk: null, li: null, yt: null },
     ],
-    posts: [],
+    posts: [
+      {
+        dia: "SEG 29/06", pilar: "PS",
+        titulo: "Antítese do Campeonato Gravel",
+        formato: "Post Feed IG + TikTok · 1080×1080 · 08h00",
+        gancho: "O Campeonato Brasileiro de Gravel acontece em julho. Cronômetro. Pódio. Ranking nacional. Respeito total. O BPMF faz uma coisa completamente diferente.",
+        slides: null,
+        legenda: "O Campeonato Brasileiro de Gravel acontece em julho.\nCronômetro. Pódio. Ranking nacional. Respeito total.\n\nO BPMF faz uma coisa completamente diferente:\n\nVocê vai pedalando pelo mesmo tipo de estrada. Mesma pedra, mesma terra, mesmo vento. Mas sem o chip de cronometragem no guidão.\n\nVocê vai porque o destino foi escolhido a dedo. Porque o grupo foi curado para que ninguém te deixe para trás. Porque no final tem uma mesa — de verdade — esperando por você.\n\nNão competimos com o campeonato. Competimos com o fim de semana perdido que você passa sem sair do sofá porque 'não existe opção organizada para pedalar com quem não é elite'.\n\nExiste. É o BPMF.\n\n📌 Próxima jornada: julho. Vagas quase esgotando.\n📲 Link na bio ou manda mensagem.\n#bpmf #cicloturismo #gravel #ciclismo #bike #aventura",
+        cta: "Link na bio ou manda mensagem",
+        hashtags: "#bpmf #cicloturismo #gravel #ciclismo #bike #aventura",
+        stories: null,
+        aiPrompt: `Bold Instagram post 1080x1080. BPMF brand. Rapha, Canyon cycling culture. Asphalt Black #050505 · Neon Green #39FF14 · White. Split composition: Left — monochrome competitive gravel race (cyclists in pack, race numbers). Right — vibrant warm group relaxed at outdoor table after trail (smiling, food, celebration). Center dividing line in Neon Green vertical. Bottom: "BPMF · Cicloturismo Curado" white small. The contrast is the message.`,
+      },
+      {
+        dia: "TER 01/07", pilar: "D",
+        titulo: "5 Tipos de Ciclista que Amam o BPMF",
+        formato: "Carrossel 5 slides · IG · 08h00",
+        gancho: "5 tipos de ciclista que encontram o que procuram no BPMF. Se você é um deles, a próxima jornada é para você.",
+        slides: "S1: Hook | S2: O que pedala bem mas não quer competir — sem chip, percurso desafiador, mesa | S3: O que quer pedalar mas não sabe por onde começar — logística pronta, só apareça | S4: Tipos 3 e 4 — experiências únicas + o que quer voltar | S5: Tipo 5: Você — CTA jornada julho",
+        legenda: "5 tipos de ciclista que encontram o que procuram no BPMF:\n\n1. O que pedala bem mas não quer competir\n2. O que quer pedalar mas não sabe por onde começar\n3. O que viaja só para experiências únicas\n4. O que quer voltar depois de uma vez\n5. Você.\n\nJornada de julho — uma vaga esperando.\n\n📲 Manda mensagem ou link na bio.\n#bpmf #cicloturismo #gravel #ciclismo #bike #aventura",
+        cta: "Manda mensagem ou link na bio",
+        hashtags: "#bpmf #cicloturismo #gravel #ciclismo #bike",
+        stories: null,
+        aiPrompt: `Carrossel 5 slides 1080x1350. BPMF brand. Asphalt Black #050505 · Neon Green #39FF14 · White. Slide 1: "5 TIPOS DE CICLISTA" in Neon Green oversized bold, white subtitle. Slides 2–4: dark frame, Neon Green bold titles, white copy. Slide 5 CTA: "TIPO 5: VOCÊ." in Neon Green hero, white CTA text. Ultra-minimal, high contrast.`,
+      },
+      {
+        dia: "QUA 02/07", pilar: "E",
+        titulo: "Gravel Sem Competição",
+        formato: "Reel 30s · IG + TikTok · 08h00",
+        gancho: "E se você pedalar no gravel sem ninguém te cronometrando?",
+        slides: null,
+        legenda: "Gravel sem chip. Sem ranking. Sem pressão.\n\nSó percurso curado, grupo compatível e uma mesa esperando na chegada.\n\nÉ o BPMF. Próxima jornada: julho.\n\n📲 Link na bio.\n#bpmf #cicloturismo #gravel #bike #ciclismo #aventura #pedalando",
+        cta: "Link na bio",
+        hashtags: "#bpmf #cicloturismo #gravel #bike #ciclismo #aventura",
+        stories: "Speech word-for-word: [00:00] E se você pedalar no gravel sem ninguém te cronometrando? | [00:05] Sem chip, sem ranking, sem pressão — percurso + grupo + mesa | [00:12] BPMF — jornadas curadas, começo meio fim | [00:20] Diferente de competição, diferente de passeio qualquer | [00:27] Próxima jornada julho, link na bio",
+        aiPrompt: `Vertical Reel thumbnail 1080x1920. BPMF brand. Rapha, Wahoo adventure. Dark landscape base · Neon Green #39FF14 text accent · White. Cinematic wide shot: dirt gravel road curving through open landscape, golden afternoon light, small group cyclists in distance, relaxed pace. Overlay: "GRAVEL" white bold oversized. Below: "SEM COMPETIÇÃO." Neon Green bold. Bottom: "BPMF · Cicloturismo Curado" white small.`,
+      },
+      {
+        dia: "QUI 03/07", pilar: "R",
+        titulo: "Collab AleChef — Real Food na Chegada",
+        formato: "Post Feed IG · 1080×1080 · 08h00",
+        gancho: "A jornada de julho termina com 165km pedalados. Você vai estar com as pernas pesadas. O corpo vai pedir comida de verdade.",
+        slides: null,
+        legenda: "A jornada de julho termina com 165km pedalados.\n\nVocê vai estar com as pernas pesadas. O corpo vai pedir comida de verdade.\n\nO @alechefemcasa vai estar lá.\n\nReal food. Ingredientes de qualidade. Prep que respeita quem treina. Sem marmita de supermercado.\n\nBPMF cuida da jornada. AleChef cuida do que você come na chegada.\n\n📲 Link na bio.\n#bpmf #alechefemcasa #cicloturismo #ciclismo #realfood #bike",
+        cta: "Link na bio",
+        hashtags: "#bpmf #alechefemcasa #cicloturismo #ciclismo #realfood",
+        stories: null,
+        aiPrompt: `Instagram post 1080x1080. BPMF × AleChef collab. Asphalt Black #050505 · Neon Green #39FF14 BPMF · Gold #C9A77A AleChef · White. Split horizontal or diagonal: top half cyclist on gravel road arriving (legs, motion); bottom half beautifully plated recovery meal, chef hands visible. Split line Neon Green. Overlay: "BPMF × AleChef em Casa" white small top. "A jornada cuida do percurso. / O chef cuida da chegada." white serif center.`,
+      },
+      {
+        dia: "SEX 04/07", pilar: "PS",
+        titulo: "Não É o Destino. É o Que Vira História.",
+        formato: "Post Feed IG · 1080×1080 · 08h00",
+        gancho: "Não é o destino que vira história. É quem decidiu o que você ia viver nele.",
+        slides: null,
+        legenda: "Não é o destino que vira história.\n\nÉ quem decidiu o que você ia viver nele.\n\nQualquer um pode marcar um ponto no mapa e chamar de passeio de bike.\n\nO BPMF faz diferente: escolhemos o percurso pelo que acontece no caminho. Escolhemos o grupo pelo que ele adiciona à sua jornada. Escolhemos o final porque chegada sem celebração é só cansaço.\n\nIsso é curadoria humana. Não é um app que te manda uma rota.\n\nÉ uma experiência que você conta na segunda-feira.\n\nPróxima jornada: julho.\n📲 Link na bio ou manda mensagem.\n#bpmf #cicloturismo #ciclismo #gravel #bike #curadoria #aventura",
+        cta: "Link na bio ou manda mensagem",
+        hashtags: "#bpmf #cicloturismo #ciclismo #gravel #bike #curadoria",
+        stories: null,
+        aiPrompt: `Cinematic Instagram post 1080x1080. BPMF brand. Rapha editorial, Komoot adventure. Dark landscape · Neon Green #39FF14 minimal accent · White text. Golden hour: single cyclist paused on gravel overlook, vast open landscape. Silhouette or three-quarter view, helmet off. Feeling: reflection, meaning, arrival. White elegant text bottom-third: "Não é o destino que vira história." serif. Below smaller: "É o que você viveu nele. — BPMF". Neon Green dot accent bottom-left.`,
+      },
+    ],
   }
 ];
 
@@ -247,7 +316,8 @@ function buildSemana(s){
     ${statusBadge(s.status)}
     <div class="section-title">📂 Arquivos</div>
     <div class="files-bar"><div class="files-grid">${(s.arquivos||[]).map(a=>`<div class="path-row"><span class="path-icon">${a.icon}</span><div class="path-info"><div class="path-name">${esc(a.nome)}</div><div class="path-txt">${esc(a.path||'')}</div></div><div style="flex-shrink:0">${a.path?`<button class="copy-btn" onclick="cp('${(a.path||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',this)">Copiar</button>`:''}</div></div>`).join('')}</div></div>
-    <p style="color:var(--grayDark);font-size:13px;margin-top:20px">Pacote completo em elaboração. Consulte o PACOTE-FULL na pasta da semana.</p>
+    <div class="section-title">&#128197; Grade Editorial</div>
+    ${(function(){if(!s.grade||!s.grade.length)return'';var cols='grid-template-columns:90px repeat(4,1fr)';var h='<div class="grade-wrap"><div class="grade-grid" style="'+cols+'">';h+='<div class="grade-cell header">DIA</div><div class="grade-cell header" style="background:#E1306C;color:white">Instagram</div><div class="grade-cell header" style="background:#000;color:white">TikTok</div><div class="grade-cell header" style="background:#0A66C2;color:white">LinkedIn</div><div class="grade-cell header" style="background:#FF0000;color:white">YouTube</div>';(s.grade||[]).forEach(function(g){h+='<div class="grade-cell dayname">'+esc(g.dia)+'</div>';[g.ig,g.tk,g.li,g.yt].forEach(function(c){h+=c?'<div class="grade-cell"><span class="chip">'+esc(c.chip)+'</span><br>'+esc(c.txt)+'</div>':'<div class="grade-cell empty">&#8212;</div>';});});return h+'</div></div>';})()} 
   </div>`);
 }
 
