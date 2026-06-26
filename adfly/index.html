@@ -149,7 +149,7 @@ const CLIENTE = {
 const SEMANAS = [
   {
     id: "s22-28-06", label: "22–28/06", labelFull: "Semana 22–28/06/2026",
-    badge: "SEM. 6", status: "progress",
+    badge: "SEM. 6", status: "done",
     objetivo: "Regulação ANAC/DECEA · Inspeção Predial · Imobiliário",
     notionUrl: "",
     arquivos: [
@@ -165,6 +165,25 @@ const SEMANAS = [
     ],
     posts: [],
   },
+  {
+    id: "s29-06-05-07", label: "29/06–05/07", labelFull: "Semana 29/06–05/07/2026",
+    badge: "SEM. 7", status: "progress",
+    objetivo: "ICA 100-40 em vigor · Checklist do Contratante · ADFly Lab pré-aquecimento",
+    notionUrl: "",
+    arquivos: [
+      { icon: "📁", nome: "Pasta da semana", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026", driveId: null, folder: true },
+      { icon: "📄", nome: "PACOTE-FULL-S15-ADFly.docx", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-ADFly.docx", driveId: null }
+    ],
+    canva: [],
+    grade: [
+      { dia: "SEG 29/06", ig: null, tk: null, li: { chip: "Post", txt: "Checklist do contratante — ICA 100-40 em vigor" }, yt: null },
+      { dia: "TER 01/07", ig: { chip: "Reel 45s", txt: "R$4.300 em 2 dias — NF emitida — ADFly Lab" }, tk: { chip: "Reel", txt: "R$4.300 em 2 dias" }, li: null, yt: null },
+      { dia: "QUA 02/07", ig: null, tk: null, li: { chip: "Carrossel", txt: "Drone vs diagnóstico aéreo: 4 diferenças" }, yt: null },
+      { dia: "QUI 03/07", ig: { chip: "Carrossel", txt: "5 habilidades que nenhum curso de drone ensina" }, tk: { chip: "Carrossel", txt: "5 habilidades B2B" }, li: null, yt: null },
+      { dia: "SEX 04/07", ig: { chip: "Post", txt: "Seguradora + laudo ADFly: sinistro em 48h" }, tk: null, li: null, yt: null },
+    ],
+    posts: [],
+  }
 ];
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -172,8 +191,8 @@ const SEMANAS = [
    ══════════════════════════════════════════════════════════════════════ */
 const RADAR = {
   semanaCorrente: {
-    label: "22–28/06",
-    execucao: "25/06/2026",
+    label: "29/06–05/07",
+    execucao: "26/06/2026",
     tendencias: [
       { titulo: "ICA 100-40 entra em vigor 01/07 — elimina isenção do drone sub-250g", corpo: "A partir de 01/07/2026 todo voo precisa de autorização no SARPAS, inclusive sub-250g. Quem opera sem autorização achando estar isento está em risco.", src: "DECEA / Portaria nº 2.094/DNOR8" },
       { titulo: "NBR 5674 aceita drone como metodologia de inspeção predial de fachadas", corpo: "Inspeção de fachadas recomendada a cada 3 anos por engenheiro/arquiteto. Drone elimina andaime, reduz custo e risco trabalhista — e é metodologia tecnicamente aceita.", src: "Sindiconet / Revista dos Condomínios" },
@@ -191,7 +210,7 @@ const RADAR = {
     ],
   },
   semanaProxima: {
-    label: "29/06–05/07",
+    label: "06–12/07",
     execucao: "25/06/2026",
     tendencias: [
       { titulo: "ICA 100-40 em vigor — zelador com drone agora precisa de autorização", corpo: "Toda operação, mesmo amadora, passa a exigir autorização formal de voo no SARPAS. Argumento de venda direto para síndico/construtora que contrata prestador informal.", gancho: "\"A partir de 01/07, até o drone de R$3.000 do seu zelador precisa de autorização de voo. Pergunte ao seu prestador se ele está regularizado — ou pague o preço depois.\"", src: "DECEA / irlenmenezes.com.br" },
@@ -209,7 +228,7 @@ const RADAR = {
       { titulo: "Webinar ADFly Lab em julho — semana que vem começa pré-aquecimento", corpo: "Com as 4 provocações mapeadas sobre gap de mentoria B2B, a semana 29/06 é o início ideal do pré-aquecimento do lançamento.", nivel: "opp" },
     ],
   },
-  ultimaExecucao: "25/06/2026",
+  ultimaExecucao: "26/06/2026",
   proximaExecucao: "quinta 02/07 às 08h",
 };
 

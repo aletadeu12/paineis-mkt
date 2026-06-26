@@ -140,13 +140,32 @@ const CLIENTE = {
 const SEMANAS = [
   {
     id: "s25-28-06", label: "25–28/06", labelFull: "Semana GO LIVE · 25/05 — Semana 4 em curso",
-    badge: "SEM. 4", status: "progress",
+    badge: "SEM. 4", status: "done",
     objetivo: "Comfort Food Inverno · Experiência vs. Commodity · Meal Prep",
     notionUrl: "",
     arquivos: [
       { icon: "📁", nome: "Pasta da semana", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 22-28-06-2026", driveId: null }
     ],
   },
+  {
+    id: "s29-06-05-07", label: "29/06–05/07", labelFull: "Semana 29/06–05/07/2026",
+    badge: "SEM. 5", status: "progress",
+    objetivo: "Cardápio de inverno · Collab BPMF · Jantar executivo julho",
+    notionUrl: "",
+    arquivos: [
+      { icon: "📁", nome: "Pasta da semana", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026", driveId: null, folder: true },
+      { icon: "📄", nome: "PACOTE-FULL-S15-AleChef.docx", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-AleChef.docx", driveId: null }
+    ],
+    canva: [],
+    grade: [
+      { dia: "SEG 29/06", ig: { chip: "Post Feed", txt: "Chef que sabe que você detesta coentro — personalização radical" }, tk: null, li: null, yt: null },
+      { dia: "TER 01/07", ig: { chip: "Stories", txt: "Spoilers cardápio inverno julho (3 stories)" }, tk: null, li: null, yt: null },
+      { dia: "QUA 02/07", ig: { chip: "Reel 45s", txt: "Reveal cardápio de inverno — pratos quentes julho" }, tk: null, li: null, yt: null },
+      { dia: "QUI 03/07", ig: { chip: "Post", txt: "Collab BPMF — real food para quem pedala" }, tk: null, li: { chip: "Post", txt: "Collab BPMF" }, yt: null },
+      { dia: "SEX 04/07", ig: { chip: "Post", txt: "Jantar executivo — fim de semestre corporativo" }, tk: null, li: { chip: "Post", txt: "Jantar executivo" }, yt: null },
+    ],
+    posts: [],
+  }
 ];
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -154,8 +173,8 @@ const SEMANAS = [
    ══════════════════════════════════════════════════════════════════════ */
 const RADAR = {
   semanaCorrente: {
-    label: "22–28/06",
-    execucao: "25/06/2026",
+    label: "29/06–05/07",
+    execucao: "26/06/2026",
     tendencias: [
       { titulo: "Marmita gourmet chegou aos supermercados — commodity de prateleira", corpo: "Marmitas ultracongeladas por chef já presentes em supermercados, hotéis e cafeterias. A marmita 'premium de chef' virou categoria massificada — o diferencial agora não pode ser o produto em si.", src: "personalchefsbr.com" },
       { titulo: "Segmento premium do foodservice mantém resiliência sob pressão econômica", corpo: "Público de renda mais alta menos sensível a preço sustenta o segmento premium mesmo em cenário de aperto. Enquanto o mercado corta preço, a demanda por qualidade real persiste.", src: "mercadoeconsumo.com.br" },
@@ -173,7 +192,7 @@ const RADAR = {
     ],
   },
   semanaProxima: {
-    label: "29/06–05/07",
+    label: "06–12/07",
     execucao: "25/06/2026",
     tendencias: [
       { titulo: "Marmita gourmet de chef virou commodity — o diferencial real é a relação", corpo: "Supermercados já vendem marmita gourmet. Hotéis. Cafeterias. O produto 'marmita premium' perdeu poder de diferenciação. O que o supermercado não entrega é o chef que conhece você.", gancho: "\"Supermercado já vende marmita gourmet. O que ele não vende é o chef que conhece seu nome.\"", src: "personalchefsbr.com" },
@@ -189,7 +208,7 @@ const RADAR = {
       { titulo: "Comfort food de inverno: semana 29/06 é pico sazonal — não perder timing", corpo: "Julho começa segunda-feira. Conteúdo de inverno/comfort food nessa semana pega o pico sazonal.", nivel: "medio" },
     ],
   },
-  ultimaExecucao: "25/06/2026",
+  ultimaExecucao: "26/06/2026",
   proximaExecucao: "quinta 02/07 às 08h",
 };
 

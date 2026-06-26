@@ -138,13 +138,32 @@ const CLIENTE = {
 const SEMANAS = [
   {
     id: "s22-28-06", label: "22–28/06", labelFull: "Semana 22–28/06/2026",
-    badge: "SEM. 4", status: "progress",
+    badge: "SEM. 4", status: "done",
     objetivo: "Gravel BR · Slow Travel · BPMF vs. competição",
     notionUrl: "",
     arquivos: [
       { icon: "📁", nome: "Pasta da semana", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 22-28-06-2026" }
     ],
   },
+  {
+    id: "s29-06-05-07", label: "29/06–05/07", labelFull: "Semana 29/06–05/07/2026",
+    badge: "SEM. 5", status: "progress",
+    objetivo: "Antítese Gravel · 5 tipos de ciclista · Collab AleChef · Jornada julho",
+    notionUrl: "",
+    arquivos: [
+      { icon: "📁", nome: "Pasta da semana", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026", driveId: null, folder: true },
+      { icon: "📄", nome: "PACOTE-FULL-S15-BPMF.docx", path: "C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-BPMF.docx", driveId: null }
+    ],
+    canva: [],
+    grade: [
+      { dia: "SEG 29/06", ig: { chip: "Post Feed", txt: "Antítese Campeonato Gravel — pódio vs mesa de jantar" }, tk: { chip: "Post", txt: "Antítese Gravel" }, li: null, yt: null },
+      { dia: "TER 01/07", ig: { chip: "Carrossel", txt: "5 tipos de ciclista que amam o BPMF" }, tk: null, li: null, yt: null },
+      { dia: "QUA 02/07", ig: { chip: "Reel 30s", txt: "Gravel sem competição — curadoria humana" }, tk: { chip: "Reel", txt: "Gravel sem competição" }, li: null, yt: null },
+      { dia: "QUI 03/07", ig: { chip: "Post", txt: "Collab AleChef — real food na chegada" }, tk: null, li: null, yt: null },
+      { dia: "SEX 04/07", ig: { chip: "Post", txt: "Não é o destino. É o que vira história." }, tk: null, li: null, yt: null },
+    ],
+    posts: [],
+  }
 ];
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -152,8 +171,8 @@ const SEMANAS = [
    ══════════════════════════════════════════════════════════════════════ */
 const RADAR = {
   semanaCorrente: {
-    label: "22–28/06",
-    execucao: "25/06/2026",
+    label: "29/06–05/07",
+    execucao: "26/06/2026",
     tendencias: [
       { titulo: "Mercado global de cicloturismo projetado em US$ 241 bilhões até 2030", corpo: "Turismo de aventura e ecológico impulsionando a categoria. Destinos fora do circuito tradicional ganhando espaço. O consumidor busca experiências autênticas, não tours massificados.", src: "travelandtourworld.com.br" },
       { titulo: "Boom do gravel no Brasil — malha de estradas de terra ideal para a modalidade", corpo: "Segmento global de gravel: US$ 1,98 bilhão em 2024, projeção US$ 5,47 bilhões até 2033. Brasil tem infraestrutura natural para crescer no gravel — e a maioria do mercado está vendendo equipamento, não experiência.", src: "wip.com.br" },
@@ -170,7 +189,7 @@ const RADAR = {
     ],
   },
   semanaProxima: {
-    label: "29/06–05/07",
+    label: "06–12/07",
     execucao: "25/06/2026",
     tendencias: [
       { titulo: "1º Campeonato Brasileiro de Gravel em julho — BPMF como antítese", corpo: "Rio Acima (MG), integrado ao Festival Estrada Real. Mercado todo falando em campeonato e cronômetro. O BPMF pode se posicionar como exatamente o oposto no mesmo momento.", gancho: "\"Enquanto o Brasil disputa o primeiro Campeonato de Gravel em julho, o BPMF organiza a jornada de quem não quer saber o tempo de prova — só a história que vai contar depois.\"", src: "caradebarro.com.br" },
@@ -186,7 +205,7 @@ const RADAR = {
       { titulo: "Contraponto ao Campeonato Brasileiro de Gravel — timing perfeito", corpo: "O campeonato acontece em julho. A semana 29/06 é o momento de publicar os 3 ganchos de posicionamento ('parar de competir', 'quem decidiu o que você viveu', 'história vs. cronômetro').", nivel: "opp" },
     ],
   },
-  ultimaExecucao: "25/06/2026",
+  ultimaExecucao: "26/06/2026",
   proximaExecucao: "quinta 02/07 às 08h",
 };
 
