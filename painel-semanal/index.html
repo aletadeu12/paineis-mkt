@@ -1,1397 +1,837 @@
-<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
-{
-  "name": "Adfly Painel Semana",
-  "schemaVersion": 1,
-  "description": "Painel semanal ADFly/AleChef/BPMF — semana 22-28/06/2026. Inclui aba dedicada de AI Prompts com 13 prompts completos seguindo framework 5 elementos do PADRAO-PROMPT-IA-IMAGENS.md."
-}
-</script>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel da Semana S16 — 06/07 a 12/07/2026</title>
+<title>Painel da Semana — S16 · 06–12/07/2026 (aguardando produção)</title>
 <style>
-:root{--adfly:#1E90FF;--adfly-dark:#0A1B33;--adfly-bg:#EBF5FF;--adfly-green:#9FE83A;--chef:#C9A77A;--chef-dark:#22324F;--chef-bg:#FEF8EF;--bpmf:#39FF14;--bpmf-dark:#050505;--marcela:#2D5016;--marcela-acc:#6B8C3E;--marcela-bg:#F0F9F4;--tracao:#3B82F6;--tracao-dark:#0D0D0D;--tracao-green:#10B981;--bg:#f5f5f7;--card:#fff;--text:#1a1a1a;--muted:#666;--border:#e0e0e0;--r:10px}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px}
-.topbar{background:#1a1a1a;color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.topbar h1{font-size:15px;font-weight:700;letter-spacing:-.3px}
-.topbar-badges{display:flex;gap:8px}
-.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-total{background:#333;color:#aaa}
-.badge-s15{background:#1E90FF;color:#fff}
-.badge-s16{background:#1E90FF;color:#fff}
-.badge-auto{background:#9FE83A;color:#1a1a1a}
-.tabs{background:#fff;border-bottom:1px solid var(--border);display:flex;overflow-x:auto;padding:0 16px;position:sticky;top:49px;z-index:99}
-.tab{padding:12px 16px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s}
-.tab:hover{color:var(--text)}
-.tab.active{color:var(--text);border-bottom-color:var(--text)}
-.tab.adfly.active{color:var(--adfly);border-bottom-color:var(--adfly)}
-.tab.chef.active{color:var(--chef-dark);border-bottom-color:var(--chef)}
-.tab.bpmf.active{background:#111;color:var(--bpmf);border-bottom-color:var(--bpmf)}
-.tab.marcela.active{color:var(--marcela);border-bottom-color:var(--marcela)}
-.tab.tracao.active{background:#0D0D0D;color:var(--tracao);border-bottom-color:var(--tracao)}
-.page{display:none;padding:20px 24px;max-width:1100px}
-.page.active{display:block}
-.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;overflow:hidden}
-.card-header{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.card-body{padding:16px}
-.card-title{font-weight:700;font-size:13px}
-.post-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);margin-bottom:20px}
-.post-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.post-date{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
-.post-format{font-size:11px;color:var(--muted)}
-.post-title{font-weight:700;font-size:14px}
-.post-body{padding:16px}
-.adfly-t{border-left:4px solid var(--adfly)}
-.chef-t{border-left:4px solid var(--chef)}
-.bpmf-t{border-left:4px solid var(--bpmf)}
-.marcela-t{border-left:4px solid var(--marcela)}
-.tracao-t{border-left:4px solid var(--tracao)}
-.copy-block{background:#f8f8f8;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;margin:10px 0;font-size:13px;line-height:1.6;position:relative;white-space:pre-wrap}
-.prompt-block{background:#1a1a1a;color:#e0e0e0;border-radius:8px;padding:12px 14px;margin:10px 0;font-size:12px;line-height:1.6;font-family:monospace;position:relative;white-space:pre-wrap}
-.copy-btn{position:absolute;top:8px;right:8px;background:#1a1a1a;color:#fff;border:none;border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer;opacity:.7}
-.copy-btn:hover{opacity:1}
-.prompt-btn{position:absolute;top:8px;right:8px;background:#fff;color:#1a1a1a;border:none;border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer}
-.lbl{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;text-transform:uppercase;letter-spacing:.5px}
-.lbl-a{background:var(--adfly-bg);color:var(--adfly)}
-.lbl-c{background:var(--chef-bg);color:var(--chef-dark)}
-.lbl-b{background:#222;color:var(--bpmf)}
-.lbl-m{background:var(--marcela-bg);color:var(--marcela)}
-.lbl-tr{background:#132a4d;color:var(--tracao)}
-.lbl-tg{background:#0f2e22;color:var(--tracao-green)}
-.lbl-red{background:#fde8e8;color:#c00}
-.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
-.kpi{border-radius:var(--r);padding:16px;text-align:center}
-.kpi.a{background:var(--adfly-bg);border:1px solid #c0d8ff}
-.kpi.c{background:var(--chef-bg);border:1px solid #f0dcc0}
-.kpi.b{background:#111;border:1px solid #333;color:#fff}
-.kpi.m{background:var(--marcela-bg);border:1px solid #b8d4c4}
-.kpi.t{background:#0D0D0D;border:1px solid #333;color:#fff}
-.kpi-n{font-size:26px;font-weight:800;line-height:1}
-.kpi-l{font-size:11px;margin-top:4px;opacity:.8}
-.kpi-s{font-size:10px;margin-top:6px;opacity:.6}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#f0f0f0;padding:8px 12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:#fafafa}
-.r-alert{border-left:4px solid #c00;background:#fde8e8;border-radius:8px;padding:12px 16px;margin-bottom:12px}
-.r-tip{border-left:4px solid var(--adfly);background:#EBF5FF;border-radius:8px;padding:12px 16px;margin-bottom:10px}
-.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:20px 0 10px}
-.chk-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
-.chk-item:last-child{border-bottom:none}
-.chk-box{width:18px;height:18px;border:2px solid #ccc;border-radius:4px;flex-shrink:0;cursor:pointer;margin-top:1px;transition:all .15s}
-.chk-box.done{background:#1E90FF;border-color:#1E90FF}
-.chk-text{font-size:13px;line-height:1.4}
-#page-bpmf{background:#111;min-height:100vh;border-radius:var(--r)}
-#page-bpmf .post-card{background:#1a1a1a;border-color:#333;color:#fff}
-#page-bpmf .post-header{border-bottom-color:#333}
-#page-bpmf .post-title,#page-bpmf .sec{color:#888}
-#page-bpmf .copy-block{background:#222;border-color:#444;color:#e0e0e0}
-#page-bpmf td,#page-bpmf th{color:#fff}
-#page-bpmf th{background:#222}
-#page-bpmf td{border-color:#333}
-#page-bpmf tr:hover td{background:#222}
-#page-bpmf .card{background:#1a1a1a;border-color:#333;color:#fff}
-#page-bpmf .card-header{border-bottom-color:#333}
-#page-tracao{background:#0D0D0D;min-height:100vh;border-radius:var(--r)}
-#page-tracao .post-card{background:#161616;border-color:#2a2a2a;color:#fff}
-#page-tracao .post-header{border-bottom-color:#2a2a2a}
-#page-tracao .post-title,#page-tracao .sec{color:#999}
-#page-tracao .copy-block{background:#1f1f1f;border-color:#333;color:#e0e0e0}
-#page-tracao td,#page-tracao th{color:#fff}
-#page-tracao th{background:#222}
-#page-tracao td{border-color:#333}
-#page-tracao tr:hover td{background:#222}
-#page-tracao .card{background:#161616;border-color:#2a2a2a;color:#fff}
-#page-tracao .card-header{border-bottom-color:#2a2a2a}
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:#1a1a1a;color:#fff;padding:8px 20px;border-radius:30px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;z-index:9999}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.topbar-badges{display:none}.page{padding:12px}}
+:root { color-scheme: light; --adfly: #1E90FF; --adfly-dark: #0A1B33; --adfly-bg: #EBF5FB; --chef: #C9A77A; --chef-dark: #22324F; --chef-bg: #FEF9E7; --bpmf: #39FF14; --bpmf-dark: #050505; --bpmf-bg: #E8FFF0; --dark: #1A1A2E; --gray: #6B7280; --light: #F8F9FA; --border: #E5E7EB; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, Arial, sans-serif; background: #F0F2F5; color: #1F2937; font-size: 14px; }
+.topbar { background: var(--dark); color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap:wrap; gap:8px; }
+.topbar h1 { font-size: 15px; font-weight: 700; letter-spacing: .5px; }
+.topbar .badge { background: #16A085; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.topbar .updated { font-size: 11px; opacity:.6; }
+.tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 20px; gap: 4px; overflow-x:auto; }
+.tab { padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; color: var(--gray); transition: all .2s; white-space: nowrap; }
+.tab.active { color: var(--dark); border-bottom-color: var(--dark); }
+.tab.adfly.active { color: var(--adfly); border-bottom-color: var(--adfly); }
+.tab.chef.active { color: var(--chef-dark); border-bottom-color: var(--chef); }
+.tab.bpmf.active { color: var(--bpmf-dark); border-bottom-color: var(--bpmf); }
+.tab.radar.active { color: #7C3AED; border-bottom-color: #7C3AED; }
+.tab:hover { color: #374151; background: #F9FAFB; }
+.page { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
+.page.active { display: block; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+.card { background: white; border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+.card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gray); }
+.stat { font-size: 26px; font-weight: 800; line-height: 1; margin-bottom: 2px; }
+.stat-label { font-size: 11px; color: var(--gray); }
+.section-title { font-size: 13px; font-weight: 700; color: var(--dark); margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.content-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 12px; overflow: hidden; }
+.content-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); flex-wrap:wrap; }
+.content-header .day { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; }
+.content-header .title { font-weight: 700; font-size: 13px; flex: 1; }
+.content-header .format { font-size: 11px; color: var(--gray); background: var(--light); padding: 3px 8px; border-radius: 20px; white-space:nowrap; }
+.content-body { padding: 12px 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+.content-body .label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gray); margin-top: 8px; margin-bottom: 3px; }
+.gancho { background: #FFF7ED; border-left: 3px solid #F59E0B; padding: 8px 12px; border-radius: 0 6px 6px 0; font-style: italic; margin: 6px 0; font-size: 13px; }
+.legenda { background: #F0FDF4; border-left: 3px solid #22C55E; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.cta { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.edl { background: #F5F3FF; border-left: 3px solid #8B5CF6; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; }
+.speech { background: #0A1B33; color: #9FE83A; border-left: 3px solid #1E90FF; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; margin: 6px 0; font-family: monospace; white-space: pre-wrap; }
+.badge-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+.overviewrow { display: grid; grid-template-columns: 120px repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+.overviewcell { background: white; padding: 10px 14px; font-size: 12px; }
+.overviewcell.header { background: var(--dark); color: white; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+.overviewcell.dayname { background: var(--light); font-weight: 700; color: var(--dark); font-size: 11px; }
+.chip { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; margin: 2px; }
+.files-bar { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; }
+.files-bar-title { font-size: 12px; font-weight: 700; color: var(--dark); margin-bottom: 10px; display:flex; align-items:center; gap:6px; }
+.files-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px; }
+.path-row { display: flex; align-items: center; gap: 8px; background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 7px 10px; }
+.path-icon { font-size: 15px; flex-shrink: 0; }
+.path-info { flex: 1; min-width: 0; }
+.path-name { font-size: 12px; font-weight: 600; color: #1F2937; }
+.path-txt { font-family: monospace; font-size: 10px; color: #64748B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.copy-btn { flex-shrink: 0; padding: 4px 10px; background: #1E3A5F; color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background .2s; }
+.copy-btn:hover { background: #2563EB; }
+.copy-btn.ok { background: #16A085; }
+.radar-header { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); color: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.radar-header h2 { font-size: 16px; font-weight: 800; margin: 0; }
+.radar-header .radar-meta { font-size: 12px; opacity: .75; }
+.radar-badge { background: #7C3AED; color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+.radar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.radar-card { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+.radar-card-head { padding: 12px 16px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+.radar-card-body { padding: 14px 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+.radar-card-body ul { padding-left: 16px; margin: 6px 0; }
+.radar-card-body li { margin-bottom: 4px; }
+.radar-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin: 2px; }
+.radar-opp { background: #F0FDF4; border-left: 3px solid #22C55E; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; }
+.radar-copy { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; font-style: italic; }
+.cross-card { background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+.cross-card h4 { font-size: 13px; font-weight: 700; color: #5B21B6; margin-bottom: 6px; }
+.cross-card p { font-size: 13px; color: #374151; line-height: 1.6; }
+.alert-warn { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #92400E; margin-bottom: 16px; }
+.alert-info { background: #EFF6FF; border: 1px solid #93C5FD; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #1e40af; margin-bottom: 12px; }
+.alert-urgente { background: #FEE2E2; border: 1px solid #F87171; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #991B1B; margin-bottom: 12px; }
+.alert-collab { background: #FDF4FF; border: 1px solid #D8B4FE; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #6B21A8; margin-bottom: 12px; }
+.timing-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+.timing-table th { background: #1E1B4B; color: white; padding: 8px 12px; text-align: left; }
+.timing-table td { padding: 7px 12px; border-bottom: 1px solid #E5E7EB; }
+.timing-table tr:last-child td { border-bottom: none; }
+.timing-table tr:nth-child(even) td { background: #F9FAFB; }
+#toast { position: fixed; bottom: 16px; right: 16px; background: #16A085; color: white; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 999; }
+#toast.show { opacity: 1; }
 </style>
 </head>
 <body>
+<div id="toast">✓ Caminho copiado!</div>
+
 <div class="topbar">
-<h1>&#128202; Painel da Semana &#8212; 06/07 a 12/07/2026</h1>
-<div class="topbar-badges">
-<span class="badge badge-s16">S16</span>
-<span class="badge badge-total">25 conte&#250;dos &#183; 5 empresas</span>
-<span class="badge badge-auto">Auto-atualizado 6h</span>
-</div>
+  <h1>📅 PAINEL DA SEMANA — S15 encerrada (29/06–05/07) · S16 06–12/07/2026 aguardando produção</h1>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <span class="badge" style="background:#F59E0B">⚠️ S16 sem pacotes gerados</span>
+    <span class="updated">Verificado em 05/07/2026 · v4 (auto)</span>
+  </div>
 </div>
 
 <div class="tabs">
-<button class="tab active" onclick="showPage('geral',this)">Vis&#227;o Geral</button>
-<button class="tab adfly" onclick="showPage('adfly',this)">ADFly</button>
-<button class="tab chef" onclick="showPage('chef',this)">AleChef</button>
-<button class="tab bpmf" onclick="showPage('bpmf',this)">BPMF</button>
-<button class="tab marcela" onclick="showPage('marcela',this)">Marcela GF</button>
-<button class="tab tracao" onclick="showPage('tracao',this)">TRA&#199;&#195;O</button>
-<button class="tab" onclick="showPage('radar',this)">Radar</button>
-<button class="tab" onclick="showPage('imgs',this)">Imagens</button>
-<button class="tab" onclick="showPage('exec',this)">Execu&#231;&#227;o</button>
+  <div class="tab active" onclick="showPage('overview',this)">Visão Geral</div>
+  <div class="tab adfly" onclick="showPage('adfly',this)">🛩 ADFly</div>
+  <div class="tab chef" onclick="showPage('chef',this)">🍳 AleChef</div>
+  <div class="tab bpmf" onclick="showPage('bpmf',this)">🚴 BPMF</div>
+  <div class="tab" onclick="showPage('prospeccao',this)">📨 Prospecção</div>
+  <div class="tab" onclick="showPage('arquivos',this)">📂 Arquivos</div>
+  <div class="tab radar" onclick="showPage('radar',this)">🔭 Radar</div>
 </div>
 
-<!-- VISAO GERAL -->
-<div id="page-geral" class="page active">
-<div class="kpi-grid">
-<div class="kpi a"><div class="kpi-n" style="color:var(--adfly)">5</div><div class="kpi-l">ADFly</div><div class="kpi-s">LinkedIn&#183;IG&#183;TikTok&#183;WhatsApp</div></div>
-<div class="kpi c"><div class="kpi-n" style="color:var(--chef-dark)">5</div><div class="kpi-l">AleChef</div><div class="kpi-s">IG&#183;Reel&#183;WhatsApp</div></div>
-<div class="kpi b"><div class="kpi-n" style="color:var(--bpmf)">5</div><div class="kpi-l">BPMF</div><div class="kpi-s">IG&#183;TikTok&#183;WhatsApp</div></div>
-<div class="kpi m"><div class="kpi-n" style="color:var(--marcela)">5</div><div class="kpi-l">Marcela GF</div><div class="kpi-s">IG&#183;LinkedIn&#183;Stories</div></div>
-<div class="kpi t"><div class="kpi-n" style="color:var(--tracao)">5</div><div class="kpi-l">TRA&#199;&#195;O <span style="background:#132a4d;color:var(--tracao);font-size:9px;padding:1px 6px;border-radius:8px;margin-left:4px">NOVA ABA</span></div><div class="kpi-s">LinkedIn&#183;IG&#183;TikTok</div></div>
-</div>
-<div class="card">
-<div class="card-header"><span class="card-title">Grade Editorial &#8212; S16 &#183; 06/07 a 12/07/2026</span></div>
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th style="width:90px">Dia</th><th>ADFly</th><th>AleChef</th><th>BPMF</th><th>Marcela GF</th><th>TRA&#199;&#195;O</th></tr></thead>
-<tbody>
-<tr><td><strong>Seg 06/07</strong></td><td><span class="lbl lbl-a">LinkedIn+IG</span> Carrossel 6 slides&#183;4 camadas regulat&#243;rias desde 01/07</td><td><span class="lbl lbl-c">IG</span> Carrossel 5 slides&#183;Marmita industrial x chef de verdade</td><td><span class="lbl lbl-b">IG+TikTok</span> Reel 45s&#183;Jornada Lagamar ao vivo (Dia 2)</td><td><span class="lbl lbl-m">IG</span> Carrossel 6 slides&#183;80,4% endividamento p&#243;s-f&#233;rias</td><td><span class="lbl lbl-tr">LinkedIn+IG</span> 86% planejam IA / 7,8% integraram</td></tr>
-<tr><td><strong>Ter 07/07</strong></td><td><span class="lbl lbl-a">IG+TikTok</span> Reel 40s&#183;FRZ urbana (ICA 100-40)</td><td><span class="lbl lbl-c">IG+TikTok</span> Reel 40s&#183;Bastidor: rea&#231;&#227;o de quem recebe</td><td><span class="lbl lbl-b">IG</span> Carrossel 5 slides&#183;BPMF x evento de massa</td><td><span class="lbl lbl-m">IG+Story</span> Post+enquete&#183;Briga no or&#231;amento p&#243;s-f&#233;rias</td><td><span class="lbl lbl-tr">LinkedIn</span> Carrossel 5 slides&#183;Dwell time (algoritmo 2026)</td></tr>
-<tr><td><strong>Qua 08/07</strong></td><td><span class="lbl lbl-a">LinkedIn</span> Selo RETA + SARPAS&#183;checklist fornecedor</td><td><span class="lbl lbl-c">IG</span> Post Feed&#183;O que voc&#234; n&#227;o corta no aperto</td><td><span class="lbl lbl-b">IG</span> Post Feed&#183;SP oficializou o cicloturismo</td><td><span class="lbl lbl-m">IG+TikTok</span> Reel 50s&#183;Tesouro Reserva &#9888;</td><td><span class="lbl lbl-tr">IG+TikTok</span> Reel 35-38s&#183;"S&#243; fazem post sobre IA?"</td></tr>
-<tr><td><strong>Qui 09/07</strong></td><td><span class="lbl lbl-a">IG+TikTok</span> Carrossel 5 slides&#183;SENAI + RBAC 100 + ADFly Lab</td><td><span class="lbl lbl-c">IG+TikTok</span> Reel 40s&#183;A conta que o delivery n&#227;o mostra</td><td><span class="lbl lbl-b">IG+TikTok</span> Reel 60s&#183;Grand Finale Jornada Lagamar</td><td><span class="lbl lbl-m">LinkedIn</span> 81,7mi em inadimpl&#234;ncia&#183;42% h&#225; 10 anos</td><td><span class="lbl lbl-tr">LinkedIn</span> 55% dos advogados j&#225; usam IA</td></tr>
-<tr><td><strong>Sex 10/07</strong></td><td><span class="lbl lbl-a">IG</span> "ADFly n&#227;o &#233; marketplace de piloto"</td><td><span class="lbl lbl-c">IG</span> Carrossel 4 slides&#183;Comida lenta vs. delivery</td><td><span class="lbl lbl-b">IG</span> Carrossel 5 slides&#183;O que vem depois (pr&#243;xima jornada)</td><td><span class="lbl lbl-m">IG</span> Curso te d&#225; o mapa, eu caminho com voc&#234;</td><td><span class="lbl lbl-tr">LinkedIn</span> "O que foi entregue pra mim essa semana?"</td></tr>
-<tr><td><strong>Cont&#237;nuo</strong></td><td><span class="lbl lbl-a">WhatsApp</span></td><td><span class="lbl lbl-c">WhatsApp</span></td><td><span class="lbl lbl-b">WhatsApp</span></td><td><span class="lbl lbl-m">WhatsApp</span></td><td><span class="lbl lbl-tr">N/A</span> canal n&#227;o priorit&#225;rio</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="card">
-<div class="card-header"><span class="card-title">&#9888; Alertas desta semana</span></div>
-<div class="card-body">
-<div class="r-alert" style="margin-bottom:8px"><strong>ADFly &#128308; CRM desatualizado h&#225; 3 semanas</strong> &#8212; &#250;ltima exporta&#231;&#227;o do CSV: 17/06/2026. Pipeline atual: 21 leads (19 Lead &#183; 1 Qualificado &#183; 1 Negocia&#231;&#227;o), 16 follow-ups agendados &#8212; <strong>todos vencidos</strong>. A&#231;&#227;o: Alexandre precisa exportar novo CSV de <code>CRM_Updates/</code> antes da pr&#243;xima an&#225;lise de pipeline.</div>
-<div class="r-alert" style="margin-bottom:8px"><strong>TRA&#199;&#195;O &#128308; Kaizen escalou em julho</strong> &#8212; 4+ guias de IA publicados ("Automa&#231;&#227;o de Marketing com IA", "IA Generativa", "OpenAI Anúncios", "Branding Digital"). N&#237;vel de amea&#231;a subiu de "construindo" (jun) para "sistematizado" (jul). 2 das 5 pe&#231;as desta semana (SEG e SEX) respondem diretamente, diferenciando por m&#233;todo/processo &#8212; nunca disputando volume de conte&#250;do educativo de IA.</div>
-<div class="r-tip" style="margin-bottom:8px"><strong>ADFly &#8212; SARPAS obrigat&#243;rio sub-250g desde 01/07</strong> &#8212; ICA 100-40 do DECEA fechou a brecha que existia para equipamentos leves; FRZ urbana passa a exigir Termo de Coordena&#231;&#227;o em &#225;reas densas como SP. 3 das 5 pe&#231;as da semana endere&#231;am o tema (Seg, Ter, Qua).</div>
-<div class="r-tip" style="margin-bottom:8px"><strong>BPMF &#8212; Jornada Lagamar ao vivo (05-09/07)</strong> &#8212; os Reels de SEG e QUI dependem de material real filmado durante a jornada. Se a capta&#231;&#227;o n&#227;o estiver dispon&#237;vel a tempo, AG-10 substitui por Stories/material do dia anterior &#8212; sem inventar cenas.</div>
-<div class="r-tip" style="margin-bottom:8px"><strong>Marcela &#8212; confirmar mec&#226;nica do Tesouro Reserva</strong> &#8212; dados de liquidez, aus&#234;ncia de marca&#231;&#227;o a mercado e aplica&#231;&#227;o m&#237;nima do Reel de QUA precisam de checagem final com Alexandre antes de publicar. Nenhum rendimento espec&#237;fico deve ser prometido.</div>
-<div class="r-tip"><strong>Gaps de processo registrados</strong> &#8212; R&#201;GUA-QUALIDADE-ADFly.md e R&#201;GUA-QUALIDADE-AleChef.md n&#227;o localizadas (pacotes seguiram Brand Kit + Posicionamento); n&#227;o h&#225; PROVOCACOES-BPMF nem PROVOCACOES-AleChef desta semana (grades usaram RADAR/TEND&#202;NCIAS como input principal); radar de 05/07 ainda duplicado em 2 arquivos com nomenclaturas de data diferentes (mesmo conte&#250;do, sinalizado para limpeza).</div>
-</div>
-</div>
+<!-- ══════════════ OVERVIEW ══════════════ -->
+<div id="page-overview" class="page active">
+
+  <div class="files-bar">
+    <div class="files-bar-title">📂 Arquivos da Semana S15 — clique Copiar → Win+R → cole → Enter</div>
+    <div class="files-grid">
+      <div class="path-row">
+        <span class="path-icon">📄</span>
+        <div class="path-info">
+          <div class="path-name">Pacote ADFly S15</div>
+          <div class="path-txt">ADFly\Semana 29-06-05-07-2026\PACOTE-FULL-S15-ADFly.md</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-ADFly.md',this)">Copiar</button>
+      </div>
+      <div class="path-row">
+        <span class="path-icon">📄</span>
+        <div class="path-info">
+          <div class="path-name">Pacote AleChef S15</div>
+          <div class="path-txt">AleChef\Semana 29-06-05-07-2026\PACOTE-FULL-S15-AleChef.md</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-AleChef.md',this)">Copiar</button>
+      </div>
+      <div class="path-row">
+        <span class="path-icon">📄</span>
+        <div class="path-info">
+          <div class="path-name">Pacote BPMF S15</div>
+          <div class="path-txt">BPMF\Semana 29-06-05-07-2026\PACOTE-FULL-S15-BPMF.md</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-BPMF.md',this)">Copiar</button>
+      </div>
+      <div class="path-row">
+        <span class="path-icon">🖼️</span>
+        <div class="path-info">
+          <div class="path-name">Imagens ADFly (14 PNGs)</div>
+          <div class="path-txt">ADFly\Semana 29-06-05-07-2026\imagens\</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026\\imagens',this)">Copiar</button>
+      </div>
+      <div class="path-row">
+        <span class="path-icon">🖼️</span>
+        <div class="path-info">
+          <div class="path-name">Imagens AleChef (6 PNGs)</div>
+          <div class="path-txt">AleChef\Semana 29-06-05-07-2026\imagens\</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026\\imagens',this)">Copiar</button>
+      </div>
+      <div class="path-row">
+        <span class="path-icon">🖼️</span>
+        <div class="path-info">
+          <div class="path-name">Imagens BPMF (10 PNGs)</div>
+          <div class="path-txt">BPMF\Semana 29-06-05-07-2026\imagens\</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026\\imagens',this)">Copiar</button>
+      </div>
+      <div class="path-row">
+        <span class="path-icon">📄</span>
+        <div class="path-info">
+          <div class="path-name">Radar Consolidado (25/06) — mais recente</div>
+          <div class="path-txt">Base Estratégica\_RADAR-SEMANAL\RADAR-CONSOLIDADO-25-06-2026.md</div>
+        </div>
+        <button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Base Estratégica Projeto MKT\\_RADAR-SEMANAL\\RADAR-CONSOLIDADO-25-06-2026.md',this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-urgente" style="font-size:13px;">
+    🔴 <strong>S16 (06–12/07/2026) AINDA NÃO PRODUZIDA — nenhuma das 3 empresas tem pasta/pacote da próxima semana.</strong><br>
+    Verificado em 05/07/2026: não existe <code>ADFly\Semana 06-12-07-2026\</code>, <code>AleChef\Semana 06-12-07-2026\</code> nem <code>BPMF\Semana 06-12-07-2026\</code>. Nenhum <code>PACOTE-FULL-S16-*</code> encontrado.<br>
+    Fluxo padrão: grade/copy/imagens/QA da S16 são produzidos na segunda-feira (06/07) — este painel será atualizado assim que os pacotes existirem.
+  </div>
+
+  <div class="alert-warn" style="font-size:13px;">
+    🔭 <strong>Radar semanal:</strong> nenhum radar com data 02/07/2026 (quinta) foi encontrado em <code>_RADAR-SEMANAL/</code>. O mais recente ainda é <strong>RADAR-CONSOLIDADO-25-06-2026.md</strong> (o mesmo já usado na grade S15). Se o radar de quinta 02/07 não rodou, confirmar o agendamento antes de fechar a grade S16 — a regra do projeto exige ler o radar mais recente antes de montar a grade.
+  </div>
+
+  <div class="alert-info" style="font-size:13px;">
+    ✅ <strong>S15 (29/06–05/07) — encerrada.</strong> As seções abaixo (Visão Geral, ADFly, AleChef, BPMF, Prospecção, Arquivos) mantêm o conteúdo já produzido e publicado da S15 como arquivo de referência — não é a grade da semana que está começando.
+  </div>
+
+  <div class="section-title">Semana 29/06–05/07 (S15 — ENCERRADA · arquivo) · Snapshot das 3 Empresas</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-header"><div class="dot" style="background:var(--adfly)"></div><span class="card-title">ADFly Soluções Aéreas</span></div>
+      <div class="stat" style="color:var(--adfly)">5</div>
+      <div class="stat-label">conteúdos na semana · 14 PNGs gerados</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--gray)">LinkedIn + IG + TikTok · Regulatório ICA 100-40 + Mentoria ADFly Lab + Seguradora B2B</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot" style="background:var(--chef)"></div><span class="card-title">AleChef em Casa</span></div>
+      <div class="stat" style="color:var(--chef-dark)">5</div>
+      <div class="stat-label">conteúdos na semana · 6 PNGs gerados</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--gray)">IG + LinkedIn · Cardápio Inverno Julho + Collab BPMF + Jantar Executivo</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot" style="background:var(--bpmf)"></div><span class="card-title">BPMF — Bora Pedalar</span></div>
+      <div class="stat" style="color:var(--bpmf-dark)">5</div>
+      <div class="stat-label">conteúdos na semana · 10 PNGs gerados</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--gray)">IG + TikTok · Antítese Gravel + ICP 5 personas + Reel + Collab + Curadoria Humana</div>
+    </div>
+  </div>
+
+  <div class="section-title">Grade Consolidada — Semana 29/06–05/07/2026 (S15)</div>
+  <div class="overviewrow">
+    <div class="overviewcell header">DIA</div>
+    <div class="overviewcell header" style="background:#0A1B33">🛩 ADFly</div>
+    <div class="overviewcell header" style="background:#22324F">🍳 AleChef</div>
+    <div class="overviewcell header" style="background:#050505">🚴 BPMF</div>
+
+    <div class="overviewcell dayname">SEG 29/06</div>
+    <div class="overviewcell"><span class="chip" style="background:var(--adfly-bg);color:var(--adfly)">Post LinkedIn</span><br><strong>Checklist do contratante: seu piloto está autorizado? (ICA 100-40)</strong><br><small>LinkedIn · 07h30</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--chef-bg);color:var(--chef-dark)">Post Feed IG</span><br><strong>Chef que sabe que você detesta coentro — personalização radical</strong><br><small>IG · 08h00</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">Post Feed IG+TikTok</span><br><strong>Antítese do Campeonato Gravel — pódio vs mesa de jantar</strong><br><small>IG + TikTok · 08h00</small></div>
+
+    <div class="overviewcell dayname">TER 01/07</div>
+    <div class="overviewcell"><span class="chip" style="background:var(--adfly-bg);color:var(--adfly)">Reel 45s</span><br><strong>"R$4.300 em 2 dias. Aqui está a NF." — Skin in the Game ADFly Lab</strong><br><small>IG + TikTok · 07h30</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--chef-bg);color:var(--chef-dark)">Story Sequência 3x</span><br><strong>Spoilers cardápio inverno julho — virada de mês</strong><br><small>IG Stories · 12h00</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">Carrossel 5 slides</span><br><strong>5 tipos de ciclista que amam o BPMF — qualificação de persona</strong><br><small>IG · 08h00</small></div>
+
+    <div class="overviewcell dayname">QUA 02/07</div>
+    <div class="overviewcell"><span class="chip" style="background:var(--adfly-bg);color:var(--adfly)">Carrossel 5 slides</span><br><strong>"Já temos drone na obra" vs diagnóstico aéreo profissional: 4 diferenças</strong><br><small>LinkedIn · 07h30</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--chef-bg);color:var(--chef-dark)">Reel 45s</span><br><strong>Reveal cardápio de inverno — Cozido, Frango Cogumelo, Sopa Mandioquinha</strong><br><small>IG · 12h00</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">Reel 30s</span><br><strong>Gravel sem competição — estrada de terra + mesa de chegada</strong><br><small>IG + TikTok · 08h00</small></div>
+
+    <div class="overviewcell dayname">QUI 03/07 🤝</div>
+    <div class="overviewcell"><span class="chip" style="background:var(--adfly-bg);color:var(--adfly)">Carrossel 5 slides</span><br><strong>5 habilidades que nenhum curso de drone ensina</strong><br><small>IG + TikTok · 07h30</small></div>
+    <div class="overviewcell" style="background:#FDF4FF;"><span class="chip" style="background:#F3E8FF;color:#6B21A8">COLLAB · Post IG+LinkedIn</span><br><strong>Real food para quem pedala — BPMF × AleChef</strong><br><small>IG + LinkedIn · 08h00</small></div>
+    <div class="overviewcell" style="background:#FDF4FF;"><span class="chip" style="background:#F3E8FF;color:#6B21A8">COLLAB · Post IG</span><br><strong>A jornada cuida do percurso. O AleChef cuida da chegada.</strong><br><small>IG · 08h00 (coord. AleChef)</small></div>
+
+    <div class="overviewcell dayname">SEX 04/07</div>
+    <div class="overviewcell"><span class="chip" style="background:var(--adfly-bg);color:var(--adfly)">Post IG</span><br><strong>Seguradora + laudo aéreo ADFly: processo aprovado em 48h</strong><br><small>IG · 07h30</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--chef-bg);color:var(--chef-dark)">Post IG+LinkedIn</span><br><strong>Jantar executivo — fim de semestre corporativo</strong><br><small>IG + LinkedIn · 07h30</small></div>
+    <div class="overviewcell"><span class="chip" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">Post IG</span><br><strong>"Não é o destino. É o que vira história." — curadoria humana</strong><br><small>IG · 08h00</small></div>
+  </div>
+
+  <div class="section-title">Foco da Semana por Empresa</div>
+  <div class="grid3">
+    <div class="card" style="border-top:3px solid var(--adfly)">
+      <div style="font-size:12px;font-weight:700;color:var(--adfly);margin-bottom:8px">ADFly — Regulatório ICA 100-40 + Mentoria + Seguradora</div>
+      <div style="font-size:12px;line-height:1.7;color:#374151">🎯 <strong>Pilar:</strong> Regulatório 40% · Mentoria 40% · Casos/Portfolio 20%<br>📍 <strong>Plataformas:</strong> LinkedIn + IG + TikTok<br>📋 <strong>Destaque:</strong> ICA 100-40 vigor desde 01/07 — checklist do contratante<br>🎓 <strong>CTA dominante:</strong> ADFly Lab — turma julho · R$4.997<br>🏆 <strong>Meta:</strong> 3–5 leads mentoria, 1 proposta B2B seguradora/sinistro</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--chef)">
+      <div style="font-size:12px;font-weight:700;color:var(--chef-dark);margin-bottom:8px">AleChef — Cardápio Inverno + Collab + Corporativo</div>
+      <div style="font-size:12px;line-height:1.7;color:#374151">🎯 <strong>Pilar:</strong> Cardápio + Collab + Eventos B2B<br>📍 <strong>Plataformas:</strong> IG + LinkedIn<br>🥘 <strong>Destaque:</strong> Cardápio de inverno: Cozido Paulistano, Frango, Sopa<br>🤝 <strong>Collab:</strong> BPMF × AleChef — real food para atleta QUI 03/07<br>🏆 <strong>Meta:</strong> 5–10 pedidos, 1 evento corporativo, leads via collab</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--bpmf)">
+      <div style="font-size:12px;font-weight:700;color:var(--bpmf-dark);margin-bottom:8px">BPMF — ICP · Curadoria Humana · Collab</div>
+      <div style="font-size:12px;line-height:1.7;color:#374151">🎯 <strong>Pilar:</strong> ICP/Personas + Filosofia + Collab<br>📍 <strong>Plataformas:</strong> IG + TikTok<br>🚴 <strong>Destaque:</strong> 5 personas + gravel sem competição + jornada julho<br>🤝 <strong>Collab:</strong> AleChef × BPMF coordenado QUI 03/07<br>🏆 <strong>Meta:</strong> Leads para jornada julho + crescimento de comunidade</div>
+    </div>
+  </div>
+
+  <div class="alert-warn" style="margin-top:8px;">
+    ⚡ <strong>ICA 100-40 em vigor desde 01/07:</strong> Sub-250g também precisa de SARPAS. ADFly é referência de operação regulamentada — reforçar em posts SEG e TER ADFly especialmente.
+  </div>
 </div>
 
-<!-- ADFLY -->
+<!-- ══════════════ ADFLY ══════════════ -->
 <div id="page-adfly" class="page">
+  <div class="section-title">🛩 ADFly — 5 Conteúdos · Semana S15 (ENCERRADA · arquivo) · 29/06–05/07/2026</div>
+  <div class="alert-warn">⚠️ S16 (06–12/07) ainda não produzida para ADFly — sem pasta/pacote encontrado.</div>
+  <div class="alert-info">
+    Tom: técnico, premium, B2B · Nichos: Construção Civil · Engenheiros/Arquitetos · Imobiliário · Paleta: Navy #0A1B33 / Azul #1E90FF / Verde Sinal #9FE83A (pontual) · Fonte: Inter Bold · 14 PNGs gerados ✅
+  </div>
+  <div class="alert-urgente">⚠️ TER 01/07 Reel: confirmar com Alexandre se "R$4.300 em 2 dias" é dado real ou exemplar antes de publicar. Se for exemplar, adaptar speech.</div>
 
-<div class="card" style="margin-bottom:16px">
-<div class="card-header"><span class="card-title">Status CRM &#8212; ADFly (&#250;nico CRM ativo)</span></div>
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th>Est&#225;gio</th><th>Quantidade</th></tr></thead>
-<tbody>
-<tr><td>Lead</td><td>19</td></tr>
-<tr><td>Qualificado</td><td>1</td></tr>
-<tr><td>Negocia&#231;&#227;o</td><td>1</td></tr>
-<tr><td><strong>Total pipeline</strong></td><td><strong>21</strong></td></tr>
-</tbody>
-</table>
-<div style="padding:14px 16px" class="r-alert">Follow-ups agendados: <strong>16</strong>, todos com data anterior a hoje (vencidos). CSV desatualizado h&#225; 3 semanas (&#250;ltima exporta&#231;&#227;o 17/06/2026). Alexandre precisa exportar novo CSV de <code>CRM_Updates/</code> antes da pr&#243;xima an&#225;lise.</div>
-</div>
-</div>
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--adfly-bg);color:var(--adfly)">SEG 29/06 · 07h30</span>
+      <span class="title">Checklist do contratante: seu piloto está autorizado? (ICA 100-40)</span>
+      <span class="format">Post LinkedIn (1200×1200)</span>
+      <span class="badge-pill" style="background:#DBEAFE;color:#1D4ED8">Regulatório · B2B</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Gancho da Caption</div>
+      <div class="gancho">01 de julho chegou. A ICA 100-40 está vigente. Mas a pergunta que poucos estão fazendo: como a empresa contratante sabe se o piloto que ela está pagando é legal?</div>
+      <div class="label">Checklist (5 itens)</div>
+      <p>1. <strong>SARPAS</strong> — aprovação de voo para local e data exatos (DECEA)<br>
+      2. <strong>SISANT</strong> — drone cadastrado na ANAC (todo acima de 250g comercial)<br>
+      3. <strong>RETA</strong> — certificação ANAC de piloto profissional (área urbana/espaço controlado)<br>
+      4. <strong>Seguro de responsabilidade civil aeronáutica</strong><br>
+      5. <strong>Nota Fiscal de serviço</strong> — CNPJ, contrato, NF</p>
+      <div class="label">Closing LinkedIn</div>
+      <div class="legenda">A ICA 100-40 não foi feita para atrapalhar o mercado. Foi feita para separar operação profissional de voo recreativo que se passa por serviço. Se o piloto não passa nesse checklist, o risco jurídico e financeiro é da empresa que contratou. A ADFly opera 100% em conformidade — SARPAS, SISANT, RETA, NF e seguro em todos os projetos. Laudo técnico em 48h.</div>
+      <div class="label">AI Prompt LinkedIn (1200×1200)</div>
+      <div class="edl">Navy #0A1B33 background · Electric Blue #1E90FF title 'CHECKLIST DO CONTRATANTE' · vertical checklist 5 itens em branco com checkboxes Signal Green · tipografia Liberation Sans Bold · style DJI Enterprise / Leica · sem emoji, sem laranja · ADFly wordmark bottom</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Me chama no WhatsApp ou acessa o link no perfil. Hashtags: #drone #construcaocivil #ICA10040 #inspecaopredial #ADFly #conformidadeaerea</div>
+    </div>
+  </div>
 
-<div class="post-card adfly-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--adfly-bg);color:var(--adfly)">Seg 06/07 &#183; 07h30</span>
-<span class="post-format">LinkedIn + IG &#183; Carrossel 6 slides &#183; 1080&#215;1350</span>
-<span class="lbl lbl-red">SARPAS/ICA 100-40</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">O que j&#225; mudou na pr&#225;tica desde 01/07 &#8212; as 4 camadas regulat&#243;rias condensadas</div>
-<div class="sec">Copy por slide</div>
-<div class="copy-block" id="a1">Slide 1 — Hook: O QUE JÁ MUDOU NA PRÁTICA DESDE 01/07. Ninguém condensou isso ainda. Nós condensamos.
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--adfly-bg);color:var(--adfly)">TER 01/07 · 07h30</span>
+      <span class="title">"R$4.300 em 2 dias. Aqui está a NF." — Skin in the Game ADFly Lab</span>
+      <span class="format">Reel 45s (1080×1920) · IG + TikTok</span>
+      <span class="badge-pill" style="background:#DBEAFE;color:#1D4ED8">Mentoria · Educação</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Speech Word-for-Word</div>
+      <div class="speech">[00:00–00:04] "Eu recebi R$4.300 em dois dias de operação. E aqui está a nota fiscal."
+[00:05–00:10] "Eu sei que isso parece bom demais pra ser verdade. Por isso vou te mostrar exatamente o que está por trás desse número."
+[00:11–00:18] "Dia 1: inspeção de fachada, condomínio de 18 andares — R$2.100. Dia 2: levantamento topográfico, obra civil — R$2.200. Total: R$4.300. Dois dias. Dois clientes corporativos."
+[00:19–00:27] "E não foi sorte. Foi método. Eu não ofereci 'voo de drone'. Eu ofereci laudo técnico com georreferenciamento, relatório em PDF, entrega em 48h. Isso não é commodity. É serviço especializado."
+[00:28–00:34] "Isso é o que o ADFly Lab ensina. Não como pilotar — você já sabe. Como construir o produto que justifica R$2.000 por projeto."
+[00:35–00:41] "A turma piloto está sendo formada para julho. São 10 semanas, R$4.997 — ou 10×R$547. Link na bio ou comenta LAB aqui."
+[00:42–00:45] "Paga a primeira parcela em um único projeto. Você já sabe voar. O que falta é o método comercial."</div>
+      <div class="label">Notas de gravação</div>
+      <div class="edl">Mostrar NF real em tela no 00:00 (cobrir CNPJ/dados do cliente) · Overlay textual: "DIA 1 — R$2.100 / DIA 2 — R$2.200 / TOTAL — R$4.300" · Tom direto, sem música motivacional genérica · Legenda automática ativada · Thumbnail: fundo Navy, "R$4.300 / 2 DIAS" em verde sinal</div>
+      <div class="label">Caption IG + TikTok</div>
+      <div class="legenda">R$ 4.300 em dois dias de operação de drone. NF emitida. Dois projetos B2B. Método replicável. O ADFly Lab está formando a turma de julho: 10 semanas, método comercial completo para piloto que já sabe voar. Comenta LAB ou acessa o link na bio. #adfly #pilotodedrone #droneb2b #adflylabdrone</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Comenta LAB ou link na bio · Turma julho · R$4.997 / 10×R$547</div>
+    </div>
+  </div>
 
-Slide 2 — CAMADA 1 — ANAC (SISANT): Todo drone acima de 250g operando comercialmente precisa estar cadastrado no SISANT. Sem cadastro, a operação é irregular desde o primeiro voo.
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--adfly-bg);color:var(--adfly)">QUA 02/07 · 07h30</span>
+      <span class="title">"Já temos drone na obra" vs diagnóstico aéreo profissional: 4 diferenças</span>
+      <span class="format">Carrossel 5 slides (1080×1350) · LinkedIn</span>
+      <span class="badge-pill" style="background:var(--adfly-bg);color:var(--adfly)">Técnico · B2B</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Slides</div>
+      <div class="gancho">SLIDE 1: "JÁ TEMOS DRONE NA OBRA." / Isso e diagnóstico aéreo profissional são coisas completamente diferentes.</div>
+      <p>SLIDE 2: "O QUE VOCÊ TEM HOJE" — quadricóptero que grava vídeo. Imagem bonita. Nenhum dado técnico. Nenhuma rastreabilidade de laudo.<br>
+      SLIDE 3: "O QUE UM DIAGNÓSTICO AÉREO ENTREGA" — ✓ Ortofotomosaico georreferenciado (±2,5cm) ✓ Termografia de fachada ✓ Relatório técnico assinado (responsável técnico) ✓ Entrega PDF 48h — auditável<br>
+      SLIDE 4: "A DIFERENÇA JURÍDICA" — Vídeo bonito: evidência informal. Laudo técnico: documento com validade jurídica. Se o prédio tiver patologia depois da vistoria sem laudo, quem assume o risco é você.<br>
+      SLIDE 5: "DIAGNÓSTICO AÉREO ADFLY" · Inspeção · Ortofoto · Termografia · Laudo 48h · SARPAS · SISANT · RETA · Seguro RC</p>
+      <div class="label">AI Prompts (1080×1350 · Navy #0A1B33 / Blue #1E90FF / White)</div>
+      <div class="edl">Slide 1: Bold "JÁ TEMOS DRONE NA OBRA." em Electric Blue, fundo Navy, estilo DJI Enterprise · Slide 3: checkmarks em Signal Green #9FE83A · Slide 4: contraste dois-colunas (vídeo vs laudo) · Slide 5: CTA badge Signal Green · Fontes Liberation Sans Bold · sem emoji, sem laranja</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Me chama no WhatsApp ou link no perfil. #inspecaopredial #drone #construcaocivil #laudotecnico #NBR5674 #ADFly</div>
+    </div>
+  </div>
 
-Slide 3 — CAMADA 2 — DECEA (SARPAS + ICA 100-40): Desde 01/07, SARPAS é obrigatório até para drones sub-250g em voo urbano/residencial. A ICA 100-40 fechou a brecha que existia para equipamentos leves.
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--adfly-bg);color:var(--adfly)">QUI 03/07 · 07h30</span>
+      <span class="title">5 habilidades que nenhum curso de drone ensina</span>
+      <span class="format">Carrossel 5 slides (1080×1350) · IG + TikTok</span>
+      <span class="badge-pill" style="background:#DBEAFE;color:#1D4ED8">Educação · CTA Mentoria</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Slides</div>
+      <div class="gancho">SLIDE 1: "5 HABILIDADES QUE NENHUM CURSO DE DRONE ENSINA. E que separam R$300/dia de R$2.000/projeto."</div>
+      <p>SLIDE 2: "1. DIAGNÓSTICO, NÃO SERVIÇO" — o cliente quer o problema resolvido. Saiba identificar antes de citar preço.<br>
+      SLIDE 3: "2. PROPOSTA COM ESCOPO" — "Voo de drone R$X" não é proposta. Proposta tem: área coberta, equipamento, entregáveis, prazo.<br>
+      SLIDE 4: "AS OUTRAS TRÊS" — 3. Relatório técnico legível para engenheiro e síndico · 4. Negociação por valor (não por hora de voo) · 5. Rede de indicação em construtoras e administradoras<br>
+      SLIDE 5: "ADFly Lab · 10 semanas · Método comercial completo · Turma julho — vagas limitadas" · Comenta LAB ou link na bio</p>
+      <div class="label">Caption IG + TikTok</div>
+      <div class="legenda">5 habilidades que separam R$300/dia de R$2.000/projeto. Nenhuma você aprende no curso de pilotagem. ADFly Lab — método completo em 10 semanas. Turma julho. Comenta LAB. #adfly #adflylabdrone #pilotodedrone #droneb2b #drone2026</div>
+      <div class="label">AI Prompts (1080×1350)</div>
+      <div class="edl">Slide 1: Navy bg, "5 HABILIDADES" em Electric Blue Bold oversized, "QUE NENHUM CURSO ENSINA" branco · Slides 2-4: sistema visual idêntico, numeração azul, copy branca · Slide 5 CTA: "ADFly Lab" em Electric Blue, CTA "Comenta LAB" em Signal Green #9FE83A · Preço R$4.997/10×R$547 em branco menor</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Comenta LAB ou link na bio · ADFly Lab turma julho</div>
+    </div>
+  </div>
 
-Slide 4 — CAMADA 3 — ANATEL: O equipamento precisa ter homologação Anatel. Drone importado sem homologação = risco documental para quem contrata, não só para quem pilota.
-
-Slide 5 — CAMADA 4 — LGPD EM ÁREA RESIDENCIAL + dado de mercado: Sobrevoo de condomínio capta imagem de terceiros. Privacidade em área habitada também é regra a seguir. Enquanto isso: o uso de drone em manutenção predial cresceu 45% em 2 anos — e a regulação de julho tirou do mercado quem operava no improviso.
-
-Slide 6 — CTA: 4 CAMADAS. 1 OPERAÇÃO REGULARIZADA. ANAC · DECEA · ANATEL · LGPD. A ADFly já opera dentro das quatro. Mercado maior, concorrência informal menor — para quem chegou preparado, isso é oportunidade. Fale com a ADFly sobre inspeção predial regularizada.
-
-#drone #inspecaopredial #construcaocivil #ICA10040 #RBAC100 #ADFly #compliance #condominios<button class="copy-btn" onclick="cp('a1')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Slide 1 (1080&#215;1350)</div>
-<div class="prompt-block" id="a1p">Format: LinkedIn/Instagram carousel slide, 1080x1350 pixels (4:5 aspect ratio).
-Brand references: visual style inspired by DJI Enterprise, Leica Geosystems, and FLIR Systems — premium B2B precision-technology brands.
-Color palette: Deep Navy #0A1B33 as full background · Electric Blue #1E90FF for the headline text · White #FFFFFF for supporting text. Signal Green #9FE83A reserved only for small badges, not used on this slide. Typography: Liberation Sans Bold, geometric and highly legible, tight letter-spacing on the large headline.
-Visual style: institutional B2B data-authority layout, ultra-clean, generous negative space. No stock photo appearance. No generic drone stock photos. No orange. No emoji. No playful or lifestyle imagery. No consumer drone feel.
-Slide brief: Full Navy background. Centered large headline in Electric Blue, uppercase: "O QUE JÁ MUDOU NA PRÁTICA DESDE 01/07." Below it, smaller white subheadline: "Ninguém condensou isso ainda. Nós condensamos." Small white ADFly wordmark bottom-right corner.<button class="prompt-btn" onclick="cp('a1p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card adfly-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--adfly-bg);color:var(--adfly)">Ter 07/07 &#183; 07h30</span>
-<span class="post-format">IG + TikTok &#183; Reel 40s &#183; 1080&#215;1920</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">FRZ urbana &#8212; por que inspecionar pr&#233;dio em SP agora exige mais planejamento</div>
-<div class="sec">Speech Word-for-Word + Timecodes</div>
-<div class="copy-block" id="a2s">[00:00–00:04] "Se você contrata drone pra inspecionar prédio em São Paulo, isso mudou desde 1º de julho."
-
-[00:05–00:11] "A ICA 100-40 criou a chamada FRZ urbana — Faixa de Restrição que passa a exigir Termo de Coordenação com a administração aeroportuária pra voos em áreas densas como São Paulo."
-
-[00:12–00:19] "Isso significa que não é só o piloto que precisa estar regularizado. O síndico que contrata também assume responsabilidade se o operador não tiver essa coordenação feita."
-
-[00:20–00:27] "A ADFly já opera dentro dessa exigência. Termo de Coordenação, SARPAS, RETA — tudo documentado antes do drone decolar."
-
-[00:28–00:34] "Se o seu fornecedor de drone não sabe o que é FRZ urbana, ele não está pronto pra voar sobre o seu condomínio em 2026."
-
-[00:35–00:40] "Quer saber se o seu prédio está dentro da FRZ? Me chama no WhatsApp ou acessa o link no perfil."
-
-Notas: roupa social lisa navy/azul escuro · fundo escritório técnico ou terraço com fachada desfocada ao fundo · luz natural difusa · overlay [00:05] "FRZ URBANA" · overlay [00:20] selo "ADFLY — REGULARIZADA".<button class="copy-btn" onclick="cp('a2s')">Copiar</button></div>
-<div class="sec">Caption (IG + TikTok)</div>
-<div class="copy-block" id="a2c">Desde 1º de julho, inspecionar prédio em São Paulo com drone exige mais do que ligar pro "cara do drone".
-
-A ICA 100-40 criou a FRZ urbana — e voos em área densa agora exigem Termo de Coordenação com a administração aeroportuária.
-
-Quem contrata sem verificar isso assume o risco junto com o operador.
-
-A ADFly já opera 100% dentro dessa exigência.
-
-Quer saber se o seu prédio está na FRZ? Me chama no WhatsApp.
-
-#drone #FRZurbana #ICA10040 #inspecaopredial #ADFly #construcaocivil #condominios #droneb2b<button class="copy-btn" onclick="cp('a2c')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Thumbnail Reel (1080&#215;1920)</div>
-<div class="prompt-block" id="a2p">Format: Instagram Reel / TikTok vertical thumbnail, 1080x1920 pixels (9:16 aspect ratio).
-Brand references: visual style inspired by DJI, Skydio, and premium B2B drone inspection technology brands.
-Color palette: Deep Navy #0A1B33 background · Electric Blue #1E90FF for the hero title · White #FFFFFF secondary text · Signal Green #9FE83A for a single small compliance badge. Typography: Liberation Sans Bold, oversized hero title, tight letter-spacing.
-Visual style: single-statement high-contrast vertical layout, technical authority tone. No stock photo appearance. No generic drone stock photos. No orange. No emoji. No consumer drone feel. No casual outdoor adventure aesthetic.
-Scene brief: Full Navy background. Top 40%: oversized title "FRZ URBANA" in Electric Blue, maximum weight, uppercase. Center: "O QUE MUDOU PRA SUA INSPEÇÃO" in white bold uppercase. Small Signal Green badge below reading "ADFLY REGULARIZADA". Bottom: small white "ADFly Soluções Aéreas" wordmark and "@adfly.sol" handle, subtle.<button class="prompt-btn" onclick="cp('a2p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card adfly-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--adfly-bg);color:var(--adfly)">Qua 08/07 &#183; 07h30</span>
-<span class="post-format">LinkedIn &#183; Post 1200&#215;1200</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Selo RETA + SARPAS &#8212; como saber se seu fornecedor de drone est&#225; regularizado</div>
-<div class="copy-block" id="a3">Antes de assinar qualquer contrato de inspeção com drone, existe uma pergunta simples que poucos gestores prediais fazem:
-
-"Seu operador tem RETA e autorização SARPAS ativa para este voo específico?"
-
-Não é burocracia. É o que separa uma operação regularizada de uma que transfere o risco para você.
-
-RETA — Certificado de Piloto Remoto emitido pela ANAC. Sem ele, o piloto não está autorizado a operar profissionalmente em área urbana e espaço aéreo controlado.
-
-SARPAS — Autorização do DECEA para o voo específico, na data e no local exatos. Uma autorização de mês passado não vale para o voo de hoje.
-
-A fiscalização conjunta ANAC/DECEA está mais rigorosa desde as resoluções 761/762. Isso significa que exigir esses dois documentos deixou de ser cautela extra — virou prática mínima de qualquer gestor que não quer assumir passivo jurídico por um fornecedor irregular.
-
-A ADFly apresenta RETA e SARPAS válidos antes de qualquer decolagem — sem que o cliente precise pedir.
-
-Se o seu fornecedor atual hesita em mostrar os dois, essa é a resposta que você precisava.
-
-📲 Me chama no WhatsApp ou acessa o link no perfil.
-
-#drone #inspecaopredial #construcaocivil #SARPAS #RETA #ANAC #condominios #ADFly #compliance #gestaopredial<button class="copy-btn" onclick="cp('a3')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; LinkedIn (1200&#215;1200)</div>
-<div class="prompt-block" id="a3p">Format: LinkedIn feed image, square 1200x1200 pixels (1:1 aspect ratio).
-Brand references: visual style inspired by DJI Enterprise, Leica Geosystems, and FLIR Systems — precision technology for infrastructure and compliance professionals.
-Color palette: Deep Navy #0A1B33 full background · Electric Blue #1E90FF for the key question headline · White #FFFFFF for supporting text · Signal Green #9FE83A used only for two small verification badges labeled "RETA" and "SARPAS". Typography: Liberation Sans Bold for headline, Regular for body, ExtraBold uppercase for the two badges.
-Visual style: institutional B2B verification-authority layout, ultra-clean, no photography. No stock photo appearance. No generic drone stock photos. No orange. No emoji. No playful or lifestyle imagery.
-Scene brief: Full Navy background. Top: headline in Electric Blue, bold: "SEU FORNECEDOR TEM RETA E SARPAS?" Center: two side-by-side Signal Green verification badges, one reading "RETA — piloto certificado" and one reading "SARPAS — voo autorizado", each with a small checkmark icon. Below, white body text: "A ADFly apresenta os dois antes de qualquer decolagem." Bottom: ADFly Soluções Aéreas wordmark in white, small.<button class="prompt-btn" onclick="cp('a3p')">Copiar</button></div>
-</div>
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--adfly-bg);color:var(--adfly)">SEX 04/07 · 07h30</span>
+      <span class="title">Seguradora + laudo aéreo ADFly: processo aprovado em 48h</span>
+      <span class="format">Post IG (1080×1080)</span>
+      <span class="badge-pill" style="background:#F0FDF4;color:#15803D">Case · Credibilidade</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG</div>
+      <div class="legenda">A seguradora pagou em 48 horas. Por quê? Porque o laudo técnico aéreo já estava pronto quando o processo foi aberto. Fachada rachou após chuva intensa. A administradora chamou a ADFly antes de acionar a seguradora. Drone com câmera termográfica + georreferenciamento → relatório em PDF com coordenadas, extensão do dano, materiais afetados. A seguradora recebeu um documento técnico auditável — não fotos de celular e relato verbal. Processo aprovado. Reforma autorizada. 48h. Se você trabalha com sinistros prediais, laudos periciais ou gestão de patrimônio — faz sentido conversar. 📲 Link no perfil ou me chama no WhatsApp. #drone #laudotecnico #seguradora #inspecaopredial #adfly #construcaocivil #pericias</div>
+      <div class="label">AI Prompt Post IG (1080×1080)</div>
+      <div class="edl">Navy #0A1B33 bg · badge Signal Green "CASO REAL" top-left · hero stat "48h" em Electric Blue oversized · "A seguradora aprovou." branco bold · "Laudo aéreo técnico. Fachada georreferenciada." branco regular · ADFly wordmark bottom · style FLIR Systems, Leica · sem emoji, sem laranja</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Link no perfil ou WhatsApp · #drone #laudotecnico #seguradora #ADFly</div>
+    </div>
+  </div>
 </div>
 
-<div class="post-card adfly-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--adfly-bg);color:var(--adfly)">Qui 09/07 &#183; 07h30</span>
-<span class="post-format">IG + TikTok &#183; Carrossel 5 slides &#183; 1080&#215;1350</span>
-<span class="lbl lbl-a">ADFly Lab</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">SENAI validou o nicho. RBAC 100 certificou o piloto. E agora?</div>
-<div class="sec">Copy por slide</div>
-<div class="copy-block" id="a4">Slide 1 — Hook: SENAI VALIDOU. RBAC 100 CERTIFICOU. E AGORA? Duas notícias boas que deixaram uma pergunta sem resposta.
-
-Slide 2 — O SENAI ENTROU NO JOGO DO DRONE: O SENAI-SP lançou cursos de drone pra atender a "crescente demanda da indústria". Quando uma instituição desse porte entra num nicho, é prova de que o mercado chegou ao mainstream.
-
-Slide 3 — O QUE O SENAI NÃO ENSINA: Formação técnica de piloto — sim. Como entrar num condomínio, precificar laudo NBR e montar proposta pra administradora de 40 prédios — não. Esse espaço continua vazio.
-
-Slide 4 — RBAC 100 CERTIFICOU O PILOTO. E AGORA?: Você passou no teste. Está regularizado. Mas certificação não é a mesma coisa que faturamento. O próximo passo não é mais um curso de voo — é aprender a cobrar por solução, não por hora de voo.
-
-Slide 5 — CTA ADFly Lab: O "e agora" que nenhum curso técnico responde. Método comercial completo para quem já voa e já é certificado — e quer atender empresa. Turma julho — vagas limitadas. Comenta LAB ou acessa o link na bio.
-
-#adfly #adflylabdrone #pilotodedrone #droneb2b #RBAC100 #empreendedorismo #senai<button class="copy-btn" onclick="cp('a4')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Slide 1 (1080&#215;1350)</div>
-<div class="prompt-block" id="a4p">Format: Instagram/TikTok carousel slide, 1080x1350 pixels (4:5 aspect ratio).
-Brand references: visual style inspired by DJI, Skydio — confident tech-education authority.
-Color palette: Deep Navy #0A1B33 background · Electric Blue #1E90FF headline · White body text. Typography: Liberation Sans Bold, uppercase headline, tight letter-spacing.
-Visual style: bold educational-hook layout, no photography. No stock photo appearance. No generic drone stock photos. No orange. No emoji.
-Slide brief: Navy background. Centered large headline in Electric Blue: "SENAI VALIDOU. RBAC 100 CERTIFICOU. E AGORA?" Below in white, smaller: "Duas notícias boas que deixaram uma pergunta sem resposta." Small white ADFly wordmark bottom-right.<button class="prompt-btn" onclick="cp('a4p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card adfly-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--adfly-bg);color:var(--adfly)">Sex 10/07 &#183; 07h30</span>
-<span class="post-format">IG &#183; Post 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Tem app que manda qualquer piloto pro seu condom&#237;nio. ADFly n&#227;o &#233; isso.</div>
-<div class="copy-block" id="a5">Semana passada, um concorrente do nicho de mapeamento lançou um app que conecta qualquer piloto disponível a qualquer contratante que precisa de um voo.
-
-É rápido. É prático. E é exatamente o oposto do que um condomínio, uma construtora ou uma administradora precisa quando o assunto é laudo técnico defensável.
-
-Marketplace resolve "preciso de alguém que voe hoje".
-
-Não resolve "preciso de um relatório técnico que meu advogado aceite se algo der errado".
-
-A ADFly não é o piloto mais rápido disponível no app. É o especialista que entrega diagnóstico aéreo com dado, responsabilidade técnica e histórico de operação regularizada — a mesma pessoa, o mesmo padrão, projeto após projeto.
-
-Quando o mercado de drone vira commodity, especialização vira diferencial ainda maior.
-
-📲 Link no perfil ou me chama no WhatsApp.
-
-#drone #inspecaopredial #construcaocivil #ADFly #laudotecnico #condominios #especialista<button class="copy-btn" onclick="cp('a5')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Imagem IG (1080&#215;1080)</div>
-<div class="prompt-block" id="a5p">Format: Instagram feed post, square 1080x1080 pixels (1:1 aspect ratio).
-Brand references: visual style inspired by DJI, Apple Enterprise campaigns — confident brand-positioning statement design.
-Color palette: Deep Navy #0A1B33 background · Electric Blue #1E90FF for the key contrast statement · White #FFFFFF body text · Signal Green #9FE83A for a single small "ADFLY" identity badge. Typography: Liberation Sans Bold, confident and clean, no decorative fonts.
-Visual style: brand-positioning contrast layout — specialist vs. generic marketplace tone, editorial and confident, not aggressive. No stock photo appearance. No generic drone stock photos. No orange. No emoji. No playful or lifestyle imagery.
-Scene brief: Navy background split conceptually in two zones without literal app UI. Top zone: white smaller text "Tem app que manda qualquer piloto pro seu condomínio." Center: large Electric Blue statement "ADFLY NÃO É ISSO." Bottom zone: white smaller text "Diagnóstico técnico. Mesma pessoa. Mesmo padrão. Projeto após projeto." Small Signal Green badge reading "ESPECIALISTA" bottom-left. ADFly wordmark bottom-right, white, subtle.<button class="prompt-btn" onclick="cp('a5p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card adfly-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--adfly-bg);color:var(--adfly)">Cont&#237;nuo &#183; Seg 06/07 08h00</span>
-<span class="post-format">WhatsApp Status &#183; 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Status Semanal &#8212; 4 camadas, 1 opera&#231;&#227;o legal</div>
-<div class="copy-block" id="awp">4 camadas regulatórias, 1 operação legal: ANAC, DECEA, ANATEL, LGPD. A ADFly já opera dentro de todas. Fala comigo.
-
-(115 caracteres · imagem: hero "4 CAMADAS" / "1 OPERAÇÃO LEGAL" / "ANAC · DECEA · ANATEL · LGPD" / @adfly.sol)
-Broadcast mensal: não aplicável esta semana (já coberto na S15) — próximo em agosto/2026.<button class="copy-btn" onclick="cp('awp')">Copiar</button></div>
-</div>
-</div>
-
-</div>
-
-<!-- ALECHEF -->
+<!-- ══════════════ ALECHEF ══════════════ -->
 <div id="page-chef" class="page">
+  <div class="section-title">🍳 AleChef — 5 Conteúdos · Semana S15 (ENCERRADA · arquivo) · 29/06–05/07/2026</div>
+  <div class="alert-warn">⚠️ S16 (06–12/07) ainda não produzida para AleChef — sem pasta/pacote encontrado.</div>
+  <div class="alert-info">
+    Tom: humano, quente, sensorial, comida de verdade · Cardápio de inverno julho · Paleta: Navy #22324F / Dourado #C9A77A / Off White #FAF7F2 · Fonte: Cormorant Garamond + Montserrat · 6 PNGs gerados ✅
+  </div>
 
-<div class="post-card chef-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--chef-bg);color:var(--chef-dark)">Seg 06/07 &#183; 08h00</span>
-<span class="post-format">IG &#183; Carrossel 5 slides &#183; 1080&#215;1350</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Marmita industrial ultracongelada x marmita feita no seu dia, por um chef de verdade</div>
-<div class="sec">Copy por slide</div>
-<div class="copy-block" id="c1">Slide 1 — Hook: "Marmita gourmet já virou prateleira de supermercado."
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--chef-bg);color:var(--chef-dark)">SEG 29/06 · 08h00</span>
+      <span class="title">Chef que sabe que você detesta coentro — personalização radical</span>
+      <span class="format">Post Feed IG (1080×1080)</span>
+      <span class="badge-pill" style="background:var(--chef-bg);color:var(--chef-dark)">Diferencial · Posicionamento</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG</div>
+      <div class="gancho">O supermercado já vende marmita gourmet. Embalagem bonita. Ingredientes escritos em francês. O que ele não vende é o chef que sabe que você detesta coentro.</div>
+      <div class="legenda">Que lembra que na semana passada você pediu o frango mais leve porque estava com o estômago sensível. Que adapta o tempero porque você está tentando reduzir o sódio. Que mandou uma mensagem na quarta perguntando se você queria algo diferente na quinta. Isso não é entrega de marmita. Isso é cozinha de verdade — feita por alguém que conhece a sua cozinha como a própria. 📲 Link na bio ou WhatsApp no perfil. #alechefemcasa #personalchef #comidareal #marmita #saopaulofoodies</div>
+      <div class="label">AI Prompt Post (1080×1080)</div>
+      <div class="edl">Mãos do chef + caderninho de anotações (personalização, memória, cuidado) · luz âmbar quente · profundidade de campo rasa · background desfocado cozinha · overlay "O chef que sabe que você detesta coentro." em Off-White serif · AleChef em Casa em Gold bottom · style Casa do Porco, Alex Atala</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Link na bio ou WhatsApp · #alechefemcasa #personalchef #comidareal</div>
+    </div>
+  </div>
 
-Slide 2: "Ultracongelada. Feita em escala. Em várias cidades ao mesmo tempo."
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--chef-bg);color:var(--chef-dark)">TER 01/07 · 12h00</span>
+      <span class="title">Spoilers cardápio inverno julho — virada de mês (3 stories)</span>
+      <span class="format">Story Sequência IG (1080×1920 × 3)</span>
+      <span class="badge-pill" style="background:var(--chef-bg);color:var(--chef-dark)">Cardápio · Teaser</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Story 1 — Hook</div>
+      <div class="gancho">🥘 JULHO CHEGOU. Cardápio de inverno novo. Pratos quentes. Caldos. O que faz sentido quando a temperatura cai. 👉 Desliza para os spoilers ↓</div>
+      <div class="label">Story 2 — Spoiler: Cozido Paulistano</div>
+      <p>🥩 COZIDO PAULISTANO — Músculo de boi. Mandioquinha. Cenoura. Caldo reduzido de 4 horas. Entrega semanal ou evento especial. 📲 Disponível por encomenda.</p>
+      <div class="label">Story 3 — CTA Preview</div>
+      <p>🍲 O cardápio completo de julho sai amanhã. Se você quer garantir os pratos da semana antes de abrir para todo mundo: 📲 Me manda mensagem aqui ou link na bio. Lista de prioridade — primeiros a reservar.</p>
+      <div class="label">Horário estratégico</div>
+      <div class="edl">12h00 — pico de engajamento do intervalo de almoço. AI Prompts: Navy bg + Gold italic "JULHO CHEGOU." story 1 · close-up Cozido real story 2 · Navy bg CTA gold story 3</div>
+    </div>
+  </div>
 
-Slide 3: "A minha marmita não. É feita no dia, por mim, do jeito que você gosta."
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--chef-bg);color:var(--chef-dark)">QUA 02/07 · 12h00</span>
+      <span class="title">Reveal cardápio de inverno — 3 pratos novos de julho</span>
+      <span class="format">Reel 45s (1080×1920) · IG</span>
+      <span class="badge-pill" style="background:var(--chef-bg);color:var(--chef-dark)">Cardápio · Conversão</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Speech Word-for-Word</div>
+      <div class="speech">[00:00–00:04] "Julho chegou. E chegou com frio. Isso significa uma coisa: cardápio de inverno."
+[00:05–00:12] "Semana que vem, o AleChef está servindo três pratos quentes novos. Vou te mostrar o que você pode pedir."
+[00:13–00:20] "Primeiro: Cozido Paulistano. Músculo de boi, mandioquinha, cenoura caramelizada, caldo reduzido de quatro horas. Não tem como comprar isso no supermercado."
+[00:21–00:28] "Segundo: Frango ao Creme de Cogumelos com Risoto de Parmesão. Cremoso, quente, sem lactose se você precisar. Porque o chef lembra das suas restrições."
+[00:29–00:36] "Terceiro: Sopa Creme de Mandioquinha com Crocante de Bacon. Para os dias que você chega em casa e não quer cozinhar nada — mas quer sentir que alguém cuidou de você."
+[00:37–00:41] "Tudo isso disponível para entrega semanal, ou encomenda avulsa para eventos."
+[00:42–00:45] "Me chama no WhatsApp ou pelo link na bio. Cardápio completo de julho no perfil essa semana."</div>
+      <div class="label">Caption IG</div>
+      <div class="legenda">🥘 Cardápio de inverno do AleChef. Três pratos novos para julho. Feitos do zero, toda semana. Cozido Paulistano · Frango ao Creme de Cogumelos · Sopa Creme de Mandioquinha. Entrega semanal ou encomenda avulsa. 📲 Link na bio ou WhatsApp. #alechefemcasa #cardapiodesemana #personalchef #comidareal #cozidopaulistano</div>
+      <div class="label">Notas de Gravação + Thumbnail</div>
+      <div class="edl">Close de cada prato (overhead ou lateral) · música de ambiente suave · legenda automática ativada · Thumbnail: close do Cozido em fundo Navy com "CARDÁPIO DE INVERNO 🥘" overlay em Gold</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Link na bio ou WhatsApp · #alechefemcasa #cardapiodesemana #saopaulofoodies</div>
+    </div>
+  </div>
 
-Slide 4 — Comparativo: Industrial: congelada em massa, chef que você nunca viu, cardápio padrão para todo mundo. | AleChef: feita no dia, chef Alexandre, cardápio adaptado a você.
+  <div class="content-card" style="border-left:3px solid #D8B4FE;">
+    <div class="content-header">
+      <span class="day" style="background:#F3E8FF;color:#6B21A8">QUI 03/07 · 08h00 🤝 COLLAB</span>
+      <span class="title">Real food para quem pedala — AleChef × BPMF</span>
+      <span class="format">Post Feed IG + LinkedIn (1080×1080 / 1200×1200)</span>
+      <span class="badge-pill" style="background:#F3E8FF;color:#6B21A8">Collab · IG + LinkedIn</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG</div>
+      <div class="legenda">Você pedala. O @bpmfoficial cuida da jornada. O AleChef cuida do que você come na chegada. Para o ciclista que sabe que performance começa na cozinha — temos uma collab real sendo construída aqui. Real food. Ingrediente de qualidade. Prep que respeita quem treina. Sem ultraprocessado. Sem cardápio genérico. O chef que adapta o prato ao esforço do seu dia. 📲 Me chama no WhatsApp ou link na bio. #alechefemcasa #bpmf #personalchef #comidareal #ciclismo #realfood</div>
+      <div class="label">⚡ Coordenação</div>
+      <div class="edl">Publicar exatamente 08h00 — coordenado com BPMF no mesmo horário. Marcar @bpmfoficial no post IG. LinkedIn: tom executivo, sem emoji.</div>
+      <div class="label">AI Prompt IG (1080×1080)</div>
+      <div class="edl">Navy #22324F bg · badge Gold "COLLAB" top-left · prato de recovery meal real (frango/peixe grelhado, vegetais, proteína) · luz natural lateral · overlay "Real food para quem pedala" Off-White serif · "AleChef em Casa × BPMF" Gold bottom</div>
+    </div>
+  </div>
 
-Slide 5 — CTA: "Se pra você marmita boa também precisa ter nome de quem fez, me chama."<button class="copy-btn" onclick="cp('c1')">Copiar</button></div>
-<div class="sec">Caption (IG)</div>
-<div class="copy-block" id="c1c">Marmita gourmet já virou prateleira de supermercado.
-Ultracongelada. Feita em escala. Em várias cidades ao mesmo tempo.
-
-A minha não.
-
-A minha é feita no dia, por mim, na minha cozinha — do jeito que você gosta, com o tempero que você aguenta e sem o que você não come.
-
-Não é modismo, é convicção: eu recuso receita que eu não serviria pra mim.
-
-Se pra você marmita boa também precisa ter nome de quem fez, me chama.
-
-📲 Link na bio ou WhatsApp no perfil.
-
-#alechefemcasa #personalchef #comidacaseira #marmitas #cozinhaartesanal #comidareal #saopaulofoodies<button class="copy-btn" onclick="cp('c1c')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Slide 1 (1080&#215;1350)</div>
-<div class="prompt-block" id="c1p">1. Formato: Carrossel Instagram, slide 1 de 5, 1080x1350 px (4:5), feed post.
-2. Brand style inspired by Ottolenghi, Eleven Madison Park, Le Creuset lifestyle campaigns, Jamie Oliver Premium, and Relais & Châteaux.
-3. Color palette: Navy #22324F as dominant background · Gold #C9A77A for accent lines and small details · Off-White #FAF7F2 for main text. Typography: Cormorant Garamond serif for the headline, Montserrat Bold for supporting text.
-4. Visual style: warm golden hour lighting, intimate kitchen atmosphere, artisan food photography, generous negative space around the subject. No stock photo appearance. No fast food feel. No harsh lighting. No clinical food photography. No industrial kitchen background.
-5. Brief: Close-up of a supermarket freezer shelf lined with premium-looking frozen meal packaging, shot with shallow depth of field to feel slightly cold and impersonal (still elegant, not ugly). Overlay text in Off-White Cormorant Garamond, centered: "Marmita gourmet já virou prateleira de supermercado." Small Gold divider line beneath the text.<button class="prompt-btn" onclick="cp('c1p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card chef-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--chef-bg);color:var(--chef-dark)">Ter 07/07 &#183; 12h00</span>
-<span class="post-format">IG + TikTok &#183; Reel 40s &#183; 1080&#215;1920</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Bastidor &#8212; a rea&#231;&#227;o de quem recebe o jantar do chef em casa</div>
-<div class="sec">Speech Word-for-Word + Timecodes</div>
-<div class="copy-block" id="c2s">[00:00–00:05] "Isso aqui não é vídeo de receita. É o que acontece de verdade quando eu chego na casa de um cliente."
-
-[00:06–00:13] "Chego, monto a cozinha, começo o preparo. O cliente vê tudo — não tem cortina, não tem segredo."
-
-[00:14–00:22] "O prato fica pronto na hora. Sem congelar, sem esquentar de novo, sem esperar entrega."
-
-[00:23–00:31] "E aí vem a parte que eu mais gosto: a reação de quem prova. Isso, pra mim, vale mais que qualquer print de cardápio."
-
-[00:32–00:37] "Não é entrega. É experiência. É o jantar que vira história pra contar depois."
-
-[00:38–00:40] "Quer viver isso na sua casa? Me chama no WhatsApp."
-
-Notas: jaqueta chef navy/avental com selo dourado, Alexandre sempre identificável · cozinha real do cliente · cortes rápidos até 00:22, desacelerar na reação · captar som ambiente real.<button class="copy-btn" onclick="cp('c2s')">Copiar</button></div>
-<div class="sec">Caption (IG)</div>
-<div class="copy-block" id="c2c">Isso aqui não é receita.
-É bastidor real de um jantar de personal chef.
-
-Chego, monto a cozinha na casa do cliente, cozinho na hora — sem congelar, sem esconder nada.
-
-A parte que eu mais gosto? A reação de quem prova.
-Isso não cabe em print de cardápio.
-
-Se você quer essa experiência na sua casa, me chama.
-
-📲 WhatsApp no perfil ou link na bio.
-
-#alechefemcasa #personalchef #bastidor #chefparticular #experienciagastronomica #saopaulofoodies #comidareal<button class="copy-btn" onclick="cp('c2c')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card chef-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--chef-bg);color:var(--chef-dark)">Qua 08/07 &#183; 08h00</span>
-<span class="post-format">IG &#183; Post Feed 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">O que voc&#234; n&#227;o corta mesmo no aperto</div>
-<div class="copy-block" id="c3">Em momento de aperto, todo mundo corta alguma coisa.
-
-Corta viagem. Corta assinatura. Corta jantar fora.
-
-Mas tem uma coisa que quem valoriza comida de verdade não corta: o momento da refeição bem feita, com calma, sem pressa, sem culpa.
-
-Não é sobre gastar mais. É sobre decidir onde o seu dinheiro compra qualidade de vida de verdade.
-
-Pra mim, é isso que o AleChef entrega: não uma marmita a mais na rotina, mas a certeza de que pelo menos uma parte do seu dia vai ser bem cuidada.
-
-O que você não corta, mesmo quando aperta o cinto?
-
-📲 Me conta nos comentários ou no WhatsApp.
-
-#alechefemcasa #personalchef #comidadeverdade #experienciagastronomica #saopaulofoodies #cozinhaartesanal<button class="copy-btn" onclick="cp('c3')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Post Feed IG (1080&#215;1080)</div>
-<div class="prompt-block" id="c3p">1. Formato: Post Feed Instagram, single image, 1080x1080 px (1:1).
-2. Brand style inspired by Ottolenghi, Eleven Madison Park, Le Creuset lifestyle campaigns, Jamie Oliver Premium, and Relais & Châteaux.
-3. Color palette: Navy #22324F background · Gold #C9A77A accent for the thin circular frame around the dish · Off-White #FAF7F2 for text. Typography: Cormorant Garamond serif for the main line, Montserrat Regular for the small supporting line.
-4. Visual style: warm golden hour lighting, intimate kitchen atmosphere, candlelight and natural window light, food as centerpiece with generous negative space. No stock photo appearance. No fast food feel. No harsh lighting. No clinical food photography. No industrial kitchen background.
-5. Brief: A single beautifully plated dish (a warm stew or braise) on a wooden table, shot with warm side light, steam gently rising, shallow depth of field. Overlay text in Off-White Cormorant Garamond, centered lower third: "O que você não corta, mesmo no aperto?" Small Gold circular frame accent around the plate. AleChef gold seal small, bottom-right.<button class="prompt-btn" onclick="cp('c3p')">Copiar</button></div>
-</div>
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--chef-bg);color:var(--chef-dark)">SEX 04/07 · 07h30</span>
+      <span class="title">Jantar executivo — fim de semestre corporativo</span>
+      <span class="format">Post Feed IG + LinkedIn (1080×1080 / 1200×1200)</span>
+      <span class="badge-pill" style="background:#DBEAFE;color:#1D4ED8">B2B · Eventos</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG + LinkedIn</div>
+      <div class="gancho">Fim de semestre chegou. E com ele: jantares de equipe, confraternizações de empresa, encontros de diretoria.</div>
+      <div class="legenda">O AleChef transforma qualquer sala de reuniões em uma experiência gastronômica. Sem restaurante. Sem barulho. Sem menu fixo que não agrada ninguém. Um chef particular que vai até o local, monta o mise en place, cozinha na hora e serve — com a atenção de quem cozinha para 6 pessoas, não para 60. É o tipo de jantar que as pessoas comentam na semana seguinte. A temporada de eventos corporativos de julho começa agora. Agenda está aberta — mas não por muito tempo. 📲 Me chama no WhatsApp ou link no perfil. #alechefemcasa #personalchef #jantarcorporativo #eventoscorporativos #chefparticular</div>
+      <div class="label">AI Prompt IG (1080×1080)</div>
+      <div class="edl">Overhead flat-lay mesa jantar para 6 · pratos empratados com cuidado · luz de vela/lateral quente · "Fim de semestre." Off-White serif top-left sutil · "Jantar executivo. AleChef em Casa." Gold italic bottom · @alechefemcasa branco · não ostentatório, íntimo · style Alex Atala</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ WhatsApp ou link no perfil · Eventos B2B julho · #jantarcorporativo #chefparticular #saopaulofoodies</div>
+    </div>
+  </div>
 </div>
 
-<div class="post-card chef-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--chef-bg);color:var(--chef-dark)">Qui 09/07 &#183; 18h30</span>
-<span class="post-format">IG + TikTok &#183; Reel 40s &#183; 1080&#215;1920</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">A conta que o delivery n&#227;o mostra</div>
-<div class="sec">Speech Word-for-Word + Timecodes</div>
-<div class="copy-block" id="c4s">[00:00–00:06] "Você já parou pra somar quanto gastou de delivery essa semana? Geralmente dá mais do que você imagina."
-
-[00:07–00:14] "R$ 180 em apps, entre taxa de entrega, embalagem e aquele lanche de desespero às 20h. Vamos fazer as contas de outro jeito."
-
-[00:15–00:24] "Com esse mesmo valor, dá pra montar cinco marmitas premium. Feitas no mesmo dia, com ingrediente de verdade, por um chef — não por um app."
-
-[00:25–00:33] "Não é sobre gastar menos. É sobre gastar o mesmo dinheiro em algo que realmente alimenta você — não só resolve a fome."
-
-[00:34–00:40] "Quer ver como fica sua semana com esse mesmo valor? Me chama no WhatsApp e eu monto seu cardápio."
-
-Notas: bancada com as 5 marmitas montadas · overlay gráfico "R$ 180" depois "5 marmitas" em dourado · thumbnail com texto "A CONTA QUE O DELIVERY NÃO MOSTRA".<button class="copy-btn" onclick="cp('c4s')">Copiar</button></div>
-<div class="sec">Caption (IG)</div>
-<div class="copy-block" id="c4c">Quanto você gastou de delivery essa semana?
-
-R$ 180 em apps — taxa, embalagem, lanche de desespero às 20h — rende cinco marmitas premium feitas no mesmo dia, por um chef.
-
-Não é sobre gastar menos. É sobre gastar melhor.
-
-Quer ver como fica sua semana com esse mesmo valor?
-
-📲 Me chama no WhatsApp.
-
-#alechefemcasa #personalchef #marmitas #comidareal #economiadomestica #saopaulofoodies #chefparticular<button class="copy-btn" onclick="cp('c4c')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card chef-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--chef-bg);color:var(--chef-dark)">Sex 10/07 &#183; 09h00</span>
-<span class="post-format">IG &#183; Carrossel 4 slides &#183; 1080&#215;1350</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Comida lenta em um mundo de delivery</div>
-<div class="sec">Copy por slide</div>
-<div class="copy-block" id="c5">Slide 1: "Vivemos no mundo do delivery em 15 minutos."
-
-Slide 2: "Mas a comida boa nunca teve pressa."
-
-Slide 3: "No AleChef, cada prato leva o tempo que precisa — nem mais, nem menos."
-
-Slide 4 — CTA: "Comida lenta, feita por gente de verdade. Isso é o AleChef."<button class="copy-btn" onclick="cp('c5')">Copiar</button></div>
-<div class="sec">Caption (IG)</div>
-<div class="copy-block" id="c5c">Vivemos no mundo do delivery em 15 minutos.
-
-Mas a comida boa nunca teve pressa.
-
-No AleChef, cada prato leva o tempo que precisa — nem mais, nem menos. Isso não é lentidão, é cuidado.
-
-Comida lenta, feita por gente de verdade. Isso é o AleChef.
-
-📲 Link na bio ou WhatsApp no perfil.
-
-#alechefemcasa #comidadeverdade #slowfood #personalchef #cozinhaartesanal #experienciagastronomica<button class="copy-btn" onclick="cp('c5c')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Slide 1 (1080&#215;1350)</div>
-<div class="prompt-block" id="c5p">1. Formato: Carrossel Instagram, slide 1 de 4, 1080x1350 px (4:5), feed post.
-2. Brand style inspired by Ottolenghi, Eleven Madison Park, Le Creuset lifestyle campaigns, Jamie Oliver Premium, and Relais & Châteaux.
-3. Color palette: Navy #22324F background · Gold #C9A77A accent · Off-White #FAF7F2 text. Typography: Montserrat Bold for the headline.
-4. Visual style: warm but slightly fast-paced visual energy (motion blur suggestion, soft), still elegant. No stock photo appearance. No fast food feel. No harsh lighting. No clinical food photography.
-5. Brief: Abstract warm-toned image suggesting speed and motion — soft light trails or blurred movement around a delivery bag silhouette, kept elegant and not literal/branded. Overlay text in Off-White Montserrat Bold, centered: "Vivemos no mundo do delivery em 15 minutos."<button class="prompt-btn" onclick="cp('c5p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card chef-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--chef-bg);color:var(--chef-dark)">Cont&#237;nuo &#183; Seg 06/07 08h00</span>
-<span class="post-format">WhatsApp Status &#183; 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Status Semanal &#8212; cardápio feito no dia</div>
-<div class="copy-block" id="cwp">Semana com cardápio novo no AleChef. Feito no dia, sem industrializado. Quer saber o que tem essa semana? Me chama.
-
-(115 caracteres · imagem: "ESSA SEMANA" (dourado) / "CARDÁPIO FEITO NO DIA" / "Sem industrializado. Sem pressa." / @alechefemcasa)
-Broadcast mensal: não aplicável esta semana — próximo em agosto/2026.<button class="copy-btn" onclick="cp('cwp')">Copiar</button></div>
-</div>
-</div>
-
-</div>
-
-<!-- BPMF -->
+<!-- ══════════════ BPMF ══════════════ -->
 <div id="page-bpmf" class="page">
+  <div class="section-title">🚴 BPMF — 5 Conteúdos · Semana S15 (ENCERRADA · arquivo) · 29/06–05/07/2026</div>
+  <div class="alert-warn">⚠️ S16 (06–12/07) ainda não produzida para BPMF — sem pasta/pacote encontrado.</div>
+  <div class="alert-info">
+    Tom: inspirador, aventureiro, comunidade acima de produto · Paleta: Preto Asfalto #050505 / Verde Neon #39FF14 / Branco · Fonte: Bold impacto · Jornada julho · 10 PNGs gerados ✅
+  </div>
 
-<div class="card" style="margin-bottom:16px"><div class="card-header"><span class="card-title">Contexto da semana</span></div>
-<div class="card-body">A Jornada Lagamar está em operação de 05 a 09/07/2026 — os primeiros dias da S16 (segunda a quinta) coincidem com a reta final da jornada. Grade montada para aproveitar esse conteúdo ao vivo, com transição para captação da próxima jornada a partir de sexta. Sem CRM estruturado — captação via DM/WhatsApp.</div>
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">SEG 29/06 · 08h00</span>
+      <span class="title">Antítese do Campeonato Gravel — pódio vs mesa de jantar</span>
+      <span class="format">Post Feed IG + TikTok (1080×1080)</span>
+      <span class="badge-pill" style="background:#050505;color:#39FF14">Posicionamento · Diferencial</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG + TikTok</div>
+      <div class="gancho">O Campeonato Brasileiro de Gravel acontece em julho. Cronômetro. Pódio. Ranking nacional. Respeito total — os atletas são impressionantes. O BPMF faz uma coisa completamente diferente:</div>
+      <div class="legenda">Você vai pedalando pelo mesmo tipo de estrada. Mesma pedra, mesma terra, mesmo vento. Mas sem o chip de cronometragem no guidão. Você vai porque o destino foi escolhido a dedo. Porque o grupo foi curado para que ninguém te deixe para trás. Porque no final tem uma mesa — de verdade — esperando por você. Não competimos com o campeonato. Competimos com o fim de semana perdido que você passa sem sair do sofá porque "não existe opção organizada para pedalar com quem não é elite". Existe. É o BPMF. 📌 Próxima jornada: julho. 📲 Link na bio ou manda mensagem. #bpmf #cicloturismo #gravel #pedalando #aventura #turismoativo</div>
+      <div class="label">AI Prompt (1080×1080)</div>
+      <div class="edl">Split frame: esquerda P&B corrida gravel competitiva (número de peito, postura tensa, pelotão) · linha divisória Neon Green vertical · direita colorida grupo relaxado em mesa ao ar livre pós-pedal (sorrisos, bebidas, celebração) · "BPMF · Cicloturismo Curado" branco bottom · o contraste É a mensagem · sem emoji</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Link na bio ou manda mensagem · Jornada julho · #bpmf #cicloturismo #gravel</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">TER 01/07 · 08h00</span>
+      <span class="title">5 tipos de ciclista que amam o BPMF — qualificação de persona</span>
+      <span class="format">Carrossel 5 slides IG (1080×1350)</span>
+      <span class="badge-pill" style="background:#050505;color:#39FF14">ICP · Persona</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Slides</div>
+      <div class="gancho">SLIDE 1: "5 TIPOS DE CICLISTA que encontram o que procuram no BPMF. (Se você é um deles, a próxima jornada é para você.)"</div>
+      <p>SLIDE 2: "O QUE PEDALA BEM MAS NÃO QUER COMPETIR" — condicionamento, gosta de estrada, sem cronômetro. O BPMF não tem chip de corrida — tem percurso desafiador e mesa no final.<br>
+      SLIDE 3: "O QUE QUER PEDALAR MAS NÃO SABE POR ONDE COMEÇAR" — rota segura, grupo confiável, sem planejar do zero. No BPMF a logística está pronta. Você só aparece.<br>
+      SLIDE 4: "O QUE VIAJA SÓ PARA EXPERIÊNCIAS ÚNICAS / O QUE QUER VOLTAR" — curadoria além do percurso. Quem participou uma vez entendeu: isso não é passeio, é história.<br>
+      SLIDE 5 (CTA): "TIPO 5: VOCÊ. Se você se viu em qualquer descrição — a jornada de julho do BPMF tem uma vaga esperando por você." + link na bio</p>
+      <div class="label">Caption IG</div>
+      <div class="legenda">5 tipos de ciclista que encontram o que procuram no BPMF. Você é um deles? A jornada de julho está formando o grupo. Vaga com o seu nome. 📲 Link na bio ou manda mensagem. #bpmf #cicloturismo #gravel #ciclismo #bike #aventura #grupodepedal</div>
+      <div class="label">AI Prompts (1080×1350)</div>
+      <div class="edl">Slide 1: Black #050505 bg · "5 TIPOS DE CICLISTA" Neon Green oversized bold · branco abaixo · máxima tipografia, zero foto · Slides 2-4: sistema visual idêntico, título Neon Green, copy branca, BPMF wordmark bottom · Slide 5 CTA: "TIPO 5: VOCÊ." Neon Green hero, "Jornada de julho / Uma vaga esperando." branco bold</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">QUA 02/07 · 08h00</span>
+      <span class="title">Gravel sem competição — estrada de terra + mesa de chegada</span>
+      <span class="format">Reel 30s (1080×1920) · IG + TikTok</span>
+      <span class="badge-pill" style="background:#050505;color:#39FF14">Filosofia · Conversão</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Speech Word-for-Word</div>
+      <div class="speech">[00:00–00:04] "E se você pedalar no gravel sem ninguém te cronometrando?"
+[00:05–00:11] "Sem chip. Sem ranking. Sem a pressão de ter que provar alguma coisa. Só você, o grupo, e uma estrada de terra que vai te levar para algum lugar que vale a chegada."
+[00:12–00:19] "O BPMF organiza jornadas curadas de cicloturismo. Percursos com começo, meio e fim pensados. Grupo com perfil compatível — ninguém te abandona na estrada. E no final: uma mesa, uma refeição, um momento que vira história."
+[00:20–00:26] "Isso é diferente de competição. Isso é diferente de um passeio de fim de semana qualquer. É uma experiência que você compra porque você merece mais do que mais um fim de semana igual."
+[00:27–00:30] "Próxima jornada em julho. Link na bio. Manda mensagem."</div>
+      <div class="label">Caption IG + TikTok</div>
+      <div class="legenda">Gravel sem chip. Sem ranking. Sem pressão. Só percurso curado, grupo compatível e uma mesa esperando na chegada. É o BPMF. Próxima jornada: julho. 📲 Link na bio. #bpmf #cicloturismo #gravel #bike #ciclismo #aventura #pedalando</div>
+      <div class="label">Thumbnail + Notas de gravação</div>
+      <div class="edl">Imagens: estrada de terra perspectiva, grupo pedalando relaxado, panorama de paisagem, corte para mesa de chegada · música ambiental suave aventura · legenda automática ativada · Thumbnail: "GRAVEL / SEM COMPETIÇÃO." Neon Green + branco sobre landscape cinematic</div>
+    </div>
+  </div>
+
+  <div class="content-card" style="border-left:3px solid #D8B4FE;">
+    <div class="content-header">
+      <span class="day" style="background:#F3E8FF;color:#6B21A8">QUI 03/07 · 08h00 🤝 COLLAB</span>
+      <span class="title">A jornada cuida do percurso. O AleChef cuida da chegada.</span>
+      <span class="format">Post Feed IG (1080×1080)</span>
+      <span class="badge-pill" style="background:#F3E8FF;color:#6B21A8">Collab AleChef · IG</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG</div>
+      <div class="legenda">A jornada de julho termina com as pernas pesadas. O corpo vai pedir comida de verdade. O @alechefemcasa vai estar lá. Real food. Ingredientes de qualidade. Prep que respeita quem treina. Sem marmita de supermercado. Sem cardápio genérico. Um chef que adapta o prato ao esforço do seu dia — e que sabe que você detesta coentro. BPMF cuida da jornada. AleChef cuida do que você come na chegada. Detalhes sobre a collab nos próximos dias. 📲 Link na bio. #bpmf #alechefemcasa #cicloturismo #ciclismo #realfood #bike #nutricaoesportiva</div>
+      <div class="label">⚡ Coordenação</div>
+      <div class="edl">Publicar 08h00 — coordenado com AleChef exato mesmo horário. Marcar @alechefemcasa no post IG.</div>
+      <div class="label">AI Prompt (1080×1080)</div>
+      <div class="edl">Split horizontal ou diagonal · top: ciclista em estrada gravel, pernas visíveis, motion blur chegada · bottom: prato de recovery real, mãos do chef visíveis, cores quentes · linha divisória Neon Green · "BPMF × AleChef em Casa" branco small top · "A jornada cuida do percurso. / O chef cuida da chegada." serif branco · sem emoji</div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="content-header">
+      <span class="day" style="background:var(--bpmf-bg);color:var(--bpmf-dark)">SEX 04/07 · 08h00</span>
+      <span class="title">"Não é o destino. É o que vira história." — curadoria humana</span>
+      <span class="format">Post Feed IG (1080×1080)</span>
+      <span class="badge-pill" style="background:#050505;color:#39FF14">Filosofia · Marca</span>
+    </div>
+    <div class="content-body">
+      <div class="label">Caption IG</div>
+      <div class="gancho">Não é o destino que vira história. É quem decidiu o que você ia viver nele.</div>
+      <div class="legenda">Qualquer um pode marcar um ponto no mapa e chamar de passeio de bike. O BPMF faz diferente: escolhemos o percurso pelo que acontece no caminho — a subida que te surpreende, a descida que te liberta, o ponto de parada que ninguém vai sozinho. Escolhemos o grupo pelo que ele adiciona à sua jornada — não pela velocidade média. Escolhemos o final porque chegada sem celebração é só cansaço. Isso é curadoria humana. Não é um app que te manda uma rota. É uma experiência com começo, meio e fim — desenhada para virar uma história que você conta na segunda-feira. Próxima jornada: julho. 📲 Link na bio ou manda mensagem. #bpmf #cicloturismo #ciclismo #gravel #bike #curadoria #aventura #experiencia</div>
+      <div class="label">AI Prompt (1080×1080)</div>
+      <div class="edl">Hora dourada · ciclista único em mirante gravel, capacete semi-levantado, olhando paisagem vasta (montanhas/vale) · silhueta ou 3/4 · sensação de reflexão, significado, chegada · overlay: "Não é o destino que vira história." serif branco bottom-third · "É o que você viveu nele. — BPMF" menor branco · ponto neon green bottom-left · cinematic Rapha/Komoot · sem racing posture</div>
+      <div class="label">CTA</div>
+      <div class="cta">→ Link na bio ou manda mensagem · Jornada julho · #bpmf #cicloturismo #experiencia</div>
+    </div>
+  </div>
 </div>
 
-<div class="post-card bpmf-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--bpmf)">Seg 06/07 &#183; 08h00</span>
-<span class="post-format" style="color:#888">IG + TikTok &#183; Reel 45s &#183; 1080&#215;1920</span>
-<span class="lbl lbl-b">AO VIVO</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Jornada Lagamar &#8212; cobertura ao vivo, Dia 2</div>
-<div class="sec" style="color:#888">Speech Word-for-Word + Timecodes</div>
-<div class="copy-block" id="b1s">[00:00–00:05] "Isso não é um vídeo pronto. Isso está acontecendo agora."
-
-[00:06–00:15] "Estamos no segundo dia da Jornada Lagamar. Grupo fechado, rota validada na visita técnica, carro de apoio, dois guias, rádio ligado. Ninguém aqui está sozinho na estrada."
-
-[00:16–00:30] "Já rolou trilha de terra com neblina de manhã. Já rolou parada pro Toque do Chef — alguém comeu geleia de pimenta artesanal sentado numa pedra no meio do mato. Já rolou risada de gente que se conheceu ontem e hoje já é dupla de subida."
-
-[00:31–00:38] "Isso não é passeio de bike. É uma jornada com começo, meio e fim — e a gente está bem no meio dela agora."
-
-[00:39–00:45] "Segue nos Stories pra ver o resto ao vivo. E se você quer estar na próxima, manda mensagem. A lista já está aberta."
-
-Notas: jersey BPMF preto/verde neon · ambiente real da jornada (trilha, Toque do Chef) · luz natural do dia · cortes dinâmicos handheld, sem talking head parado · gravar 4-6 clipes soltos de apoio para Stories.<button class="copy-btn" onclick="cp('b1s')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (IG + TikTok)</div>
-<div class="copy-block" id="b1c">Isso não é conteúdo gravado. É agora.
-
-Segundo dia da Jornada Lagamar. Grupo fechado, rota validada, dois guias e carro de apoio o tempo todo.
-
-Já teve neblina na trilha, Toque do Chef numa pedra no meio do mato e gente que se conheceu ontem e hoje já sobe junto.
-
-Isso é jornada. Não é passeio.
-
-📌 Segue nos Stories pra acompanhar o resto ao vivo.
-📲 Quer estar na próxima? Manda mensagem — a lista já abriu.
-
-#bpmf #cicloturismo #jornadalagamar #ciclismo #bike #aventura #comunidade<button class="copy-btn" onclick="cp('b1c')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; Thumbnail Reel (1080&#215;1920)</div>
-<div class="prompt-block" id="b1p">1. Format: vertical Reel thumbnail, 1080x1920 (9:16), Instagram/TikTok.
-2. Brand references: style inspired by Rapha, Canyon, Specialized, Pas Normal Studios and premium cycling tourism brands — no other brand references.
-3. Color palette: Asphalt Black #050505 as base, Neon Green #39FF14 as accent only (never dominant), White #FFFFFF for text. Typography: heavy bold impact sans-serif for overlay text.
-4. Visual style: cinematic outdoor lighting, golden or misty morning light, dramatic natural directional light, epic landscape with cyclists in real action. No stock photo appearance. No amateur cycling aesthetic. No flat or harsh lighting. No tourist/hobbyist feel.
-5. Slide brief: cinematic wide shot of a foggy dirt trail at sunrise, small group of cyclists mid-ride, support vehicle faintly visible in the background, guide with radio in foreground. Overlay text exact PT-BR: top 'JORNADA LAGAMAR' in white bold; below 'AO VIVO — DIA 2' in Neon Green #39FF14 bold. Bottom small: 'BPMF · Cicloturismo Curado' in white.<button class="prompt-btn" onclick="cp('b1p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card bpmf-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--bpmf)">Ter 07/07 &#183; 08h00</span>
-<span class="post-format" style="color:#888">IG &#183; Carrossel 5 slides &#183; 1080&#215;1350</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">BPMF x evento de massa &#8212; por que jornada curada vale mais</div>
-<div class="sec" style="color:#888">Copy por slide</div>
-<div class="copy-block" id="b2">Slide 1 — Hook: JULHO TEM 3 EVENTOS DE BIKE. Só um deles não é feito para multidão.
-
-Slide 2 — GRANDE. GRATUITO. PARA TODO MUNDO.: Festival de cicloturismo, passeio patrocinado, inscrição aberta pra milhares de pessoas. É bonito, é importante, é acessível.
-
-Slide 3 — PEQUENO. CURADO. PARA VOCÊ.: Visita técnica na quarta antes do sábado. Dois guias, carro de apoio, Toque do Chef, Grand Finale. Grupo máximo de 15 pessoas — de propósito.
-
-Slide 4 — A DIFERENÇA NÃO É TAMANHO. É ATENÇÃO.: Em evento de massa, você é um número entre milhares. No BPMF, o percurso foi validado pensando em quem vai estar nele — inclusive você.
-
-Slide 5 — CTA: PRÓXIMA JORNADA: VOCÊ DECIDE SE QUER SER NÚMERO OU NOME. Manda mensagem ou link na bio.<button class="copy-btn" onclick="cp('b2')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (IG)</div>
-<div class="copy-block" id="b2c">Julho tem 3 eventos de bike disputando sua atenção.
-
-Festival grande. Passeio gratuito patrocinado. E o BPMF.
-
-Os dois primeiros são ótimos pra quem quer volume, gratuidade e experiência coletiva de massa. Sem discussão.
-
-O BPMF é outra categoria: grupo de até 15 pessoas, visita técnica na quarta antes do sábado, dois guias, carro de apoio, Toque do Chef e Grand Finale.
-
-A diferença não é tamanho. É atenção.
-
-Você decide o que quer ser: número ou nome.
-
-📲 Manda mensagem ou link na bio.
-
-#bpmf #cicloturismo #ciclismo #bike #curadoria #experiencia #gravel #aventura<button class="copy-btn" onclick="cp('b2c')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; Slide 1 (1080&#215;1350)</div>
-<div class="prompt-block" id="b2p">1. Format: carrossel slide, 1080x1350 (4:5), Instagram.
-2. Brand references: style inspired by Rapha, Canyon, Specialized, Pas Normal Studios and premium cycling tourism brands.
-3. Color palette: Asphalt Black #050505 background, Neon Green #39FF14 for headline accent, White for subheadline. Typography: heavy bold condensed impact font.
-4. Visual style: minimal, no photography on slide 1, high contrast, editorial. No stock photo appearance. No amateur cycling aesthetic. No flat lighting.
-5. Slide brief: pure typographic slide, black background. Exact PT-BR text: 'JULHO TEM 3 EVENTOS DE BIKE.' in Neon Green #39FF14, oversized bold, top half. Below in white: 'Só um deles não é feito para multidão.' Bottom-right: small neon dot accent. Bottom-left: 'bpmf' small white wordmark.<button class="prompt-btn" onclick="cp('b2p')">Copiar</button></div>
-</div>
+<!-- ══════════════ PROSPECÇÃO ══════════════ -->
+<div id="page-prospeccao" class="page">
+  <div class="section-title">📨 Prospecção S15 (ENCERRADA · arquivo) — 3 Empresas</div>
+  <div class="alert-warn">⚠️ AG-13 Vibe Prospecting roda segunda 29/06 manhã (segmento ADFly da semana). AG-03 abordagem LinkedIn a partir da lista gerada. Créditos: 0/70 usados.</div>
+  <div class="grid3">
+    <div class="content-card" style="border-top:3px solid var(--adfly)">
+      <div class="content-header" style="border:none;padding-bottom:0"><span class="title" style="color:var(--adfly)">🛩 ADFly — B2B + Mentoria</span></div>
+      <div class="content-body">
+        <div class="label">Sequência WhatsApp B2B · Foco regulatório</div>
+        <div style="font-size:12px;line-height:1.7"><strong>Fontes:</strong> Lista AG-13 · Administradoras SP · LinkedIn · Eng./Arquitetos<br><strong>Msg 1:</strong> "Olá [nome], a ADFly realiza inspeções técnicas de fachada com drone certificado ANAC. Com a ICA 100-40 em vigor desde 01/07, seu fornecedor atual tem SARPAS, SISANT e RETA? Posso te passar uma proposta?"<br><strong>Msg 2 (+2d):</strong> Checklist do contratante (post LinkedIn SEG) como contexto<br><strong>Msg 3 (+3d):</strong> CTA: "15 minutos de conversa?"</div>
+        <div class="label">Mentoria ADFly Lab — Turma Julho</div>
+        <div class="cta">Encaminhar Reel TER 01/07 para leads de pilotos que interagiram com conteúdos anteriores · CTA: "Comenta LAB" · Meta: 3–5 leads qualificados turma julho</div>
+        <div class="label">Nova vertical: Seguradoras + Administradoras</div>
+        <div class="cta">Case SEX 04/07 (seguradora 48h) → encaminhar diretamente para leads de seguradoras e administradoras de patrimônio · "Viu nosso case? Posso te mostrar como funciona."</div>
+      </div>
+    </div>
+    <div class="content-card" style="border-top:3px solid var(--chef)">
+      <div class="content-header" style="border:none;padding-bottom:0"><span class="title" style="color:var(--chef-dark)">🍳 AleChef — B2C + Eventos B2B</span></div>
+      <div class="content-body">
+        <div class="label">Broadcast Mês 2 — Cardápio Inverno</div>
+        <div style="font-size:12px;line-height:1.7"><strong>Enviar segunda 29/06:</strong> Broadcast para lista de contatos sobre cardápio de inverno (Cozido Paulistano, Frango, Sopa) + prioridade de reserva para quem está na lista</div>
+        <div class="label">Eventos B2B — Jantar Corporativo</div>
+        <div class="cta">RH de empresas médias SP · Imobiliárias (closing gift) · 5 contatos/semana · Assunto: "Jantar corporativo de fim de semestre com chef particular?" · Usar post SEX 04/07 como contexto</div>
+        <div class="label">Collab BPMF → leads cruzados</div>
+        <div class="cta">Ciclistas que interagirem com o post de collab QUI 03/07 → DM personalizado: "Se você pedala sério, monto cardápio de performance pra você. Me chama."</div>
+      </div>
+    </div>
+    <div class="content-card" style="border-top:3px solid var(--bpmf)">
+      <div class="content-header" style="border:none;padding-bottom:0"><span class="title" style="color:var(--bpmf-dark)">🚴 BPMF — Comunidade + Jornada Julho</span></div>
+      <div class="content-body">
+        <div class="label">Broadcast — Jornada Julho</div>
+        <div style="font-size:12px;line-height:1.7"><strong>Enviar segunda 29/06:</strong> Lista de inscritos e interessados · Conteúdo: gravel sem cronômetro, collab AleChef, vagas disponíveis · CTA: responde aqui para garantir vaga</div>
+        <div class="label">Comunidades + Strava</div>
+        <div class="cta">Grupos WA/FB de ciclismo SP · Strava clubs · 5 contatos/dia · Mensagem com link do Reel QUA 02/07 · Foco: ciclistas que NÃO querem competir</div>
+        <div class="label">Follow-up leads antigos</div>
+        <div class="cta">Quem pediu info de jornadas anteriores mas não converteu → retomar com carrossel ICP TER 01/07 e link para Reel QUA 02/07 · "Você se viu nessa lista?"</div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="post-card bpmf-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--bpmf)">Qua 08/07 &#183; 08h00</span>
-<span class="post-format" style="color:#888">IG &#183; Post Feed 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">SP oficializou o cicloturismo &#8212; a gente j&#225; pedalava l&#225;, com o chef junto</div>
-<div class="copy-block" id="b3">O Estado de São Paulo acabou de oficializar 4 rotas de cicloturismo como destino turístico: Caminho da Fé, Rota da Luz, Rota Interparques e Ciclorrota da Mata Atlântica.
-
-Ótima notícia. Sério.
-
-Mas rota oficial não vira jornada por decreto.
-
-A gente já pedala em estradas como essas há meses — só que com visita técnica na quarta, dois guias, carro de apoio e um chef esperando no meio do caminho com o Toque do Chef.
-
-O governo valida que o cicloturismo é produto real de São Paulo.
-
-A curadoria — essa a gente já trazia antes de virar notícia.
-
-Próxima jornada: em breve. Lista de espera aberta.
-
-📲 Manda mensagem ou link na bio.
-
-#bpmf #cicloturismo #saopaulo #ciclismo #bike #curadoria #aventura<button class="copy-btn" onclick="cp('b3')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; Post Feed IG (1080&#215;1080)</div>
-<div class="prompt-block" id="b3p">1. Format: Instagram feed post, square 1080x1080 (1:1).
-2. Brand references: style inspired by Rapha, Canyon, Specialized, Pas Normal Studios and premium cycling tourism brands.
-3. Color palette: Asphalt Black #050505 background, Neon Green #39FF14 accent line/icon, White text. Typography: heavy bold impact sans-serif for headline, clean sans-serif for supporting text.
-4. Visual style: cinematic outdoor lighting, dramatic natural light over a real São Paulo state landscape road (hills, dirt/paved mixed route, Mata Atlântica-style green backdrop). No stock photo appearance. No amateur cycling aesthetic. No flat or harsh lighting. No generic tourism-board imagery.
-5. Slide brief: wide cinematic shot of a lone cyclist on an official-looking rural route through green hills, morning light, small route marker sign subtly visible in the distance (generic, no real government logo). Overlay exact PT-BR text bottom-third: 'O ESTADO OFICIALIZOU A ROTA.' in white bold. Below in Neon Green #39FF14 smaller: 'A GENTE JÁ TRAZIA O CHEF JUNTO.' Small bottom: 'BPMF · Cicloturismo Curado.'<button class="prompt-btn" onclick="cp('b3p')">Copiar</button></div>
-</div>
+<!-- ══════════════ ARQUIVOS ══════════════ -->
+<div id="page-arquivos" class="page">
+  <div class="section-title" style="margin-top:0">📂 Todos os Arquivos da Semana S15 (ENCERRADA · arquivo — S16 ainda sem arquivos)</div>
+  <p style="font-size:13px;color:var(--gray);margin-bottom:16px;">Clique <strong>Copiar</strong> → pressione <strong>Win + R</strong> → cole → Enter. O arquivo ou pasta abre direto no Explorer.</p>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+    <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">Pacote ADFly S15 · FULL</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\ADFly\Semana 29-06-05-07-2026\PACOTE-FULL-S15-ADFly.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-ADFly.md',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">Pacote AleChef S15 · FULL</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\AleChef\Semana 29-06-05-07-2026\PACOTE-FULL-S15-AleChef.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-AleChef.md',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">Pacote BPMF S15 · FULL</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\BPMF\Semana 29-06-05-07-2026\PACOTE-FULL-S15-BPMF.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026\\PACOTE-FULL-S15-BPMF.md',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">🐍</span><div class="path-info"><div class="path-name">Script Python ADFly S15 (14 PNGs)</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\ADFly\Semana 29-06-05-07-2026\scripts\gerar-imagens-S15-ADFLY.py</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026\\scripts\\gerar-imagens-S15-ADFLY.py',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">🐍</span><div class="path-info"><div class="path-name">Script Python AleChef S15 (6 PNGs)</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\AleChef\Semana 29-06-05-07-2026\scripts\gerar-imagens-S15-ALECH.py</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026\\scripts\\gerar-imagens-S15-ALECH.py',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">🐍</span><div class="path-info"><div class="path-name">Script Python BPMF S15 (10 PNGs)</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\BPMF\Semana 29-06-05-07-2026\scripts\gerar-imagens-S15-BPMF.py</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026\\scripts\\gerar-imagens-S15-BPMF.py',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">🖼️</span><div class="path-info"><div class="path-name">Imagens ADFly S15</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\ADFly\Semana 29-06-05-07-2026\imagens</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026\\imagens',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">🖼️</span><div class="path-info"><div class="path-name">Imagens AleChef S15</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\AleChef\Semana 29-06-05-07-2026\imagens</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\AleChef\\Semana 29-06-05-07-2026\\imagens',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">🖼️</span><div class="path-info"><div class="path-name">Imagens BPMF S15</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\BPMF\Semana 29-06-05-07-2026\imagens</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\BPMF\\Semana 29-06-05-07-2026\\imagens',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">Radar Consolidado 25/06 — mais recente</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Base Estratégica Projeto MKT\_RADAR-SEMANAL\RADAR-CONSOLIDADO-25-06-2026.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Base Estratégica Projeto MKT\\_RADAR-SEMANAL\\RADAR-CONSOLIDADO-25-06-2026.md',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">QA Consolidado S15 — 5 empresas · todos 🟢</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\RELATORIO-AG-QA-S15-CONSOLIDADO.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\RELATORIO-AG-QA-S15-CONSOLIDADO.md',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">📁</span><div class="path-info"><div class="path-name">Pasta ADFly Semana S15</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Agência MKT — Clientes\ADFly\Semana 29-06-05-07-2026</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Agência MKT — Clientes\\ADFly\\Semana 29-06-05-07-2026',this)">Copiar</button></div>
+    <div class="path-row"><span class="path-icon">📁</span><div class="path-info"><div class="path-name">Base Estratégica Projeto MKT</div><div class="path-txt">C:\Users\aleta\OneDrive\Documentos\Claude\Projects\Projeto Área de MKT\Base Estratégica Projeto MKT</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Base Estratégica Projeto MKT',this)">Copiar</button></div>
+  </div>
 </div>
 
-<div class="post-card bpmf-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--bpmf)">Qui 09/07 &#183; 08h00</span>
-<span class="post-format" style="color:#888">IG + TikTok &#183; Reel 60s &#183; 1080&#215;1920</span>
-<span class="lbl lbl-b">GRAND FINALE</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Grand Finale Jornada Lagamar &#8212; recap emocional</div>
-<div class="sec" style="color:#888">Speech Word-for-Word + Timecodes</div>
-<div class="copy-block" id="b4s">[00:00–00:06] "Cinco dias. Hoje a Jornada Lagamar chega no Grand Finale."
-
-[00:07–00:18] "Começou numa quarta, com uma visita técnica que ninguém pediu pra gente fazer. Passou por trilha de terra, neblina de manhã, Toque do Chef no meio do mato. Dois guias, carro de apoio, rádio ligado o tempo todo."
-
-[00:19–00:40] "E termina aqui. Mesa posta, comida de verdade, todo mundo sentado junto — não porque o pedal acabou, mas porque a jornada precisa de um final à altura do que ela foi. Brinde pra quem pedalou. Brinde pra quem apareceu sozinho e sai daqui com amigo novo. Brinde pro grupo que virou comunidade em cinco dias."
-
-[00:41–00:52] "Isso não estava no mapa. Isso é o que a gente constrói junto quando o pedal é só o começo."
-
-[00:53–01:00] "Se essa foi a jornada que você perdeu, a próxima já está com a lista de espera aberta. Manda mensagem."
-
-Notas: transição de jersey técnico para roupa casual pós-pedal · cervejaria artesanal/restaurante real do Grand Finale · luz quente de fim de tarde · gravar brinde real e depoimento espontâneo.<button class="copy-btn" onclick="cp('b4s')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (IG + TikTok)</div>
-<div class="copy-block" id="b4c">Cinco dias. Hoje o Grand Finale da Jornada Lagamar.
-
-Começou com uma visita técnica que ninguém pediu pra gente fazer. Passou por trilha, neblina, Toque do Chef no meio do mato.
-
-E termina numa mesa posta, com brinde pra quem pedalou e pra quem saiu de lá com amigo novo.
-
-Isso não estava no mapa. É o que a gente constrói junto quando o pedal é só o começo.
-
-Perdeu essa? A próxima já tem lista de espera aberta.
-
-📲 Manda mensagem.
-
-#bpmf #cicloturismo #jornadalagamar #grandfinale #ciclismo #bike #comunidade<button class="copy-btn" onclick="cp('b4c')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; Thumbnail Reel (1080&#215;1920)</div>
-<div class="prompt-block" id="b4p">1. Format: vertical Reel thumbnail, 1080x1920 (9:16), Instagram/TikTok.
-2. Brand references: style inspired by Rapha, Canyon, Specialized, Pas Normal Studios and premium cycling tourism brands.
-3. Color palette: warm ambient tones for the photo, with Asphalt Black #050505 overlay bar and Neon Green #39FF14 text accent, White for supporting text.
-4. Visual style: cinematic warm interior/patio lighting, editorial restaurant photography feel, genuine candid celebration moment. No stock photo appearance. No amateur cycling aesthetic. No flat lighting.
-5. Slide brief: warm evening shot of a small group seated around a rustic wooden table at a craft brewery/premium restaurant, glasses raised mid-toast, cycling gear visible nearby (helmets on the table edge, jerseys). Overlay exact PT-BR text top: 'GRAND FINALE' in white bold. Below in Neon Green #39FF14: 'JORNADA LAGAMAR.' Bottom small: 'BPMF · Cicloturismo Curado.'<button class="prompt-btn" onclick="cp('b4p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card bpmf-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--bpmf)">Sex 10/07 &#183; 08h00</span>
-<span class="post-format" style="color:#888">IG &#183; Carrossel 5 slides &#183; 1080&#215;1350</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">O que vem depois &#8212; pr&#243;xima jornada BPMF</div>
-<div class="sec" style="color:#888">Copy por slide</div>
-<div class="copy-block" id="b5">Slide 1 — Hook: A JORNADA LAGAMAR ACABOU. A próxima já está sendo desenhada.
-
-Slide 2 — O QUE ACONTECEU NESSES 5 DIAS: Visita técnica. Trilha real, com neblina e desafio de verdade. Toque do Chef no meio do mato. Grand Finale com mesa posta e brinde de comunidade.
-
-Slide 3 — A CURADORIA COMEÇA ANTES DE VOCÊ SABER: Enquanto o grupo da Lagamar ainda comemorava, a gente já estava olhando mapa pra próxima rota. Curadoria não é evento — é rotina.
-
-Slide 4 — MESMA ESTRUTURA. NOVO PERCURSO.: Visita técnica obrigatória. Dois guias + carro de apoio. Toque do Chef. Grand Finale. Grupo máximo de 15 pessoas.
-
-Slide 5 — CTA: LISTA DE ESPERA ABERTA AGORA. Manda mensagem ou link na bio antes que feche.<button class="copy-btn" onclick="cp('b5')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (IG)</div>
-<div class="copy-block" id="b5c">A Jornada Lagamar acabou. Cinco dias de visita técnica, trilha real, Toque do Chef e um Grand Finale com mesa posta pra comunidade inteira.
-
-Enquanto o grupo ainda comemorava, a gente já estava com o mapa da próxima na mesa. Curadoria não é evento — é rotina.
-
-Mesma estrutura. Novo percurso. Grupo máximo de 15 pessoas.
-
-📲 Lista de espera aberta agora — manda mensagem ou link na bio antes que feche.
-
-#bpmf #cicloturismo #ciclismo #bike #jornada #curadoria #comunidade #proximaviagem<button class="copy-btn" onclick="cp('b5c')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card bpmf-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--bpmf)">Cont&#237;nuo &#183; Qui 09/07 18h</span>
-<span class="post-format" style="color:#888">WhatsApp Status &#183; 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Status Semanal &#8212; Lagamar + pr&#243;xima jornada</div>
-<div class="copy-block" id="bwp">Jornada Lagamar terminando com Grand Finale. Já pensando na próxima. Lista de espera aberta — grupo de até 15. Manda mensagem.
-
-(126 caracteres · imagem: "LAGAMAR." (neon) / "GRAND FINALE HOJE" / "Próxima jornada · Lista de espera aberta" / @bpmfoficial)
-Broadcast mensal: não aplicável esta semana — próximo em agosto/2026.<button class="copy-btn" onclick="cp('bwp')">Copiar</button></div>
-</div>
-</div>
-
-</div>
-
-<!-- MARCELA -->
-<div id="page-marcela" class="page">
-
-<div class="post-card marcela-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--marcela-bg);color:var(--marcela)">Seg 06/07 &#183; 08h00</span>
-<span class="post-format">IG &#183; Carrossel 6 slides &#183; 1080&#215;1350</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">80,4%: voc&#234; voltou de Canc&#250;n &#8212; e voltou endividado sem perceber</div>
-<div class="sec">Copy por slide</div>
-<div class="copy-block" id="m1">Slide 1 — Hook: 80,4% DAS FAMÍLIAS BRASILEIRAS ESTÃO ENDIVIDADAS. O maior recorde desde 2010. (Isso inclui quem foi pra Cancún em julho.)
-
-Slide 2 — O QUE OS NÚMEROS DIZEM: Endividamento das famílias chega a 80,4% em março/2026 — recorde da série histórica PEIC/CNC, iniciada em 2010. A inadimplência voltou a subir, para 29,6%. Fonte: PEIC/CNC.
-
-Slide 3 — QUEM VOCÊ ACHA QUE ESTÁ NESSE NÚMERO?: A narrativa pública associa dívida à baixa renda. Mas quem ganha R$ 8 mil a R$ 18 mil por mês tem o mesmo percentual de endividamento — só esconde com mais sofisticação. Parcelamento "que cabe no orçamento". Financiamento "com taxa boa". Silêncio no grupo de amigos.
-
-Slide 4 — POR QUE JULHO É O MÊS QUE MAIS PESA: Férias dão uma licença moral temporária: "já que estou de férias, posso gastar um pouco mais." O problema não é o gasto de julho. É voltar sem um plano para agosto — e repetir o mesmo ciclo em dezembro.
-
-Slide 5 — O QUE REALMENTE PRECISA MUDAR: Não é nunca mais viajar. Não é se punir pelo passeio que valeu a pena. É ter, antes da viagem, uma estrutura que absorve o mês de volta sem gerar a dívida de vergonha de sempre.
-
-Slide 6 — CTA: A CONVERSA COMEÇA SEM JULGAMENTO. Com os seus números reais na mesa — e um plano para quebrar o ciclo antes de agosto chegar. Me chama no WhatsApp ou pelo link na bio.<button class="copy-btn" onclick="cp('m1')">Copiar</button></div>
-<div class="sec">Caption (IG)</div>
-<div class="copy-block" id="m1c">80,4% das famílias brasileiras estão endividadas — o maior recorde desde o início da série histórica, em 2010.
-
-Aposto que você não se reconhece nesse número. A maioria não se reconhece.
-
-Mas o dado inclui quem ganha bem, viajou em julho e voltou com o cartão mais pesado do que devia — só que com mais sofisticação para esconder: parcelamento "que cabe", financiamento "com taxa boa", silêncio no grupo de amigos.
-
-O problema nunca foi ter viajado. É voltar sem plano para o mês seguinte — e repetir isso todo ano.
-
-A sessão comigo começa exatamente aqui: sem culpa, com os números reais na mesa.
-
-📲 Me chama no WhatsApp ou pelo link na bio.
-
-#financaspessoais #planejamentofinanceiro #comportamentofinanceiro #marcelapinheiro #endividamento #educacaofinanceira #ferias2026<button class="copy-btn" onclick="cp('m1c')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Slide 1 (1080&#215;1350)</div>
-<div class="prompt-block" id="m1p">1. Format: Instagram carousel slide, 1080x1350 (4:5), slide 1 of 6.
-2. Brand style inspired by JPMorgan Wealth Management campaigns, American Express Platinum, and Goldman Sachs brand — premium personal financial advisory, composed authority.
-3. Palette: Verde Floresta #1B6A39 as primary background. Verde Oliva #83983A used ONLY as accent for the number "80,4%" (Montserrat ExtraBold). Creme #F8F5EE for supporting text. Typography: Montserrat Black for headline (all caps), Lora Italic for the parenthetical subline.
-4. Style: warm editorial financial authority, natural soft lighting feel even in flat design, generous negative space. No stock photo appearance. No cold/corporate finance feel. No bank imagery, no coins, no graphs, no pie charts. No orange or red. No pure white background — use Creme instead.
-5. Brief: Large centered headline in Montserrat Black, Creme text: "80,4% DAS FAMÍLIAS BRASILEIRAS ESTÃO ENDIVIDADAS." Below, in Verde Oliva Montserrat Bold: "O maior recorde desde 2010." Smaller italic Creme line below (Lora Italic): "(Isso inclui quem foi pra Cancún em julho.)" Bottom corner: "Marcela Pinheiro · Gestora Financeira" in Creme, small.<button class="prompt-btn" onclick="cp('m1p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card marcela-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--marcela-bg);color:var(--marcela)">Ter 07/07 &#183; 09h00</span>
-<span class="post-format">IG Post + Story enquete &#183; 1080&#215;1080 / 1080&#215;1920</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Quem mais brigou com o or&#231;amento na volta das f&#233;rias?</div>
-<div class="copy-block" id="m2">Quem mais chegou de férias e sentiu o orçamento apertar na primeira semana de volta? 🙋
-
-Não é falta de disciplina. É o clássico "mês de julho gasta, mês de agosto paga" — e ninguém combinou isso com o extrato.
-
-Se rolou aquela conversa tensa em casa sobre "quem gastou mais" ou "por que não sobrou nada" — comenta aqui com um 👇 ou me manda mensagem. Você não é o único casal que passou por isso essa semana.
-
-#financaspessoais #comportamentofinanceiro #marcelapinheiro #casaisedinheiro #ferias2026<button class="copy-btn" onclick="cp('m2')">Copiar</button></div>
-<div class="sec">Story Enquete — sequência (2 stories)</div>
-<div class="copy-block" id="m2s">Story 1 — Enquete: "Depois de julho, seu orçamento está:" 🟢 Sob controle | 🟡 Meio apertado | 🔴 Zerado
-
-Story 2 — Follow-up (para 🟡 ou 🔴): "Sem julgamento — a maioria está aí também. Me chama que eu te explico como funciona a consultoria para reorganizar antes de agosto fechar."<button class="copy-btn" onclick="cp('m2s')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card marcela-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--marcela-bg);color:var(--marcela)">Qua 08/07 &#183; 08h00</span>
-<span class="post-format">IG + TikTok &#183; Reel 50s &#183; 1080&#215;1920</span>
-<span class="lbl lbl-red">Confirmar mec&#226;nica</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Tesouro Reserva: o novo queridinho da reserva de emerg&#234;ncia</div>
-<div class="r-alert" style="margin-bottom:10px">&#9888; CONFIRMAR MEC&#194;NICA EXATA DO PRODUTO COM ALEXANDRE ANTES DE PUBLICAR &#8212; dados de liquidez, aus&#234;ncia de marca&#231;&#227;o a mercado e aplica&#231;&#227;o m&#237;nima vêm do Radar (fonte: Tesouro Direto, maio/2026). Nenhum rendimento espec&#237;fico deve ser prometido.</div>
-<div class="sec">Speech Word-for-Word + Timecodes</div>
-<div class="copy-block" id="m3s">[00:00–00:06] "Se você tem reserva de emergência parada e não sabe se está no lugar certo, essa novidade é pra você."
-
-[00:07–00:15] "A Selic está em patamar alto, com projeção subindo ainda mais até o fim do ano. E o Tesouro Selic continua sendo o queridinho de quem quer segurança — mas tem um produto novo que poucas pessoas ainda entenderam direito: o Tesouro Reserva."
-
-[00:16–00:26] "Ele foi lançado em maio deste ano. A proposta: mais praticidade pra quem precisa de liquidez rápida, sem passar pelo mesmo processo dos títulos tradicionais. [CONFIRMAR COM ALEXANDRE: liquidez, marcação a mercado e aplicação mínima antes de publicar]"
-
-[00:27–00:37] "Não estou aqui pra te dizer 'invista nisso e pronto'. Investimento não é sobre seguir modinha — é sobre entender se o produto conversa com o seu objetivo. Reserva de emergência tem uma regra simples: liquidez em primeiro lugar, rendimento em segundo."
-
-[00:38–00:45] "O que eu faço com meus clientes não é escolher o produto por eles. É sentar, entender o objetivo real da reserva, e só depois ver qual estrutura faz sentido."
-
-[00:46–00:50] "Quer entender se sua reserva está no lugar certo? Me chama no WhatsApp ou pelo link na bio."
-
-Notas: tom educadora confiável, nunca vendedora · overlay [00:16] "Tesouro Reserva · lançado mai/2026" · card disclaimer [00:27] "Não é recomendação de investimento".<button class="copy-btn" onclick="cp('m3s')">Copiar</button></div>
-<div class="sec">Caption (IG/TikTok)</div>
-<div class="copy-block" id="m3c">A Selic segue em patamar alto — e a projeção é de continuar subindo até o fim do ano.
-
-Enquanto isso, o Tesouro Selic segue como o mais procurado de quem quer segurança pra reserva de emergência. Mas existe uma novidade recente que poucas pessoas ainda traduziram em linguagem simples: o Tesouro Reserva.
-
-Não é sobre seguir modinha de produto financeiro. É sobre entender se ele conversa com o seu objetivo — e reserva de emergência tem uma regra simples: liquidez primeiro, rendimento depois.
-
-⚠️ Não é recomendação de investimento.
-
-📲 Quer entender se sua reserva está no lugar certo? Me chama no WhatsApp ou pelo link na bio.
-
-#financaspessoais #reservadeemergencia #educacaofinanceira #tesourodireto #marcelapinheiro #planejamentofinanceiro<button class="copy-btn" onclick="cp('m3c')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card marcela-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--marcela-bg);color:var(--marcela)">Qui 09/07 &#183; 07h30</span>
-<span class="post-format">LinkedIn &#183; Post longo &#183; 1200&#215;1200</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">81,7 milh&#245;es em inadimpl&#234;ncia &#8212; 42% h&#225; mais de 10 anos: estrutural, n&#227;o conjuntural</div>
-<div class="copy-block" id="m4">81,7 milhões de brasileiros estão em situação de inadimplência hoje.
-
-Desse total, 42% já enfrentavam restrições há mais de 10 anos.
-
-Isso muda a leitura do problema.
-
-Não é uma dificuldade pontual, de um mês ruim ou uma emergência específica. Para quase metade desses casos, o padrão se repete há uma década — o que significa que renegociação, aplicativo de controle ou planilha nova não resolveram, porque o problema nunca foi a ferramenta.
-
-Vejo isso constantemente em quem lidera equipes ou toca o próprio negócio: a pessoa é extremamente competente na gestão financeira da empresa, e trava exatamente no mesmo ponto na vida pessoal — porque ninguém nunca sentou com ela, abriu o extrato real e desenhou uma estrutura de decisão, não só um controle de gastos.
-
-Reestruturar um padrão financeiro de 10 anos não se resolve com mais informação. Quem já tem 78% da internet de conteúdo financeiro disponível sabe disso — e ainda assim continua no mesmo lugar.
-
-Resolve com alguém sentado ao lado, olhando os números reais, e construindo o plano junto — não entregando um curso e desejando boa sorte.
-
-Se você reconhece esse padrão — no seu time ou em você mesmo — vale a conversa.
-
-#financaspessoais #gestaofinanceira #lideranca #planejamentofinanceiro #marcelapinheiro #inadimplencia #comportamentofinanceiro #educacaofinanceira<button class="copy-btn" onclick="cp('m4')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; LinkedIn (1200&#215;1200)</div>
-<div class="prompt-block" id="m4p">1. Format: LinkedIn post image, square 1200x1200.
-2. Brand style inspired by Goldman Sachs brand and JPMorgan Wealth Management editorial — executive-level financial authority.
-3. Palette: Verde Floresta #1B6A39 background, Creme #F8F5EE text, Verde Oliva #83983A for the hero statistic. Montserrat Black headline, Lora Italic for the closing reflective line.
-4. Style: editorial, executive, reflective tone. No stock photo appearance. No cold/corporate finance feel. No bank imagery, no coins, no graphs, no generic office/suit clichés.
-5. Brief: Hero stat in Verde Oliva Montserrat ExtraBold: "42%". Below in Creme Montserrat Bold: "dos inadimplentes no Brasil já enfrentavam restrições há mais de 10 anos." Closing line in Lora Italic, smaller: "Não é conjuntural. É estrutural." Bottom: "Marcela Pinheiro · Gestora Financeira" small Creme.<button class="prompt-btn" onclick="cp('m4p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card marcela-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--marcela-bg);color:var(--marcela)">Sex 10/07 &#183; 08h30</span>
-<span class="post-format">IG &#183; Post Feed 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Curso te d&#225; o mapa. Eu caminho com voc&#234; at&#233; o destino.</div>
-<div class="copy-block" id="m5">Cursos de educação financeira ensinam muito bem o "o quê". O que é reserva de emergência, o que é juro composto, como montar um orçamento.
-
-O que eles não ensinam — porque não dá pra ensinar em vídeo gravado — é o "como", quando a sua vida real não segue o roteiro do curso.
-
-Teve uma cliente que fez três cursos de finanças antes de vir até mim. Sabia toda a teoria. Ainda assim, todo mês repetia o mesmo padrão de gasto — porque o gatilho dela não era falta de informação. Era comportamental, e específico da vida dela.
-
-Em poucas sessões, identificamos o gatilho, ajustamos a estrutura de decisão dela — e o padrão mudou. Não porque ela aprendeu mais uma vez o que já sabia. Porque teve alguém olhando os números reais dela, e não um exemplo genérico de curso.
-
-O índice de confiança do consumidor brasileiro caiu para 49,2 este ano — abaixo do neutro. A maioria vai esperar a situação "melhorar" para agir. Quem decide agir agora — com o método certo para o seu caso, não um curso genérico — sai na frente.
-
-Curso te dá o mapa.
-Eu caminho com você até o destino.
-
-📲 Me chama no WhatsApp ou pelo link na bio.
-
-#financaspessoais #gestaofinanceira #planejamentofinanceiro #marcelapinheiro #comportamentofinanceiro #consultoriafinanceira<button class="copy-btn" onclick="cp('m5')">Copiar</button></div>
-<div class="sec">AI Prompt &#8212; Post Feed (1080&#215;1080)</div>
-<div class="prompt-block" id="m5p">1. Format: Instagram feed post, square 1080x1080.
-2. Brand style inspired by American Express Platinum and UBS editorial — premium, individualized advisory positioning (contrasted against scaled/generic course positioning).
-3. Palette: Verde Floresta #1B6A39 background, Creme #F8F5EE headline, Verde Oliva #83983A accent on the contrast line. Montserrat Black headline, Lora Italic for the closing contrast statement.
-4. Style: premium, personal, warm authority. No stock photo appearance. No cold/corporate finance feel. No bank imagery, no coins, no graphs, no literal map or compass icons.
-5. Brief: Centered closing statement in Lora Italic, Creme: "Curso te dá o mapa." Below, in Verde Oliva Montserrat Bold: "Eu caminho com você até o destino." Bottom small: "Marcela Pinheiro · @marcelapinheirogf".<button class="prompt-btn" onclick="cp('m5p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card marcela-t">
-<div class="post-header">
-<span class="post-date" style="background:var(--marcela-bg);color:var(--marcela)">Cont&#237;nuo &#183; Seg 06/07 08h00</span>
-<span class="post-format">WhatsApp Status &#183; 1080&#215;1080</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Status Semanal &#8212; 80,4% recorde de endividamento</div>
-<div class="copy-block" id="mwp">Voltou de férias e o orçamento apertou? Não é falta de disciplina — é falta de plano pra volta. Chama pra conversar, sem julgamento.
-
-(133 caracteres · imagem: "80,4%" (Verde Oliva) / "RECORDE DE ENDIVIDAMENTO." / "E o seu orçamento pós-férias, como está?" / @marcelapinheirogf)
-Broadcast mensal: não aplicável esta semana — próximo em agosto/2026.<button class="copy-btn" onclick="cp('mwp')">Copiar</button></div>
-</div>
-</div>
-
-</div>
-
-<!-- TRACAO -->
-<div id="page-tracao" class="page">
-
-<div class="card" style="margin-bottom:16px"><div class="card-header"><span class="card-title">&#9888; Alerta cr&#237;tico ativo &#8212; Kaizen escalou em julho</span></div>
-<div class="card-body">Kaizen publicou 4+ guias de IA em julho/2026 ("Automa&#231;&#227;o de Marketing com IA", "IA Generativa: ChatGPT e Gemini", "OpenAI Plataforma de An&#250;ncios", "Branding Digital na Era da IA"). N&#237;vel de amea&#231;a subiu de "construindo" (jun/2026) para "sistematizado" (jul/2026). Kantar confirma 70%+ das empresas j&#225; usam IA generativa. <strong>Resposta desta semana:</strong> 2 das 5 pe&#231;as confrontam o alerta diretamente (SEG e SEX), 1 refor&#231;a indiretamente (QUA/Bastidor) &#8212; todas diferenciando por m&#233;todo + processo documentado + fundador vis&#237;vel, nunca por volume de conte&#250;do educativo de IA. Sem CRM estruturado para TRA&#199;&#195;O &#8212; pipeline gerido diretamente por Alexandre.</div>
-</div>
-
-<div class="post-card tracao-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--tracao)">Seg 06/07 &#183; 07h30</span>
-<span class="post-format" style="color:#888">LinkedIn + IG &#183; Post 1200&#215;1200 / 1080&#215;1080</span>
-<span class="lbl lbl-tr">RESULTADO</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">86% planejam IA. 7,8% integraram. Onde a TRA&#199;&#195;O est&#225;?</div>
-<div class="sec" style="color:#888">Copy (LinkedIn — sem emoji)</div>
-<div class="copy-block" id="t1">Toda agência vai te dizer que usa IA em 2026.
-
-Algumas publicam guias técnicos sobre agentes de IA, automação e ChatGPT. Outras têm certificação de parceiro Google e Meta.
-
-Nenhuma delas te mostra o processo.
-
-O dado é do Panorama GTM Brasil 2026: 86% dos profissionais de marketing planejam aumentar investimento em IA nos próximos 12 meses. Mas apenas 7,8% das empresas têm a IA completamente integrada nos processos.
-
-Isso significa uma coisa simples: quase todo mundo está no discurso. Quase ninguém está na prática.
-
-A pergunta certa para quem dirige uma PME B2B e já contratou agência antes sem resultado não é "vocês usam IA?" — é "o que foi entregue pra mim essa semana?"
-
-Na TRAÇÃO, a resposta é sempre a mesma, há 3 semanas seguidas: radar de concorrentes na quinta. Grade editorial fechada na sexta. Pacote completo — posts, captions, roteiros, imagens — entregue no domingo. Publicação na segunda.
-
-Isso não é discurso sobre IA. É processo documentado, repetido, auditável.
-
-Se a sua agência atual só fala sobre IA, faça essa pergunta a ela essa semana: o que foi entregue de fato?
-
-Me manda mensagem se quiser ver como funciona na prática.
-
-#marketingb2b #marketingcomia #inteligenciaartificial #tracaomkt #tração #pme #marketingderesultado #processodemarketing #consultoriademarketing #agenciadigital<button class="copy-btn" onclick="cp('t1')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (IG — versão adaptada)</div>
-<div class="copy-block" id="t1c">86% das agências planejam usar IA. 7,8% realmente integraram.
-
-A TRAÇÃO está nesse grupo pequeno — há 3 semanas seguidas de pacote completo entregue, sem falha.
-
-Enquanto a maioria fala sobre IA, a gente documenta o processo.
-
-📲 Manda mensagem pra ver como funciona.
-
-#tracaomkt #tração #marketingcomia #pme #marketingb2b #processodemarketing<button class="copy-btn" onclick="cp('t1c')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; LinkedIn (1200&#215;1200)</div>
-<div class="prompt-block" id="t1p">1. Format: LinkedIn post image, square 1200x1200px.
-2. Brand style inspired by Linear, Notion brand campaigns, and HubSpot visual marketing — dark editorial B2B authority, premium marketing-technology aesthetic.
-3. Colors: Carbon Black #0D0D0D background base. Electric Blue #3B82F6 exclusively for the "86%" statistic. Result Green #10B981 exclusively for the "7,8%" metric (data-only use, never decorative). White #FFFFFF for supporting text. Typography: Inter ExtraBold 800 for both oversized statistics, Inter Regular 400 for supporting copy.
-4. Visual style: dark editorial, data-forward single-statement layout, hard-edge geometric grid, no gradients, no photography. No stock photo appearance. No soft organic curves. No warm/rustic textures. No inspirational-quote aesthetic. No amateur content creator feel.
-5. Brief: Full dark #0D0D0D background, left-aligned composition. Top small white line: "QUANTAS AGÊNCIAS REALMENTE USAM IA?" Center-left, two stacked data rows — Row 1: "86%" in Electric Blue #3B82F6, oversized bold, next to "planejam investir em IA" in white regular. Row 2: "7,8%" in Result Green #10B981, oversized bold, next to "realmente integraram ao processo" in white regular. Below: a thin horizontal divider line. Bottom line, white small: "A TRAÇÃO está no grupo pequeno." Footer, white extra small: "@tracao_mkt · Marketing que gera resultado."<button class="prompt-btn" onclick="cp('t1p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card tracao-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--tracao)">Ter 07/07 &#183; 07h30</span>
-<span class="post-format" style="color:#888">LinkedIn &#183; Carrossel 5 slides &#183; 1200&#215;1200</span>
-<span class="lbl lbl-tg">M&#201;TODO</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">O sinal #1 do LinkedIn em 2026 n&#227;o &#233; like. &#201; tempo de aten&#231;&#227;o.</div>
-<div class="sec" style="color:#888">Copy por slide</div>
-<div class="copy-block" id="t2">Slide 1 — Hook: O ALGORITMO DO LINKEDIN MUDOU DE NOVO EM 2026. E a maioria das PMEs ainda não percebeu.
-
-Slide 2 — O SINAL #1 AGORA É DWELL TIME: O "360Brew" elegeu o tempo de permanência no conteúdo como o sinal mais importante de ranking em 2026. A mediana de impressões por post caiu 47%. O engajamento qualificado subiu 12%. Menos alcance amplo. Mais impacto real. Fonte: Fresh Lab · Social Media Marcos.
-
-Slide 3 — O QUE A MAIORIA FAZ: Posta todo dia pra "aparecer". Frequência alta, profundidade zero. O algoritmo de 2026 penaliza exatamente isso.
-
-Slide 4 — O QUE A TRAÇÃO FAZ (PROFUNDIDADE > FREQUÊNCIA): Um post por semana, com conteúdo técnico real, supera cinco posts vazios. É assim que a TRAÇÃO estrutura o método: menos volume, mais substância.
-
-Slide 5 — CTA: TRAÇÃO MKT. Método executivo + IA. Toda segunda-feira, sem falha. Me chama para saber como funciona. @tracao_mkt<button class="copy-btn" onclick="cp('t2')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (LinkedIn — sem emoji)</div>
-<div class="copy-block" id="t2c">O LinkedIn elegeu o dwell time como o sinal mais importante de ranking em 2026.
-
-Isso muda tudo sobre como pensar frequência de postagem.
-
-Neste carrossel: o que isso significa pra quem faz marketing B2B.
-
-#linkedin #algoritmolinkedin #marketingb2b #tracaomkt #tração #estrategiadigital #conteudob2b #marketingderesultado #autoridadedigital #dwelltime<button class="copy-btn" onclick="cp('t2c')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; Slide 1 (1200&#215;1200)</div>
-<div class="prompt-block" id="t2p">1. Format: LinkedIn carrossel slide, square 1200x1200px.
-2. Brand style inspired by Linear, Notion brand campaigns and HubSpot visual marketing.
-3. Colors: Carbon Black #0D0D0D background, Electric Blue #3B82F6 accent, White text. Inter ExtraBold for headline.
-4. Visual style: dark editorial, hard-edge geometry, no gradients, no photography, no stock photo appearance, no soft organic curves, no warm/rustic textures.
-5. Brief: Dark background. "O ALGORITMO DO LINKEDIN" in white bold large, "MUDOU DE NOVO EM 2026." same weight below. Third line in Electric Blue italic: "E a maioria das PMEs ainda não percebeu." Small "@tracao_mkt" bottom white. No emoji.<button class="prompt-btn" onclick="cp('t2p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card tracao-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--tracao)">Qua 08/07 &#183; 07h30</span>
-<span class="post-format" style="color:#888">IG + TikTok &#183; Reel 35-38s &#183; 1080&#215;1920</span>
-<span class="lbl" style="background:#222;color:#aaa">BASTIDOR</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">"Voc&#234;s tamb&#233;m s&#243; fazem post sobre IA?"</div>
-<div class="sec" style="color:#888">Speech Word-for-Word + Timecodes (38s)</div>
-<div class="copy-block" id="t3s">[00:00–00:04] "Essa semana alguém me perguntou: 'vocês também só fazem post sobre IA?'"
-
-[00:05–00:11] "Não. A gente aplica IA no marketing do cliente. Toda semana. Com processo — não com guia técnico genérico."
-
-[00:12–00:19] "Isso aqui é o radar de concorrentes que roda toda quinta. Aqui é a grade editorial que a gente fecha na sexta com base nele."
-
-[00:20–00:27] "Sábado a gente produz: copy, roteiro, prompt de imagem, tudo revisado. Domingo o cliente recebe o pacote inteiro pronto pra publicar."
-
-[00:28–00:33] "Segunda ele publica. Sem atraso. Há 3 semanas seguidas."
-
-[00:34–00:38] "Isso não é discurso de IA. É método. E o método a gente mostra — não só fala. @tracao_mkt"
-
-Notas: mostrar tela real do radar/grade (blur em dados de clientes) · Alexandre falando direto pra câmera intercalado com cortes de tela · tom confiante, sem hype, sem citar concorrente nominalmente.<button class="copy-btn" onclick="cp('t3s')">Copiar</button></div>
-<div class="sec" style="color:#888">Caption (IG)</div>
-<div class="copy-block" id="t3c">"Vocês também só fazem post sobre IA?" Não. A gente aplica. Essa é a diferença.
-
-Bastidor real da produção semanal da TRAÇÃO. Toda semana, sem falha.
-
-📲 @tracao_mkt
-
-#tracaomkt #tração #bastidor #marketingb2b #agenciadigital #conteudob2b #marketingcomia<button class="copy-btn" onclick="cp('t3c')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; Thumbnail Reel (1080&#215;1920)</div>
-<div class="prompt-block" id="t3p">1. Format: vertical Reel/TikTok thumbnail, 1080x1920px.
-2. Brand style inspired by Linear and Notion — dark editorial tech B2B, authentic founder-facing.
-3. Colors: Carbon Black #0D0D0D background, Electric Blue #3B82F6 accent text, White text. Inter Bold for overlay.
-4. Visual style: authentic, not staged, dark editorial energy. No stock photo appearance. No soft organic curves. No warm/rustic textures. No amateur content creator feel.
-5. Brief: Dark background. Foreground: a laptop screen partially visible showing a content/radar document (blurred, not readable). In front: a person (Alexandre) looking at camera, serious and focused expression. Overlay text top-left white bold: "BASTIDOR REAL." Below in Electric Blue: "Vocês só falam ou aplicam IA?" Bottom small white: "@tracao_mkt".<button class="prompt-btn" onclick="cp('t3p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card tracao-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--tracao)">Qui 09/07 &#183; 08h00</span>
-<span class="post-format" style="color:#888">LinkedIn &#183; Post &#183; 1200&#215;1200</span>
-<span class="lbl lbl-tr">PROVOCA&#199;&#195;O</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">55% dos advogados j&#225; usam IA &#8212; Renata est&#225; mais pronta do que parece</div>
-<div class="copy-block" id="t4">55% dos advogados brasileiros já usam IA no trabalho em 2026.
-
-Uma advogada que aplicou IA à captação fechou 6 contratos de execução em 45 dias, com ticket médio de R$ 2.800.
-
-Isso muda a conversa sobre marketing para profissional liberal.
-
-A objeção que eu mais ouço de médicos, advogados e consultores não é sobre tecnologia. É sobre exposição: "não quero parecer vendedor", "não quero virar blogueira", "tenho medo do conselho de classe".
-
-Mas o dado mostra outra coisa: quem já usa IA no trabalho jurídico, médico ou de consultoria está mais pronto para usar IA no marketing do que imagina.
-
-O que falta não é abertura à tecnologia.
-
-É um sistema que aplique o mesmo padrão de eficiência ao marketing — sem o profissional precisar aprender prompt, sem precisar postar todo dia, sem parecer "blogueiro".
-
-A pergunta não é "você usa IA?" — você já usa.
-
-A pergunta é: seu marketing também usa, com o mesmo padrão de resultado?
-
-Se você é profissional liberal e reconhece essa dor, me manda mensagem.
-
-#marketingjuridico #advocacia #marketingparaadvogados #iamarketing #tracaomkt #tração #marketingderesultado #autoridadedigital #profissionalliberal #marketingb2b<button class="copy-btn" onclick="cp('t4')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; LinkedIn (1200&#215;1200, contextual)</div>
-<div class="prompt-block" id="t4p">1. Format: LinkedIn post image, square 1200x1200px.
-2. Brand style inspired by Linear, Notion brand campaigns and Mailchimp editorial design.
-3. Colors: Carbon Black #0D0D0D background, Electric Blue #3B82F6 for the "55%" statistic, Result Green #10B981 exclusively for the "R$ 2.800" and "45 dias" data points, White text. Inter ExtraBold for stats, Inter Regular for copy.
-4. Visual style: dark editorial, data-forward, no gradients, no photography, no stock photo appearance, no soft organic curves, no warm/rustic textures, no inspirational-quote aesthetic, no smiling professional stock photography.
-5. Brief: Dark background. Top white regular: "QUANTOS ADVOGADOS JÁ USAM IA?" Center: "55%" in Electric Blue #3B82F6, oversized bold. Below, two small data chips in Result Green #10B981: "6 contratos em 45 dias" and "ticket médio R$ 2.800". Bottom white small: "A pergunta não é se você usa IA. É se o seu marketing também usa. @tracao_mkt". No legal iconography (no scales of justice, no gavel).<button class="prompt-btn" onclick="cp('t4p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card tracao-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--tracao)">Sex 10/07 &#183; 07h30</span>
-<span class="post-format" style="color:#888">LinkedIn &#183; Post &#183; 1200&#215;1200</span>
-<span class="lbl lbl-tr">PROVOCA&#199;&#195;O</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">"O que foi entregue pra mim essa semana?"</div>
-<div class="copy-block" id="t5">Toda agência vai te dizer que usa IA em 2026.
-
-Uma publica o guia completo de automação de marketing com IA. Outra tem certificação de parceiro Google Ads. Outra promete "agentes de IA" que qualificam lead 24 horas por dia.
-
-Nenhuma te mostra o entregável da semana.
-
-A pergunta que qualquer dono de PME B2B deveria fazer para a agência que contrata não é "vocês usam IA?" — é "o que foi entregue pra mim essa semana?"
-
-Na TRAÇÃO a resposta é sempre visível: radar de concorrentes rodou quinta. Grade editorial fechou sexta. Pacote completo — posts, roteiros, imagens, prompts — entregue domingo. Publicação segunda. Há 3 semanas seguidas, sem falha.
-
-Isso não é conteúdo educativo sobre IA. É processo aplicado, repetido, auditável — no negócio do cliente, não em um blog institucional.
-
-Se a agência que te atende hoje só fala sobre IA, pergunta a ela o que foi entregue essa semana. Se a resposta for vaga, você já sabe o problema.
-
-Me manda mensagem com o maior problema de consistência do seu marketing hoje.
-
-#marketingb2b #tracaomkt #tração #consistenciademarketing #marketingderesultado #pme #processodemarketing #agenciadigital #marketingexecutivo #iamarketing<button class="copy-btn" onclick="cp('t5')">Copiar</button></div>
-<div class="sec" style="color:#888">AI Prompt &#8212; LinkedIn (1200&#215;1200, contextual)</div>
-<div class="prompt-block" id="t5p">1. Format: LinkedIn post image, square 1200x1200px.
-2. Brand style inspired by Linear, Notion brand campaigns and HubSpot visual marketing — dark editorial B2B authority.
-3. Colors: Carbon Black #0D0D0D background, Electric Blue #3B82F6 for the central question text, Result Green #10B981 exclusively for the 4 process checkmarks. White text. Inter ExtraBold for the hero question, Inter Regular for the process list.
-4. Visual style: dark editorial, hard-edge geometric checklist, no gradients, no photography, no stock photo appearance, no soft organic curves, no warm/rustic textures, no inspirational-quote aesthetic, no generic AI/robot iconography.
-5. Brief: Dark background. Center hero text in Electric Blue #3B82F6, bold: "O QUE FOI ENTREGUE PRA MIM ESSA SEMANA?" Below, a vertical 4-step checklist in white with Result Green #10B981 checkmarks: "✓ Radar — quinta" / "✓ Grade — sexta" / "✓ Pacote completo — domingo" / "✓ Publicação — segunda". Bottom white small: "3 semanas seguidas, sem falha. @tracao_mkt". No competitor names or logos shown.<button class="prompt-btn" onclick="cp('t5p')">Copiar</button></div>
-</div>
-</div>
-
-<div class="post-card tracao-t">
-<div class="post-header">
-<span class="post-date" style="background:#1a1a1a;color:var(--tracao)">Cont&#237;nuo (opcional)</span>
-<span class="post-format" style="color:#888">WhatsApp Status &#183; canal n&#227;o priorit&#225;rio esta semana</span>
-</div>
-<div class="post-body">
-<div class="post-title" style="margin-bottom:10px">Status alternativo &#8212; refor&#231;o cross-canal</div>
-<div class="copy-block" id="twp">Toda agência fala em IA. Poucas mostram o processo. Radar, grade, pacote — toda semana, sem falha. Manda mensagem pra ver como funciona.
-
-(137 caracteres · uso sugerido: publicar em paralelo ao post de SEG ou SEX, se Alexandre optar por reforçar a mensagem na própria lista de contatos)<button class="copy-btn" onclick="cp('twp')">Copiar</button></div>
-</div>
-</div>
-
-</div>
-
-<!-- RADAR -->
+<!-- ══════════════ RADAR ══════════════ -->
 <div id="page-radar" class="page">
-<div class="sec">Radar Consolidado &#8212; 05/07/2026 (cobre lacuna de 02/07, radar de quinta n&#227;o rodou)</div>
-<div class="r-alert"><strong>ADFly &#128308; URGENTE</strong> &#8212; ICA 100-40 do DECEA entrou em vigor em 01/07 &#8212; SARPAS obrigat&#243;rio para qualquer drone. Janela de "o que j&#225; mudou na pr&#225;tica" est&#225; aberta e nenhum concorrente monitorado capitalizou ainda.</div>
-<div class="r-alert"><strong>TRA&#199;&#195;O &#128308;</strong> &#8212; Kaizen continua dominando esmagadoramente a pauta de IA (10+ pe&#231;as recentes cobrindo Google, Meta, OpenAI). Org&#226;nica Digital aprofunda discurso "humano vs. IA" com dado novo (queda de 61% em cliques org&#226;nicos por AI Overviews). Pend&#234;ncia cr&#237;tica: TRA&#199;&#195;O ainda sem case com n&#250;mero real publicado.</div>
-<div class="card">
-<div class="card-header"><span class="card-title">Resumo executivo por empresa/cliente</span></div>
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th>Empresa</th><th>Resumo</th></tr></thead>
-<tbody>
-<tr><td><span class="lbl lbl-a">ADFly</span></td><td>ICA 100-40 vigente 01/07 — janela de "o que já mudou" aberta, nenhum concorrente monitorado capitalizou ainda.</td></tr>
-<tr><td><span class="lbl lbl-c">AleChef</span></td><td>Nicho de personal chef consolida-se como hábito permanente (não modismo), discurso "slow food" dominante — oportunidade de contraste artesanal vs. industrial/ultracongelado.</td></tr>
-<tr><td><span class="lbl lbl-b">BPMF</span></td><td>Jornada Lagamar acontecendo AGORA (05-09/07) — prioridade máxima. Calendário de julho lotado (Brasil Bike Fest 25-26/07, Pedala Tour 02/08) — BPMF precisa se diferenciar de festival de massa/passeio gratuito.</td></tr>
-<tr><td><span class="lbl lbl-m">Marcela</span></td><td>Tesouro Reserva (lançado maio/2026) ainda pouco traduzido para leigos — janela de autoridade aberta. Selic com viés de alta (Focus 13% a.a.). Grupo A (P-01 a P-04) sem dados públicos disponíveis nesta rodada.</td></tr>
-<tr><td><span class="lbl lbl-tr">TRAÇÃO</span></td><td>Kaizen dominando pauta de IA (10+ peças). Orgânica Digital com dado novo (-61% cliques orgânicos por AI Overviews). TRAÇÃO ainda sem case com número real publicado — pendência crítica.</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="card-header"><span class="card-title">Top oportunidades por empresa &#8212; S16</span></div>
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th>Empresa</th><th>#</th><th>Oportunidade</th><th>A&#231;&#227;o S16</th></tr></thead>
-<tbody>
-<tr><td><span class="lbl lbl-a">ADFly</span></td><td>1</td><td>"O que já mudou na prática desde 01/07" — 4 camadas regulatórias condensadas</td><td style="color:var(--adfly)">&#10003; Seg 06/07</td></tr>
-<tr><td><span class="lbl lbl-a">ADFly</span></td><td>2</td><td>FRZ urbana — Termo de Coordenação com administração aeroportuária</td><td style="color:var(--adfly)">&#10003; Ter 07/07</td></tr>
-<tr><td><span class="lbl lbl-a">ADFly</span></td><td>3</td><td>Selo RETA + SARPAS — checklist do fornecedor de drone</td><td style="color:var(--adfly)">&#10003; Qua 08/07</td></tr>
-<tr><td><span class="lbl lbl-c">AleChef</span></td><td>1</td><td>Marmita industrial ultracongelada x marmita feita no dia por chef de verdade</td><td style="color:var(--chef-dark)">&#10003; Seg 06/07</td></tr>
-<tr><td><span class="lbl lbl-c">AleChef</span></td><td>2</td><td>Reel de bastidor estilo TikTok — atendimento do personal chef</td><td style="color:var(--chef-dark)">&#10003; Ter 07/07</td></tr>
-<tr><td><span class="lbl lbl-c">AleChef</span></td><td>3</td><td>Carrossel "comida lenta em um mundo de delivery" — slow food</td><td style="color:var(--chef-dark)">&#10003; Sex 10/07</td></tr>
-<tr><td><span class="lbl lbl-b">BPMF</span></td><td>1</td><td>Cobertura em tempo real da Jornada Lagamar (05-09/07)</td><td style="color:var(--bpmf)">&#10003; Seg + Qui</td></tr>
-<tr><td><span class="lbl lbl-b">BPMF</span></td><td>2</td><td>"BPMF x festival grande" — jornada curada vs. evento de massa</td><td style="color:var(--bpmf)">&#10003; Ter 07/07</td></tr>
-<tr><td><span class="lbl lbl-b">BPMF</span></td><td>3</td><td>Reel pré-aquecimento pós-Lagamar — captação da próxima jornada</td><td style="color:var(--bpmf)">&#10003; Sex 10/07</td></tr>
-<tr><td><span class="lbl lbl-m">Marcela</span></td><td>1</td><td>Tesouro Reserva — tradução simples do produto lançado em maio/2026</td><td style="color:var(--marcela)">&#10003; Qua 08/07 &#9888;</td></tr>
-<tr><td><span class="lbl lbl-m">Marcela</span></td><td>2</td><td>Selic subindo de novo — gancho na projeção Focus de 13% a.a.</td><td>Incorporado no contexto Qua</td></tr>
-<tr><td><span class="lbl lbl-m">Marcela</span></td><td>3</td><td>Desafio de poupança formato FinTok (59% de adesão no nicho)</td><td>Reservado — S17+</td></tr>
-<tr><td><span class="lbl lbl-tr">TRAÇÃO</span></td><td>1</td><td>Google/Meta agentes de IA dentro do anúncio — tradução para quem fatura R$50k/mês</td><td>Reservado — S17+</td></tr>
-<tr><td><span class="lbl lbl-tr">TRAÇÃO</span></td><td>2</td><td>"86% vão investir mais em IA. Só 7,8% integraram. A TRAÇÃO está nos 7,8%."</td><td style="color:var(--tracao)">&#10003; Seg 06/07</td></tr>
-<tr><td><span class="lbl lbl-tr">TRAÇÃO</span></td><td>3</td><td>Resposta ao "Unpromptable Ideas" da Orgânica — execução vs. ideia de prompt</td><td>Adaptado — "O que foi entregue essa semana?" Sex 10/07</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="card-header"><span class="card-title">Tema transversal da semana</span></div>
-<div class="card-body"><p style="line-height:1.6"><strong>&#8220;A regra chegou, a novidade chegou &#8212; quem traduz primeiro, vence a aten&#231;&#227;o&#8221;</strong> &#8212; nas 3 verticais regulat&#243;rias/t&#233;cnicas (ADFly: ICA 100-40 vigente desde 01/07; Marcela: Tesouro Reserva lan&#231;ado em maio, ainda n&#227;o traduzido; TRA&#199;&#195;O: agentes de IA da Google/Meta rec&#233;m-lan&#231;ados), a mesma din&#226;mica se repete: uma mudan&#231;a concreta e recente ainda n&#227;o foi traduzida em linguagem simples por nenhum concorrente monitorado. Alexandre pode usar o pr&#243;prio conceito como reflex&#227;o de conte&#250;do pessoal, cruzando regula&#231;&#227;o (ADFly), produto financeiro (Marcela) e tecnologia (TRA&#199;&#195;O).</p></div>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="card-header"><span class="card-title">Alerta de timing</span></div>
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th>Data</th><th>Evento / Prazo</th><th>Empresa</th></tr></thead>
-<tbody>
-<tr><td><strong>01/07 (j&#225; ocorrido)</strong></td><td>ICA 100-40 DECEA entrou em vigor — sub-250g precisa de SARPAS</td><td><span class="lbl lbl-red">ADFly &#128308;</span></td></tr>
-<tr><td><strong>05-09/07 (em curso)</strong></td><td>Jornada Lagamar — cobertura em tempo real</td><td><span class="lbl lbl-b">BPMF &#128308;</span></td></tr>
-<tr><td><strong>02/07-31/07</strong></td><td>Inscrições abertas — Pedala Tour (Anglo American, gratuito, 02/08)</td><td><span class="lbl lbl-b">BPMF</span></td></tr>
-<tr><td><strong>25-26/07</strong></td><td>Brasil Bike Fest — Monte Sião/MG</td><td><span class="lbl lbl-b">BPMF</span></td></tr>
-<tr><td><strong>Julho (todo o m&#234;s)</strong></td><td>Selic com vi&#233;s de alta (Focus: 13% a.a. no fechamento de 2026)</td><td><span class="lbl lbl-m">Marcela</span></td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="card-header"><span class="card-title">Status da infraestrutura / gaps</span></div>
-<div class="card-body" style="line-height:1.6">
-<p>&#9888; Rodada executada via WebSearch (n&#227;o Bright Data). Para o Grupo A da Marcela (P-01 a P-04) e C-01/C-02/C-05 da TRA&#199;&#195;O, a busca p&#250;blica n&#227;o retornou dados espec&#237;ficos de posts da semana — marcado como "sem dados dispon&#237;veis", sem inven&#231;&#227;o de dados.</p>
-<p style="margin-top:8px">&#9888; <strong>Radar de 02/07 n&#227;o foi encontrado</strong> no hist&#243;rico — n&#227;o h&#225; como confirmar se rodou e n&#227;o foi salvo. Esta execu&#231;&#227;o em 05/07 cobre o intervalo.</p>
-<p style="margin-top:8px">&#9888; <strong>Radar duplicado confirmado:</strong> existem 2 arquivos RADAR-CONSOLIDADO (formato <code>05-07-2026</code> e <code>2026-07-05</code>) com conte&#250;do id&#234;ntico para cada empresa/cliente — consistente com a falha de duplica&#231;&#227;o j&#225; registrada em mem&#243;ria (falha 02/07). Sinalizado para limpeza posterior, sem conflito editorial neste pacote.</p>
-</div>
-</div>
-</div>
 
-<!-- IMAGENS -->
-<div id="page-imgs" class="page">
-<div class="sec">Brand kits &#8212; cores exatas para gera&#231;&#227;o de imagem</div>
-<div class="card">
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th>Empresa</th><th>Background</th><th>Accent</th><th>Texto</th><th>Destaque</th><th>Refer&#234;ncia</th></tr></thead>
-<tbody>
-<tr><td><span class="lbl lbl-a">ADFly</span></td><td><code>#0A1B33</code></td><td><code>#1E90FF</code></td><td>#FFFFFF</td><td><code>#9FE83A</code></td><td>DJI, Leica, FLIR, Skydio</td></tr>
-<tr><td><span class="lbl lbl-c">AleChef</span></td><td><code>#22324F</code></td><td><code>#C9A77A</code></td><td>#FAF7F2</td><td>&#8212;</td><td>Ottolenghi, EMP, Le Creuset, Jamie Oliver Premium, Relais & Ch&#226;teaux</td></tr>
-<tr><td><span class="lbl lbl-b">BPMF</span></td><td><code>#050505</code></td><td><code>#39FF14</code></td><td>#FFFFFF</td><td>&#8212;</td><td>Rapha, Canyon, Specialized, Pas Normal Studios, Castelli</td></tr>
-<tr><td><span class="lbl lbl-m">Marcela</span></td><td><code>#1B6A39</code></td><td><code>#83983A</code></td><td>#F8F5EE</td><td>&#8212;</td><td>JPMorgan Wealth Mgmt, AmEx Platinum, Goldman Sachs, BlackRock, UBS</td></tr>
-<tr><td><span class="lbl lbl-tr">TRA&#199;&#195;O</span></td><td><code>#0D0D0D</code></td><td><code>#3B82F6</code></td><td>#FFFFFF</td><td><code>#10B981</code></td><td>Linear, Notion, HubSpot, Mailchimp, Figma</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="card-header"><span class="card-title">Dimens&#245;es obrigat&#243;rias por formato</span></div>
-<div class="card-body" style="padding:0">
-<table>
-<thead><tr><th>Formato</th><th>Dimens&#227;o</th><th>Uso S16</th></tr></thead>
-<tbody>
-<tr><td>Post Feed IG</td><td>1080&#215;1080</td><td>ADFly Sex&#183;AleChef Qua&#183;BPMF Qua&#183;Marcela Ter/Sex&#183;WhatsApp (todas)</td></tr>
-<tr><td>Carrossel IG/TikTok</td><td>1080&#215;1350</td><td>ADFly Seg/Qui&#183;AleChef Seg/Sex&#183;BPMF Ter/Sex&#183;Marcela Seg</td></tr>
-<tr><td>Reel / Story</td><td>1080&#215;1920</td><td>ADFly Ter&#183;AleChef Ter/Qui&#183;BPMF Seg/Qui&#183;Marcela Qua&#183;TRA&#199;&#195;O Qua</td></tr>
-<tr><td>LinkedIn Post/Carrossel</td><td>1200&#215;1200</td><td>ADFly Qua&#183;Marcela Qui&#183;TRA&#199;&#195;O Seg/Ter/Qui/Sex (4 pe&#231;as)</td></tr>
-<tr><td>WhatsApp Status</td><td>1080&#215;1080</td><td>ADFly&#183;AleChef&#183;BPMF&#183;Marcela &#8212; segunda 08h00. TRA&#199;&#195;O: opcional/n&#227;o priorit&#225;rio esta semana</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="card-header"><span class="card-title">Scripts Python/Pillow</span></div>
-<div class="card-body">
-<p style="line-height:1.6">Scripts de gera&#231;&#227;o em cada pasta de semana:</p>
-<ul style="margin-top:8px;padding-left:20px;line-height:1.8;font-size:13px">
-<li><code>ADFly/Semana 06-07-12-07-2026/scripts/</code></li>
-<li><code>AleChef/Semana 06-07-12-07-2026/scripts/</code></li>
-<li><code>BPMF/Semana 06-07-12-07-2026/scripts/</code></li>
-<li><code>Marcela-Pinheiro-GF/Semana 06-07-12-07-2026/scripts/</code></li>
-<li><code>CLIENTE-TRAO-TRAC/Semana 06-07-12-07-2026/scripts/</code></li>
-</ul>
-<p style="margin-top:12px;color:var(--muted);line-height:1.6">Fontes: Liberation Sans Bold (sub. Montserrat/Inter) &#183; DejaVu Serif Bold (sub. Cormorant/Lora). Imagens com sufixo <code>-v1.png</code> em <code>/imagens/[EMPRESA]/</code>. ZIP consolidado em <code>/imagens/ZIPS/</code>.</p>
-</div>
-</div>
-</div>
+  <div class="radar-header">
+    <div>
+      <div style="font-size:11px;opacity:.6;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">🔭 Inteligência Competitiva</div>
+      <h2>Radar Semanal de Concorrentes</h2>
+      <div class="radar-meta">Última execução encontrada: 25/06/2026 · Radar de qui 02/07 não localizado em _RADAR-SEMANAL/ (verificado 05/07) · dados abaixo ainda são os de 25/06</div>
+    </div>
+    <span class="radar-badge">5 empresas monitoradas</span>
+  </div>
 
-<!-- EXECUCAO -->
-<div id="page-exec" class="page">
-<div class="sec">Checklist de Execu&#231;&#227;o &#8212; S16 &#183; 06/07 a 12/07/2026</div>
+  <div class="radar-grid">
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:#EBF5FB;color:#0A1B33;">
+        🛩️ ADFly Soluções Aéreas
+        <span class="radar-tag" style="background:#1E90FF;color:white;margin-left:auto;">Drone B2B</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px;">Top 3 oportunidades do radar 25/06</div>
+        <ul>
+          <li><strong>🔴 URGENTE — ICA 100-40 em vigor 01/07:</strong> sub-250g agora também precisa de SARPAS. ADFly como referência de regulamentação — checklist do contratante como conteúdo de autoridade imediata.</li>
+          <li><strong>Reel de inspeção predial com prova visual:</strong> "Quantas horas e quanto custa fazer isso sem drone vs. com drone" — resultado concreto que convence construtoras e síndicos.</li>
+          <li><strong>Drone no imobiliário — reel narrativo:</strong> sobrevoar o imóvel, criar narrativa de apresentação — diferencial para corretores e construtoras.</li>
+        </ul>
+        <div class="radar-opp"><strong>Oportunidade semana S15:</strong> ICA 100-40 em vigor desde 01/07. Checklist do contratante (SEG 29/06) + Reel Lab (TER 01/07) + case seguradora (SEX 04/07) = semana de autoridade técnica máxima.</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "ADFly opera 100% dentro da lei — ANAC + DECEA + SARPAS. Exija isso do seu piloto."</div>
+      </div>
+    </div>
 
-<div class="card"><div class="card-header"><span class="card-title">Segunda 06/07</span></div>
-<div class="card-body">
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[ADFly]</strong> LinkedIn + IG &#183; 07h30 &#8212; Carrossel 6 slides "O que já mudou na prática desde 01/07"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AleChef]</strong> IG &#183; 08h00 &#8212; Carrossel 5 slides "Marmita industrial x chef de verdade"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[BPMF]</strong> IG + TikTok &#183; 08h00 &#8212; Reel 45s Jornada Lagamar ao vivo (Dia 2) &#8212; depende de material real filmado</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Marcela]</strong> IG &#183; 08h00 &#8212; Carrossel 6 slides "80,4% endividamento — voltou de Cancún"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[TRAÇÃO]</strong> LinkedIn + IG &#183; 07h30 &#8212; Post "86% planejam IA / 7,8% integraram" (resposta ao alerta Kaizen)</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Todos]</strong> WhatsApp Status &#183; 08h00 &#8212; publicar status semanal (ADFly/AleChef/Marcela; BPMF publica o seu na quinta pós-Finale; TRAÇÃO opcional)</div></div>
-</div></div>
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:#FEF9E7;color:#22324F;">
+        🍳 AleChef em Casa
+        <span class="radar-tag" style="background:#C9A77A;color:white;margin-left:auto;">Personal Chef</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px;">Top 3 oportunidades do radar 25/06</div>
+        <ul>
+          <li><strong>Inverno 2026 + nostalgia gastronômica:</strong> comfort food sazonal domina o comportamento de busca. Cozido Paulistano, caldos, sopas — timing perfeito.</li>
+          <li><strong>Reel emocional de nostalgia:</strong> "A minha avó fazia assim — eu fiz do jeito certo para você" — conexão com tendência dominante em 2026.</li>
+          <li><strong>Presente de inverno: jantar com personal chef:</strong> para casais, aniversários, datas especiais de julho/férias. Proposta de experiência, não produto.</li>
+        </ul>
+        <div class="radar-opp"><strong>Oportunidade semana S15:</strong> Cardápio de inverno + collab BPMF + jantar corporativo = semana de três públicos diferentes (B2C diário, atletas, B2B eventos).</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "Os concorrentes entregam em 15 minutos. A AleChef entrega afeto sob encomenda — slow care vs fast delivery."</div>
+      </div>
+    </div>
 
-<div class="card" style="margin-top:12px"><div class="card-header"><span class="card-title">Ter&#231;a 07/07</span></div>
-<div class="card-body">
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[ADFly]</strong> IG + TikTok &#183; 07h30 &#8212; Reel 40s "FRZ urbana" — Termo de Coordenação</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AleChef]</strong> IG + TikTok &#183; 12h00 &#8212; Reel 40s "Bastidor: reação de quem recebe"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[BPMF]</strong> IG &#183; 08h00 &#8212; Carrossel 5 slides "BPMF x evento de massa"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Marcela]</strong> IG + Story &#183; 09h00/12h00 &#8212; Post + enquete "Quem mais brigou com o orçamento"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[TRAÇÃO]</strong> LinkedIn &#183; 07h30 &#8212; Carrossel 5 slides "Dwell time — sinal #1 do LinkedIn 2026"</div></div>
-</div></div>
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:#1a1a1a;color:#39FF14;">
+        🚴 BPMF
+        <span class="radar-tag" style="background:#39FF14;color:#050505;margin-left:auto;">Cicloturismo</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px;">Top 3 oportunidades do radar 25/06</div>
+        <ul>
+          <li><strong>Novo player detectado — "Fabio.naEstrada":</strong> cicloturismo curado fora da lista monitorada — avaliar diferencial e posicionamento versus BPMF.</li>
+          <li><strong>Reel "Inverno é a melhor estação para pedalar":</strong> quebrar objeção do frio, ativar público parado — educação + chamada à ação.</li>
+          <li><strong>4º Pedal Estrada de Ferro (28/06):</strong> evento nacional — cobertura ao vivo ou menção fortalece presença de comunidade.</li>
+        </ul>
+        <div class="radar-opp"><strong>Oportunidade semana S15:</strong> Antítese campeonato gravel (SEG) + ICP qualificação (TER) + filosofia gravel sem chip (QUA) = semana de posicionamento definitivo do BPMF vs. competição.</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "Curadoria humana. Não é um app que te manda uma rota — é uma experiência com começo, meio e fim."</div>
+      </div>
+    </div>
 
-<div class="card" style="margin-top:12px"><div class="card-header"><span class="card-title">Quarta 08/07</span></div>
-<div class="card-body">
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[ADFly]</strong> LinkedIn &#183; 07h30 &#8212; Post "Selo RETA + SARPAS" — checklist do fornecedor</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AleChef]</strong> IG &#183; 08h00 &#8212; Post Feed "O que você não corta mesmo no aperto"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[BPMF]</strong> IG &#183; 08h00 &#8212; Post Feed "SP oficializou o cicloturismo"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Marcela]</strong> IG + TikTok &#183; 08h00 &#8212; Reel 50s "Tesouro Reserva" &#8212; &#9888; confirmar mecânica com Alexandre antes de publicar</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[TRAÇÃO]</strong> IG + TikTok &#183; 07h30 &#8212; Reel 35-38s "Vocês também só fazem post sobre IA?"</div></div>
-</div></div>
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:#F0FDF4;color:#14532D;">
+        💰 Marcela Pinheiro GF
+        <span class="radar-tag" style="background:#16A34A;color:white;margin-left:auto;">Fin. Pessoal</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px;">Top 3 oportunidades do radar 25/06</div>
+        <ul>
+          <li><strong>Camila Villela acelerando no pilar comportamental:</strong> revisar tom de @nathfinancas — mais próximo do humanizado do que o posicionamento presume (validação Bright Data).</li>
+          <li><strong>Selic alta + férias de julho:</strong> temas de alta demanda agora — "Como não sair no vermelho sem cancelar as férias dos filhos."</li>
+          <li><strong>FinTok crescendo 300%:</strong> entrar no TikTok é urgente — público-alvo Marcela presente e sub-saturado.</li>
+        </ul>
+        <div class="radar-opp"><strong>Oportunidade semana S15 (Marcela):</strong> Revisão de metas 2º semestre + gastos julho — publicar antes das férias escolares para capturar pico orgânico.</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "Se você sempre volta de viagem no vermelho, não é falta de planejamento — é isso aqui."</div>
+      </div>
+    </div>
 
-<div class="card" style="margin-top:12px"><div class="card-header"><span class="card-title">Quinta 09/07 &#8212; Grand Finale Jornada Lagamar</span></div>
-<div class="card-body">
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[ADFly]</strong> IG + TikTok &#183; 07h30 &#8212; Carrossel 5 slides "SENAI validou. RBAC 100 certificou. E agora?" (ADFly Lab)</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AleChef]</strong> IG + TikTok &#183; 18h30 &#8212; Reel 40s "A conta que o delivery não mostra"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[BPMF]</strong> IG + TikTok &#183; 08h00 &#8212; Reel 60s Grand Finale Jornada Lagamar (recap emocional) + WhatsApp Status a partir das 18h</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Marcela]</strong> LinkedIn &#183; 07h30 &#8212; Post longo "81,7 milhões em inadimplência — 42% há mais de 10 anos"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[TRAÇÃO]</strong> LinkedIn &#183; 08h00 &#8212; Post "55% dos advogados já usam IA — Renata mais pronta do que parece"</div></div>
-</div></div>
+    <div class="radar-card">
+      <div class="radar-card-head" style="background:#EDE9FE;color:#4C1D95;">
+        🚀 TRAÇÃO MKT
+        <span class="radar-tag" style="background:#7C3AED;color:white;margin-left:auto;">Agência IA</span>
+      </div>
+      <div class="radar-card-body">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:6px;">Top 3 oportunidades do radar 25/06</div>
+        <ul>
+          <li><strong>Google Business Agent for Leads:</strong> traduzir IA de anúncios para PME que fatura R$50k/mês — ângulo exclusivo não coberto por nenhum concorrente.</li>
+          <li><strong>Kaizen dominou pauta de IA esta semana (5+ posts):</strong> TRAÇÃO deve publicar *como* usa IA com resultado, não *que* usa. Transparência de processo &gt; declaração.</li>
+          <li><strong>Urgente — primeiro case com número real:</strong> sem dado publicado, TRAÇÃO é só promessa. Mesmo cliente pequeno: construir prova social documentada.</li>
+        </ul>
+        <div class="radar-opp"><strong>Alerta ativo:</strong> Kaizen acelerando em IA — diferenciar por método+fundador. Não entrar na guerra de features de IA.</div>
+        <div class="radar-copy"><strong>Ângulo AG-05:</strong> "Marketing que gera resultado — não marketing que fala sobre marketing."</div>
+      </div>
+    </div>
+  </div>
 
-<div class="card" style="margin-top:12px"><div class="card-header"><span class="card-title">Sexta 10/07</span></div>
-<div class="card-body">
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[ADFly]</strong> IG &#183; 07h30 &#8212; Post "Tem app que manda qualquer piloto pro seu condomínio. ADFly não é isso."</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AleChef]</strong> IG &#183; 09h00 &#8212; Carrossel 4 slides "Comida lenta em um mundo de delivery"</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[BPMF]</strong> IG &#183; 08h00 &#8212; Carrossel 5 slides "O que vem depois" — próxima jornada, lista de espera</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Marcela]</strong> IG &#183; 08h30 &#8212; Post "Curso te dá o mapa. Eu caminho com você até o destino."</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[TRAÇÃO]</strong> LinkedIn &#183; 07h30 &#8212; Post "O que foi entregue pra mim essa semana?" — resposta final ao Kaizen</div></div>
-</div></div>
+  <div class="section-title">🔄 Cross-Insights — Semana 29/06–05/07</div>
+  <div class="cross-card">
+    <h4>1. "IA precisa de humano para funcionar de verdade" — tema transversal em 3 nichos</h4>
+    <p>Marketing digital: Orgânica Digital declarou que "toque humano é o diferencial" com excesso de IA. Gastronomia: IA sugere receitas mas o personal chef entrega o afeto que o app não faz. Finanças: FinTok cresce mas o planejamento personalizado (Marcela) não é substituível por algoritmo. Alexandre pode usar esse tema em redes pessoais como reflexão cross-nicho com potencial viral.</p>
+  </div>
+  <div class="cross-card">
+    <h4>2. Collab AleChef × BPMF = evento de conteúdo QUI 03/07</h4>
+    <p>Dois públicos distintos se encontram: ciclistas BPMF (aventura, comunidade, experiência) e clientes AleChef (comida real, personalização, cuidado). A collab cria alcance cruzado — seguidores de um descobrem o outro. Publicar coordenado 08h00 garante máxima visibilidade simultânea dos dois perfis.</p>
+  </div>
+  <div class="cross-card">
+    <h4>3. Julho como mês de início de semestre + férias + inverno — janela de ouro para todas as empresas</h4>
+    <p>ADFly: ICA 100-40 vigente — urgência de regularização. AleChef: cardápio de inverno + jantares corporativos fim de semestre. BPMF: jornada julho + posicionamento filosofia. Marcela: revisão de metas 2º semestre + gastos de julho. TRAÇÃO: primeiro case com número real. Cada empresa tem um gatilho de virada de mês específico esta semana.</p>
+  </div>
 
-<div class="card" style="margin-top:12px"><div class="card-header"><span class="card-title">A&#231;&#245;es pendentes fora da grade</span></div>
-<div class="card-body">
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[ADFly/Alexandre]</strong> Exportar novo CSV de CRM_Updates/ — defasagem de 3 semanas (última exportação 17/06/2026)</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Marcela/Alexandre]</strong> Confirmar mecânica exata do Tesouro Reserva (liquidez, marcação a mercado, aplicação mínima) antes de publicar Reel de quarta</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AG-QA/Alexandre]</strong> Criar RÉGUA-QUALIDADE-ADFly.md e RÉGUA-QUALIDADE-AleChef.md — não localizadas na base estratégica</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[Alexandre]</strong> Lançar PROVOCACOES-BPMF e PROVOCACOES-AleChef da S17 até sexta — ausentes nesta semana (grades usaram RADAR/TENDÊNCIAS)</div></div>
-<div class="chk-item"><div class="chk-box" onclick="this.classList.toggle('done')"></div><div class="chk-text"><strong>[AG-QA]</strong> Auditoria completa 🟢/🟡/🔴 dos 5 pacotes antes de declarar entrega — nenhum item 🔴 pendente</div></div>
-</div></div>
+  <div class="section-title">📅 Alerta de Timing — Semana S15</div>
+  <table class="timing-table">
+    <tr><th>Data</th><th>Evento</th><th>Empresa</th><th>Ação</th></tr>
+    <tr><td>29/06 (segunda)</td><td>Início semana S15 — grade começa</td><td>Todas</td><td>Publicar conteúdos conforme pacote S15</td></tr>
+    <tr><td>29/06 (segunda)</td><td>AG-13 Vibe Prospecting roda</td><td>ADFly</td><td>Lista priorizada → AG-03 LinkedIn a partir de seg</td></tr>
+    <tr><td>01/07 (terça)</td><td>ICA 100-40 DECEA em vigor</td><td>ADFly 🔴</td><td>Reel ADFly Lab já publicado SEG — confirmar dado R$4.300</td></tr>
+    <tr><td>03/07 (quinta) 08h</td><td>COLLAB AleChef × BPMF</td><td>AleChef + BPMF 🤝</td><td>Publicar coordenado EXATO 08h00 nos dois perfis</td></tr>
+    <tr><td>05/07 (domingo)</td><td>Fim semana S15</td><td>Todas</td><td>Monitorar engajamento + leads gerados</td></tr>
+    <tr><td>03/07 (quinta)</td><td>Radar S16 — execução preparatória</td><td>Todas</td><td>AG-12 roda radar quinta 08h para S16</td></tr>
+    <tr><td>Julho (início)</td><td>Férias escolares de julho</td><td>AleChef · Marcela</td><td>Jantar em família + gastos com férias — pico de demanda</td></tr>
+    <tr><td>05-09/07</td><td>Jornada Lagamar (BPMF radar)</td><td>BPMF</td><td>Conteúdo de pré-aquecimento se Alexandre confirmar participação</td></tr>
+  </table>
 
-<div style="background:#f0f9f4;border:1px solid #b8d4c4;border-radius:8px;padding:14px 16px;margin-top:16px;font-size:13px;color:#1B6A39">
-&#128202; <strong>Painel atualizado manualmente para S16</strong> &#8212; l&#234; os 5 pacotes PACOTE-FULL-S16 (ADFly, AleChef, BPMF, TRA&#199;&#195;O, Marcela) + RADAR-CONSOLIDADO-05-07-2026.md + CRM ADFly. Nova aba TRA&#199;&#195;O adicionada nesta atualiza&#231;&#227;o.
+  <div class="section-title">📂 Relatórios completos do Radar</div>
+  <div class="files-bar">
+    <div class="files-bar-title">🔭 Arquivos do Radar 25/06 — clique Copiar para abrir no Explorer</div>
+    <div class="files-grid">
+      <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">Radar Consolidado 25/06 — mais recente</div><div class="path-txt">Base Estratégica Projeto MKT\_RADAR-SEMANAL\RADAR-CONSOLIDADO-25-06-2026.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Base Estratégica Projeto MKT\\_RADAR-SEMANAL\\RADAR-CONSOLIDADO-25-06-2026.md',this)">Copiar</button></div>
+      <div class="path-row"><span class="path-icon">📄</span><div class="path-info"><div class="path-name">Tendências Alexandre 25/06</div><div class="path-txt">Base Estratégica Projeto MKT\_RADAR-SEMANAL\TENDENCIAS-ALEXANDRE-25-06-2026.md</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Base Estratégica Projeto MKT\\_RADAR-SEMANAL\\TENDENCIAS-ALEXANDRE-25-06-2026.md',this)">Copiar</button></div>
+      <div class="path-row"><span class="path-icon">📁</span><div class="path-info"><div class="path-name">Pasta _RADAR-SEMANAL completa</div><div class="path-txt">C:\...\Base Estratégica Projeto MKT\_RADAR-SEMANAL\</div></div><button class="copy-btn" onclick="cp('C:\\Users\\aleta\\OneDrive\\Documentos\\Claude\\Projects\\Projeto Área de MKT\\Base Estratégica Projeto MKT\\_RADAR-SEMANAL',this)">Copiar</button></div>
+    </div>
+  </div>
 </div>
-</div>
-
-<div id="toast">&#10003; Copiado!</div>
 
 <script>
-function showPage(id,btn){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-document.getElementById('page-'+id).classList.add('active');
-btn.classList.add('active');
+function showPage(id, tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  tab.classList.add('active');
 }
-function cp(id){
-const el=document.getElementById(id);
-const text=el.innerText.replace(/Copiar\s*$/,'').replace(/^Copiar\s*/,'').trim();
-navigator.clipboard.writeText(text).then(()=>{
-const t=document.getElementById('toast');
-t.classList.add('show');
-setTimeout(()=>t.classList.remove('show'),1800);
-});
+
+function cp(text, btn) {
+  var original = btn.textContent;
+  function onOk() {
+    btn.textContent = '✓ Copiado!';
+    btn.classList.add('ok');
+    var t = document.getElementById('toast');
+    if (t) { t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2000); }
+    setTimeout(function(){ btn.textContent = original; btn.classList.remove('ok'); }, 2000);
+  }
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+    navigator.clipboard.writeText(text).then(onOk).catch(function(){ fallback(text, onOk); });
+  } else {
+    fallback(text, onOk);
+  }
+}
+
+function fallback(text, onOk) {
+  var el = document.createElement('input');
+  el.value = text;
+  el.setAttribute('readonly', '');
+  el.style.cssText = 'position:fixed;top:0;left:0;width:2em;height:2em;padding:0;border:none;outline:none;box-shadow:none;background:transparent;opacity:0;pointer-events:none;';
+  document.body.appendChild(el);
+  el.focus();
+  el.select();
+  el.setSelectionRange(0, 99999);
+  var ok = false;
+  try { ok = document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(el);
+  if (ok) { onOk(); } else { window.prompt('Selecione e copie o caminho (Ctrl+A → Ctrl+C):', text); }
 }
 </script>
 </body>

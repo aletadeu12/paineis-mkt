@@ -1,3 +1,5 @@
+> ⚠️ **DOCUMENTO OBSOLETO desde 26/06/2026** — Netlify descontinuado. Deploy atual: `deploy-paineis.ps1` → repo público `paineis-mkt` → GitHub Pages (https://aletadeu12.github.io/paineis-mkt/). Mantido só como histórico.
+
 # Setup GitHub + Netlify — Painéis MKT
 
 ## Modelo de privacidade — um site Netlify por painel

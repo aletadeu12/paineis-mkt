@@ -1,3 +1,5 @@
+> ⚠️ **DOCUMENTO OBSOLETO desde 26/06/2026** — Netlify descontinuado. Deploy atual: `deploy-paineis.ps1` → repo público `paineis-mkt` → GitHub Pages (https://aletadeu12.github.io/paineis-mkt/). Mantido só como histórico.
+
 # Claude Code Prompt — Setup Netlify para painel-trao.html
 
 Use este prompt no Claude Code quando precisar configurar ou reconfigurar o site Netlify da TRAÇÃO MKT.
