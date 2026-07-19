@@ -39,6 +39,21 @@ $copies = @(
         label = "Marcela Pinheiro GF"
         src   = "$CLIENTES\Marcela-Pinheiro-GF\painel-marcela-pinheiro.html"
         dst   = "$REPO_DIR\marcela-gf\index.html"
+    },
+    @{
+        label = "ADFly"
+        src   = "$CLIENTES\ADFly\painel-adfly.html"
+        dst   = "$REPO_DIR\adfly\index.html"
+    },
+    @{
+        label = "AleChef"
+        src   = "$CLIENTES\AleChef\painel-alechef.html"
+        dst   = "$REPO_DIR\alechef\index.html"
+    },
+    @{
+        label = "BPMF"
+        src   = "$CLIENTES\BPMF\painel-bpmf.html"
+        dst   = "$REPO_DIR\bpmf\index.html"
     }
     # -- NOVOS CLIENTES: adicionar aqui ------------------------------------
     # Padrao: @{ label="[Nome]"; src="$CLIENTES\[SIGLA]\painel-[sigla].html"; dst="$REPO_DIR\[sigla]\index.html" }
