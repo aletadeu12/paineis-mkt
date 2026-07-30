@@ -2843,13 +2843,31 @@ const RADAR = {
   },
   semanaProxima: {
     label: "03–09/08",
-    execucao: "aguardando radar de quinta 30/07",
-    tendencias: [{ titulo: "Radar da próxima semana ainda não rodou", corpo: "Este bloco é preenchido automaticamente toda quinta-feira, após o radar das 08h.", src: "Agência MKT" }],
-    concorrentes: [],
-    alertas: [],
+    execucao: "30/07/2026",
+    tendencias: [
+      { titulo: "Uma agência de marketing virou rede de 200+ franquias este ano", corpo: "Setor de franquias no Brasil cresceu 10,1% no 1º tri de 2026 e acumulou R$308,4bi em faturamento nos últimos 12 meses — a V4 Company, concorrente confirmado hoje no radar, é uma rede de 200+ franquias dentro desse universo.", gancho: "\"Uma agência de marketing virou uma rede de 200+ franquias este ano. Isso prova que o modelo vende. Não prova que quem vai atender A SUA empresa é quem entende dela.\"", src: "ABF" },
+      { titulo: "A OAB proíbe advogado de comemorar resultado de caso — mesmo assim tem quem vire referência", corpo: "A cartilha oficial da OAB sobre o Provimento 205/2021 estabelece que toda publicidade de advogado deve ser 'exclusivamente ilustrativa, educacional e instrutiva' e proíbe até citar resultado de caso específico.", gancho: "\"A OAB proíbe advogado de comemorar resultado de caso publicamente. Mesmo assim, tem advogado que vira referência sem nunca soar comercial. A diferença não é ousadia — é método.\"", src: "OAB (Provimento 205/2021)" },
+      { titulo: "174% mais coach no Brasil desde 2016 — a indicação não cresceu no mesmo ritmo", corpo: "O número de coaches oferecendo serviço no Brasil cresceu 174% desde 2016, segundo levantamento do setor — mercado mais disputado reduz a eficácia da indicação pura como canal.", gancho: "\"Tem 174% mais coach no Brasil hoje do que em 2016. Sua rede de indicação não cresceu 174% no mesmo período. A conta não fecha mais só com boca a boca.\"", src: "SLA Coaching / ICF 🟡" }
+    ],
+    concorrentes: [
+      { nome: "V4 Company (C-06)", tag: "🔴 Alerta confirmado — quebra premissa do mapa", tagBg: "#DC2626", tagFg: "#fff", headBg: "#FEF2F2", headFg: "#7F1D1D", oQuePublicaram: "Confirmado: rede de franquia (200-273 unidades), fundador Dener Lippert (210k seguidores, autor best-seller, Forbes Under30), plataforma proprietária Mkt.Lab (US$20M), ticket R$4-7k/mês (chegando a R$50k).", opp: "'Fundador como rosto de autoridade — nenhum concorrente' no mapa está factualmente errado a partir de hoje. Contra-argumento: autoridade emprestada de franquia vs. autoridade direta do fundador-operador. Avaliar com AG-12 subir POSICIONAMENTO-TRAC para v2." },
+      { nome: "Agência Kaizen (C-03)", tag: "Provando o produto com números", tagBg: "#F59E0B", tagFg: "#fff", headBg: "#FFFBEB", headFg: "#78350F", oQuePublicaram: "SDR Agent (Claude Code + CrewAI + OpenClaw) agora divulga métricas: 40% mais leads qualificados, resposta de 4h→30s, CPL -32%.", opp: "Evolução de 'lançou produto' (23/07) para 'prova com números' (30/07) — reforça urgência do contra-argumento ROI real vs. ferramenta de IA." },
+      { nome: "GV8 (C-01)", tag: "Sem novidade — só atualizou número", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Site atualizou de 5.105 para ~5.500 clientes declarados — mesmo argumento de escala/volume, sem sinal de IA.", opp: "Contraste 'atendimento industrial vs. fundador na operação' permanece válido." },
+      { nome: "Goma Digital (C-02)", tag: "Sem novidade — sem IA", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Nenhum post novo datado identificado — nenhuma menção a produto ou discurso de IA na varredura.", opp: "Segue sem IA no DNA e sem fundador visível — as 2 fraquezas do POSICIONAMENTO-TRAC seguem válidas." },
+      { nome: "@agenciapocket (C-09)", tag: "⚠️ Handle não confirmado", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Candidato mais próximo: Pocket Lab | Agência Digital (@agenciapocketlab, ~3.960 seguidores) — boutique WordPress/inbound/infoprodutos.", opp: "Se confirmado, posicionamento de boutique é adjacente à TRAÇÃO mas com escopo mais estreito — checar via Chrome MCP na próxima rodada." },
+      { nome: "Orgânica Digital (C-04)", tag: "Sem movimento — prioridade baixa", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Nenhum movimento relevante identificado esta semana — sem busca aprofundada (fora de prioridade).", opp: "Sem sinal de mudança nas fontes já indexadas." },
+      { nome: "Envox (C-05)", tag: "Sem movimento — prioridade baixa", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Nenhum movimento relevante identificado esta semana — sem busca aprofundada (fora de prioridade).", opp: "Handle @envox.agencia ainda não confirmado com certeza." },
+      { nome: "@agenciamidiacerta (C-07)", tag: "Handle confirmado — performance tradicional", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Agência Mídia Certa — foco em performance/design/conteúdo (tráfego pago Google/Meta) — sem dado de IA no discurso.", opp: "Classificação preliminar: agência de performance tradicional, não parece adjacente ao território de IA da TRAÇÃO." },
+      { nome: "@agenciamango (C-08)", tag: "Handle provável — brandformance", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "@agencia.mango (~5.627 seguidores) — foco em brandformance/e-commerce, 'Top 2 RD Station — Agências Platinum'. Sem sinal de IA.", opp: "Confirmar grafia exata do handle (com/sem ponto) na próxima rodada." }
+    ],
+    alertas: [
+      { titulo: "🔴 V4 Company quebra a premissa central do Mapa de Posicionamento", corpo: "Confirmação factual das hipóteses de Alexandre em 29/07: modelo de franquia em escala, fundador extremamente visível, IA como infraestrutura central, ticket que sobrepõe a faixa de entrada da TRAÇÃO. Avaliar com AG-12 subir POSICIONAMENTO-TRAC-v1 para v2.", nivel: "alto" },
+      { titulo: "Oportunidade: autoridade emprestada (franquia) vs. autoridade direta (fundador-operador)", corpo: "A V4 vende via franquia — quem atende o cliente PME não é necessariamente Dener Lippert. Ângulo de contra-ataque: 'quando você contrata a TRAÇÃO, é o Alexandre que pensa pela sua empresa'.", nivel: "opp" },
+      { titulo: "Kaizen evoluiu de lançamento para prova numérica do SDR Agent", corpo: "40% mais leads qualificados, CPL -32%, resposta 4h→30s — reforça urgência do contra-argumento ROI real vs. ferramenta de IA já recomendado em 23/07.", nivel: "medio" }
+    ],
   },
-  ultimaExecucao: "23/07/2026",
-  proximaExecucao: "quinta 30/07 às 08h",
+  ultimaExecucao: "30/07/2026",
+  proximaExecucao: "quinta 06/08 às 08h",
 };
 
 /* ══════════════════════════════════════════════════════════════════════
