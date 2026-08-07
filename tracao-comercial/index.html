@@ -3903,13 +3903,31 @@ const RADAR = {
   },
   semanaProxima: {
     label: "10–16/08",
-    execucao: "aguardando radar de quinta 06/08",
-    tendencias: [{ titulo: "Radar da próxima semana ainda não rodou", corpo: "Este bloco é preenchido automaticamente toda quinta-feira, após o radar das 08h.", src: "Agência MKT" }],
-    concorrentes: [],
-    alertas: [],
+    execucao: "06/08/2026",
+    tendencias: [
+      { titulo: "87% das PMEs querem crescer mais em 2026 — 54% nem têm CRM pra saber de onde veio o cliente", corpo: "Panoramas RD Station 2026 (~3 mil profissionais): 87% quer crescer, 75% não bateu meta em 2025. Na raiz: 54% sem CRM, 62% não acompanha a própria taxa de conversão de funil.", gancho: "\"87% das empresas brasileiras querem crescer mais esse ano. 54% delas nem têm CRM pra saber de onde veio o último cliente que fechou. O problema nunca foi vontade.\"", src: "E-Commerce Update (RD Station)" },
+      { titulo: "Você foi indicada. Mesmo assim, ele vai olhar seu perfil antes de te ligar", corpo: "A geração mais nova checa o perfil do profissional nas redes mesmo vindo por indicação, 'até pra ver se existe identificação com a pessoa' (Dra. Jéssica Simon) — a indicação abre a porta, não fecha mais a decisão sozinha.", gancho: "\"Você foi indicada. Mesmo assim, ele vai no seu perfil antes de te ligar. A pergunta nunca foi 'apareço ou não' — é o que ele encontra quando chega lá.\"", src: "🟡 Nace (via Forbes Brasil)" },
+      { titulo: "88% dos clientes de consultoria vêm de indicação — não é orgulho, é risco de canal único", corpo: "Pesquisa IBCO/ABCO: 88,1% dos clientes de consultoria vêm de indicação de cliente satisfeito, 55,4% de indicação de colegas — quase 9 em cada 10 contratos nascem de um único canal.", gancho: "\"88% dos clientes de consultoria vêm de indicação. Isso não é prova de que você é bom. É prova de que sua agenda inteira depende de uma coisa que você não controla.\"", src: "🟡 BuzzLead (via IBCO/ABCO)" }
+    ],
+    concorrentes: [
+      { nome: "V4 Company (C-06)", tag: "🔴 CONFIRMADO — franquia + Mkt.Lab US$20M", tagBg: "#DC2626", tagFg: "#fff", headBg: "#FEF2F2", headFg: "#7F1D1D", oQuePublicaram: "Aprofundamento: franquia desde 2017 (200-330+ unidades, fontes divergem), fundador Dener Lippert com 847K seguidores IG + livro + colunas InfoMoney/Exame, Mkt.Lab (US$20M, hub de IA proprietário que é infraestrutura central, não bot isolado), Framework FPA + Método V4 aplicado em 5.000+ clientes. Headline ativa: 'O fim das agências'.", opp: "Argumento correto contra a V4 não é 'você é um número' — é 'seu franqueado local é operador licenciado, não sócio-fundador do método'. Recomenda-se avaliação do AG-12 pra subir o POSICIONAMENTO-TRAC para v2." },
+      { nome: "Agência Kaizen (C-03)", tag: "Ofensiva de conteúdo técnico sobre IA", tagBg: "#F59E0B", tagFg: "#fff", headBg: "#FFFBEB", headFg: "#78350F", oQuePublicaram: "3 guias técnicos novos no blog (Google Ads IA generativa, Automação de Marketing com IA, Agentes de IA em Vendas) — agora também publicando em inglês (en.agenciakaizen.com.br).", opp: "Ritmo de publicação não diminuiu desde junho — ameaça segue ativa e crescente, testando audiência internacional no mesmo território de conteúdo." },
+      { nome: "GV8 (C-01)", tag: "Vitrine autoproduzida — sem IA", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Série de posts 'ranking' ('Melhores Agências do Brasil 2026' etc.) sempre posicionando a própria GV8 no topo — '5.500+ clientes' como assinatura. Nenhuma menção a IA.", opp: "Confirma o ponto fraco já mapeado (sem IA como argumento) — contraste 'vitrine comparativa vs. fundador na operação' segue válido." },
+      { nome: "Orgânica Digital (C-04)", tag: "Case Safecar em destaque", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Case Safecar: resultado projetado pra 7 anos atingido em 1 (2025), volume de vendas já dobrado até maio/2026. Case ABB (+107% receita) segue ativo. Sem menção a IA.", opp: "Nenhum movimento em direção a PME pequena — confirma que o público da Orgânica segue distante do ICP da TRAÇÃO." },
+      { nome: "Goma Digital (C-02)", tag: "Sem novidade — sem IA", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Sem post/artigo novo identificado esta semana — fundador Thiago Villa Verde confirmado ativo, mas sem material novo sobre IA.", opp: "Ponto fraco mapeado (sem IA no DNA) segue confirmado, sem mudança." },
+      { nome: "Envox (C-05)", tag: "Sem movimento — prioridade baixa", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Conteúdo mais recente indexado é de janeiro/2026 — perfil institucional sem mudança (fundador Gustavo Braga, +450 clientes).", opp: "Nenhum sinal de entrada em discurso de IA." },
+      { nome: "@agencia.mango (C-08)", tag: "Handle confirmado — brandformance", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Handle resolvido: @agencia.mango. Branding + Growth Marketing em 8+ países, Top 2 Agências Platinum RD Station. Sem sinal de IA no discurso.", opp: "Perfil de cliente parece médio porte, não necessariamente PME pequena (R$15-300k/mês) — overlap parcial com o ICP da TRAÇÃO." },
+      { nome: "@agmidiacerta (C-07)", tag: "Handle corrigido — performance tradicional", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Handle correto: @agmidiacerta (era @agenciamidiacerta). Foco em performance/design/conteúdo, +10 anos — sem IA, fundador ou método nomeado identificados.", opp: "Classificação preliminar: agência de performance tradicional, não parece adjacente ao território de IA da TRAÇÃO." },
+      { nome: "@agenciapocket (C-09)", tag: "⚠️ Handle ainda não confirmado", tagBg: "#6B7280", tagFg: "#fff", headBg: "#1F2937", headFg: "#F9FAFB", oQuePublicaram: "Candidato mais próximo segue Pocket Lab (pocketlab.com.br, possível @agenciapocketlab) — boutique B2B de sites WordPress/Inbound.", opp: "Handle exato não bateu nesta rodada — precisa verificação manual direta no Instagram por Alexandre." }
+    ],
+    alertas: [
+      { titulo: "🔴 V4 Company: aprofundamento confirma ameaça e reforça necessidade de subir POSICIONAMENTO para v2", corpo: "Franquia com fundador extremamente visível (847K IG, livro, colunista, palestrante) e US$20M em plataforma de IA proprietária como infraestrutura central — não produto isolado. Isso invalida a linha 'nenhum concorrente tem fundador como rosto de autoridade' do Mapa de Posicionamento. Decisão de virada de versão segue pendente de avaliação do AG-12.", nivel: "alto" },
+      { titulo: "Oportunidade: 'fundador que pensa a SUA empresa' vs. 'fundador que pensa a franquia dele'", corpo: "Dener Lippert é rosto de autoridade da marca V4 e dos franqueados, não do negócio individual do cliente PME — ângulo que sobrevive à entrada da V4 no mapa e deve orientar a grade até a decisão formal do AG-12.", nivel: "opp" },
+      { titulo: "Gap de execução real de IA: 86% planeja investir, só 7,8% tem IA totalmente integrada", nivel: "opp", corpo: "Janela de vantagem ainda aberta para quem implementa de verdade, não só quem fala — reforça o ângulo da TRAÇÃO de vender aplicação específica, não a ferramenta." }
+    ],
   },
-  ultimaExecucao: "30/07/2026",
-  proximaExecucao: "quinta 06/08 às 08h",
+  ultimaExecucao: "06/08/2026",
+  proximaExecucao: "quinta 13/08 às 08h",
 };
 
 /* ══════════════════════════════════════════════════════════════════════
