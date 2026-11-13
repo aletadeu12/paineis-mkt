@@ -54,6 +54,11 @@ $copies = @(
         label = "BPMF"
         src   = "$CLIENTES\BPMF\painel-bpmf.html"
         dst   = "$REPO_DIR\bpmf\index.html"
+    },
+    @{
+        label = "Raio-X TRACAO (link da bio)"
+        src   = "$CLIENTES\CLIENTE-TRAO-TRAC\00 - Base Estrategica\PAGINA-RAIO-X-TRAC.html"
+        dst   = "$REPO_DIR\raio-x\index.html"
     }
     # -- NOVOS CLIENTES: adicionar aqui ------------------------------------
     # Padrao: @{ label="[Nome]"; src="$CLIENTES\[SIGLA]\painel-[sigla].html"; dst="$REPO_DIR\[sigla]\index.html" }
