@@ -59,7 +59,15 @@ $copies = @(
         label = "Raio-X TRACAO (link da bio)"
         src   = "$CLIENTES\CLIENTE-TRAO-TRAC\00 - Base Estrategica\PAGINA-RAIO-X-TRAC.html"
         dst   = "$REPO_DIR\raio-x\index.html"
-    }
+    },
+    # Cartao digital do Alexandre (QR Code de eventos) -- fonte: BPMF\CARTAO-DIGITAL
+    @{ label = "Cartao digital (pagina)"; src = "$CLIENTES\BPMF\CARTAO-DIGITAL\index.html";          dst = "$REPO_DIR\alexandre\index.html" },
+    @{ label = "Cartao digital (contato)"; src = "$CLIENTES\BPMF\CARTAO-DIGITAL\alexandre-tadeu.vcf"; dst = "$REPO_DIR\alexandre\alexandre-tadeu.vcf" },
+    @{ label = "Cartao digital (foto)";    src = "$CLIENTES\BPMF\CARTAO-DIGITAL\foto-alexandre.jpg";  dst = "$REPO_DIR\alexandre\foto-alexandre.jpg" },
+    @{ label = "Cartao digital (logo ADFly)";   src = "$CLIENTES\BPMF\CARTAO-DIGITAL\logo-adfly.png";   dst = "$REPO_DIR\alexandre\logo-adfly.png" },
+    @{ label = "Cartao digital (logo TRACAO)";  src = "$CLIENTES\BPMF\CARTAO-DIGITAL\logo-tracao.png";  dst = "$REPO_DIR\alexandre\logo-tracao.png" },
+    @{ label = "Cartao digital (logo AleChef)"; src = "$CLIENTES\BPMF\CARTAO-DIGITAL\logo-alechef.png"; dst = "$REPO_DIR\alexandre\logo-alechef.png" },
+    @{ label = "Cartao digital (logo BPMF)";    src = "$CLIENTES\BPMF\CARTAO-DIGITAL\logo-bpmf.png";    dst = "$REPO_DIR\alexandre\logo-bpmf.png" }
     # -- NOVOS CLIENTES: adicionar aqui ------------------------------------
     # Padrao: @{ label="[Nome]"; src="$CLIENTES\[SIGLA]\painel-[sigla].html"; dst="$REPO_DIR\[sigla]\index.html" }
     # Depois criar novo site Netlify apontando para publish dir = "[sigla]"
@@ -81,15 +89,40 @@ foreach ($c in $copies) {
 # -- GIT PUSH ----------------------------------------------------------------
 Set-Location $REPO_DIR
 
+# Travas de execucoes anteriores (.lock) impedem o git de rodar
+$locks = Get-ChildItem -Path ".git" -Recurse -Force -Filter "*.lock*" -ErrorAction SilentlyContinue
+if ($locks) {
+    Write-Host ""
+    Write-Host "ERRO: existem arquivos de trava do git (.lock). Feche outros programas que usam o git e apague:" -ForegroundColor Red
+    $locks | ForEach-Object { Write-Host "  $($_.FullName)" -ForegroundColor Red }
+    exit 1
+}
+
+# Sincroniza antes (evita rejeicao quando o repositorio mudou pelo site)
+git pull --no-rebase --no-edit origin main
+if ($LASTEXITCODE -ne 0) {
+    Write-Host ""
+    Write-Host "ERRO no git pull. Resolva o conflito antes de publicar (nada foi enviado)." -ForegroundColor Red
+    exit 1
+}
+
 $status = git status --porcelain
 if ($status) {
     $msg = "Auto-deploy $(Get-Date -Format 'dd/MM/yyyy HH:mm')"
     git add .
     git commit -m $msg
-    git push origin main
-    Write-Host ""
-    Write-Host "OK Push concluido: $msg" -ForegroundColor Green
-} else {
-    Write-Host ""
-    Write-Host "INFO: Sem mudancas -- nada a fazer." -ForegroundColor Gray
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host ""
+        Write-Host "ERRO no git commit. Nada foi enviado." -ForegroundColor Red
+        exit 1
+    }
 }
+
+git push origin main
+if ($LASTEXITCODE -ne 0) {
+    Write-Host ""
+    Write-Host "ERRO no git push: NADA foi publicado. Veja a mensagem acima (login, permissao ou conflito)." -ForegroundColor Red
+    exit 1
+}
+Write-Host ""
+Write-Host "OK Publicado no GitHub Pages (aguarde 1-3 min): https://aletadeu12.github.io/paineis-mkt/" -ForegroundColor Green
